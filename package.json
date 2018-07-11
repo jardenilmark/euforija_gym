@@ -1,0 +1,51 @@
+{
+  "name": "euforija-system",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@gitlab.com:softdev-eufouria/euforija-system.git",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon -r babel-register src/index.js",
+    "pack": "webpack",
+    "pack:watch": "webpack --watch",
+    "babel": "babel src -d dist"
+  },
+  "dependencies": {
+    "@feathersjs/authentication": "^2.1.7",
+    "@feathersjs/authentication-client": "^1.0.2",
+    "@feathersjs/authentication-jwt": "^2.0.1",
+    "@feathersjs/authentication-local": "^1.2.1",
+    "@feathersjs/configuration": "^1.0.2",
+    "@feathersjs/express": "^1.2.3",
+    "@feathersjs/feathers": "^3.1.7",
+    "@feathersjs/socketio": "^3.2.2",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.2",
+    "feathers-mongodb": "^3.2.0",
+    "mongodb": "^3.1.1",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "semantic-ui-react": "^0.82.0",
+    "socket.io-client": "^2.1.1",
+    "webpack": "^4.16.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "electron": "^2.0.4",
+    "nodemon": "^1.18.1"
+  }
+}
