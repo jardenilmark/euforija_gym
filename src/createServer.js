@@ -6,16 +6,16 @@ import feathersConfig from '@feathersjs/configuration';
 import socketio from '@feathersjs/socketio';
 import compression from 'compression';
 
-const app = feathers();
+const app = express(feathers());
 
 app
   .use(compression())
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
   .configure(feathersConfig(path.join(process.cwd())))
   .configure(express.rest())
   .configure(socketio())
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .use(feathers.static(path.join(process.cwd(), 'public')));
+  .use(express.errorHandler());
 
 const createServer = async () => {
   const db = await MongoClient.connect(app.get('mongoURI'));
