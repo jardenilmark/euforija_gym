@@ -15,10 +15,11 @@ app
   .configure(feathersConfig(path.join(process.cwd())))
   .configure(express.rest())
   .configure(socketio())
+  .use(express.static(path.join(process.cwd(), 'public')))
   .use(express.errorHandler());
 
 const createServer = async () => {
-  const db = await MongoClient.connect("mongodb://localhost:27017/euforia", { useNewUrlParser: true });
+  const db = await MongoClient.connect(app.get('mongoURI'));
   return app;
 };
 

@@ -5,5 +5,6 @@
     "secret": "euforijasystem",
     "path": "/api/authentication",
     "service": "/api/users"
-  }
+  },
+  "frontend": "./public/index"
 }
