@@ -1,16 +1,15 @@
 import React from 'react'
-import { Container } from 'semantic-ui-react'
 import { Route } from 'react-router-dom'
 import App from './App'
-import BodyRouter from './BodyRouter'
+import Inventory from './Inventory'
 
 const Body = (props) => {
+  // console.log(history)
   return (
-    <Container fluid>
-      <BodyRouter>
-        <Route exact path='/' component={App} />
-      </BodyRouter>
-    </Container>
+    <div>
+      <Route exact path='/' component={App} />
+      <Route exact path='/Inventory' component={Inventory} />
+    </div>
   )
 }
 

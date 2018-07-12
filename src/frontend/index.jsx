@@ -1,15 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import store from '../backend/store'
+import store from '../redux/store'
 import { Provider } from 'react-redux'
-import { Router } from 'react-router-dom'
-import history from '../backend/history'
+import { HashRouter as Router } from 'react-router-dom'
 import Component from './components/Body'
 
 function renderComponent (Component) {
   ReactDOM.render(
     <Provider store={store}>
-      <Router history={history}>
+      <Router>
         <Component />
       </Router>
     </Provider>,
