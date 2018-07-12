@@ -1,14 +1,15 @@
 {
   "name": "euforija-system",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/main.js",
   "repository": "git@gitlab.com:softdev-eufouria/euforija-system.git",
   "license": "MIT",
   "scripts": {
     "start:dev": "nodemon -r babel-register src/index.js",
     "pack": "webpack",
     "pack:watch": "webpack --watch",
-    "babel": "babel src -d dist"
+    "babel": "babel src -d dist",
+    "electron": "electron ."
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.7",
@@ -46,6 +47,12 @@
     "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.1.0",
     "electron": "^2.0.4",
+    "eslint": "^5.1.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
     "nodemon": "^1.18.1"
   }
 }

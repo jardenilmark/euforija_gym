@@ -18,7 +18,7 @@ app
   .use(express.errorHandler());
 
 const createServer = async () => {
-  const db = await MongoClient.connect(app.get('mongoURI'));
+  const db = await MongoClient.connect("mongodb://localhost:27017/euforia", { useNewUrlParser: true });
   return app;
 };
 
