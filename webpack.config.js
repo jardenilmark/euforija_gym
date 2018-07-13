@@ -22,9 +22,10 @@ const options = {
       {
         test: /\.(js|jsx)?$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'babel-loader'
-        }]
+        loader: 'babel-loader',
+        query: {
+          presets: ['env', 'react']
+        }
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -44,6 +45,7 @@ const options = {
   },
 
   plugins: [],
+  mode: 'development',
   performance: { hints: false }
 }
 
