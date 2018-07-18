@@ -7,7 +7,7 @@ const options = {
   entry: {
     core: [
       'babel-polyfill',
-      path.join(__dirname, 'src/frontend/index.jsx')
+      path.join(__dirname, 'src/frontend/Index.jsx')
     ]
   },
 

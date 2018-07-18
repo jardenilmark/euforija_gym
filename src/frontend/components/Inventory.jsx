@@ -1,17 +1,32 @@
 import React from 'react'
-import { Container, Search, Dropdown } from 'semantic-ui-react'
+import { Icon, Input, Menu, Container } from 'semantic-ui-react'
+import InventoryTable from './InventoryTable'
 import 'semantic-ui-css/semantic.min.css'
 
 const Inventory = (props) => {
   return (
-    <Container fluid>
-      <Search noResultsMessage='' icon='search'/>
-      <Dropdown text='File'>
-        <Dropdown.Menu>
-          <Dropdown.Item text='New' />
-          <Dropdown.Item text='Open...' description='ctrl + o' />
-        </Dropdown.Menu>
-      </Dropdown>
+    <Container fluid style={{ paddingLeft: 30, paddingRight: 30 }}>
+      <Menu text>
+        <Menu.Item header>Search By</Menu.Item>
+        <Menu.Item
+          name='Name'
+        />
+        <Menu.Item
+          name='Quantity'
+        />
+        <Menu.Item
+          name='Price'
+        />
+        <Menu.Item
+          name='Search'
+        >
+          <Input focus placeholder='Search...' />
+        </Menu.Item>
+        <Menu.Item position='right'>
+          <Icon fitted name='plus' />
+        </Menu.Item>
+      </Menu>
+      <InventoryTable/>
     </Container>
   )
 }
