@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb'
 import feathersConfig from '@feathersjs/configuration'
 import socketio from '@feathersjs/socketio'
 import compression from 'compression'
-import { initializeServices } from './services/servicesIndex'
+import serviceIndex from './services/serviceIndex'
 
 const app = express(feathers())
 
@@ -22,8 +22,7 @@ app
 const createServer = async () => {
   const client = await MongoClient.connect(app.get('mongoURI'), { useNewUrlParser: true })
   const db = client.db('euforija-system')
-  initializeServices(app, db)
-  console.log(await app.service('/inventory').find())
+  app.configure(serviceIndex(app, db))
   return app
 }
 
