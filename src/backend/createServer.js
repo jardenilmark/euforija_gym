@@ -23,6 +23,7 @@ const createServer = async () => {
   const client = await MongoClient.connect(app.get('mongoURI'), { useNewUrlParser: true })
   const db = client.db('euforija-system')
   initializeServices(app, db)
+  console.log(await app.service('/inventory').find())
   return app
 }
 
