@@ -21,6 +21,11 @@ export default function reducer (state = initialState, action) {
         ...state,
         filteredInv: action.payload
       }
+    case 'ITEM_CREATED':
+      return {
+        ...state,
+        itemCreated: action.payload
+      }
     default:
       return state
   }

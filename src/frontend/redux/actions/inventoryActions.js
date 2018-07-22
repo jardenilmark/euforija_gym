@@ -8,6 +8,17 @@ export function fetchWholeInventory () {
   }
 }
 
+export function createItem (obj) {
+  return async (dispatch) => {
+    await app.service(api).create({
+      name: obj.name,
+      quantity: parseInt(obj.quantity),
+      price: parseInt(obj.price)
+    })
+    dispatch({type: 'ITEM_CREATED', payload: true})
+  }
+}
+
 export function setActiveItem (name) {
   return (dispatch) => {
     dispatch({type: 'GET_ACTIVE_ITEM_INVENTORY', payload: name})

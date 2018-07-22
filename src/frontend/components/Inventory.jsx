@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input, Menu, Container, Table } from 'semantic-ui-react'
-import AddItemModal from './AddItemModal'
+import Modal from '../redux/containers/ModalContainer'
 import 'semantic-ui-css/semantic.min.css'
 
 class Inventory extends React.Component {
@@ -24,8 +24,7 @@ class Inventory extends React.Component {
   }
 
   render () {
-    const { activeItem, setActiveItem, filterList, filteredInv } = this.props
-    console.log(filteredInv)
+    const { activeItem, setActiveItem, filterList } = this.props
     return (
       <Container fluid style={{ paddingLeft: 30, paddingRight: 30 }}>
         <Menu text>
@@ -51,7 +50,7 @@ class Inventory extends React.Component {
             <Input focus placeholder='Search...' onChange={(e) => filterList({name: activeItem, value: e.target.value})}/>
           </Menu.Item>
           <Menu.Item position='right'>
-            <AddItemModal/>
+            <Modal />
           </Menu.Item>
         </Menu>
         <Table
