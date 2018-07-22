@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import App from './App'
-import Inventory from '../../redux/containers/InventoryContainer'
+import Inventory from '../redux/containers/InventoryContainer'
 
 const Body = (props) => {
   return (
