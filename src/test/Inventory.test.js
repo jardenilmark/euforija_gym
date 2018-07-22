@@ -6,7 +6,7 @@ import { Menu, Table } from 'semantic-ui-react'
 describe('<Inventory/>', () => {
   let wrapper
   beforeEach(() => {
-    wrapper = shallow(<Inventory inventory={[]} getInventory={jest.fn()}/>)
+    wrapper = shallow(<Inventory inventory={[]} filteredInv={[]} getInventory={jest.fn()}/>)
   })
   it('contains a table', () => {
     expect(wrapper.find(Table)).toHaveLength(1)
