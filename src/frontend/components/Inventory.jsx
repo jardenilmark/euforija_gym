@@ -16,9 +16,9 @@ class Inventory extends React.Component {
     }
     return arr.map(item => {
       return <Table.Row key={item._id}>
-        <Table.Cell>{item.name}</Table.Cell>
-        <Table.Cell>{item.quantity}</Table.Cell>
-        <Table.Cell>₱{item.price}</Table.Cell>
+        <Table.Cell onClick={() => console.log(item._id)}>{item.name}</Table.Cell>
+        <Table.Cell onClick={() => console.log(item._id)}>{item.quantity}</Table.Cell>
+        <Table.Cell onClick={() => console.log(item._id)}>₱{item.price}</Table.Cell>
       </Table.Row>
     })
   }
