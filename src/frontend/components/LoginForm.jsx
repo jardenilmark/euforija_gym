@@ -27,7 +27,7 @@ const LoginForm = (props) => {
         Sign in to your Account
       </Header>
       {/* <Segment size='big' padded raised> */}
-      {renderField('Username', 'user outline', 'text', 'username')}
+      {renderField('ID Number', 'user outline', 'text', 'idNumber')}
       {renderField('Password', 'lock', 'password', 'password')}
       {/* </Segment> */}
       <Divider />

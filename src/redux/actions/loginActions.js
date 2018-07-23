@@ -5,7 +5,7 @@ const location = 'api/staff'
 export function handleLogin (data) {
   return async (dispatch) => {
     const result = await app.service(location).find({
-      query: { username: data.username }
+      query: { idNumber: data.idNumber }
     })
     if (result.length > 0) {
       const user = result[0]
