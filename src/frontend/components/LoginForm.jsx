@@ -6,7 +6,6 @@ import 'semantic-ui-css/semantic.min.css'
 
 const renderField = (label, icon, type, name) => (
   <Form.Field>
-    {/* <label>{label}</label> */}
     <Field
       icon={icon}
       iconPosition='left'
@@ -21,24 +20,22 @@ const renderField = (label, icon, type, name) => (
 )
 
 const LoginForm = (props) => {
-  const { handleSubmit } = props
+  const { handleSubmit, pristine, submitting } = props
   return (
     <Form size='large' as='form' onSubmit={handleSubmit}>
-      <Segment size='massive' padded secondary>
-        <Header color='orange' textAlign='center' style={{ fontSize: '25px' }}>
-          Sign in to your Account
-        </Header>
-        <Segment size='big' padded raised >
-          {renderField('Username', 'user outline', 'text', 'username')}
-          {renderField('Password', 'lock', 'password', 'password')}
-        </Segment>
-        <Divider />
-        <Button color='orange' fluid size='big' type='submit'>
-          Login
-        </Button>
-      </Segment>
+      <Header color='orange' textAlign='center' style={{ fontSize: '25px' }}>
+        Sign in to your Account
+      </Header>
+      {/* <Segment size='big' padded raised> */}
+      {renderField('Username', 'user outline', 'text', 'username')}
+      {renderField('Password', 'lock', 'password', 'password')}
+      {/* </Segment> */}
+      <Divider />
+      <Button color='orange' fluid size='big' type='submit' disabled={pristine || submitting}>
+        Login
+      </Button>
     </Form>
   )
 }
 
-export default reduxForm({ form: 'loginform' })(LoginForm)
+export default LoginForm
