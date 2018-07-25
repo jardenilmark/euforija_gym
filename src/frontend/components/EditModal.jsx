@@ -3,7 +3,7 @@ import { Modal, Container, Header, Icon } from 'semantic-ui-react'
 import EditForm from '../redux/containers/EditFormContainer'
 import 'semantic-ui-css/semantic.min.css'
 
-const editItemModal = (props) => {
+const EditItemModal = (props) => {
   return <Modal
     open={props.editModalState}
     onClose={() => props.setModalState(false, 'EDIT_FORM_STATE')}
@@ -25,4 +25,4 @@ const editItemModal = (props) => {
   </Modal>
 }
 
-export default editItemModal
+export default EditItemModal

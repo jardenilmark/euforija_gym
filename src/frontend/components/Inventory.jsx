@@ -1,7 +1,8 @@
 import React from 'react'
-import { Input, Menu, Container, Table, Button } from 'semantic-ui-react'
+import { Input, Menu, Container, Table, Button, Icon } from 'semantic-ui-react'
 import AddItemModal from '../redux/containers/AddModalContainer'
 import EditItemModal from '../redux/containers/EditModalContainer'
+import DeleteItemModal from '../redux/containers/DeleteModalContainer'
 import 'semantic-ui-css/semantic.min.css'
 
 class Inventory extends React.Component {
@@ -17,14 +18,28 @@ class Inventory extends React.Component {
     }
     return arr.map(item => {
       return (
-        <Table.Row key={item._id} onClick={() => {
-          setModalState(true, 'EDIT_FORM_STATE')
-          setFormValues(item)
-          setFormId(item._id)
-        }}>
+        <Table.Row key={item._id}>
           <Table.Cell>{item.name}</Table.Cell>
           <Table.Cell>{item.quantity}</Table.Cell>
           <Table.Cell>₱{item.price}</Table.Cell>
+          <Table.Cell>
+            <Button
+              compact
+              icon='edit'
+              onClick={() => {
+                setModalState(true, 'EDIT_FORM_STATE')
+                setFormValues(item)
+                setFormId(item._id)
+              }}
+            />
+            <Button
+              compact
+              icon='delete'
+              onClick={() => {
+                setModalState(true, 'DELETE_FORM_STATE')
+                setFormId(item._id)
+              }}/>
+          </Table.Cell>
         </Table.Row>
       )
     })
@@ -36,6 +51,7 @@ class Inventory extends React.Component {
       <Container fluid style={{ paddingLeft: 30, paddingRight: 30 }}>
         <EditItemModal />
         <AddItemModal />
+        <DeleteItemModal />
         <Menu text>
           <Menu.Item header>Search By</Menu.Item>
           <Menu.Item
@@ -73,6 +89,7 @@ class Inventory extends React.Component {
               <Table.HeaderCell>Name</Table.HeaderCell>
               <Table.HeaderCell>Quantity</Table.HeaderCell>
               <Table.HeaderCell>Price</Table.HeaderCell>
+              <Table.HeaderCell>Action</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>

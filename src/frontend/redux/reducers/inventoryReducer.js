@@ -9,6 +9,7 @@ const initialState = {
   },
   editModalState: false,
   addModalState: false,
+  deleteModalState: false,
   formId: ''
 }
 
@@ -23,6 +24,11 @@ export default function reducer (state = initialState, action) {
       return {
         ...state,
         formId: action.payload
+      }
+    case 'DELETE_FORM_STATE':
+      return {
+        ...state,
+        deleteModalState: action.payload
       }
     case 'ADD_FORM_STATE':
       return {

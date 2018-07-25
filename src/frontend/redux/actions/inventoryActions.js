@@ -28,6 +28,13 @@ export function updateItem (id, data) {
   }
 }
 
+export function removeItem (id) {
+  return async (dispatch) => {
+    await app.service(api).remove(id)
+    dispatch({type: 'ITEM_DELETED', payload: true})
+  }
+}
+
 export function setFormValues (item) {
   return async (dispatch) => {
     const value = {
