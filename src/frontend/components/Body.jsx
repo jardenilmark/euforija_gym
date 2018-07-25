@@ -3,7 +3,7 @@ import { Route } from 'react-router-dom'
 import App from './App'
 import Inventory from '../redux/containers/InventoryContainer'
 
-const Body = (props) => {
+const Body = () => {
   return (
     <div>
       <Route exact path='/' component={App} />

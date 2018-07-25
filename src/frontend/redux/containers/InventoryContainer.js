@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchWholeInventory, setActiveItem, filterList } from '../actions/inventoryActions'
+import { fetchWholeInventory, setActiveItem, filterList, setFormValues, setModalState, setFormId } from '../actions/inventoryActions'
 import Inventory from '../../components/Inventory'
 
 function mapStateToProps (state) {
@@ -20,6 +20,15 @@ function mapDispatchToProps (dispatch) {
     },
     setActiveItem (name) {
       dispatch(setActiveItem(name))
+    },
+    setFormId (id) {
+      dispatch(setFormId(id))
+    },
+    setModalState (state, type) {
+      dispatch(setModalState(state, type))
+    },
+    setFormValues (id) {
+      dispatch(setFormValues(id))
     }
   })
 }

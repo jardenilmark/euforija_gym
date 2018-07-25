@@ -41,7 +41,7 @@ const InventoryForm = (props) => {
         </div>
       </div>
       <Container textAlign='right' style={{paddingTop: '10px'}}>
-        <Button type="submit" disabled={pristine || submitting}>
+        <Button type='submit' disabled={pristine || submitting}>
           Submit
         </Button>
       </Container>

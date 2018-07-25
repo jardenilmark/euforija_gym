@@ -1,7 +1,15 @@
 const initialState = {
   items: [],
   activeItem: 'name',
-  filteredInv: []
+  filteredInv: [],
+  initialVal: {
+    name: '',
+    price: 0,
+    quantity: 0
+  },
+  editModalState: false,
+  addModalState: false,
+  formId: ''
 }
 
 export default function reducer (state = initialState, action) {
@@ -10,6 +18,31 @@ export default function reducer (state = initialState, action) {
       return {
         ...state,
         items: action.payload
+      }
+    case 'GET_EDIT_FORM_ID':
+      return {
+        ...state,
+        formId: action.payload
+      }
+    case 'ADD_FORM_STATE':
+      return {
+        ...state,
+        addModalState: action.payload
+      }
+    case 'EDIT_FORM_ID':
+      return {
+        ...state,
+        formId: action.payload
+      }
+    case 'EDIT_FORM_STATE':
+      return {
+        ...state,
+        editModalState: action.payload
+      }
+    case 'GET_INITIAL_VALUES':
+      return {
+        ...state,
+        initialVal: action.payload
       }
     case 'GET_ACTIVE_ITEM_INVENTORY':
       return {
