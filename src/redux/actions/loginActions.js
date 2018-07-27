@@ -15,7 +15,7 @@ export function handleLogin (data) {
         swal('Oops', 'The password you entered is incorrect.', 'error')
       }
     } else {
-      swal('Oops', 'User not found.', 'warning')
+      swal('Oops', 'User not found.', 'error')
     }
   }
 }
