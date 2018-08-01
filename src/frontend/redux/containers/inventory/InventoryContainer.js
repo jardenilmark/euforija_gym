@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { fetchWholeInventory, setActiveItem, filterList, setFormValues, setModalState, setFormId } from '../actions/inventoryActions'
-import Inventory from '../../components/Inventory'
+import { fetchWholeInventory, setActiveItem, filterList, setFormValues, setModalState, setFormId } from '../../actions/inventoryActions'
+import Inventory from '../../../components/inventory/Inventory'
 
 function mapStateToProps (state) {
   return {

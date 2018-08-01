@@ -1,6 +1,6 @@
 import React from 'react'
 import shallow from './Enzyme.js'
-import Inventory from '../frontend/components/Inventory'
+import Inventory from '../frontend/components/inventory/Inventory'
 import { Menu, Table } from 'semantic-ui-react'
 
 describe('<Inventory/>', () => {

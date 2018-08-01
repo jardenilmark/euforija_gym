@@ -1,8 +1,8 @@
 import React from 'react'
 import { Input, Menu, Container, Table, Button, Icon } from 'semantic-ui-react'
-import AddItemModal from '../redux/containers/AddModalContainer'
-import EditItemModal from '../redux/containers/EditModalContainer'
-import DeleteItemModal from '../redux/containers/DeleteModalContainer'
+import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
+import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
+import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
 import 'semantic-ui-css/semantic.min.css'
 
 class Inventory extends React.Component {

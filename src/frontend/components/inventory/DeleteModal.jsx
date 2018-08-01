@@ -1,6 +1,5 @@
 import React from 'react'
 import { Modal, Container, Header, Icon, Button } from 'semantic-ui-react'
-import EditForm from '../redux/containers/EditFormContainer'
 import 'semantic-ui-css/semantic.min.css'
 
 const DeleteItemModal = (props) => {
