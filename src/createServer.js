@@ -1,12 +1,12 @@
-import path from 'path';
-import feathers from '@feathersjs/feathers';
-import express from '@feathersjs/express';
-import { MongoClient } from 'mongodb';
-import feathersConfig from '@feathersjs/configuration';
-import socketio from '@feathersjs/socketio';
-import compression from 'compression';
+import path from 'path'
+import feathers from '@feathersjs/feathers'
+import express from '@feathersjs/express'
+import { MongoClient } from 'mongodb'
+import feathersConfig from '@feathersjs/configuration'
+import socketio from '@feathersjs/socketio'
+import compression from 'compression'
 
-const app = express(feathers());
+const app = express(feathers())
 
 app
   .use(compression())
@@ -15,11 +15,11 @@ app
   .configure(feathersConfig(path.join(process.cwd())))
   .configure(express.rest())
   .configure(socketio())
-  .use(express.errorHandler());
+  .use(express.errorHandler())
 
 const createServer = async () => {
-  const db = await MongoClient.connect(app.get('mongoURI'));
-  return app;
-};
+  const db = await MongoClient.connect(app.get('mongoURI'))
+  return app
+}
 
-export default createServer;
+export default createServer
