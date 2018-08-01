@@ -1,8 +1,10 @@
-import feathersMongo from 'feathers-mongodb';
+import service from 'feathers-mongodb'
 
-const createDBService = (app, db, collectionName) => {
-  app.use(`/api/${collectionName}`, feathersMongo({ Model: db.collection(collectionName) }));
-  return app.service(`/api/${collectionName}`);
+const createService = (app, db, collection) => {
+  app.use(`api/${collection}`, service({
+    Model: db.collection(collection)
+  }))
+  return app.service(`api/${collection}`)
 }
 
-export default createDBService;
+export default createService
