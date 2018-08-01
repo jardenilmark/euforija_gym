@@ -1,13 +1,15 @@
-import Model from './Model';
+import Joi from 'joi'
+import Model from './Model'
 
 class Staff extends Model {
-  constructor(docs) {
-    super(docs);
-  }
-
-  static get schema() {
-    return {};
+  static get schema () {
+    return {
+      firstname: Joi.string().regex(/^[a-zA-Z ]*$/).required(),
+      lastname: Joi.string().regex(/^[a-zA-Z ]*$/).required(),
+      type: Joi.string().required(),
+      studentsIds: Joi.array()
+    }
   }
 }
 
-export default Staff;
+export default Staff

@@ -1,14 +1,17 @@
+import Joi from 'joi'
+
 class Model {
-  constructor(docs) {
+  constructor (docs) {
     Object.assign(this, docs)
   }
 
-  static get schema() {
+  static get schema () {
     return {}
   }
 
-  isValid() {
-    return result;
+  isValid () {
+    const result = Joi.validate(this, this.constructor.schema)
+    return result.error == null
   }
 }
 

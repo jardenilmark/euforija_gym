@@ -1,18 +1,21 @@
-import createServices from './createService';
+import createServices from './createService'
+import validateHook from '../hooks/validate'
 
 const setupStaffService = (db) => {
   return () => {
-    const app = this;
-    const service = createServices(app, db, 'staff');
+    const app = this
+    const service = createServices(app, db, 'staff')
 
     service.hooks({
       before: {
-        create: [],
+        create: [
+          validateHook()
+        ],
         update: [],
-        remove: [],
+        remove: []
       }
     })
-  };
+  }
 }
 
-export default setupStaffService;
+export default setupStaffService
