@@ -28,7 +28,7 @@ const options = {
         }
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000'
       },
       {
@@ -47,7 +47,10 @@ const options = {
     historyApiFallback: true,
     publicPath: '/',
     contentBase: './public',
-    hot: true
+    hot: true,
+    watchOptions: {
+      ignored: /node_modules/
+    }
   },
   plugins: [],
   mode: 'development',
