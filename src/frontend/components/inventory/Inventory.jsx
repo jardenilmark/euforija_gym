@@ -6,11 +6,11 @@ import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContain
 import 'semantic-ui-css/semantic.min.css'
 
 class Inventory extends React.Component {
-  componentDidMount() {
-    this.props.getInventory()
+  componentDidMount () {
+    this.props.getInventory ()
   }
 
-  getTableRows() {
+  getTableRows () {
     const { inventory, filteredInv, setModalState, setFormValues, setFormId } = this.props
     let arr = inventory
     if (filteredInv.length > 0) {

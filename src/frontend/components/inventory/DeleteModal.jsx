@@ -3,7 +3,7 @@ import { Modal, Container, Header, Icon, Button } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 const DeleteItemModal = (props) => {
-  return <Modal
+  return (<Modal
     open={props.deleteModalState}
     size='tiny'
     closeIcon
@@ -37,7 +37,7 @@ const DeleteItemModal = (props) => {
         Cancel
       </Button>
     </Modal.Actions>
-  </Modal>
+  </Modal>)
 }
 
 export default DeleteItemModal

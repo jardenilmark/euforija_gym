@@ -4,7 +4,7 @@ import EditForm from '../../redux/containers/inventory/EditFormContainer'
 import 'semantic-ui-css/semantic.min.css'
 
 const EditItemModal = (props) => {
-  return <Modal
+  return (<Modal
     open={props.editModalState}
     size='tiny'
     closeIcon
@@ -27,7 +27,7 @@ const EditItemModal = (props) => {
         props.setModalState(false, 'EDIT_FORM_STATE')
       }}/>
     </Modal.Content>
-  </Modal>
+  </Modal>)
 }
 
 export default EditItemModal

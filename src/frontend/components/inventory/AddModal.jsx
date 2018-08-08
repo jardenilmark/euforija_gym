@@ -4,7 +4,7 @@ import AddForm from '../../redux/containers/inventory/AddFormContainer'
 import 'semantic-ui-css/semantic.min.css'
 
 const AddItemModal = (props) => {
-  return <Modal
+  return (<Modal
     open={props.addModalState}
     size='tiny'
     basic
@@ -28,7 +28,7 @@ const AddItemModal = (props) => {
         props.createItem(e)
       }}/>
     </Modal.Content>
-  </Modal>
+  </Modal>)
 }
 
 export default AddItemModal
