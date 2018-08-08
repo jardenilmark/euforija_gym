@@ -11,10 +11,10 @@ const InventoryForm = (props) => {
         <label><Header size='small' inverted>Name</Header></label>
         <div>
           <Field
-            name="name"
-            component="input"
-            type="text"
-            placeholder="First Name"
+            name='name'
+            component='input'
+            type='text'
+            placeholder='First Name'
           />
         </div>
       </div>
@@ -22,10 +22,10 @@ const InventoryForm = (props) => {
         <label><Header size='small' inverted>Quantity</Header></label>
         <div>
           <Field
-            name="quantity"
-            component="input"
-            type="number"
-            placeholder="Quantity"
+            name='quantity'
+            component='input'
+            type='number'
+            placeholder='Quantity'
           />
         </div>
       </div>
@@ -33,14 +33,14 @@ const InventoryForm = (props) => {
         <label><Header size='small' inverted>Price</Header></label>
         <div>
           <Field
-            name="price"
-            component="input"
-            type="number"
-            placeholder="Price"
+            name='price'
+            component='input'
+            type='number'
+            placeholder='Price'
           />
         </div>
       </div>
-      <Container textAlign='right' style={{paddingTop: '20px'}}>
+      <Container textAlign='right' style={{ paddingTop: '20px' }}>
         <Button type='submit' disabled={pristine || submitting}>
           Submit
         </Button>

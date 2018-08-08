@@ -28,7 +28,7 @@ const options = {
         }
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000'
       },
       {
@@ -43,7 +43,15 @@ const options = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-
+  devServer: {
+    historyApiFallback: true,
+    publicPath: '/',
+    contentBase: './public',
+    hot: true,
+    watchOptions: {
+      ignored: /node_modules/
+    }
+  },
   plugins: [],
   mode: 'development',
   performance: { hints: false }

@@ -2,9 +2,9 @@ import feathers from '@feathersjs/client'
 import feathersSocketIO from '@feathersjs/socketio-client'
 import socket from 'socket.io-client'
 import setupServices from './services/index'
+import url from './config/index'
 
-const url = window.location.origin
-const socketIO = socket(url)
+const socketIO = socket(url.api.host)
 const app = feathers()
 
 app

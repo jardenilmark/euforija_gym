@@ -1,4 +1,4 @@
-import inventoryService from './inventoryService'
+import inventoryService from './inventory/inventoryService'
 
 const setupService = (app) => {
   return () => {
