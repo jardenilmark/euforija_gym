@@ -1,6 +1,6 @@
 import React from 'react'
 import shallow from './Enzyme.js'
-import Inventory from '../frontend/components/Inventory'
+import Inventory from '../frontend/components/inventory/Inventory'
 import { Menu, Table } from 'semantic-ui-react'
 
 describe('<Inventory/>', () => {
@@ -9,7 +9,10 @@ describe('<Inventory/>', () => {
     wrapper = shallow(<Inventory inventory={[]} filteredInv={[]} getInventory={jest.fn()}/>)
   })
   it('contains a table', () => {
-    expect(wrapper.find(Table)).toHaveLength(1)
+    expect(wrapper.find(Table)).toHaveLength(2)
+  })
+  it('contains a Table.Body', () => {
+    expect(wrapper.find(Table.Body)).toHaveLength(1)
   })
   it('contains atleast 3 HeaderCells', () => {
     expect(wrapper.find(Table.HeaderCell).length).toBeGreaterThanOrEqual(3)
