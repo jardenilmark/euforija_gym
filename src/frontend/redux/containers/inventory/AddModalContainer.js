@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { createItem, fetchWholeInventory, setModalState } from '../actions/inventoryActions'
-import AddModal from '../../components/AddModal'
+import { createItem, fetchWholeInventory, setModalState } from '../../actions/inventoryActions'
+import AddModal from '../../../components/inventory/AddModal'
 
 function mapStateToProps (state) {
   return {

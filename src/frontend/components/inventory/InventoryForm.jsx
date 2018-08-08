@@ -7,8 +7,8 @@ const InventoryForm = (props) => {
   const { handleSubmit, pristine, submitting } = props
   return (
     <Form onSubmit={handleSubmit}>
-      <div>
-        <label><Header size='medium'>Name</Header></label>
+      <div style={{marginBottom: '8px'}}>
+        <label><Header size='small' inverted>Name</Header></label>
         <div>
           <Field
             name="name"
@@ -18,8 +18,8 @@ const InventoryForm = (props) => {
           />
         </div>
       </div>
-      <div>
-        <label><Header size='medium'>Quantity</Header></label>
+      <div style={{marginBottom: '8px'}}>
+        <label><Header size='small' inverted>Quantity</Header></label>
         <div>
           <Field
             name="quantity"
@@ -30,7 +30,7 @@ const InventoryForm = (props) => {
         </div>
       </div>
       <div>
-        <label><Header size='medium'>Price</Header></label>
+        <label><Header size='small' inverted>Price</Header></label>
         <div>
           <Field
             name="price"
@@ -40,7 +40,7 @@ const InventoryForm = (props) => {
           />
         </div>
       </div>
-      <Container textAlign='right' style={{paddingTop: '10px'}}>
+      <Container textAlign='right' style={{paddingTop: '20px'}}>
         <Button type='submit' disabled={pristine || submitting}>
           Submit
         </Button>
