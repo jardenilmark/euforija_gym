@@ -43,7 +43,12 @@ const options = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-
+  devServer: {
+    historyApiFallback: true,
+    publicPath: '/',
+    contentBase: './public',
+    hot: true
+  },
   plugins: [],
   mode: 'development',
   performance: { hints: false }
