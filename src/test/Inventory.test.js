@@ -9,7 +9,10 @@ describe('<Inventory/>', () => {
     wrapper = shallow(<Inventory inventory={[]} filteredInv={[]} getInventory={jest.fn()}/>)
   })
   it('contains a table', () => {
-    expect(wrapper.find(Table)).toHaveLength(1)
+    expect(wrapper.find(Table)).toHaveLength(2)
+  })
+  it('contains a Table.Body', () => {
+    expect(wrapper.find(Table.Body)).toHaveLength(1)
   })
   it('contains atleast 3 HeaderCells', () => {
     expect(wrapper.find(Table.HeaderCell).length).toBeGreaterThanOrEqual(3)

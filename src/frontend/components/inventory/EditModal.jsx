@@ -4,16 +4,21 @@ import EditForm from '../../redux/containers/inventory/EditFormContainer'
 import 'semantic-ui-css/semantic.min.css'
 
 const EditItemModal = (props) => {
-  return <Modal
+  return (<Modal
     open={props.editModalState}
+    size='tiny'
+    closeIcon
+    basic
+    closeOnEscape={false}
+    closeOnDimmerClick={false}
     onClose={() => props.setModalState(false, 'EDIT_FORM_STATE')}
   >
     <Modal.Header>
-      <Container textAlign='right'>
-        <Icon name='cancel' onClick={() => props.setModalState(false, 'EDIT_FORM_STATE')}/>
-      </Container>
       <Container textAlign='center'>
-        <Header size='huge'>Edit Item</Header>
+        <Header as='h3' inverted>
+          <Icon name='edit' size='small'/>
+          <Header.Content>Edit an Item</Header.Content>
+        </Header>
       </Container>
     </Modal.Header>
     <Modal.Content>
@@ -22,7 +27,7 @@ const EditItemModal = (props) => {
         props.setModalState(false, 'EDIT_FORM_STATE')
       }}/>
     </Modal.Content>
-  </Modal>
+  </Modal>)
 }
 
 export default EditItemModal
