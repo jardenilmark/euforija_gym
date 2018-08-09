@@ -4,4 +4,4 @@ const compareData = (arr, propertyName) => {
   })
 }
 
-export {compareData}
+export { compareData }
