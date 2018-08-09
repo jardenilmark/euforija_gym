@@ -7,7 +7,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 class Inventory extends React.Component {
   componentDidMount () {
-    this.props.getInventory ()
+    this.props.getInventory()
   }
 
   getTableRows () {
@@ -134,7 +134,7 @@ class Inventory extends React.Component {
             </Table.Header>
           </Table>
         </div>
-        <div style={{ height: '450px', overflowY: 'scroll' }}>
+        <div style={{ height: '65%', overflowY: 'scroll' }}>
           <Table
             celled
             unstackable

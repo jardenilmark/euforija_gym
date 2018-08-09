@@ -3,21 +3,10 @@ import { Field } from 'redux-form'
 import { Form, Button, Container, Header } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
-const InventoryForm = (props) => {
+const SaleForm = (props) => {
   const { handleSubmit, pristine, submitting } = props
   return (
     <Form onSubmit={handleSubmit}>
-      <div style={{ marginBottom: '8px' }}>
-        <label><Header size='small' inverted>Name</Header></label>
-        <div>
-          <Field
-            name='name'
-            component='input'
-            type='text'
-            placeholder='First Name'
-          />
-        </div>
-      </div>
       <div style={{ marginBottom: '8px' }}>
         <label><Header size='small' inverted>Quantity</Header></label>
         <div>
@@ -26,17 +15,6 @@ const InventoryForm = (props) => {
             component='input'
             type='number'
             placeholder='Quantity'
-          />
-        </div>
-      </div>
-      <div>
-        <label><Header size='small' inverted>Price</Header></label>
-        <div>
-          <Field
-            name='price'
-            component='input'
-            type='number'
-            placeholder='Price'
           />
         </div>
       </div>
@@ -49,4 +27,4 @@ const InventoryForm = (props) => {
   )
 }
 
-export default InventoryForm
+export default SaleForm
