@@ -1,18 +1,51 @@
 import createServices from './createService'
 import validateHook from '../hooks/validate'
+import transformHook from '../hooks/transfrom'
+import objectIdHook from '../hooks/objectId'
+import { populate } from 'feathers-hooks-common'
+import Staff from '../../models/Staff'
 
-const setupStaffService = (db) => {
+const setupStaffService = (app, db) => {
   return () => {
-    const app = this
-    const service = createServices(app, db, 'staff')
+    const service = createServices(app, db, 'staffs')
+
+    const staffSchema = {
+      include: [
+        {
+          service: '/api/students',
+          nameAs: 'students',
+          parentField: 'studentsIds',
+          childField: '_id',
+          asArray: true
+        }
+      ]
+    }
 
     service.hooks({
       before: {
         create: [
+          transformHook(Staff),
+          objectIdHook('studentsIds'),
           validateHook()
         ],
-        update: [],
-        remove: []
+        update: [
+          objectIdHook('studentsIds')
+        ],
+        patch: [
+          objectIdHook('studentsIds')
+        ]
+      },
+
+      after: {
+        all: [
+          populate({ schema: staffSchema })
+        ],
+        find: [
+          transformHook(Staff)
+        ],
+        get: [
+          transformHook(Staff)
+        ]
       }
     })
   }
