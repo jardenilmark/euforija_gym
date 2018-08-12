@@ -24,9 +24,8 @@ const EditItemModal = (props) => {
     </Modal.Header>
     <Modal.Content>
       <EditForm onSubmit={(e) => {
-        item.quantity = parseInt(e.quantity, 10)
         props.setModalState(false)
-        props.addItemOverview(item)
+        props.addItemOverview(item, parseInt(e.quantity, 10))
       }}/>
     </Modal.Content>
   </Modal>)

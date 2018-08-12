@@ -14,8 +14,8 @@ function mapDispatchToProps (dispatch) {
     setModalState (state) {
       dispatch(setModalState(state))
     },
-    addItemOverview (item) {
-      dispatch(addItemOverview(item))
+    addItemOverview (item, quantity) {
+      dispatch(addItemOverview(item, quantity))
     }
   })
 }

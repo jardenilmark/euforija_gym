@@ -14,7 +14,8 @@ const SaleForm = (props) => {
             name='quantity'
             component='input'
             type='number'
-            placeholder='Quantity'
+            placeholder='place value'
+            required
           />
         </div>
       </div>
