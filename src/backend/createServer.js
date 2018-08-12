@@ -5,7 +5,7 @@ import { MongoClient } from 'mongodb'
 import feathersConfig from '@feathersjs/configuration'
 import socketio from '@feathersjs/socketio'
 import compression from 'compression'
-import setupAllServices from './backend/services/setupAllServices'
+import setupAllServices from './services/setupAllServices'
 
 const app = express(feathers())
 

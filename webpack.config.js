@@ -7,7 +7,7 @@ const options = {
   entry: {
     core: [
       'babel-polyfill',
-      path.join(__dirname, 'src/frontend/index.jsx'),
+      path.join(__dirname, 'src/frontend/Index.jsx')
     ]
   },
 
@@ -28,7 +28,7 @@ const options = {
         }
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000'
       },
       {
@@ -43,14 +43,22 @@ const options = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-
+  devServer: {
+    historyApiFallback: true,
+    publicPath: '/',
+    contentBase: './public',
+    hot: true,
+    watchOptions: {
+      ignored: /node_modules/
+    }
+  },
   plugins: [],
   mode: 'development',
   performance: { hints: false }
 }
 
 if (process.env.NODE_ENV === 'production') {
-  options.plugins.push(new webpack.optimize.UglifyJsPlugin());
+  options.plugins.push(new webpack.optimize.UglifyJsPlugin())
 }
 
 module.exports = options
