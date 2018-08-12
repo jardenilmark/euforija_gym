@@ -13,7 +13,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return ({
     async getInventory () {
-      await dispatch(fetchWholeInventory())
+      await dispatch(fetchWholeInventory({}))
     },
     async filterList (param) {
       await dispatch(filterList(param))

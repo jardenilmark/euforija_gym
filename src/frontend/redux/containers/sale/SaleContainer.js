@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setModalState, setClickedItem } from '../../actions/saleAction'
+import { setModalState, setClickedItem, updateSales } from '../../actions/saleAction'
 import { fetchWholeInventory } from '../../actions/inventoryActions'
 import Sale from '../../../components/sale/Sale'
 
@@ -14,13 +14,29 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return ({
     async getInventory () {
-      await dispatch(fetchWholeInventory())
+      await dispatch(fetchWholeInventory({
+        query: {
+          quantity: {
+            $gt: 0
+          }
+        }
+      }))
     },
     setModalState (state) {
       dispatch(setModalState(state))
     },
     setClickedItem (item) {
       dispatch(setClickedItem(item))
+    },
+    async updateSales (items) {
+      await dispatch(updateSales(items))
+      await dispatch(fetchWholeInventory({
+        query: {
+          quantity: {
+            $gt: 0
+          }
+        }
+      }))
     }
   })
 }

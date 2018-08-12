@@ -8,11 +8,12 @@ class Sale extends React.Component {
   componentDidMount () {
     this.props.getInventory()
   }
-  renderCards (arr) {
-    const { setModalState, setClickedItem } = this.props
+
+  renderCards () {
+    const { setModalState, setClickedItem, inventory } = this.props
     return (
       <Card.Group itemsPerRow={4} style={{ paddingTop: '10px', paddingLeft: '10px' }}>
-        {arr.map(val => {
+        {inventory.map(val => {
           return (
             <Card key={val._id} onClick={() => {
               setModalState(true)
@@ -20,7 +21,8 @@ class Sale extends React.Component {
             }}>
               <Image src={placeholder}/>
               <Card.Content>
-                {val.name}
+                {val.name}<br/>
+                In stock: {val.quantity}
               </Card.Content>
               <Card.Content>
               ₱{val.price}
@@ -32,14 +34,32 @@ class Sale extends React.Component {
     )
   }
 
+  renderTableContent () {
+    const { overviewArr } = this.props
+    return overviewArr.map(val => {
+      return (
+        <Table.Row key={val._id}>
+          <Table.Cell>
+            {val.name}
+          </Table.Cell>
+          <Table.Cell>
+            {val.quantity}
+          </Table.Cell>
+          <Table.Cell>
+            {val.price * val.quantity}
+          </Table.Cell>
+        </Table.Row>
+      )
+    })
+  }
+
   render () {
-    console.log(this.props.overviewArr)
     return (
       <Grid style={{ height: '100%' }}>
         <EditModal />
         <Grid.Row>
           <Grid.Column width={12}>
-            {this.renderCards(this.props.inventory)}
+            {this.renderCards()}
           </Grid.Column>
           <Grid.Column width={4} style={{ background: 'blue', height: '100%', padding: '0' }}>
             <Header as='h1'>
@@ -65,9 +85,12 @@ class Sale extends React.Component {
                     </Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
+                <Table.Body>
+                  {this.renderTableContent()}
+                </Table.Body>
               </Table>
             </Container>
-            <Button>
+            <Button onClick={() => this.props.updateSales(this.props.overviewArr)}>
               Submit
             </Button>
           </Grid.Column>

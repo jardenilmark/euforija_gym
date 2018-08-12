@@ -2,9 +2,9 @@ import app from '../../client'
 import { compareData } from '../../sort'
 const api = 'api/inventory'
 
-export function fetchWholeInventory () {
+export function fetchWholeInventory (arg) {
   return async (dispatch) => {
-    const items = await app.service(api).find()
+    const items = await app.service(api).find(arg)
     compareData(items, 'name')
     dispatch({ type: 'GET_INVENTORY', payload: items })
   }
