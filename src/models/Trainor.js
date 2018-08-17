@@ -1,9 +1,11 @@
-import Joi from 'joi'
 import Model from './Model'
+import Joi from 'joi'
 
-class Staff extends Model {
+class Trainor extends Model {
   static get schema () {
     return {
+      idNumber: Joi.string().required(),
+      password: Joi.string().regex(/^[a-zA-Z0-9]{8,30}$/).required(),
       firstname: Joi.string().regex(/^[a-zA-Z ]*$/).required(),
       lastname: Joi.string().regex(/^[a-zA-Z ]*$/).required(),
       type: Joi.string().required(),
@@ -12,4 +14,4 @@ class Staff extends Model {
   }
 }
 
-export default Staff
+export default Trainor

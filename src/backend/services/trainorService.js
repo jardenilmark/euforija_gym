@@ -4,12 +4,13 @@ import transformHook from '../hooks/transfrom'
 import objectIdHook from '../hooks/objectId'
 import { populate } from 'feathers-hooks-common'
 import Staff from '../../models/Staff'
+import { hooks } from '@feathersjs/authentication-local'
 
-const setupStaffService = (app, db) => {
+const setupTrainorService = (app, db) => {
   return () => {
     const service = createServices(app, db, 'staffs')
 
-    const staffSchema = {
+    const trainorSchema = {
       include: [
         {
           service: '/api/students',
@@ -26,29 +27,26 @@ const setupStaffService = (app, db) => {
         create: [
           transformHook(Staff),
           objectIdHook('studentsIds'),
+          hooks.hashPassword({ passwordField: 'password' }),
           validateHook()
         ],
         update: [
-          objectIdHook('studentsIds')
+          objectIdHook('studentsIds'),
+          hooks.hashPassword({ passwordField: 'password' })
         ],
         patch: [
-          objectIdHook('studentsIds')
+          objectIdHook('studentsIds'),
+          hooks.hashPassword({ passwordField: 'password' })
         ]
       },
 
       after: {
         all: [
-          populate({ schema: staffSchema })
-        ],
-        find: [
-          transformHook(Staff)
-        ],
-        get: [
-          transformHook(Staff)
+          populate({ schema: trainorSchema })
         ]
       }
     })
   }
 }
 
-export default setupStaffService
+export default setupTrainorService

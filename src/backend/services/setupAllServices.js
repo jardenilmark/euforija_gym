@@ -1,11 +1,15 @@
 import setupStudentService from './studentService'
-import setupStaffService from './staffService'
+import setupTrainorService from './trainorService'
+import setupUtilityService from './utilityService'
+import setupAuthService from './authenticationService'
 
 const setupAllServices = (app, db) => {
   return () => {
     app
-      .configure(setupStaffService(app, db))
+      .configure(setupTrainorService(app, db))
+      .configure(setupUtilityService(app, db))
       .configure(setupStudentService(app, db))
+      .configure(setupAuthService(app))
   }
 }
 
