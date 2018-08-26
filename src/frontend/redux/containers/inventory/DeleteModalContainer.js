@@ -18,7 +18,7 @@ function mapDispatchToProps (dispatch) {
       await dispatch(removeItem(id))
     },
     async getInventory () {
-      await dispatch(fetchWholeInventory())
+      await dispatch(fetchWholeInventory({}))
     }
   })
 }

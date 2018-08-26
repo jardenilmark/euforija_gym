@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchWholeInventory, setActiveItem, filterList, setFormValues, setModalState, setFormId } from '../../actions/inventoryActions'
+import { fetchWholeInventory, setActiveItem, filterList, setFormValues, setModalState, setFormId, setFilteredInv } from '../../actions/inventoryActions'
 import Inventory from '../../../components/inventory/Inventory'
 
 function mapStateToProps (state) {
@@ -13,7 +13,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return ({
     async getInventory () {
-      await dispatch(fetchWholeInventory())
+      await dispatch(fetchWholeInventory({}))
     },
     async filterList (param) {
       await dispatch(filterList(param))
@@ -29,6 +29,9 @@ function mapDispatchToProps (dispatch) {
     },
     setFormValues (id) {
       dispatch(setFormValues(id))
+    },
+    setFilteredInv (arr) {
+      dispatch(setFilteredInv(arr))
     }
   })
 }

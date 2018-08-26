@@ -1,12 +1,18 @@
 import app from '../../client'
-import {compareData} from '../../sort'
+import { compareData } from '../../sort'
 const api = 'api/inventory'
 
-export function fetchWholeInventory () {
+export function fetchWholeInventory (arg) {
   return async (dispatch) => {
-    const items = await app.service(api).find()
+    const items = await app.service(api).find(arg)
     compareData(items, 'name')
-    dispatch({type: 'GET_INVENTORY', payload: items})
+    dispatch({ type: 'GET_INVENTORY', payload: items })
+  }
+}
+
+export function setFilteredInv (arr) {
+  return (dispatch) => {
+    dispatch({ type: 'GET_FILTERED_INVENTORY', payload: arr })
   }
 }
 
@@ -14,24 +20,24 @@ export function createItem (obj) {
   return async (dispatch) => {
     await app.service(api).create({
       name: obj.name,
-      quantity: parseInt(obj.quantity),
-      price: parseInt(obj.price)
+      quantity: parseInt(obj.quantity, 10),
+      price: parseInt(obj.price, 10)
     })
-    dispatch({type: 'ITEM_CREATED', payload: true})
+    dispatch({ type: 'ITEM_CREATED', payload: true })
   }
 }
 
 export function updateItem (id, data) {
   return async (dispatch) => {
     await app.service(api).update(id, data)
-    dispatch({type: 'ITEM_UPDATED', payload: true})
+    dispatch({ type: 'ITEM_UPDATED', payload: true })
   }
 }
 
 export function removeItem (id) {
   return async (dispatch) => {
     await app.service(api).remove(id)
-    dispatch({type: 'ITEM_DELETED', payload: true})
+    dispatch({ type: 'ITEM_DELETED', payload: true })
   }
 }
 
@@ -42,30 +48,30 @@ export function setFormValues (item) {
       price: item.price,
       quantity: item.quantity
     }
-    dispatch({type: 'GET_INITIAL_VALUES', payload: value})
+    dispatch({ type: 'GET_INITIAL_VALUES', payload: value })
   }
 }
 
 export function setModalState (state, type) {
   return (dispatch) => {
-    dispatch({type: type, payload: state})
+    dispatch({ type: type, payload: state })
   }
 }
 
 export function setActiveItem (name) {
   return (dispatch) => {
-    dispatch({type: 'GET_ACTIVE_ITEM_INVENTORY', payload: name})
+    dispatch({ type: 'GET_ACTIVE_ITEM_INVENTORY', payload: name })
   }
 }
 
 export function setFormId (id) {
   return (dispatch) => {
-    dispatch({type: 'GET_EDIT_FORM_ID', payload: id})
+    dispatch({ type: 'GET_EDIT_FORM_ID', payload: id })
   }
 }
 
 const getValue = (param) => {
-  const value = parseInt(param)
+  const value = parseInt(param, 10)
   if (isNaN(value)) {
     return param
   }
@@ -74,11 +80,15 @@ const getValue = (param) => {
 
 export function filterList (param) {
   return async (dispatch) => {
-    const items = await app.service(api).find({
-      query: {
-        [param.name]: getValue(param.value)
+    let query = (param.name === 'name') ? {
+      [param.name]: {
+        $search: getValue(param.value),
+        $caseSensitive: false
       }
-    })
-    dispatch({type: 'GET_FILTERED_INVENTORY', payload: items})
+    } : {
+      [param.name]: getValue(param.value)
+    }
+    const items = await app.service(api).find({ query })
+    dispatch({ type: 'GET_FILTERED_INVENTORY', payload: items })
   }
 }
