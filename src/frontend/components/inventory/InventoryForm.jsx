@@ -7,7 +7,7 @@ const InventoryForm = (props) => {
   const { handleSubmit, pristine, submitting } = props
   return (
     <Form onSubmit={handleSubmit}>
-      <div style={{marginBottom: '8px'}}>
+      <div style={{ marginBottom: '8px' }}>
         <label><Header size='small' inverted>Name</Header></label>
         <div>
           <Field
@@ -18,7 +18,7 @@ const InventoryForm = (props) => {
           />
         </div>
       </div>
-      <div style={{marginBottom: '8px'}}>
+      <div style={{ marginBottom: '8px' }}>
         <label><Header size='small' inverted>Quantity</Header></label>
         <div>
           <Field
