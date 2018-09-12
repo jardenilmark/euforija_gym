@@ -134,7 +134,7 @@ class Inventory extends React.Component {
             </Table.Header>
           </Table>
         </div>
-        <div style={{ height: '450px', overflowY: 'scroll' }}>
+        <div id='tbody' style={{ height: '30vw', overflowY: 'scroll' }}>
           <Table
             celled
             unstackable

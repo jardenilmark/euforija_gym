@@ -1,5 +1,6 @@
 import app from '../../client'
-import {compareData} from '../../sort'
+import { compareData } from '../../sort'
+import iziToast from 'izitoast'
 const api = 'api/inventory'
 
 export function fetchWholeInventory () {
@@ -14,8 +15,12 @@ export function createItem (obj) {
   return async (dispatch) => {
     await app.service(api).create({
       name: obj.name,
-      quantity: parseInt(obj.quantity),
-      price: parseInt(obj.price)
+      quantity: parseInt(obj.quantity, 10),
+      price: parseInt(obj.price, 10)
+    })
+    iziToast.success({
+      title: 'OK',
+      message: 'Successfully Added an Item!'
     })
     dispatch({type: 'ITEM_CREATED', payload: true})
   }
@@ -24,6 +29,10 @@ export function createItem (obj) {
 export function updateItem (id, data) {
   return async (dispatch) => {
     await app.service(api).update(id, data)
+    iziToast.success({
+      title: 'OK',
+      message: 'Successfully Updated an Item!'
+    })
     dispatch({type: 'ITEM_UPDATED', payload: true})
   }
 }
@@ -65,7 +74,7 @@ export function setFormId (id) {
 }
 
 const getValue = (param) => {
-  const value = parseInt(param)
+  const value = parseInt(param, 10)
   if (isNaN(value)) {
     return param
   }
