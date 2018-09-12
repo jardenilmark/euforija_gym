@@ -7,7 +7,7 @@ import 'semantic-ui-css/semantic.min.css'
 
 class Inventory extends React.Component {
   componentDidMount () {
-    this.props.getInventory ()
+    this.props.getInventory()
   }
 
   getTableRows () {
@@ -61,7 +61,7 @@ class Inventory extends React.Component {
   }
 
   render () {
-    const { activeItem, setActiveItem, filterList, setModalState } = this.props
+    const { activeItem, setActiveItem, filterList, setModalState, setFilteredInv } = this.props
     return (
       <Container textAlign='center' fluid style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 20 }}>
         <EditItemModal />
@@ -102,7 +102,13 @@ class Inventory extends React.Component {
               icon={<Icon name='search' inverted circular disabled style={{ marginTop: '2px' }} />}
               style={{ padding: '3px' }}
               placeholder='Search...'
-              onChange={(e) => filterList({ name: activeItem, value: e.target.value })} />
+              onChange={(e) => {
+                if (e.target.value === '') {
+                  setFilteredInv([])
+                } else {
+                  filterList({ name: activeItem, value: e.target.value })
+                }
+              }} />
           </Menu.Item>
           <Menu.Item position='right'>
             <Button

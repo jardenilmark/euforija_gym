@@ -16,7 +16,7 @@ function mapDispatchToProps (dispatch) {
     },
     async updateItem (id, obj) {
       await dispatch(updateItem(id, obj))
-      await dispatch(fetchWholeInventory())
+      await dispatch(fetchWholeInventory({}))
     }
   })
 }

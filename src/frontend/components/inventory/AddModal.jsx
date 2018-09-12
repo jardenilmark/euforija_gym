@@ -26,6 +26,7 @@ const AddItemModal = (props) => {
       <AddForm onSubmit={(e) => {
         props.setModalState(false, 'ADD_FORM_STATE')
         props.createItem(e)
+        props.setFilteredInv([])
       }}/>
     </Modal.Content>
   </Modal>)
