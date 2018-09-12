@@ -8,8 +8,8 @@ const Body = () => {
   return (
     <div>
       <Route exact path='/' component={App} />
-      <Route exact path='/Inventory' component={Inventory} />
-      <Route exact path='/Home' component={HomeScreen} />
+      <Route exact path='/inventory' component={Inventory} />
+      <Route exact path='/home' component={HomeScreen} />
     </div>
   )
 }
