@@ -14,6 +14,7 @@ const InventoryForm = (props) => {
             name='name'
             component='input'
             type='text'
+            required
             placeholder='First Name'
           />
         </div>
@@ -25,6 +26,7 @@ const InventoryForm = (props) => {
             name='quantity'
             component='input'
             type='number'
+            required
             placeholder='Quantity'
           />
         </div>
@@ -36,6 +38,7 @@ const InventoryForm = (props) => {
             name='price'
             component='input'
             type='number'
+            required
             placeholder='Price'
           />
         </div>
@@ -52,7 +55,7 @@ const InventoryForm = (props) => {
         </div>
       </div>
       <Container textAlign='right' style={{ paddingTop: '20px' }}>
-        <Button type='submit' disabled={pristine || submitting}>
+        <Button type='submit' color='green' inverted disabled={pristine || submitting}>
           Submit
         </Button>
       </Container>

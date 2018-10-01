@@ -1,5 +1,6 @@
 import app from '../../client'
 import { compareData } from '../../sort'
+import iziToast from 'izitoast'
 const api = 'api/inventory'
 
 export function fetchWholeInventory (arg) {
@@ -25,6 +26,10 @@ export function createItem (obj) {
       price: parseInt(obj.price, 10),
       image: null //to change
     })
+    iziToast.success({
+      title: 'OK',
+      message: 'Successfully Added an Item!'
+    })
     dispatch({ type: 'ITEM_CREATED', payload: true })
   }
 }
@@ -32,7 +37,11 @@ export function createItem (obj) {
 export function updateItem (id, data) {
   return async (dispatch) => {
     await app.service(api).update(id, data)
-    dispatch({ type: 'ITEM_UPDATED', payload: true })
+    iziToast.success({
+      title: 'OK',
+      message: 'Successfully Updated an Item!'
+    })
+    dispatch({type: 'ITEM_UPDATED', payload: true})
   }
 }
 

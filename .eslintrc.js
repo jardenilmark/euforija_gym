@@ -1,7 +1,10 @@
 module.exports = {
-    "extends": ["standard", "react"],
+    "extends": ["standard", "react", "plugin:jest/recommended"],
     "rules": {
         "indent": [2, 2],
         "jsx-quotes": ["error", "prefer-single"]
+    },
+    "env": {
+        "jest": true
     }
 };
