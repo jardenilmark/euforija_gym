@@ -40,6 +40,17 @@ const InventoryForm = (props) => {
           />
         </div>
       </div>
+      <div>
+        <label><Header size='small' inverted>Image</Header></label>
+        <div>
+          <Field
+            name='image'
+            component='input'
+            accept='.jpg, .png, .jpeg'
+            type='file'
+          />
+        </div>
+      </div>
       <Container textAlign='right' style={{ paddingTop: '20px' }}>
         <Button type='submit' disabled={pristine || submitting}>
           Submit

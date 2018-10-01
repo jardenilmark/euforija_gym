@@ -18,10 +18,12 @@ export function setFilteredInv (arr) {
 
 export function createItem (obj) {
   return async (dispatch) => {
+    //to add image
     await app.service(api).create({
       name: obj.name,
       quantity: parseInt(obj.quantity, 10),
-      price: parseInt(obj.price, 10)
+      price: parseInt(obj.price, 10),
+      image: null //to change
     })
     dispatch({ type: 'ITEM_CREATED', payload: true })
   }
@@ -46,7 +48,8 @@ export function setFormValues (item) {
     const value = {
       name: item.name,
       price: item.price,
-      quantity: item.quantity
+      quantity: item.quantity,
+      image: item.image
     }
     dispatch({ type: 'GET_INITIAL_VALUES', payload: value })
   }

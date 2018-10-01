@@ -5,7 +5,8 @@ const initialState = {
   initialVal: {
     name: '',
     price: 0,
-    quantity: 0
+    quantity: 0,
+    image: ''
   },
   editModalState: false,
   addModalState: false,
