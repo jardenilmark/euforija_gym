@@ -1,7 +1,9 @@
 import app from '../../client'
 import { compareData } from '../../sort'
+import { converter } from '../../converter'
 import iziToast from 'izitoast'
 const api = 'api/inventory'
+const fileApi = 'api/file'
 
 export function fetchWholeInventory (arg) {
   return async (dispatch) => {
@@ -17,35 +19,22 @@ export function setFilteredInv (arr) {
   }
 }
 
-function getBase64 (file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = error => reject(error)
-  })
-}
-
-const converter = async (targetFile) => {
-  const data = await getBase64(targetFile)
-  return data
-}
-
 export function createItem (obj) {
   return async (dispatch) => {
-    //to add image
-    console.log(obj)
-    console.log(await converter(obj.image))
-    // await app.service(api).create({
-    //   name: obj.name,
-    //   quantity: parseInt(obj.quantity, 10),
-    //   price: parseInt(obj.price, 10),
-    //   image: null //to change
-    // })
-    // iziToast.success({
-    //   title: 'OK',
-    //   message: 'Successfully Added an Item!'
-    // })
+    const base64 = await converter(obj.image)
+    const data = await app.service(fileApi).create({
+      data: base64
+    })
+    await app.service(api).create({
+      name: obj.name,
+      quantity: parseInt(obj.quantity, 10),
+      price: parseInt(obj.price, 10),
+      image: data._id
+    })
+    iziToast.success({
+      title: 'OK',
+      message: 'Successfully Added an Item!'
+    })
     dispatch({ type: 'ITEM_CREATED', payload: true })
   }
 }

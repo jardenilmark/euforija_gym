@@ -12,10 +12,8 @@ class Inventory extends React.Component {
 
   getTableRows () {
     const { inventory, filteredInv, setModalState, setFormValues, setFormId } = this.props
-    let arr = inventory
-    if (filteredInv.length > 0) {
-      arr = filteredInv
-    }
+    console.log(inventory)
+    const arr = filteredInv.length > 0 ? filteredInv : inventory
     return arr.map((item, index) => {
       return (
         <Table.Row key={item._id}>
