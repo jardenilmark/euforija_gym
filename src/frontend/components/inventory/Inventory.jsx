@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Menu, Container, Table, Button, Icon, Label, Header } from 'semantic-ui-react'
+import { Input, Menu, Container, Table, Button, Icon, Label, Header, Image } from 'semantic-ui-react'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
 import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
@@ -12,14 +12,13 @@ class Inventory extends React.Component {
 
   getTableRows () {
     const { inventory, filteredInv, setModalState, setFormValues, setFormId } = this.props
-    console.log(inventory)
     const arr = filteredInv.length > 0 ? filteredInv : inventory
     return arr.map((item, index) => {
       return (
         <Table.Row key={item._id}>
           <Table.Cell style={{ fontSize: 15, fontWeight: 'bold' }}>
             <Label ribbon>{index + 1}</Label>
-            {/* <Image src='/assets/images/logo.jpg' avatar /> */}
+            <Image src={item.image} avatar />
             {item.name}
           </Table.Cell>
           <Table.Cell style={{ fontSize: 13, fontWeight: 'bold' }} textAlign='center'>
