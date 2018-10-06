@@ -17,19 +17,35 @@ export function setFilteredInv (arr) {
   }
 }
 
+function getBase64 (file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+}
+
+const converter = async (targetFile) => {
+  const data = await getBase64(targetFile)
+  return data
+}
+
 export function createItem (obj) {
   return async (dispatch) => {
     //to add image
-    await app.service(api).create({
-      name: obj.name,
-      quantity: parseInt(obj.quantity, 10),
-      price: parseInt(obj.price, 10),
-      image: null //to change
-    })
-    iziToast.success({
-      title: 'OK',
-      message: 'Successfully Added an Item!'
-    })
+    console.log(obj)
+    console.log(await converter(obj.image))
+    // await app.service(api).create({
+    //   name: obj.name,
+    //   quantity: parseInt(obj.quantity, 10),
+    //   price: parseInt(obj.price, 10),
+    //   image: null //to change
+    // })
+    // iziToast.success({
+    //   title: 'OK',
+    //   message: 'Successfully Added an Item!'
+    // })
     dispatch({ type: 'ITEM_CREATED', payload: true })
   }
 }
@@ -41,7 +57,7 @@ export function updateItem (id, data) {
       title: 'OK',
       message: 'Successfully Updated an Item!'
     })
-    dispatch({type: 'ITEM_UPDATED', payload: true})
+    dispatch({ type: 'ITEM_UPDATED', payload: true })
   }
 }
 

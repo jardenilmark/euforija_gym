@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Container, Header } from 'semantic-ui-react'
+import FieldComponent from './FieldComponent'
 import 'semantic-ui-css/semantic.min.css'
 
 const InventoryForm = (props) => {
@@ -48,9 +49,9 @@ const InventoryForm = (props) => {
         <div>
           <Field
             name='image'
-            component='input'
-            accept='.jpg, .png, .jpeg'
+            component={FieldComponent}
             type='file'
+            required
           />
         </div>
       </div>
