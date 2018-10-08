@@ -1,12 +1,14 @@
 import React from 'react'
-import { Input, Menu, Container, Table, Button, Icon, Label, Header, Image } from 'semantic-ui-react'
+import { Input, Menu, Container, Table, Button, Icon, Label, Header, Image, Popup } from 'semantic-ui-react'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
 import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
 import 'semantic-ui-css/semantic.min.css'
+import 'izitoast/dist/css/iziToast.min.css'
+import 'izitoast/dist/js/iziToast.min.js'
 
 class Inventory extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.getInventory()
   }
 
@@ -16,24 +18,27 @@ class Inventory extends React.Component {
     return arr.map((item, index) => {
       return (
         <Table.Row key={item._id}>
-          <Table.Cell style={{ fontSize: 15, fontWeight: 'bold' }}>
+          <Table.Cell style={{ fontSize: 18, fontWeight: 'bold' }}>
             <Label ribbon>{index + 1}</Label>
-            <Image src={item.image} avatar />
+            <Popup
+              trigger={<Image src={item.image} avatar />}
+              content={<Image src={item.image} size='small' />}
+              position='right center'
+            />
             {item.name}
           </Table.Cell>
-          <Table.Cell style={{ fontSize: 13, fontWeight: 'bold' }} textAlign='center'>
+          <Table.Cell style={{ fontSize: 15, fontWeight: 'bold' }} textAlign='center'>
             {item.quantity}
           </Table.Cell>
           <Table.Cell textAlign='center'>
-            <Label tag style={{ fontSize: 13, fontWeight: 'bold' }}>
+            <Label tag style={{ fontSize: 15, fontWeight: 'bold' }}>
               ₱ {item.price}
             </Label>
           </Table.Cell>
           <Table.Cell textAlign='center'>
-            <Button.Group size='small'>
+            <Button.Group size='medium'>
               <Button
                 content='Edit'
-                size='small'
                 inverted color='green'
                 onClick={() => {
                   setModalState(true, 'EDIT_FORM_STATE')
@@ -46,7 +51,6 @@ class Inventory extends React.Component {
               <Button
                 content='Delete'
                 inverted color='red'
-                size='small'
                 onClick={() => {
                   setModalState(true, 'DELETE_FORM_STATE')
                   setFormId(item._id)
@@ -59,7 +63,7 @@ class Inventory extends React.Component {
     })
   }
 
-  render () {
+  render() {
     const { activeItem, setActiveItem, filterList, setModalState, setFilteredInv } = this.props
     return (
       <Container textAlign='center' fluid style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 20 }}>
