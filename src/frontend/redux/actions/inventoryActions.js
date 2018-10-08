@@ -124,6 +124,13 @@ export function filterList (param) {
       [param.name]: getValue(param.value)
     }
     const items = await app.service(inventoryApi).find({ query })
+    const imageData = await app.service(fileApi).find()
+    items.map(item => {
+      const image = imageData.find(data => item.image === data._id)
+      item.imageId = item.image
+      item.image = image.data
+    })
+    compareData(items, 'name')
     dispatch({ type: 'GET_FILTERED_INVENTORY', payload: items })
   }
 }
