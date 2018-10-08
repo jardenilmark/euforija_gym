@@ -6,7 +6,7 @@ const Profile = () => (
   <ProfileSegment raised>
     <ProfileImage src={logo} />
     <Name>
-      Joselito Gemal
+      Firstname Lastname
     </Name>
   </ProfileSegment>
 )
