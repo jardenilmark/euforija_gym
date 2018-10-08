@@ -1,37 +1,71 @@
 import app from '../../client'
-import {compareData} from '../../sort'
+import { compareData } from '../../sort'
+import { converter } from '../../converter'
+import iziToast from 'izitoast'
 const api = 'api/inventory'
+const fileApi = 'api/file'
 
-export function fetchWholeInventory () {
+export function fetchWholeInventory (arg) {
   return async (dispatch) => {
-    const items = await app.service(api).find()
+    const items = await app.service(api).find(arg)
+    const imageData = await app.service(fileApi).find()
+    items.map(item => {
+      const image = imageData.find(data => item.image === data._id)
+      item.imageId = item.image
+      item.image = image.data
+    })
     compareData(items, 'name')
-    dispatch({type: 'GET_INVENTORY', payload: items})
+    dispatch({ type: 'GET_INVENTORY', payload: items })
+  }
+}
+
+export function setFilteredInv (arr) {
+  return (dispatch) => {
+    dispatch({ type: 'GET_FILTERED_INVENTORY', payload: arr })
   }
 }
 
 export function createItem (obj) {
   return async (dispatch) => {
+    const base64 = await converter(obj.image)
+    const data = await app.service(fileApi).create({
+      data: base64
+    })
     await app.service(api).create({
       name: obj.name,
-      quantity: parseInt(obj.quantity),
-      price: parseInt(obj.price)
+      quantity: parseInt(obj.quantity, 10),
+      price: parseInt(obj.price, 10),
+      image: data._id
     })
-    dispatch({type: 'ITEM_CREATED', payload: true})
+    iziToast.success({
+      title: 'OK',
+      message: 'Successfully Added an Item!'
+    })
+    dispatch({ type: 'ITEM_CREATED', payload: true })
   }
 }
 
-export function updateItem (id, data) {
+export function updateItem (id, imageId, obj) {
   return async (dispatch) => {
-    await app.service(api).update(id, data)
-    dispatch({type: 'ITEM_UPDATED', payload: true})
+    const base64 = await converter(obj.image)
+    await app.service(fileApi).update(imageId, {
+      data: base64
+    })
+    obj.image = imageId
+    await app.service(api).update(id, obj)
+    iziToast.success({
+      title: 'OK',
+      message: 'Successfully Updated an Item!'
+    })
+    dispatch({ type: 'ITEM_UPDATED', payload: true })
   }
 }
 
-export function removeItem (id) {
+export function removeItem (id, imageId) {
   return async (dispatch) => {
     await app.service(api).remove(id)
-    dispatch({type: 'ITEM_DELETED', payload: true})
+    await app.service(fileApi).remove(imageId)
+    dispatch({ type: 'ITEM_DELETED', payload: true })
   }
 }
 
@@ -40,32 +74,39 @@ export function setFormValues (item) {
     const value = {
       name: item.name,
       price: item.price,
-      quantity: item.quantity
+      quantity: item.quantity,
+      image: item.image // need to fix this
     }
-    dispatch({type: 'GET_INITIAL_VALUES', payload: value})
+    dispatch({ type: 'GET_INITIAL_VALUES', payload: value })
   }
 }
 
 export function setModalState (state, type) {
   return (dispatch) => {
-    dispatch({type: type, payload: state})
+    dispatch({ type: type, payload: state })
   }
 }
 
 export function setActiveItem (name) {
   return (dispatch) => {
-    dispatch({type: 'GET_ACTIVE_ITEM_INVENTORY', payload: name})
+    dispatch({ type: 'GET_ACTIVE_ITEM_INVENTORY', payload: name })
   }
 }
 
 export function setFormId (id) {
   return (dispatch) => {
-    dispatch({type: 'GET_EDIT_FORM_ID', payload: id})
+    dispatch({ type: 'GET_EDIT_FORM_ID', payload: id })
+  }
+}
+
+export function setImageId (id) {
+  return (dispatch) => {
+    dispatch({ type: 'GET_IMAGE_ID', payload: id })
   }
 }
 
 const getValue = (param) => {
-  const value = parseInt(param)
+  const value = parseInt(param, 10)
   if (isNaN(value)) {
     return param
   }
@@ -74,11 +115,15 @@ const getValue = (param) => {
 
 export function filterList (param) {
   return async (dispatch) => {
-    const items = await app.service(api).find({
-      query: {
-        [param.name]: getValue(param.value)
+    let query = (param.name === 'name') ? {
+      [param.name]: {
+        $search: getValue(param.value),
+        $caseSensitive: false
       }
-    })
-    dispatch({type: 'GET_FILTERED_INVENTORY', payload: items})
+    } : {
+      [param.name]: getValue(param.value)
+    }
+    const items = await app.service(api).find({ query })
+    dispatch({ type: 'GET_FILTERED_INVENTORY', payload: items })
   }
 }

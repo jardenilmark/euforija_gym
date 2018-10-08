@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom'
 import App from './App'
 import Inventory from '../redux/containers/inventory/InventoryContainer'
 import HomeScreen from './homescreen/HomeScreen'
+import Sale from '../redux/containers/sale/SaleContainer'
 
 const Body = () => {
   return (
@@ -10,6 +11,7 @@ const Body = () => {
       <Route exact path='/' component={App} />
       <Route exact path='/inventory' component={Inventory} />
       <Route exact path='/home' component={HomeScreen} />
+      <Route exact path='/sales' component={Sale} />
     </div>
   )
 }

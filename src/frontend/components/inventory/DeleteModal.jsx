@@ -25,7 +25,7 @@ const DeleteItemModal = (props) => {
     </Modal.Content>
     <Modal.Actions>
       <Button color='green' inverted onClick={() => {
-        props.removeItem(props.formId)
+        props.removeItem(props.formId, props.imageId)
         props.setModalState(false, 'DELETE_FORM_STATE')
         props.getInventory()
       }}>
