@@ -1,18 +1,9 @@
-<<<<<<< HEAD
-image: node:8.10.0
-
-=======
 image: node:latest
 cache:
   paths:
     - node_modules/
->>>>>>> 1cda1cfcb201fdee0119863912f4737a23da6a7e
 all_tests:
   stage: test
   script:
         - npm i
-<<<<<<< HEAD
         - npm test
-=======
-        - npm test
->>>>>>> 1cda1cfcb201fdee0119863912f4737a23da6a7e
