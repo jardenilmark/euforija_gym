@@ -1,6 +1,6 @@
 import React from 'react'
-import shallow from './enzymeSetup.js'
-import Login from '../components/Login.jsx'
+import shallow from './Enzyme.js'
+import Login from '../frontend/components/login/Login'
 import { Header, Grid, Divider } from 'semantic-ui-react'
 
 describe('<Login />', () => {
@@ -8,7 +8,7 @@ describe('<Login />', () => {
   beforeEach(() => {
     wrapper = shallow(<Login />)
   })
-  
+
   it('should render three <Header /> component', () => {
     expect(wrapper.find(Header)).toHaveLength(3)
   })
