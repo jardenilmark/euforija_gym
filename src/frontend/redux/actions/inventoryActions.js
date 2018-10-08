@@ -38,7 +38,7 @@ export function createItem (obj) {
     })
     iziToast.success({
       title: 'OK',
-      message: 'Successfully Added an Item!'
+      message: 'Item added successfully!'
     })
     dispatch({ type: 'ITEM_CREATED', payload: true })
   }
@@ -49,7 +49,7 @@ export function updateItem (id, data) {
     await app.service(api).update(id, data)
     iziToast.success({
       title: 'OK',
-      message: 'Successfully Updated an Item!'
+      message: 'Item updated successfully!'
     })
     dispatch({ type: 'ITEM_UPDATED', payload: true })
   }
@@ -58,6 +58,10 @@ export function updateItem (id, data) {
 export function removeItem (id) {
   return async (dispatch) => {
     await app.service(api).remove(id)
+    iziToast.success({
+      title: 'OK',
+      message: 'Item removed successfully!'
+    })
     dispatch({ type: 'ITEM_DELETED', payload: true })
   }
 }
