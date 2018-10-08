@@ -39,7 +39,7 @@ export function createItem (obj) {
     })
     iziToast.success({
       title: 'OK',
-      message: 'Successfully Added an Item!'
+      message: 'Item added successfully!'
     })
     dispatch({ type: 'ITEM_CREATED', payload: true })
   }
@@ -52,10 +52,12 @@ export function updateItem (id, imageId, obj) {
       data: base64
     })
     obj.image = imageId
+    obj.quantity = parseInt(obj.quantity, 10)
+    obj.price = parseInt(obj.price, 10)
     await app.service(inventoryApi).update(id, obj)
     iziToast.success({
       title: 'OK',
-      message: 'Successfully Updated an Item!'
+      message: 'Item updated successfully!'
     })
     dispatch({ type: 'ITEM_UPDATED', payload: true })
   }
@@ -65,6 +67,10 @@ export function removeItem (id, imageId) {
   return async (dispatch) => {
     await app.service(inventoryApi).remove(id)
     await app.service(fileApi).remove(imageId)
+    iziToast.success({
+      title: 'OK',
+      message: 'Item removed successfully!'
+    })
     dispatch({ type: 'ITEM_DELETED', payload: true })
   }
 }
@@ -124,6 +130,13 @@ export function filterList (param) {
       [param.name]: getValue(param.value)
     }
     const items = await app.service(inventoryApi).find({ query })
+    const imageData = await app.service(fileApi).find()
+    items.map(item => {
+      const image = imageData.find(data => item.image === data._id)
+      item.imageId = item.image
+      item.image = image.data
+    })
+    compareData(items, 'name')
     dispatch({ type: 'GET_FILTERED_INVENTORY', payload: items })
   }
 }
