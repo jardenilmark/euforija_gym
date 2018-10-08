@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { createItem, fetchWholeInventory, setModalState } from '../../actions/inventoryActions'
+import { createItem, fetchWholeInventory, setModalState, setFilteredInv } from '../../actions/inventoryActions'
 import AddModal from '../../../components/inventory/AddModal'
 
 function mapStateToProps (state) {
@@ -12,6 +12,9 @@ function mapDispatchToProps (dispatch) {
   return ({
     setModalState (state, type) {
       dispatch(setModalState(state, type))
+    },
+    setFilteredInv (arr) {
+      dispatch(setFilteredInv(arr))
     },
     async createItem (obj) {
       await dispatch(createItem(obj))

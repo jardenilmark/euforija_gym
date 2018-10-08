@@ -2,7 +2,6 @@ import React from 'react'
 import { Container, Card, Image, Grid, Header, Icon, Button, Table } from 'semantic-ui-react'
 import EditModal from '../../redux/containers/sale/EditModalContainer'
 import 'semantic-ui-css/semantic.min.css'
-import placeholder from '../../../../testPics/download.jpg'
 
 class Sale extends React.Component {
   componentDidMount () {
@@ -11,6 +10,7 @@ class Sale extends React.Component {
 
   renderCards () {
     const { setModalState, setClickedItem, inventory } = this.props
+    console.log(inventory)
     return (
       <Card.Group itemsPerRow={4} style={{ paddingTop: '10px', paddingLeft: '10px' }}>
         {inventory.map(val => {
@@ -19,7 +19,7 @@ class Sale extends React.Component {
               setModalState(true)
               setClickedItem(val)
             }}>
-              <Image src={placeholder}/>
+              <Image src={val.image}/>
               <Card.Content>
                 {val.name}<br/>
                 In stock: {val.quantity}

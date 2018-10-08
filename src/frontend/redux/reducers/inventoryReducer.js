@@ -5,7 +5,8 @@ const initialState = {
   initialVal: {
     name: '',
     price: 0,
-    quantity: 0
+    quantity: 0,
+    image: ''
   },
   editModalState: false,
   addModalState: false,
@@ -24,6 +25,11 @@ export default function reducer (state = initialState, action) {
     return {
       ...state,
       formId: action.payload
+    }
+  case 'GET_IMAGE_ID':
+    return {
+      ...state,
+      imageId: action.payload
     }
   case 'DELETE_FORM_STATE':
     return {

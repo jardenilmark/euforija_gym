@@ -1,8 +1,20 @@
 import createService from './createService'
+import search from 'feathers-mongodb-fuzzy-search'
 
 const inventoryService = (app, db) => {
   return () => {
-    createService(app, db, 'inventory')
+    const service = createService(app, db, 'inventory')
+    service.Model.createIndex({ name: 'text' })
+    service.hooks({
+      before: {
+        all: [
+          search(),
+          search({
+            fields: ['name']
+          })
+        ]
+      }
+    })
   }
 }
 

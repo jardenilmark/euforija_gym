@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Container, Header } from 'semantic-ui-react'
+import FieldComponent from './FieldComponent'
 import 'semantic-ui-css/semantic.min.css'
 
 const InventoryForm = (props) => {
@@ -14,6 +15,7 @@ const InventoryForm = (props) => {
             name='name'
             component='input'
             type='text'
+            required
             placeholder='First Name'
           />
         </div>
@@ -25,6 +27,7 @@ const InventoryForm = (props) => {
             name='quantity'
             component='input'
             type='number'
+            required
             placeholder='Quantity'
           />
         </div>
@@ -36,12 +39,24 @@ const InventoryForm = (props) => {
             name='price'
             component='input'
             type='number'
+            required
             placeholder='Price'
           />
         </div>
       </div>
+      <div>
+        <label><Header size='small' inverted>Image</Header></label>
+        <div>
+          <Field
+            name='image'
+            component={FieldComponent}
+            type='file'
+            required
+          />
+        </div>
+      </div>
       <Container textAlign='right' style={{ paddingTop: '20px' }}>
-        <Button type='submit' disabled={pristine || submitting}>
+        <Button type='submit' color='green' inverted disabled={pristine || submitting}>
           Submit
         </Button>
       </Container>

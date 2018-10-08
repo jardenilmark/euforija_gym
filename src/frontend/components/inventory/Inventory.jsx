@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Menu, Container, Table, Button, Icon, Label, Header } from 'semantic-ui-react'
+import { Input, Menu, Container, Table, Button, Icon, Label, Header, Image } from 'semantic-ui-react'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
 import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
@@ -11,17 +11,14 @@ class Inventory extends React.Component {
   }
 
   getTableRows () {
-    const { inventory, filteredInv, setModalState, setFormValues, setFormId } = this.props
-    let arr = inventory
-    if (filteredInv.length > 0) {
-      arr = filteredInv
-    }
+    const { inventory, filteredInv, setModalState, setFormValues, setFormId, setImageId } = this.props
+    const arr = filteredInv.length > 0 ? filteredInv : inventory
     return arr.map((item, index) => {
       return (
         <Table.Row key={item._id}>
           <Table.Cell style={{ fontSize: 15, fontWeight: 'bold' }}>
             <Label ribbon>{index + 1}</Label>
-            {/* <Image src='/assets/images/logo.jpg' avatar /> */}
+            <Image src={item.image} avatar />
             {item.name}
           </Table.Cell>
           <Table.Cell style={{ fontSize: 13, fontWeight: 'bold' }} textAlign='center'>
@@ -42,6 +39,7 @@ class Inventory extends React.Component {
                   setModalState(true, 'EDIT_FORM_STATE')
                   setFormValues(item)
                   setFormId(item._id)
+                  setImageId(item.imageId)
                 }}
               />
               <Button.Or style={{ color: 'red' }} />
@@ -52,6 +50,7 @@ class Inventory extends React.Component {
                 onClick={() => {
                   setModalState(true, 'DELETE_FORM_STATE')
                   setFormId(item._id)
+                  setImageId(item.imageId)
                 }} />
             </Button.Group>
           </Table.Cell>
@@ -61,7 +60,7 @@ class Inventory extends React.Component {
   }
 
   render () {
-    const { activeItem, setActiveItem, filterList, setModalState } = this.props
+    const { activeItem, setActiveItem, filterList, setModalState, setFilteredInv } = this.props
     return (
       <Container textAlign='center' fluid style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 20 }}>
         <EditItemModal />
@@ -102,7 +101,13 @@ class Inventory extends React.Component {
               icon={<Icon name='search' inverted circular disabled style={{ marginTop: '2px' }} />}
               style={{ padding: '3px' }}
               placeholder='Search...'
-              onChange={(e) => filterList({ name: activeItem, value: e.target.value })} />
+              onChange={(e) => {
+                if (e.target.value === '') {
+                  setFilteredInv([])
+                } else {
+                  filterList({ name: activeItem, value: e.target.value })
+                }
+              }} />
           </Menu.Item>
           <Menu.Item position='right'>
             <Button
@@ -134,7 +139,7 @@ class Inventory extends React.Component {
             </Table.Header>
           </Table>
         </div>
-        <div style={{ height: '65%', overflowY: 'scroll' }}>
+        <div id='tbody' style={{ height: '30vw', overflowY: 'scroll' }}>
           <Table
             celled
             unstackable
