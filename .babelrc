@@ -1,8 +1,8 @@
 {
-  "plugins" : [
+  "plugins": [
     "transform-object-rest-spread"
   ],
-  "presets": [   
+  "presets": [
     [
       "env",
       {

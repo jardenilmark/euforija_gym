@@ -7,7 +7,7 @@ const options = {
   entry: {
     core: [
       'babel-polyfill',
-      path.join(__dirname, 'src/frontend/index.jsx')
+      path.join(__dirname, 'src/frontend/Index.jsx')
     ]
   },
 
@@ -28,28 +28,14 @@ const options = {
         }
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url-loader?limit=100000'
       },
       {
         test: /\.css$/,
         use: [
           { loader: 'style-loader' },
-          { loader: 'css-loader' },
-          { loader: 'font-loader' }
-        ]
-      },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i,
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              bypassOnDebug: true,
-              disable: true
-            }
-          }
+          { loader: 'css-loader' }
         ]
       }]
   },
@@ -57,7 +43,15 @@ const options = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-
+  devServer: {
+    historyApiFallback: true,
+    publicPath: '/',
+    contentBase: './public',
+    hot: true,
+    watchOptions: {
+      ignored: /node_modules/
+    }
+  },
   plugins: [],
   mode: 'development',
   performance: { hints: false }
