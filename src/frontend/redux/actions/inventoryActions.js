@@ -52,6 +52,8 @@ export function updateItem (id, imageId, obj) {
       data: base64
     })
     obj.image = imageId
+    obj.quantity = parseInt(obj.quantity, 10)
+    obj.price = parseInt(obj.price, 10)
     await app.service(inventoryApi).update(id, obj)
     iziToast.success({
       title: 'OK',
