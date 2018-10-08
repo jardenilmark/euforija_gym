@@ -2,15 +2,16 @@ import app from '../../client'
 import { compareData } from '../../sort'
 import { converter } from '../../converter'
 import iziToast from 'izitoast'
-const api = 'api/inventory'
+const inventoryApi = 'api/inventory'
 const fileApi = 'api/file'
 
 export function fetchWholeInventory (arg) {
   return async (dispatch) => {
-    const items = await app.service(api).find(arg)
+    const items = await app.service(inventoryApi).find(arg)
     const imageData = await app.service(fileApi).find()
     items.map(item => {
       const image = imageData.find(data => item.image === data._id)
+      item.imageId = item.image
       item.image = image.data
     })
     compareData(items, 'name')
@@ -30,7 +31,7 @@ export function createItem (obj) {
     const data = await app.service(fileApi).create({
       data: base64
     })
-    await app.service(api).create({
+    await app.service(inventoryApi).create({
       name: obj.name,
       quantity: parseInt(obj.quantity, 10),
       price: parseInt(obj.price, 10),
@@ -44,9 +45,14 @@ export function createItem (obj) {
   }
 }
 
-export function updateItem (id, data) {
+export function updateItem (id, imageId, obj) {
   return async (dispatch) => {
-    await app.service(api).update(id, data)
+    const base64 = await converter(obj.image)
+    await app.service(fileApi).update(imageId, {
+      data: base64
+    })
+    obj.image = imageId
+    await app.service(inventoryApi).update(id, obj)
     iziToast.success({
       title: 'OK',
       message: 'Item updated successfully!'
@@ -55,9 +61,10 @@ export function updateItem (id, data) {
   }
 }
 
-export function removeItem (id) {
+export function removeItem (id, imageId) {
   return async (dispatch) => {
-    await app.service(api).remove(id)
+    await app.service(inventoryApi).remove(id)
+    await app.service(fileApi).remove(imageId)
     iziToast.success({
       title: 'OK',
       message: 'Item removed successfully!'
@@ -72,7 +79,7 @@ export function setFormValues (item) {
       name: item.name,
       price: item.price,
       quantity: item.quantity,
-      image: item.image
+      image: item.image // need to fix this
     }
     dispatch({ type: 'GET_INITIAL_VALUES', payload: value })
   }
@@ -96,6 +103,12 @@ export function setFormId (id) {
   }
 }
 
+export function setImageId (id) {
+  return (dispatch) => {
+    dispatch({ type: 'GET_IMAGE_ID', payload: id })
+  }
+}
+
 const getValue = (param) => {
   const value = parseInt(param, 10)
   if (isNaN(value)) {
@@ -114,7 +127,14 @@ export function filterList (param) {
     } : {
       [param.name]: getValue(param.value)
     }
-    const items = await app.service(api).find({ query })
+    const items = await app.service(inventoryApi).find({ query })
+    const imageData = await app.service(fileApi).find()
+    items.map(item => {
+      const image = imageData.find(data => item.image === data._id)
+      item.imageId = item.image
+      item.image = image.data
+    })
+    compareData(items, 'name')
     dispatch({ type: 'GET_FILTERED_INVENTORY', payload: items })
   }
 }

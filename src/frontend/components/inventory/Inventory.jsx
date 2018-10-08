@@ -12,8 +12,8 @@ class Inventory extends React.Component {
     this.props.getInventory()
   }
 
-  getTableRows() {
-    const { inventory, filteredInv, setModalState, setFormValues, setFormId } = this.props
+  getTableRows () {
+    const { inventory, filteredInv, setModalState, setFormValues, setFormId, setImageId } = this.props
     const arr = filteredInv.length > 0 ? filteredInv : inventory
     return arr.map((item, index) => {
       return (
@@ -44,6 +44,7 @@ class Inventory extends React.Component {
                   setModalState(true, 'EDIT_FORM_STATE')
                   setFormValues(item)
                   setFormId(item._id)
+                  setImageId(item.imageId)
                 }}
               />
               <Button.Or style={{ color: 'red' }} />
@@ -53,6 +54,7 @@ class Inventory extends React.Component {
                 onClick={() => {
                   setModalState(true, 'DELETE_FORM_STATE')
                   setFormId(item._id)
+                  setImageId(item.imageId)
                 }} />
             </Button.Group>
           </Table.Cell>

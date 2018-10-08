@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 const adaptFileEventToValue = (delegate) => async e => {
   delegate(e.target.files[0])
