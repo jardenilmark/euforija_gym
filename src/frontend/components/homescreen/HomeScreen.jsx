@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Header, Icon, Button, Card, Divider, Image } from 'semantic-ui-react'
+import { Menu, Header, Icon, Button, Card, Image } from 'semantic-ui-react'
 import { StyledContainer, StyledHeaderContent, StyledCard, StyledIcon } from './StyledComponents'
 import { Link } from 'react-router-dom'
 

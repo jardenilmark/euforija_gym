@@ -2,12 +2,12 @@ import app from '../../client'
 import { compareData } from '../../sort'
 import { converter } from '../../converter'
 import iziToast from 'izitoast'
-const api = 'api/inventory'
+const inventoryApi = 'api/inventory'
 const fileApi = 'api/file'
 
 export function fetchWholeInventory (arg) {
   return async (dispatch) => {
-    const items = await app.service(api).find(arg)
+    const items = await app.service(inventoryApi).find(arg)
     const imageData = await app.service(fileApi).find()
     items.map(item => {
       const image = imageData.find(data => item.image === data._id)
@@ -31,7 +31,7 @@ export function createItem (obj) {
     const data = await app.service(fileApi).create({
       data: base64
     })
-    await app.service(api).create({
+    await app.service(inventoryApi).create({
       name: obj.name,
       quantity: parseInt(obj.quantity, 10),
       price: parseInt(obj.price, 10),
@@ -52,7 +52,7 @@ export function updateItem (id, imageId, obj) {
       data: base64
     })
     obj.image = imageId
-    await app.service(api).update(id, obj)
+    await app.service(inventoryApi).update(id, obj)
     iziToast.success({
       title: 'OK',
       message: 'Successfully Updated an Item!'
@@ -63,7 +63,7 @@ export function updateItem (id, imageId, obj) {
 
 export function removeItem (id, imageId) {
   return async (dispatch) => {
-    await app.service(api).remove(id)
+    await app.service(inventoryApi).remove(id)
     await app.service(fileApi).remove(imageId)
     dispatch({ type: 'ITEM_DELETED', payload: true })
   }
@@ -123,7 +123,7 @@ export function filterList (param) {
     } : {
       [param.name]: getValue(param.value)
     }
-    const items = await app.service(api).find({ query })
+    const items = await app.service(inventoryApi).find({ query })
     dispatch({ type: 'GET_FILTERED_INVENTORY', payload: items })
   }
 }
