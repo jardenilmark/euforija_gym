@@ -3,6 +3,7 @@ import { Field } from 'redux-form'
 import { Form, Segment, Button, Divider, Header, Image } from 'semantic-ui-react'
 import { InputField } from 'react-semantic-redux-form'
 import 'semantic-ui-css/semantic.min.css'
+import logo from '../../../../public/assets/images/logo.jpg'
 
 const renderField = (placeholder, icon, type, name) => (
   <Form.Field>
@@ -24,7 +25,7 @@ const LoginForm = (props) => {
   return (
     <Segment basic textAlign='center' id='outer-segment'>
       <Form size='tiny' as='form' onSubmit={handleSubmit}>
-        <Image src='./assets/images/logo.jpg' circular centered size='tiny' />
+        <Image src={logo} circular centered size='tiny' />
         <Header id='login-label'>
           Sign in to your Account
         </Header>

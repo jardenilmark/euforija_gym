@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProfileSegment, ProfileImage, Name } from './AttendanceStyled'
-import logo from '../../../../assets/images/profilelogo.png'
+import logo from '../../../../public/assets/images/profilelogo.png'
 
 const Profile = () => (
   <ProfileSegment raised>

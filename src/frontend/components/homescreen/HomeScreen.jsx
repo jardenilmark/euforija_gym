@@ -2,6 +2,7 @@ import React from 'react'
 import { Menu, Header, Icon, Button, Card, Image } from 'semantic-ui-react'
 import { StyledContainer, StyledHeaderContent, StyledCard, StyledIcon } from './StyledComponents'
 import { Link } from 'react-router-dom'
+import logo from '../../../../public/assets/images/logo.jpg'
 
 const HomeScreen = () => {
   const icons = ['table', 'money', 'users', 'student', 'columns', 'chart line']
@@ -27,7 +28,7 @@ const HomeScreen = () => {
   return (
     <div style={{ height: '100%', backgroundColor: '#f4e8fc' }}>
       <div style={{ backgroundColor: '#541087', marginBottom: -15, height: '12%', padding: 10 }}>
-        <Image src='/images/logo.jpg' style={{ height: '100%' }} centered/>
+        <Image src={logo} style={{ height: '100%' }} centered/>
       </div>
       <Menu borderless style={{ height: '10%', borderRadius: 0 }} size='huge'>
         <Menu.Item header>
