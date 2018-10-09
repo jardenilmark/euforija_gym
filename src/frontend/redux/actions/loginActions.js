@@ -1,6 +1,9 @@
 import app from '../../client'
 import swal from 'sweetalert'
+import createHistory from 'history/createBrowserHistory'
+
 const location = 'api/staff'
+const history = createHistory()
 
 export function handleLogin (data) {
   return async (dispatch) => {
@@ -11,6 +14,7 @@ export function handleLogin (data) {
       const user = result[0]
       if (user.password === data.password) {
         swal('Success', 'You have successfully logged in.', 'success')
+        history.push('/')
       } else {
         swal('Oops', 'The password you entered is incorrect.', 'error')
       }
