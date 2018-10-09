@@ -1,4 +1,4 @@
-#mount-point { 
+#main { 
   background: rgba(148,0,148,0.63);
   background: -moz-linear-gradient(top, rgba(148,0,148,0.63) 0%, rgba(255,255,255,0.81) 35%, rgba(255,255,255,0.8) 46%, rgba(255,255,255,0.79) 63%, rgba(255,178,36,0.76) 100%);
   background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(148,0,148,0.63)), color-stop(35%, rgba(255,255,255,0.81)), color-stop(46%, rgba(255,255,255,0.8)), color-stop(63%, rgba(255,255,255,0.79)), color-stop(100%, rgba(255,178,36,0.76)));
@@ -39,10 +39,11 @@
 }
 
 #slogan {
-  font-family: 'Letters in Circles';
-  font-size: 4.3vw;
+  /* font-family: 'Letters in Circles'; */
+  font-size: 3.3vw;
   color: orange;
-  margin-bottom: 0px;
+  font-weight: 900;
+  margin-bottom: 2px;
 }
 
 #sub-header {
@@ -65,6 +66,11 @@
   color: white;
 }
 
+#login-button:hover {
+  background-color: orange;
+  color: white;
+}
+
 #outer-segment {
   width: 95%;
   margin-left: 2.5%;
@@ -73,11 +79,4 @@
 #inner-segment {
   margin-left: 2.5%;
   margin-right: 2.5%;
-}
-
-.field {
-  border: 2px solid purple;
-  border-radius: 5px;
-  /* height: 3vw;
-  width: 2vw; */
 }
