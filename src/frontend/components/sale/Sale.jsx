@@ -55,7 +55,7 @@ class Sale extends React.Component {
 
   render () {
     return (
-      <Grid style={{ height: '100%', background: 'white' }}>
+      <Grid style={{ height: '100%' }}>
         <EditModal />
         <Grid.Row>
           <Grid.Column width={12}>

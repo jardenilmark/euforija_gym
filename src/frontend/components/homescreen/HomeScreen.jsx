@@ -42,7 +42,7 @@ const HomeScreen = () => {
           </Header>
         </Menu.Item>
         <Menu.Item position='right'>
-          <Button animated='fade' color='black'>
+          <Button animated='fade' color='black' as={Link} to='/login'>
             <Button.Content visible>
               Logout
             </Button.Content>

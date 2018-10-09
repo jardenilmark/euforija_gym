@@ -66,7 +66,7 @@ class Inventory extends React.Component {
   render() {
     const { activeItem, setActiveItem, filterList, setModalState, setFilteredInv } = this.props
     return (
-      <Container textAlign='center' fluid style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 20, background: 'white' }}>
+      <Container textAlign='center' fluid style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 20 }}>
         <EditItemModal />
         <AddItemModal />
         <DeleteItemModal />

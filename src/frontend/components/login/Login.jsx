@@ -5,7 +5,7 @@ import LoginForm from '../../redux/containers/login/LoginFormContainer'
 
 const Login = (props) => {
   return (
-    <Grid padded divided textAlign='center' verticalAlign='middle' style={{ height: '100%' }}>
+    <Grid padded divided textAlign='center' verticalAlign='middle' id='main' style={{ height: '100%' }}>
       <Grid.Row>
         <Grid.Column width={9}>
           <Divider horizontal fitted>
