@@ -10,6 +10,7 @@ export function setModalState (payload) {
 
 export function addItemOverview (item, quantity) {
   return (dispatch) => {
+    console.log(item, quantity)
     dispatch({ type: 'OVERVIEW_ARR', payload: [item, quantity] })
   }
 }
