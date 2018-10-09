@@ -3,5 +3,8 @@ module.exports = {
     "rules": {
         "indent": [2, 2],
         "jsx-quotes": ["error", "prefer-single"]
+    },
+    "env": {
+        "jest": true
     }
 };

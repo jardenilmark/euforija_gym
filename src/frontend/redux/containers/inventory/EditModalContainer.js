@@ -5,7 +5,8 @@ import EditModal from '../../../components/inventory/EditModal'
 function mapStateToProps (state) {
   return {
     editModalState: state.inventory.editModalState,
-    formId: state.inventory.formId
+    formId: state.inventory.formId,
+    imageId: state.inventory.imageId
   }
 }
 
@@ -14,9 +15,9 @@ function mapDispatchToProps (dispatch) {
     setModalState (state, type) {
       dispatch(setModalState(state, type))
     },
-    async updateItem (id, obj) {
-      await dispatch(updateItem(id, obj))
-      await dispatch(fetchWholeInventory())
+    async updateItem (id, imageId, obj) {
+      await dispatch(updateItem(id, imageId, obj))
+      await dispatch(fetchWholeInventory({}))
     }
   })
 }

@@ -5,7 +5,8 @@ import DeleteModal from '../../../components/inventory/DeleteModal'
 function mapStateToProps (state) {
   return {
     deleteModalState: state.inventory.deleteModalState,
-    formId: state.inventory.formId
+    formId: state.inventory.formId,
+    imageId: state.inventory.imageId
   }
 }
 
@@ -14,11 +15,11 @@ function mapDispatchToProps (dispatch) {
     setModalState (state, type) {
       dispatch(setModalState(state, type))
     },
-    async removeItem (id) {
-      await dispatch(removeItem(id))
+    async removeItem (id, imageId) {
+      await dispatch(removeItem(id, imageId))
     },
     async getInventory () {
-      await dispatch(fetchWholeInventory())
+      await dispatch(fetchWholeInventory({}))
     }
   })
 }

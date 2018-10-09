@@ -1,57 +1,60 @@
 import React from 'react'
-import { Input, Menu, Container, Table, Button, Icon, Label, Header } from 'semantic-ui-react'
+import { Input, Menu, Container, Table, Button, Icon, Label, Header, Image, Popup } from 'semantic-ui-react'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
 import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
 import 'semantic-ui-css/semantic.min.css'
+import 'izitoast/dist/css/iziToast.min.css'
+import 'izitoast/dist/js/iziToast.min.js'
 
 class Inventory extends React.Component {
-  componentDidMount () {
-    this.props.getInventory ()
+  componentDidMount() {
+    this.props.getInventory()
   }
 
   getTableRows () {
-    const { inventory, filteredInv, setModalState, setFormValues, setFormId } = this.props
-    let arr = inventory
-    if (filteredInv.length > 0) {
-      arr = filteredInv
-    }
+    const { inventory, filteredInv, setModalState, setFormValues, setFormId, setImageId } = this.props
+    const arr = filteredInv.length > 0 ? filteredInv : inventory
     return arr.map((item, index) => {
       return (
         <Table.Row key={item._id}>
-          <Table.Cell style={{ fontSize: 15, fontWeight: 'bold' }}>
+          <Table.Cell style={{ fontSize: 18, fontWeight: 'bold' }}>
             <Label ribbon>{index + 1}</Label>
-            {/* <Image src='/assets/images/logo.jpg' avatar /> */}
+            <Popup
+              trigger={<Image src={item.image} avatar />}
+              content={<Image src={item.image} size='small' />}
+              position='right center'
+            />
             {item.name}
           </Table.Cell>
-          <Table.Cell style={{ fontSize: 13, fontWeight: 'bold' }} textAlign='center'>
+          <Table.Cell style={{ fontSize: 15, fontWeight: 'bold' }} textAlign='center'>
             {item.quantity}
           </Table.Cell>
           <Table.Cell textAlign='center'>
-            <Label tag style={{ fontSize: 13, fontWeight: 'bold' }}>
+            <Label tag style={{ fontSize: 15, fontWeight: 'bold' }}>
               ₱ {item.price}
             </Label>
           </Table.Cell>
           <Table.Cell textAlign='center'>
-            <Button.Group size='small'>
+            <Button.Group size='medium'>
               <Button
                 content='Edit'
-                size='small'
                 inverted color='green'
                 onClick={() => {
                   setModalState(true, 'EDIT_FORM_STATE')
                   setFormValues(item)
                   setFormId(item._id)
+                  setImageId(item.imageId)
                 }}
               />
               <Button.Or style={{ color: 'red' }} />
               <Button
                 content='Delete'
                 inverted color='red'
-                size='small'
                 onClick={() => {
                   setModalState(true, 'DELETE_FORM_STATE')
                   setFormId(item._id)
+                  setImageId(item.imageId)
                 }} />
             </Button.Group>
           </Table.Cell>
@@ -60,10 +63,10 @@ class Inventory extends React.Component {
     })
   }
 
-  render () {
-    const { activeItem, setActiveItem, filterList, setModalState } = this.props
+  render() {
+    const { activeItem, setActiveItem, filterList, setModalState, setFilteredInv } = this.props
     return (
-      <Container textAlign='center' fluid style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 20 }}>
+      <Container textAlign='center' fluid style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 20, background: 'white' }}>
         <EditItemModal />
         <AddItemModal />
         <DeleteItemModal />
@@ -102,7 +105,13 @@ class Inventory extends React.Component {
               icon={<Icon name='search' inverted circular disabled style={{ marginTop: '2px' }} />}
               style={{ padding: '3px' }}
               placeholder='Search...'
-              onChange={(e) => filterList({ name: activeItem, value: e.target.value })} />
+              onChange={(e) => {
+                if (e.target.value === '') {
+                  setFilteredInv([])
+                } else {
+                  filterList({ name: activeItem, value: e.target.value })
+                }
+              }} />
           </Menu.Item>
           <Menu.Item position='right'>
             <Button
@@ -134,7 +143,7 @@ class Inventory extends React.Component {
             </Table.Header>
           </Table>
         </div>
-        <div style={{ height: '450px', overflowY: 'scroll' }}>
+        <div id='tbody' style={{ height: '30vw', overflowY: 'scroll' }}>
           <Table
             celled
             unstackable
