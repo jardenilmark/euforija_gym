@@ -10,7 +10,7 @@ const Login = (props) => {
         <Grid.Column width={9}>
           <Divider horizontal fitted>
             <Header id='slogan'>
-              Commit to be Fit
+              COMMIT TO BE FIT
             </Header>
           </Divider>
           <Header id='primary-header'>
