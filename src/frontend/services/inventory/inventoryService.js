@@ -1,7 +1,7 @@
-const inventoryService = (app) => {
-  return () => {
-    app.service('api/inventory')
-  }
+const inventoryService = app => {
+	return () => {
+		app.service('api/inventory')
+	}
 }
 
 export default inventoryService

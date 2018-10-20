@@ -2,43 +2,43 @@ import app from '../../client'
 const salesApi = 'api/sales'
 const inventoryApi = 'api/inventory'
 
-export function setModalState (payload) {
-  return (dispatch) => {
-    dispatch({ type: 'SALE_MODAL_STATE', payload: payload })
-  }
+export function setModalState(payload) {
+	return dispatch => {
+		dispatch({ type: 'SALE_MODAL_STATE', payload: payload })
+	}
 }
 
-export function addItemOverview (item, quantity) {
-  return (dispatch) => {
-    console.log(item, quantity)
-    dispatch({ type: 'OVERVIEW_ARR', payload: [item, quantity] })
-  }
+export function addItemOverview(item, quantity) {
+	return dispatch => {
+		console.log(item, quantity)
+		dispatch({ type: 'OVERVIEW_ARR', payload: [item, quantity] })
+	}
 }
 
-export function setClickedItem (payload) {
-  return (dispatch) => {
-    dispatch({ type: 'CLICKED_ITEM', payload: payload })
-  }
+export function setClickedItem(payload) {
+	return dispatch => {
+		dispatch({ type: 'CLICKED_ITEM', payload: payload })
+	}
 }
 
-export function updateSales (arr) {
-  return async (dispatch) => {
-    const items = arr.map(val => {
-      return {
-        name: val.name,
-        quantity: val.quantity,
-        price: val.price,
-        date: new Date()
-      }
-    })
-    await app.service(salesApi).create(items)
-    for (const item of arr) {
-      await app.service(inventoryApi).patch(item._id, {
-        $inc: {
-          quantity: -parseInt(item.quantity, 10)
-        }
-      })
-    }
-    dispatch({ type: 'SALES_UPDATED', payload: true })
-  }
+export function updateSales(arr) {
+	return async dispatch => {
+		const items = arr.map(val => {
+			return {
+				name: val.name,
+				quantity: val.quantity,
+				price: val.price,
+				date: new Date()
+			}
+		})
+		await app.service(salesApi).create(items)
+		for (const item of arr) {
+			await app.service(inventoryApi).patch(item._id, {
+				$inc: {
+					quantity: -parseInt(item.quantity, 10)
+				}
+			})
+		}
+		dispatch({ type: 'SALES_UPDATED', payload: true })
+	}
 }

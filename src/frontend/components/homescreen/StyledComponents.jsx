@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Header, Card, Icon } from 'semantic-ui-react'
 import styled from 'styled-components'
 
@@ -17,7 +16,7 @@ export const StyledCard = styled(Card)`
 `
 
 export const StyledIcon = styled(Icon)`
-  font-size: 45 !important
+	font-size: 45 !important;
 `
 
 export const StyledHeaderContent = styled(Header.Content)`

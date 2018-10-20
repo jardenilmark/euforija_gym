@@ -6,17 +6,17 @@ import Profile from './Profile'
 import { ParentContainer, MainGrid } from './AttendanceStyled'
 
 const Attendance = () => (
-  <ParentContainer>
-    <AttendanceHeader />
-    <MainGrid>
-      <Grid.Column width='5'>
-        <Profile />
-      </Grid.Column>
-      <Grid.Column width='11'>
-        <Logs />
-      </Grid.Column>
-    </MainGrid>
-  </ParentContainer>
+	<ParentContainer>
+		<AttendanceHeader />
+		<MainGrid>
+			<Grid.Column width={'5'}>
+				<Profile />
+			</Grid.Column>
+			<Grid.Column width={'11'}>
+				<Logs />
+			</Grid.Column>
+		</MainGrid>
+	</ParentContainer>
 )
 
 export default Attendance

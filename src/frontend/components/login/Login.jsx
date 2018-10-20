@@ -3,29 +3,29 @@ import 'semantic-ui-css/semantic.min.css'
 import { Grid, Header, Divider } from 'semantic-ui-react'
 import LoginForm from '../../redux/containers/login/LoginFormContainer'
 
-const Login = (props) => {
-  return (
-    <Grid padded divided textAlign='center' verticalAlign='middle' id='main' style={{ height: '100%' }}>
-      <Grid.Row>
-        <Grid.Column width={9}>
-          <Divider horizontal fitted>
-            <Header id='slogan'>
-              COMMIT TO BE FIT
-            </Header>
-          </Divider>
-          <Header id='primary-header'>
-            Euforija Fitness
-          </Header>
-          <Header id='sub-header'>
-            Management System
-          </Header>
-        </Grid.Column>
-        <Grid.Column width={7}>
-          <LoginForm onSubmit={props.handleLogin} />
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
-  )
+const Login = props => {
+	return (
+		<Grid
+			padded
+			divided
+			textAlign={'center'}
+			verticalAlign={'middle'}
+			id={'main'}
+			style={{ height: '100%' }}>
+			<Grid.Row>
+				<Grid.Column width={9}>
+					<Divider horizontal fitted>
+						<Header id={'slogan'}>COMMIT TO BE FIT</Header>
+					</Divider>
+					<Header id={'primary-header'}>Euforija Fitness</Header>
+					<Header id={'sub-header'}>Management System</Header>
+				</Grid.Column>
+				<Grid.Column width={7}>
+					<LoginForm onSubmit={props.handleLogin} />
+				</Grid.Column>
+			</Grid.Row>
+		</Grid>
+	)
 }
 
 export default Login
