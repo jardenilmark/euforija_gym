@@ -5,6 +5,7 @@
 	"repository": "git@gitlab.com:softdev-eufouria/euforija-system.git",
 	"license": "MIT",
 	"scripts": {
+		"start": "concurrently \"npm run start:dev\" \"npm run pack:dev\"",
 		"start:dev": "nodemon -r babel-register src/backend/index.js",
 		"pack:dev": "webpack-dev-server --hot --inline",
 		"babel": "babel src -d dist",
@@ -31,6 +32,7 @@
 		"@feathersjs/socketio-client": "^1.1.0",
 		"body-parser": "^1.18.3",
 		"compression": "^1.7.2",
+		"concurrently": "^4.0.1",
 		"css-loader": "^1.0.0",
 		"feathers-hooks-common": "^4.16.0",
 		"feathers-mongodb": "^3.2.0",
