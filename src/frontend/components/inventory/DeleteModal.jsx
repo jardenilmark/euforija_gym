@@ -21,7 +21,7 @@ const DeleteItemModal = props => {
 				</Container>
 			</Modal.Header>
 			<Modal.Content>
-				Are you sure? This action <b>can't be undone</b>.
+				Are you sure? This action <b>cannot be undone</b>.
 			</Modal.Content>
 			<Modal.Actions>
 				<Button
