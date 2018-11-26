@@ -4,8 +4,7 @@ import { Form, Button, Container, Header } from 'semantic-ui-react'
 import FieldComponent from './FieldComponent'
 import 'semantic-ui-css/semantic.min.css'
 
-const InventoryForm = props => {
-	const { handleSubmit, pristine, submitting } = props
+const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 	return (
 		<Form onSubmit={handleSubmit}>
 			<div style={{ marginBottom: '8px' }}>

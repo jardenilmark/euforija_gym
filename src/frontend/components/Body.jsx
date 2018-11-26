@@ -13,7 +13,7 @@ const Body = () => {
 			<Route exact path={'/inventory'} component={Inventory} />
 			<Route exact path={'/sales'} component={Sale} />
 			<Route exact path={'/login'} component={Login} />
-			<Route exact path={'/Attendance'} component={Attendance} />
+			<Route exact path={'/attendance'} component={Attendance} />
 		</div>
 	)
 }

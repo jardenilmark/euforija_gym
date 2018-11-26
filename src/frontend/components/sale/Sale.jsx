@@ -1,57 +1,13 @@
+import Cards from './Cards'
 import React from 'react'
-import { Container, Card, Image, Grid, Header, Icon, Button, Table, Label } from 'semantic-ui-react'
+import { Container, Grid, Header, Icon, Button, Table } from 'semantic-ui-react'
 import EditModal from '../../redux/containers/sale/EditModalContainer'
 import 'semantic-ui-css/semantic.min.css'
+import TableContent from './TableContent'
 
 class Sale extends React.Component {
 	componentDidMount() {
 		this.props.getInventory()
-	}
-
-	renderCards() {
-		const { setModalState, setClickedItem, inventory } = this.props
-		console.log(inventory)
-		return (
-			<Card.Group itemsPerRow={6} style={{ paddingTop: '10px', paddingLeft: '10px' }}>
-				{inventory.map(val => {
-					return (
-						<Card
-							key={val._id}
-							onClick={() => {
-								setModalState(true)
-								setClickedItem(val)
-							}}>
-							<Label
-								attached={'top'}
-								content={<span>₱ {val.price}</span>}
-								color={'orange'}
-								size={'large'}
-							/>
-							<Image src={val.image} />
-							<Card.Content>
-								<Card.Header>{val.name}</Card.Header>
-							</Card.Content>
-							<Card.Content extra>
-								In Stock: {<Label content={val.quantity} circular color={'grey'} />}
-							</Card.Content>
-						</Card>
-					)
-				})}
-			</Card.Group>
-		)
-	}
-
-	renderTableContent() {
-		const { overviewArr } = this.props
-		return overviewArr.map(val => {
-			return (
-				<Table.Row key={val._id} textAlign={'center'}>
-					<Table.Cell>{val.name}</Table.Cell>
-					<Table.Cell>{val.quantity}</Table.Cell>
-					<Table.Cell>{val.price * val.quantity}</Table.Cell>
-				</Table.Row>
-			)
-		})
 	}
 
 	render() {
@@ -59,7 +15,9 @@ class Sale extends React.Component {
 			<Grid style={{ height: '100%' }}>
 				<EditModal />
 				<Grid.Row divided>
-					<Grid.Column width={12}>{this.renderCards()}</Grid.Column>
+					<Grid.Column width={12}>
+						<Cards {...this.props} />
+					</Grid.Column>
 					<Grid.Column
 						width={4}
 						textAlign={'center'}
@@ -77,7 +35,9 @@ class Sale extends React.Component {
 										<Table.HeaderCell>Price</Table.HeaderCell>
 									</Table.Row>
 								</Table.Header>
-								<Table.Body>{this.renderTableContent()}</Table.Body>
+								<Table.Body>
+									<TableContent {...this.props} />
+								</Table.Body>
 							</Table>
 						</Container>
 						<Button onClick={() => this.props.updateSales(this.props.overviewArr)}>Submit</Button>

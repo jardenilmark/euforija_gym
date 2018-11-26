@@ -8,8 +8,8 @@ import {
 	TrainerSegment,
 	VisitedLabel
 } from './AttendanceStyled'
-import TrainerCards from './TrainerCards'
-import AttendanceList from './AttendanceList'
+// import TrainerCards from './TrainerCards'
+// import AttendanceList from './AttendanceList'
 
 const Logs = () => (
 	<LogGrid>
