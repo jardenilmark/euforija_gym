@@ -2,6 +2,7 @@ import { DropdownField } from '../custom/Dropdown'
 import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Container, Header } from 'semantic-ui-react'
+import ImageField from '../custom/ImageField'
 import 'semantic-ui-css/semantic.min.css'
 
 const genderOptions = [
@@ -15,7 +16,7 @@ const genderOptions = [
 	}
 ]
 
-const typeOptions = [
+const roleOptions = [
 	{
 		text: 'Coach',
 		value: 'coach'
@@ -32,17 +33,13 @@ const Create = props => {
 		<Form onSubmit={handleSubmit}>
 			<div style={{ marginBottom: '8px' }}>
 				<label>
-					<Header size={'small'} inverted>
-						Name
-					</Header>
+					<Header size={'small'}>Name</Header>
 				</label>
 				<div>
 					<Field name={'name'} component={'input'} type={'text'} placeholder={'Name'} required />
 				</div>
 				<label>
-					<Header size={'small'} inverted>
-						Passowrd
-					</Header>
+					<Header size={'small'}>Password</Header>
 				</label>
 				<div>
 					<Field
@@ -54,9 +51,7 @@ const Create = props => {
 					/>
 				</div>
 				<label>
-					<Header size={'small'} inverted>
-						Re-type Password
-					</Header>
+					<Header size={'small'}>Re-type Password</Header>
 				</label>
 				<div>
 					<Field
@@ -68,9 +63,7 @@ const Create = props => {
 					/>
 				</div>
 				<label>
-					<Header size={'small'} inverted>
-						Birthday
-					</Header>
+					<Header size={'small'}>Birthday</Header>
 				</label>
 				<div>
 					<Field
@@ -82,9 +75,7 @@ const Create = props => {
 					/>
 				</div>
 				<label>
-					<Header size={'small'} inverted>
-						Sex
-					</Header>
+					<Header size={'small'}>Sex</Header>
 				</label>
 				<div>
 					<Field
@@ -95,28 +86,23 @@ const Create = props => {
 						required
 					/>
 				</div>
+				<label>
+					<Header size={'small'}>Type</Header>
+				</label>
 				<div>
 					<Field
-						name={'type'}
+						name={'role'}
 						component={DropdownField}
-						label={'Type'}
-						options={typeOptions}
+						label={'Role'}
+						options={roleOptions}
 						required
 					/>
 				</div>
 				<label>
-					<Header size={'small'} inverted>
-						placeholder
-					</Header>
+					<Header size={'small'}>Picture</Header>
 				</label>
 				<div>
-					<Field
-						name={'placeholder'}
-						component={'input'}
-						type={'text'}
-						placeholder={'placeholder'}
-						required
-					/>
+					<Field name={'image'} component={ImageField} type={'file'} required />
 				</div>
 			</div>
 			<Container textAlign={'right'} style={{ paddingTop: '20px' }}>
