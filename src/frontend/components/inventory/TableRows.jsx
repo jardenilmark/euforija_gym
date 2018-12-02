@@ -11,8 +11,9 @@ const TableRows = ({
 }) => {
 	const arr = filteredInv.length > 0 ? filteredInv : inventory
 	return arr.map((item, index) => {
+		const style = item.quantity < 5 ? { fontSize: '30' } : {}
 		return (
-			<Table.Row key={item._id}>
+			<Table.Row key={item._id} negative={item.quantity < 5} style={style}>
 				<Table.Cell style={{ fontSize: 18, fontWeight: 'bold' }}>
 					<Label ribbon>{index + 1}</Label>
 					<Popup

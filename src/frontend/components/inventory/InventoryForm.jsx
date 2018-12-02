@@ -7,8 +7,8 @@ import 'semantic-ui-css/semantic.min.css'
 const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 	return (
 		<Form onSubmit={handleSubmit}>
-			<div style={{ marginBottom: '8px' }}>
-				<label>
+			<div style={styles.div}>
+				<label style={styles.label}>
 					<Header size={'small'} inverted>
 						Name
 					</Header>
@@ -18,13 +18,15 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						name={'name'}
 						component={'input'}
 						type={'text'}
-						required
 						placeholder={'First Name'}
+						style={styles.field}
+						required
+						padded
 					/>
 				</div>
 			</div>
-			<div style={{ marginBottom: '8px' }}>
-				<label>
+			<div style={styles.div}>
+				<label style={styles.label}>
 					<Header size={'small'} inverted>
 						Quantity
 					</Header>
@@ -34,13 +36,15 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						name={'quantity'}
 						component={'input'}
 						type={'number'}
-						required
 						placeholder={'Quantity'}
+						style={styles.field}
+						required
+						padded
 					/>
 				</div>
 			</div>
-			<div>
-				<label>
+			<div style={styles.div}>
+				<label style={styles.label}>
 					<Header size={'small'} inverted>
 						Price
 					</Header>
@@ -50,9 +54,11 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						name={'price'}
 						component={'input'}
 						type={'number'}
-						required
 						placeholder={'Price'}
-					/>
+						style={styles.field}
+						required
+						padded
+						/>
 				</div>
 			</div>
 			<div>
@@ -62,16 +68,31 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 					</Header>
 				</label>
 				<div>
-					<Field name={'image'} component={FieldComponent} type={'file'} required />
+					<Field name={'image'} component={FieldComponent} type={'file'} required style={styles.field} />
 				</div>
 			</div>
-			<Container textAlign={'right'} style={{ paddingTop: '20px' }}>
+			<Container textAlign={'right'} style={styles.container}>
 				<Button type={'submit'} color={'green'} inverted disabled={pristine || submitting}>
 					Submit
 				</Button>
 			</Container>
 		</Form>
 	)
+}
+
+const styles = {
+	div: {
+		marginBottom: '8px'
+	},
+	container: {
+		paddingTop: '20px'
+	},
+	field: {
+		borderBottom: '2px solid red'
+	},
+	label: {
+		marginBottom: '8px'
+	}
 }
 
 export default InventoryForm

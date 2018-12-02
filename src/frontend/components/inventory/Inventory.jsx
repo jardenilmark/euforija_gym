@@ -19,7 +19,7 @@ class Inventory extends React.Component {
 			<Container
 				textAlign={'center'}
 				fluid
-				style={{ paddingLeft: 30, paddingRight: 30, paddingTop: 20 }}>
+				style={{ paddingLeft: 100, paddingRight: 100, paddingTop: 20 }}>
 				<EditItemModal />
 				<AddItemModal />
 				<DeleteItemModal />
@@ -30,7 +30,7 @@ class Inventory extends React.Component {
 				<Menu text>
 					<Menu.Item header>Search By</Menu.Item>
 					<Menu.Item>
-						<Button.Group>
+						<Button.Group size={'medium'}>
 							<Button
 								compact
 								positive={activeItem === 'name'}
@@ -82,10 +82,10 @@ class Inventory extends React.Component {
 						</Button>
 					</Menu.Item>
 				</Menu>
-				<div style={{ marginBottom: -1, paddingRight: 10 }}>
+				<div style={{ }}>
 					<Table celled unstackable striped fixed>
 						<Table.Header>
-							<Table.Row textAlign={'center'} style={{ fontSize: 15 }}>
+							<Table.Row textAlign={'center'} style={{ fontSize: 17 }}>
 								<Table.HeaderCell>Name</Table.HeaderCell>
 								<Table.HeaderCell>Quantity</Table.HeaderCell>
 								<Table.HeaderCell>Price</Table.HeaderCell>
@@ -94,7 +94,7 @@ class Inventory extends React.Component {
 						</Table.Header>
 					</Table>
 				</div>
-				<div id={'tbody'} style={{ height: '30vw', overflowY: 'scroll' }}>
+				<div id={'tbody'} style={{ height: '35vw', overflowY: 'auto' }}>
 					<Table celled unstackable striped fixed>
 						<Table.Body>
 							<TableRows {...this.props} />
