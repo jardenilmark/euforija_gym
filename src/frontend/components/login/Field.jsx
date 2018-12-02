@@ -3,7 +3,7 @@ import { Form } from 'semantic-ui-react'
 import { InputField } from 'react-semantic-redux-form'
 import React from 'react'
 
-const Field = (placeholder, icon, type, name) => (
+const Field = ({ placeholder, icon, type, name }) => (
 	<Form.Field>
 		<ReduxField
 			icon={icon}

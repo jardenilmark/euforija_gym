@@ -6,26 +6,43 @@ import Field from './Field'
 const LoginForm = ({ handleSubmit }) => {
 	return (
 		<Segment basic textAlign={'center'} id={'outer-segment'}>
-			<Form size={'tiny'} as={'form'} onSubmit={handleSubmit}>
+			<Form as={'form'} onSubmit={handleSubmit}>
 				<Image
-					src={require('../../../../public/assets/images/logo.jpg')}
+					src={'./assets/images/logoAttendance.jpg'}
 					circular
 					centered
-					size={'tiny'}
+					size={'small'}
 				/>
-				<Header id={'login-label'}>Sign in to your Account</Header>
+				<Header style={styles.header}>Sign in to your Account</Header>
 				<Divider />
 				<Segment basic id={'inner-segment'} textAlign={'left'}>
 					<Field placeholder={'ID Number'} icon={'id card'} type={'text'} name={'idNumber'} />
 					<Field placeholder={'Password'} icon={'lock'} type={'password'} name={'password'} />
 				</Segment>
 				<Divider />
-				<Button type={'submit'} id={'login-button'} size={'medium'}>
+				<Button type={'submit'} id={'login-button'} size={'large'}>
 					Login
 				</Button>
 			</Form>
 		</Segment>
 	)
+}
+
+const styles = {
+	header: {
+		fontSize: '2vw',
+		marginTop: '5px',
+
+	},
+	outerSegment: {
+		width: '95%',
+  		marginLeft: '2.5%'
+	},
+	innerSegment: {
+		marginLeft: '2.5%',
+		marginRight: '2.5%'
+	},
+	
 }
 
 export default LoginForm
