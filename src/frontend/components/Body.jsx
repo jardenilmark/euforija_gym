@@ -9,10 +9,10 @@ import Login from '../redux/containers/login/LoginContainer'
 const Body = () => {
 	return (
 		<div>
-			<Route exact path={'/'} component={HomeScreen} />
+			<Route exact path={'/'} component={Login} />
 			<Route exact path={'/inventory'} component={Inventory} />
 			<Route exact path={'/sales'} component={Sale} />
-			<Route exact path={'/login'} component={Login} />
+			<Route exact path={'/home'} component={HomeScreen} />
 			<Route exact path={'/attendance'} component={Attendance} />
 		</div>
 	)
