@@ -6,7 +6,7 @@ import HomeScreen from './homescreen/HomeScreen'
 import Sale from '../redux/containers/sale/SaleContainer'
 import Login from '../redux/containers/login/LoginContainer'
 import User from './staff/User'
-import Staff from './staff/Create'
+import Staff from '../redux/containers/staff/CreateContainer'
 
 const Body = () => {
 	return (

@@ -36,7 +36,25 @@ const Create = props => {
 					<Header size={'small'}>Name</Header>
 				</label>
 				<div>
-					<Field name={'name'} component={'input'} type={'text'} placeholder={'Name'} required />
+					<Field
+						name={'firstName'}
+						component={'input'}
+						type={'text'}
+						placeholder={'Firstname'}
+						required
+					/>
+				</div>
+				<label>
+					<Header size={'small'}>Name</Header>
+				</label>
+				<div>
+					<Field
+						name={'lastName'}
+						component={'input'}
+						type={'text'}
+						placeholder={'Lastname'}
+						required
+					/>
 				</div>
 				<label>
 					<Header size={'small'}>Password</Header>
@@ -55,7 +73,7 @@ const Create = props => {
 				</label>
 				<div>
 					<Field
-						name={'re-password'}
+						name={'rePassword'}
 						component={'input'}
 						type={'password'}
 						placeholder={'Re-type password'}

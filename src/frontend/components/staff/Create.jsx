@@ -11,7 +11,7 @@ const Create = props => {
 					<Header size={'huge'}>Create Staff</Header>
 				</Card.Header>
 				<Card.Content>
-					<CreateStaff onSubmit={e => console.log(e)} />
+					<CreateStaff onSubmit={e => props.createStaff(e)} />
 				</Card.Content>
 			</Card>
 		</div>
