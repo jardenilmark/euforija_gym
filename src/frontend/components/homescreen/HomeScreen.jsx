@@ -1,8 +1,6 @@
 import React from 'react'
-import { Menu, Header, Icon, Button, Card, Image } from 'semantic-ui-react'
-import { StyledContainer, StyledHeaderContent, StyledCard, StyledIcon } from './StyledComponents'
+import { Menu, Header, Icon, Card, Image, Sidebar, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import logo from '../../../../public/assets/images/logo.jpg'
 
 const HomeScreen = () => {
 	const icons = ['table', 'money', 'users', 'student', 'columns', 'chart line']
@@ -11,51 +9,72 @@ const HomeScreen = () => {
 
 	const cards = icons.map((icon, index) => {
 		return (
-			<StyledCard raised as={Link} to={paths[index]} key={index}>
+			<Card raised as={Link} to={paths[index]} key={index}>
 				<Card.Content textAlign={'center'}>
-					<Header style={{ margin: 0 }}>
+					<Header style={styles.header}>
 						<center>
-							<StyledIcon name={icon} />
+							<Icon name={icon} />
 						</center>
-						<StyledHeaderContent>{contents[index]}</StyledHeaderContent>
+						<Header.Content>{contents[index]}</Header.Content>
 					</Header>
 				</Card.Content>
-			</StyledCard>
+			</Card>
 		)
 	})
 
 	return (
-		<div style={{ height: '100%', backgroundColor: '#f4e8fc' }}>
-			<div style={{ backgroundColor: '#541087', marginBottom: -15, height: '12%', padding: 10 }}>
-				<Image src={logo} style={{ height: '100%' }} centered />
-			</div>
-			<Menu borderless style={{ height: '10%', borderRadius: 0 }} size={'huge'}>
-				<Menu.Item header>
-					<Header as={'h3'}>
-						<Icon name={'user'} circular inverted />
-						<Header.Content>
-							Danddie Porras
-							<Header.Subheader>Owner</Header.Subheader>
-						</Header.Content>
+		<div style={styles.div}>
+			<Sidebar as={Menu} icon='labeled' vertical visible width={'wide'} borderless style={{ padding: 0 }}>
+				{/* <Menu.Item>
+					<Image src={'./assets/images/logo.jpg'} />
+				</Menu.Item> */}
+				<Menu.Item>
+					<Image src={'./assets/images/images.png'} size={'small'} circular centered />
+					<Header as={'h2'} style={styles.user}>
+						Mark Jardenil
+						<Header.Subheader>Owner</Header.Subheader>
 					</Header>
 				</Menu.Item>
-				<Menu.Item position={'right'}>
-					<Button animated={'fade'} color={'black'} as={Link} to={'/login'}>
+				<Menu.Item style={styles.item}>
+					<Button animated fluid style={styles.logout} size={'huge'}>
 						<Button.Content visible>Logout</Button.Content>
 						<Button.Content hidden>
-							<Icon name={'angle double right'} />
+							<Icon name='arrow right' />
 						</Button.Content>
 					</Button>
 				</Menu.Item>
-			</Menu>
-			<StyledContainer>
-				<div style={{ height: '10%' }} />
-				<Card.Group itemsPerRow={'2'} centered style={{ height: '80%', marginTop: 2 }}>
-					{cards}
+			</Sidebar>
+			<Sidebar.Pusher>
+				<Card.Group>
+					{/* {cards} */}
 				</Card.Group>
-			</StyledContainer>
+			</Sidebar.Pusher>
 		</div>
 	)
 }
+
+const styles = {
+	div: {
+		height: '100%'
+	},
+	header: {
+		margin: 0
+	},
+	user: {
+		margin: 0,
+		marginTop: 8
+	},
+	item: {
+		padding: 0,
+		bottom: 0,
+		position: 'absolute',
+		width: '100%'
+	},
+	logout: {
+		borderRadius: 0
+	}
+}
+
+
 
 export default HomeScreen
