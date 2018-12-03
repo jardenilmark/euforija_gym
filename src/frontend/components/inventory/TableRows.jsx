@@ -1,4 +1,5 @@
-import { Table, Button, Label, Image, Popup } from 'semantic-ui-react'
+import { Table, Button, Label, Image, Popup, Message } from 'semantic-ui-react'
+import { Link } from 'react-router'
 import React from 'react'
 
 const TableRows = ({
@@ -10,11 +11,18 @@ const TableRows = ({
 	setImageId
 }) => {
 	const arr = filteredInv.length > 0 ? filteredInv : inventory
-	return arr.map((item, index) => {
-		const style = item.quantity < 5 ? { fontSize: '30' } : {}
+	if (arr.length === 0) {
 		return (
-			<Table.Row key={item._id} negative={item.quantity < 5} style={style}>
-				<Table.Cell style={{ fontSize: 18, fontWeight: 'bold' }}>
+			<Message negative size={'big'}>
+				<Message.Header><b>Inventory is empty!</b></Message.Header>
+				<p>No item has been added to the inventory. <b onClick={() => setModalState(true, 'ADD_FORM_STATE')} style={styles.cursor}>Click here</b> to add one.</p>
+			</Message>
+		)
+	}
+	return arr.map((item, index) => {
+		return (
+			<Table.Row key={item._id} negative={item.quantity < 5}>
+				<Table.Cell style={styles.text}>
 					<Label ribbon>{index + 1}</Label>
 					<Popup
 						trigger={<Image src={item.image} avatar />}
@@ -23,16 +31,16 @@ const TableRows = ({
 					/>
 					{item.name}
 				</Table.Cell>
-				<Table.Cell style={{ fontSize: 15, fontWeight: 'bold' }} textAlign={'center'}>
+				<Table.Cell style={styles.text} textAlign={'center'}>
 					{item.quantity}
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>
-					<Label tag style={{ fontSize: 15, fontWeight: 'bold' }}>
-						₱ {item.price}
+					<Label tag style={styles.text}>
+						₱ {item.price}.00
 					</Label>
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>
-					<Button.Group size={'medium'}>
+					<Button.Group size={'large'}>
 						<Button
 							content={'Edit'}
 							inverted
@@ -44,7 +52,7 @@ const TableRows = ({
 								setImageId(item.imageId)
 							}}
 						/>
-						<Button.Or style={{ color: 'red' }} />
+						<Button.Or />
 						<Button
 							content={'Delete'}
 							inverted
@@ -60,6 +68,16 @@ const TableRows = ({
 			</Table.Row>
 		)
 	})
+}
+
+const styles = {
+	text: {
+		fontSize: 16,
+		fontWeight: 'bold'
+	},
+	cursor: {
+		cursor: 'pointer'
+	}
 }
 
 export default TableRows
