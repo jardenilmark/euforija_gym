@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { setModalState, addItemOverview } from '../../actions/saleAction'
-import EditModal from '../../../components/sale/EditModal'
+import PurchaseModal from '../../../components/sale/PurchaseModal'
 
 function mapStateToProps(state) {
 	return {
@@ -23,4 +23,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(EditModal)
+)(PurchaseModal)

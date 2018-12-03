@@ -6,10 +6,10 @@ import 'semantic-ui-css/semantic.min.css'
 const SaleForm = ({ handleSubmit, pristine, submitting }) => {
 	return (
 		<Form onSubmit={handleSubmit}>
-			<div style={{ marginBottom: '8px' }}>
+			<div>
 				<label>
-					<Header size={'small'} inverted>
-						Quantity
+					<Header size={'small'} inverted style={styles.header}>
+						Number of Items
 					</Header>
 				</label>
 				<div>
@@ -17,18 +17,27 @@ const SaleForm = ({ handleSubmit, pristine, submitting }) => {
 						name={'quantity'}
 						component={'input'}
 						type={'number'}
-						placeholder={'place value'}
+						placeholder={'place value here...'}
 						required
 					/>
 				</div>
 			</div>
-			<Container textAlign={'right'} style={{ paddingTop: '20px' }}>
+			<Container textAlign={'right'} style={styles.container}>
 				<Button type={'submit'} disabled={pristine || submitting}>
-					Submit
+					Add to Cart
 				</Button>
 			</Container>
 		</Form>
 	)
+}
+
+const styles = {
+	container: {
+		paddingTop: '20px'
+	},
+	header: {
+		marginBottom: '7px'
+	}
 }
 
 export default SaleForm

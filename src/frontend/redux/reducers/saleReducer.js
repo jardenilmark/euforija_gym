@@ -1,4 +1,4 @@
-import swal from 'sweetalert'
+import iziToast from 'izitoast'
 
 const initialState = {
 	modal: false,
@@ -31,13 +31,21 @@ export default function reducer(state = initialState, action) {
 					state.overviewArr.push(newItem)
 				}
 			} else {
-				swal('Quantity is invalid')
+				iziToast.error({
+					title: 'ERROR',
+					message: 'Quantity is invalid!',
+					position: 'topRight'
+				})
 			}
 			return {
 				...state
 			}
 		case 'SALES_UPDATED':
-			swal('Sales confirmed')
+			iziToast.success({
+				title: 'SUCCESS',
+				message: 'Purchase successful!',
+				position: 'topRight'
+			})
 			return {
 				...state,
 				overviewArr: []
