@@ -7,6 +7,7 @@ import 'semantic-ui-css/semantic.min.css'
 import 'izitoast/dist/css/iziToast.min.css'
 import 'izitoast/dist/js/iziToast.min.js'
 import TableRows from './TableRows'
+import ActionButton from '../ActionButton'
 
 class Inventory extends React.Component {
 	componentDidMount() {
@@ -19,7 +20,7 @@ class Inventory extends React.Component {
 			<Container
 				textAlign={'center'}
 				fluid
-				style={{ paddingLeft: 100, paddingRight: 100, paddingTop: 20 }}>
+				style={styles.container}>
 				<EditItemModal />
 				<AddItemModal />
 				<DeleteItemModal />
@@ -28,7 +29,7 @@ class Inventory extends React.Component {
 					<Header.Subheader>Inventory Management</Header.Subheader>
 				</Header>
 				<Menu text>
-					<Menu.Item header>Search By</Menu.Item>
+					<Menu.Item header>SEARCH BY</Menu.Item>
 					<Menu.Item>
 						<Button.Group size={'medium'}>
 							<Button
@@ -56,9 +57,9 @@ class Inventory extends React.Component {
 					<Menu.Item>
 						<Input
 							icon={
-								<Icon name={'search'} inverted circular disabled style={{ marginTop: '2px' }} />
+								<Icon name={'search'} inverted circular disabled style={styles.icon} />
 							}
-							style={{ padding: '3px' }}
+							style={styles.input}
 							placeholder={'Search...'}
 							onChange={e => {
 								if (e.target.value === '') {
@@ -73,7 +74,7 @@ class Inventory extends React.Component {
 						<Button
 							animated
 							negative
-							style={{ width: '110px' }}
+							style={styles.button}
 							onClick={() => setModalState(true, 'ADD_FORM_STATE')}>
 							<Button.Content hidden>Add New Item</Button.Content>
 							<Button.Content visible>
@@ -82,10 +83,10 @@ class Inventory extends React.Component {
 						</Button>
 					</Menu.Item>
 				</Menu>
-				<div style={{ }}>
+				<div>
 					<Table celled unstackable striped fixed>
 						<Table.Header>
-							<Table.Row textAlign={'center'} style={{ fontSize: 17 }}>
+							<Table.Row textAlign={'center'} style={styles.tableHeader}>
 								<Table.HeaderCell>Name</Table.HeaderCell>
 								<Table.HeaderCell>Quantity</Table.HeaderCell>
 								<Table.HeaderCell>Price</Table.HeaderCell>
@@ -94,15 +95,40 @@ class Inventory extends React.Component {
 						</Table.Header>
 					</Table>
 				</div>
-				<div id={'tbody'} style={{ height: '35vw', overflowY: 'auto' }}>
+				<div style={styles.div}>
 					<Table celled unstackable striped fixed>
 						<Table.Body>
 							<TableRows {...this.props} />
 						</Table.Body>
 					</Table>
 				</div>
+				<ActionButton/>
 			</Container>
 		)
+	}
+}
+
+const styles = {
+	container: {
+		paddingLeft: 100,
+		paddingRight: 100,
+		paddingTop: 20
+	},
+	button: {
+		width: '120px'
+	},
+	div: {
+		height: '38vw',
+		overflowY: 'auto'
+	},
+	tableHeader: {
+		fontSize: 18,
+	},
+	input: {
+		padding: '3px'
+	},
+	icon: {
+		marginTop: '2px'
 	}
 }
 
