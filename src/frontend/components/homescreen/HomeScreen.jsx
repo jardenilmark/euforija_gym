@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Header, Icon, Card, Image, Sidebar, Button } from 'semantic-ui-react'
+import { Menu, Header, Icon, Card, Image, Sidebar, Button, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 const HomeScreen = () => {
@@ -45,6 +45,13 @@ const HomeScreen = () => {
 				</Menu.Item>
 			</Sidebar>
 			<Sidebar.Pusher>
+				<div style={{ marginRight: '350px' }}>
+					<Segment fluid basic>
+						<Header style={styles.header}>
+							EUFORIJA FITNESS
+					</Header>
+					</Segment>
+				</div>
 				<Card.Group>
 					{/* {cards} */}
 				</Card.Group>
@@ -58,7 +65,9 @@ const styles = {
 		height: '100%'
 	},
 	header: {
-		margin: 0
+		margin: 0,
+		fontSize: '70px',
+		textAlign: 'center'
 	},
 	user: {
 		margin: 0,
