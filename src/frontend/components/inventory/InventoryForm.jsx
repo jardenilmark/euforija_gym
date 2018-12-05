@@ -18,7 +18,7 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						name={'name'}
 						component={'input'}
 						type={'text'}
-						placeholder={'First Name'}
+						placeholder={'Name'}
 						style={styles.field}
 						required
 						padded
