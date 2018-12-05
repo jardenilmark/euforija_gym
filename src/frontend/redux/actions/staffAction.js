@@ -1,5 +1,5 @@
 import app from '../../client'
-import { converter } from '../../converter'
+import { converter } from '../../helpers/converter'
 
 const staffApi = 'api/staff'
 const fileApi = 'api/file'

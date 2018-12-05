@@ -1,6 +1,6 @@
 import app from '../../client'
-import { compareData } from '../../sort'
-import { converter } from '../../converter'
+import { compareData } from '../../helpers/sort'
+import { converter } from '../../helpers/converter'
 import iziToast from 'izitoast'
 const inventoryApi = 'api/inventory'
 const fileApi = 'api/file'
