@@ -9,14 +9,12 @@ const HomeScreen = () => {
 
 	const cards = icons.map((icon, index) => {
 		return (
-			<Card raised as={Link} to={paths[index]} key={index}>
+			<Card raised as={Link} to={paths[index]} key={index} color={'blue'}>
 				<Card.Content textAlign={'center'}>
-					<Header style={styles.header}>
-						<center>
-							<Icon name={icon} />
-						</center>
-						<Header.Content>{contents[index]}</Header.Content>
-					</Header>
+					<Icon name={icon} size={'massive'} />
+					<br />
+					<br />
+					<label style={styles.cardLabel}>{contents[index]}</label>
 				</Card.Content>
 			</Card>
 		)
@@ -26,15 +24,12 @@ const HomeScreen = () => {
 		<div style={styles.div}>
 			<Sidebar
 				as={Menu}
-				icon={'labeled'}
+				icon="labeled"
 				vertical
 				visible
 				width={'wide'}
 				borderless
-				style={{ padding: 0 }}>
-				{/* <Menu.Item>
-					<Image src={'./assets/images/logo.jpg'} />
-				</Menu.Item> */}
+				style={{ paddingTop: 15 }}>
 				<Menu.Item>
 					<Image src={'./assets/images/images.png'} size={'small'} circular centered />
 					<Header as={'h2'} style={styles.user}>
@@ -52,7 +47,11 @@ const HomeScreen = () => {
 				</Menu.Item>
 			</Sidebar>
 			<Sidebar.Pusher>
-				<Card.Group>{/* {cards} */}</Card.Group>
+				<div style={{ marginRight: '350px' }}>
+					<Card.Group itemsPerRow={2} style={styles.cards}>
+						{cards}
+					</Card.Group>
+				</div>
 			</Sidebar.Pusher>
 		</div>
 	)
@@ -64,6 +63,7 @@ const styles = {
 	},
 	header: {
 		margin: 0,
+		marginTop: 10,
 		fontSize: '70px',
 		textAlign: 'center'
 	},
@@ -79,6 +79,17 @@ const styles = {
 	},
 	logout: {
 		borderRadius: 0
+	},
+	cards: {
+		marginLeft: '5%',
+		marginRight: '5%',
+		height: '70%',
+		paddingTop: '10%',
+		paddingBottom: '10%'
+	},
+	cardLabel: {
+		fontSize: '50px',
+		fontWeight: 'bold'
 	}
 }
 
