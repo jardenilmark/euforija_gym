@@ -1,6 +1,6 @@
 import React from 'react'
 import { Input, Menu, Container, Table, Button, Icon, Header } from 'semantic-ui-react'
-import { onSubmit } from '../../inventoryHelper'
+import { onSubmit } from '../../helpers/inventoryHelper'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
 import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
