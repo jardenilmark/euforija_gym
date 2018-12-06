@@ -21,7 +21,7 @@ const PurchaseItemModal = props => {
 						<Icon name={'cart plus'} size={'small'} />
 						<Header.Content>Purchase an Item</Header.Content>
 					</Header>
-				</Container> 
+				</Container>
 			</Modal.Header>
 			<Modal.Content>
 				<EditForm
