@@ -58,7 +58,7 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						style={styles.field}
 						required
 						padded
-						/>
+					/>
 				</div>
 			</div>
 			<div>
@@ -68,7 +68,13 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 					</Header>
 				</label>
 				<div>
-					<Field name={'image'} component={FieldComponent} type={'file'} required style={styles.field} />
+					<Field
+						name={'image'}
+						component={FieldComponent}
+						type={'file'}
+						required
+						style={styles.field}
+					/>
 				</div>
 			</div>
 			<Container textAlign={'right'} style={styles.container}>

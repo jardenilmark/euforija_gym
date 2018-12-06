@@ -1,5 +1,6 @@
 import React from 'react'
 import { Input, Menu, Container, Table, Button, Icon, Header } from 'semantic-ui-react'
+import { onSubmit } from '../../inventoryHelper'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
 import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
@@ -7,7 +8,6 @@ import 'semantic-ui-css/semantic.min.css'
 import 'izitoast/dist/css/iziToast.min.css'
 import 'izitoast/dist/js/iziToast.min.js'
 import TableRows from './TableRows'
-import ActionButton from '../ActionButton'
 
 class Inventory extends React.Component {
 	componentDidMount() {
@@ -15,12 +15,9 @@ class Inventory extends React.Component {
 	}
 
 	render() {
-		const { activeItem, setActiveItem, filterList, setModalState, setFilteredInv } = this.props
+		const { activeItem, setActiveItem, setModalState, setPriceValue, setNameVal } = this.props
 		return (
-			<Container
-				textAlign={'center'}
-				fluid
-				style={styles.container}>
+			<Container textAlign={'center'} fluid style={styles.container}>
 				<EditItemModal />
 				<AddItemModal />
 				<DeleteItemModal />
@@ -56,19 +53,23 @@ class Inventory extends React.Component {
 					</Menu.Item>
 					<Menu.Item>
 						<Input
-							icon={
-								<Icon name={'search'} inverted circular disabled style={styles.icon} />
-							}
 							style={styles.input}
 							placeholder={'Search...'}
 							onChange={e => {
-								if (e.target.value === '') {
-									setFilteredInv([])
+								if (activeItem === 'name') {
+									setNameVal(e.target.value)
 								} else {
-									filterList({ name: activeItem, value: e.target.value })
+									setPriceValue(e.target.value, 'ONE')
 								}
 							}}
 						/>
+						<Header style={{ display: activeItem !== 'name' ? 'inline' : 'none' }}>To</Header>
+						<Input
+							style={{ ...styles.input, display: activeItem !== 'name' ? 'inline' : 'none' }}
+							placeholder={'Search...'}
+							onChange={e => setPriceValue(e.target.value, 'TWO')}
+						/>
+						<Button icon={'search'} onClick={e => onSubmit(this.props)} />
 					</Menu.Item>
 					<Menu.Item position={'right'}>
 						<Button
@@ -102,7 +103,6 @@ class Inventory extends React.Component {
 						</Table.Body>
 					</Table>
 				</div>
-				<ActionButton/>
 			</Container>
 		)
 	}
@@ -122,7 +122,7 @@ const styles = {
 		overflowY: 'auto'
 	},
 	tableHeader: {
-		fontSize: 18,
+		fontSize: 18
 	},
 	input: {
 		padding: '3px'

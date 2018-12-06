@@ -24,7 +24,14 @@ const HomeScreen = () => {
 
 	return (
 		<div style={styles.div}>
-			<Sidebar as={Menu} icon='labeled' vertical visible width={'wide'} borderless style={{ padding: 0 }}>
+			<Sidebar
+				as={Menu}
+				icon={'labeled'}
+				vertical
+				visible
+				width={'wide'}
+				borderless
+				style={{ padding: 0 }}>
 				{/* <Menu.Item>
 					<Image src={'./assets/images/logo.jpg'} />
 				</Menu.Item> */}
@@ -39,22 +46,13 @@ const HomeScreen = () => {
 					<Button animated fluid style={styles.logout} size={'huge'}>
 						<Button.Content visible>Logout</Button.Content>
 						<Button.Content hidden>
-							<Icon name='arrow right' />
+							<Icon name={'arrow right'} />
 						</Button.Content>
 					</Button>
 				</Menu.Item>
 			</Sidebar>
 			<Sidebar.Pusher>
-				<div style={{ marginRight: '350px' }}>
-					<Segment fluid basic>
-						<Header style={styles.header}>
-							EUFORIJA FITNESS
-					</Header>
-					</Segment>
-				</div>
-				<Card.Group>
-					{/* {cards} */}
-				</Card.Group>
+				<Card.Group>{/* {cards} */}</Card.Group>
 			</Sidebar.Pusher>
 		</div>
 	)
@@ -83,7 +81,5 @@ const styles = {
 		borderRadius: 0
 	}
 }
-
-
 
 export default HomeScreen

@@ -1,5 +1,4 @@
 import { Table, Button, Label, Image, Popup, Message } from 'semantic-ui-react'
-import { Link } from 'react-router'
 import React from 'react'
 
 const TableRows = ({
@@ -14,11 +13,20 @@ const TableRows = ({
 	if (arr.length === 0) {
 		return (
 			<Message negative size={'big'}>
-				<Message.Header><b>Inventory is empty!</b></Message.Header>
-				<p>No item has been added to the inventory. <b onClick={() => setModalState(true, 'ADD_FORM_STATE')} style={styles.cursor}>Click here</b> to add one.</p>
+				<Message.Header>
+					<b>Inventory is empty!</b>
+				</Message.Header>
+				<p>
+					No item has been added to the inventory.{' '}
+					<b onClick={() => setModalState(true, 'ADD_FORM_STATE')} style={styles.cursor}>
+						Click here
+					</b>{' '}
+					to add one.
+				</p>
 			</Message>
 		)
 	}
+
 	return arr.map((item, index) => {
 		return (
 			<Table.Row key={item._id} negative={item.quantity < 5}>
@@ -36,7 +44,8 @@ const TableRows = ({
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>
 					<Label tag style={styles.text}>
-						₱ {item.price}.00
+						₱ {item.price}
+						.00
 					</Label>
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>

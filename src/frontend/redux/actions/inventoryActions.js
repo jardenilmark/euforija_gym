@@ -25,6 +25,18 @@ export function setFilteredInv(arr) {
 	}
 }
 
+export function setPriceValue(val, num) {
+	return dispatch => {
+		dispatch({ type: `GET_PRICE_${num}`, payload: val })
+	}
+}
+
+export function setNameVal(val) {
+	return dispatch => {
+		dispatch({ type: 'GET_NAME_VAL', payload: val })
+	}
+}
+
 export function createItem(obj) {
 	return async dispatch => {
 		const base64 = await converter(obj.image)
@@ -130,7 +142,10 @@ export function filterList(param) {
 						}
 				  }
 				: {
-						[param.name]: getValue(param.value)
+						[param.name]: {
+							$lte: getValue(param.valueTwo),
+							$gte: getValue(param.value)
+						}
 				  }
 		const items = await app.service(inventoryApi).find({ query })
 		const imageData = await app.service(fileApi).find()

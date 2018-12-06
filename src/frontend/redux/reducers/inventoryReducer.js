@@ -21,6 +21,21 @@ export default function reducer(state = initialState, action) {
 				...state,
 				items: action.payload
 			}
+		case 'GET_NAME_VAL':
+			return {
+				...state,
+				nameVal: action.payload
+			}
+		case 'GET_PRICE_ONE':
+			return {
+				...state,
+				priceOne: action.payload
+			}
+		case 'GET_PRICE_TWO':
+			return {
+				...state,
+				priceTwo: action.payload
+			}
 		case 'GET_EDIT_FORM_ID':
 			return {
 				...state,

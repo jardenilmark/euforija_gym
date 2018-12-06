@@ -7,7 +7,9 @@ import {
 	setModalState,
 	setFormId,
 	setFilteredInv,
-	setImageId
+	setImageId,
+	setPriceValue,
+	setNameVal
 } from '../../actions/inventoryActions'
 import Inventory from '../../../components/inventory/Inventory'
 
@@ -15,7 +17,10 @@ function mapStateToProps(state) {
 	return {
 		inventory: state.inventory.items,
 		activeItem: state.inventory.activeItem,
-		filteredInv: state.inventory.filteredInv
+		filteredInv: state.inventory.filteredInv,
+		priceOne: state.inventory.priceOne,
+		priceTwo: state.inventory.priceTwo,
+		nameVal: state.inventory.nameVal
 	}
 }
 
@@ -27,7 +32,12 @@ function mapDispatchToProps(dispatch) {
 		async filterList(param) {
 			await dispatch(filterList(param))
 		},
-
+		setNameVal(val) {
+			dispatch(setNameVal(val))
+		},
+		setPriceValue(val, num) {
+			dispatch(setPriceValue(val, num))
+		},
 		setActiveItem(name) {
 			dispatch(setActiveItem(name))
 		},
