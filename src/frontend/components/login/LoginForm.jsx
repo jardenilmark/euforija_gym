@@ -7,12 +7,7 @@ const LoginForm = ({ handleSubmit }) => {
 	return (
 		<Segment basic textAlign={'center'} id={'outer-segment'}>
 			<Form as={'form'} onSubmit={handleSubmit}>
-				<Image
-					src={'./assets/images/logoAttendance.jpg'}
-					circular
-					centered
-					size={'small'}
-				/>
+				<Image src={'./assets/images/logoAttendance.jpg'} circular centered size={'small'} />
 				<Header style={styles.header}>Sign in to your Account</Header>
 				<Divider />
 				<Segment basic id={'inner-segment'} textAlign={'left'}>
@@ -31,18 +26,16 @@ const LoginForm = ({ handleSubmit }) => {
 const styles = {
 	header: {
 		fontSize: '2vw',
-		marginTop: '5px',
-
+		marginTop: '5px'
 	},
 	outerSegment: {
 		width: '95%',
-  		marginLeft: '2.5%'
+		marginLeft: '2.5%'
 	},
 	innerSegment: {
 		marginLeft: '2.5%',
 		marginRight: '2.5%'
-	},
-	
+	}
 }
 
 export default LoginForm

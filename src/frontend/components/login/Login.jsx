@@ -5,10 +5,7 @@ import LoginForm from '../../redux/containers/login/LoginFormContainer'
 
 const Login = props => {
 	return (
-		<Grid
-			textAlign={'center'}
-			verticalAlign={'middle'}
-			style={styles.grid}>
+		<Grid textAlign={'center'} verticalAlign={'middle'} style={styles.grid}>
 			<Grid.Row>
 				<Grid.Column width={6}>
 					<LoginForm onSubmit={props.handleLogin} />

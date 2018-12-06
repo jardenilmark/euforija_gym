@@ -41,15 +41,22 @@ class Sale extends React.Component {
 									<TableContent {...this.props} />
 								</Table.Body>
 							</Table>
-							{!isEmpty && <Segment basic textAlign={'right'}>
-								<b style={{ fontSize: '17px' }}>Total Price: ₱ {getTotalPrice(this.props.overviewArr)}.00</b>
-							</Segment>}
-							{!isEmpty && <Button
-								onClick={() => this.props.updateSales(this.props.overviewArr)}
-								size={'large'}
-								style={{ float: 'right' }}>
-								Confirm Purchase
-							</Button>}
+							{!isEmpty && (
+								<Segment basic textAlign={'right'}>
+									<b style={{ fontSize: '17px' }}>
+										Total Price: ₱ {getTotalPrice(this.props.overviewArr)}
+										.00
+									</b>
+								</Segment>
+							)}
+							{!isEmpty && (
+								<Button
+									onClick={() => this.props.updateSales(this.props.overviewArr)}
+									size={'large'}
+									style={{ float: 'right' }}>
+									Confirm Purchase
+								</Button>
+							)}
 							{isEmpty && <EmptyCartMessage />}
 						</Container>
 					</Grid.Column>
@@ -59,7 +66,7 @@ class Sale extends React.Component {
 	}
 }
 
-const getTotalPrice = (arr) => {
+const getTotalPrice = arr => {
 	let total = 0
 	arr.forEach(element => {
 		total += element.price * element.quantity
@@ -70,8 +77,12 @@ const getTotalPrice = (arr) => {
 const EmptyCartMessage = () => {
 	return (
 		<Message negative size={'big'}>
-			<Message.Header><b>Cart is empty!</b></Message.Header>
-			<p>Start adding items to your cart by <b>clicking the cards on the side.</b></p>
+			<Message.Header>
+				<b>Cart is empty!</b>
+			</Message.Header>
+			<p>
+				Start adding items to your cart by <b>clicking the cards on the side.</b>
+			</p>
 		</Message>
 	)
 }

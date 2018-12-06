@@ -3,10 +3,7 @@ import { Card, Image, Label } from 'semantic-ui-react'
 
 const Cards = ({ setModalState, setClickedItem, inventory }) => {
 	return (
-		<Card.Group
-			stackable
-			itemsPerRow={5}
-			style={styles.cardGroup}>
+		<Card.Group stackable itemsPerRow={5} style={styles.cardGroup}>
 			{inventory.map(val => {
 				const color = val.quantity < 5 ? 'red' : 'green'
 				return (
@@ -23,12 +20,17 @@ const Cards = ({ setModalState, setClickedItem, inventory }) => {
 							<Card.Header>{val.name}</Card.Header>
 						</Card.Content>
 						<Card.Content extra>
-							In Stock: {<Label content={val.quantity} circular color={color} size='medium' />}
+							In Stock: {<Label content={val.quantity} circular color={color} size={'medium'} />}
 							<Label
 								tag
 								size={'medium'}
 								// color={'black'}
-								content={<strong>₱ {val.price}.00</strong>}
+								content={
+									<strong>
+										₱ {val.price}
+										.00
+									</strong>
+								}
 								style={styles.label}
 							/>
 						</Card.Content>
