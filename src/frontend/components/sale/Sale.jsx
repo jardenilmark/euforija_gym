@@ -1,103 +1,91 @@
+import Cards from './Cards'
 import React from 'react'
-import { Container, Card, Image, Grid, Header, Icon, Button, Table } from 'semantic-ui-react'
+import { Container, Grid, Header, Icon, Button, Table, Message, Segment } from 'semantic-ui-react'
 import EditModal from '../../redux/containers/sale/EditModalContainer'
 import 'semantic-ui-css/semantic.min.css'
+import TableContent from './TableContent'
 
 class Sale extends React.Component {
-  componentDidMount () {
-    this.props.getInventory()
-  }
+	componentDidMount() {
+		this.props.getInventory()
+	}
 
-  renderCards () {
-    const { setModalState, setClickedItem, inventory } = this.props
-    console.log(inventory)
-    return (
-      <Card.Group itemsPerRow={4} style={{ paddingTop: '10px', paddingLeft: '10px' }}>
-        {inventory.map(val => {
-          return (
-            <Card key={val._id} onClick={() => {
-              setModalState(true)
-              setClickedItem(val)
-            }}>
-              <Image src={val.image}/>
-              <Card.Content>
-                {val.name}<br/>
-                In stock: {val.quantity}
-              </Card.Content>
-              <Card.Content>
-              ₱{val.price}
-              </Card.Content>
-            </Card>
-          )
-        })}
-      </Card.Group>
-    )
-  }
+	render() {
+		const isEmpty = this.props.overviewArr.length === 0
+		return (
+			<Grid style={{ height: '100%' }}>
+				<EditModal />
+				<Grid.Row divided>
+					<Grid.Column width={11} style={{ overflowY: 'auto', height: '100%' }}>
+						<Cards {...this.props} />
+					</Grid.Column>
+					<Grid.Column
+						width={5}
+						textAlign={'center'}
+						style={{ height: '100%', paddingRight: 30, paddingTop: 70 }}>
+						<Header as={'h1'}>
+							<Icon name={'shopping cart'} />
+							Overview of Orders
+						</Header>
+						<Container fluid style={{ height: '80%', marginTop: 20 }}>
+							<Table basic={'very'} singleLine padded>
+								<Table.Header>
+									<Table.Row textAlign={'center'} style={{ fontSize: '17px' }}>
+										<Table.HeaderCell>Name</Table.HeaderCell>
+										<Table.HeaderCell>Price</Table.HeaderCell>
+										<Table.HeaderCell>Quantity</Table.HeaderCell>
+										<Table.HeaderCell>Total</Table.HeaderCell>
+										<Table.HeaderCell>Action</Table.HeaderCell>
+									</Table.Row>
+								</Table.Header>
+								<Table.Body>
+									<TableContent {...this.props} />
+								</Table.Body>
+							</Table>
+							{!isEmpty && (
+								<Segment basic textAlign={'right'}>
+									<b style={{ fontSize: '17px' }}>
+										Total Price: ₱ {getTotalPrice(this.props.overviewArr)}
+										.00
+									</b>
+								</Segment>
+							)}
+							{!isEmpty && (
+								<Button
+									onClick={() => this.props.updateSales(this.props.overviewArr)}
+									size={'medium'}
+									style={{ float: 'right' }}>
+									Confirm Purchase
+								</Button>
+							)}
+							{isEmpty && <EmptyCartMessage />}
+						</Container>
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
+		)
+	}
+}
 
-  renderTableContent () {
-    const { overviewArr } = this.props
-    return overviewArr.map(val => {
-      return (
-        <Table.Row key={val._id}>
-          <Table.Cell>
-            {val.name}
-          </Table.Cell>
-          <Table.Cell>
-            {val.quantity}
-          </Table.Cell>
-          <Table.Cell>
-            {val.price * val.quantity}
-          </Table.Cell>
-        </Table.Row>
-      )
-    })
-  }
+const getTotalPrice = arr => {
+	let total = 0
+	arr.forEach(element => {
+		total += element.price * element.quantity
+	})
+	return total
+}
 
-  render () {
-    return (
-      <Grid style={{ height: '100%' }}>
-        <EditModal />
-        <Grid.Row>
-          <Grid.Column width={12}>
-            {this.renderCards()}
-          </Grid.Column>
-          <Grid.Column width={4} style={{ background: 'blue', height: '100%', padding: '0' }}>
-            <Header as='h1'>
-              <Container fluid textAlign='center' style={{ paddingTop: '10px' }}>
-                Overview
-              </Container>
-              <Container fluid textAlign='center' style={{ paddingTop: '10px' }}>
-                <Icon name='shopping basket' size='big' />
-              </Container>
-            </Header>
-            <Container fluid style={{ height: '50%', background: 'white' }}>
-              <Table>
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell>
-                      Name
-                    </Table.HeaderCell>
-                    <Table.HeaderCell>
-                      Quantity
-                    </Table.HeaderCell>
-                    <Table.HeaderCell>
-                      Price
-                    </Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {this.renderTableContent()}
-                </Table.Body>
-              </Table>
-            </Container>
-            <Button onClick={() => this.props.updateSales(this.props.overviewArr)}>
-              Submit
-            </Button>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    )
-  }
+const EmptyCartMessage = () => {
+	return (
+		<Message negative size={'big'}>
+			<Message.Header>
+				<b>Cart is empty!</b>
+			</Message.Header>
+			<p>
+				Start adding items to your cart by <b>clicking the cards on the side.</b>
+			</p>
+		</Message>
+	)
 }
 
 export default Sale

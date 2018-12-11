@@ -7,16 +7,16 @@ import loginService from './loginService'
 import attendanceService from './attendanceService'
 
 const setupAllServices = (app, db) => {
-  return () => {
-    app
+	return () => {
+		app
+			.configure(setupInventoryService(app, db))
+			.configure(setupStudentService(app, db))
+			.configure(setupSaleService(app, db))
+			.configure(fileService(app, db))
+			.configure(loginService(app, db))
       .configure(setupStaffService(app, db))
-      .configure(setupStudentService(app, db))
-      .configure(setupInventoryService(app, db))
-      .configure(setupSaleService(app, db))
-      .configure(fileService(app, db))
-      .configure(loginService(app, db))
       .configure(attendanceService(app, db))
-  }
+	}
 }
 
 export default setupAllServices

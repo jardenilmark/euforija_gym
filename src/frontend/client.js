@@ -7,8 +7,6 @@ import url from './config/index'
 const socketIO = socket(url.api.host)
 const app = feathers()
 
-app
-  .configure(feathersSocketIO(socketIO))
-  .configure(setupServices(app))
-
+app.configure(feathersSocketIO(socketIO)).configure(setupServices(app))
+window.app = app
 export default app
