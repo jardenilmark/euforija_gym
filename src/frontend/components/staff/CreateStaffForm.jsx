@@ -33,7 +33,7 @@ const Create = props => {
 		<Form onSubmit={handleSubmit}>
 			<div style={{ marginBottom: '8px' }}>
 				<label>
-					<Header size={'small'}>Name</Header>
+					<Header size={'small'}>Firstname</Header>
 				</label>
 				<div>
 					<Field
@@ -45,7 +45,7 @@ const Create = props => {
 					/>
 				</div>
 				<label>
-					<Header size={'small'}>Name</Header>
+					<Header size={'small'}>Lastname</Header>
 				</label>
 				<div>
 					<Field

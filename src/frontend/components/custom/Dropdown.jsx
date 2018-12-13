@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Dropdown } from 'semantic-ui-react'
 
 export const DropdownField = props => (
-	<Form.Field>
+	<Form.Field style={style.form}>
 		<Dropdown
 			selection
 			{...props.input}
@@ -13,3 +13,11 @@ export const DropdownField = props => (
 		/>
 	</Form.Field>
 )
+
+const style = {
+	form: {
+		padding: 0,
+		margin: 0,
+		marginBottom: 10
+	}
+}

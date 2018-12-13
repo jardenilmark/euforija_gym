@@ -8,6 +8,7 @@ import Login from '../redux/containers/login/LoginContainer'
 import User from './staff/User'
 import Staff from '../redux/containers/staff/CreateContainer'
 import Student from './student/StudentPage'
+import CreateStudent from './student/CreatePage'
 
 const Body = () => {
 	return (
@@ -20,6 +21,7 @@ const Body = () => {
 			<Route exact path={'/staff'} component={User} />
 			<Route exact path={'/create-staff'} component={Staff} />
 			<Route exact path={'/student'} component={Student} />
+			<Route exact path={'/create-student'} component={CreateStudent} />
 		</div>
 	)
 }
