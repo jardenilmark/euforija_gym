@@ -7,8 +7,8 @@ const HealthPage = props => {
 	const { handleSubmit, pristine, submitting } = props
 	return (
 		<Form onSubmit={handleSubmit}>
-			<Card style={{ width: '100%' }}>
-				<div style={{ marginBottom: '8px', paddingLeft: '4%', paddingRight: '4%' }}>
+			<Card style={style.width}>
+				<div style={style.div}>
 					<Divider />
 					<Header textAlign={'center'}>HEALTH INDEX QUESTIONAIRE</Header>
 					<Divider />
@@ -124,7 +124,7 @@ const HealthPage = props => {
 					</label>
 				</div>
 			</Card>
-			<Container textAlign={'right'} style={{ paddingTop: '20px' }}>
+			<Container textAlign={'right'} style={style.container}>
 				<Button type={'submit'} disabled={pristine || submitting}>
 					Next
 				</Button>
@@ -134,9 +134,16 @@ const HealthPage = props => {
 }
 
 const style = {
-	header: {
-		padding: 0,
-		margin: 0
+	card: {
+		width: '100%'
+	},
+	div: {
+		marginBottom: '8px',
+		paddingLeft: '4%',
+		paddingRight: '4%'
+	},
+	container: {
+		paddingTop: '20px'
 	}
 }
 
