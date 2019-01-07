@@ -7,7 +7,7 @@ const HomeScreen = () => {
 	const contents = ['Inventory', 'Sales', 'Staff', 'Students', 'Payroll', 'Income Reports']
 	const paths = ['/inventory', '/sales', '/staff', '/students', '/payroll', '/income-reports']
 
-	const cards = icons.map((icon, index) => {
+	const Cards = icons.map((icon, index) => {
 		return (
 			<Card raised as={Link} to={paths[index]} key={index}>
 				<Card.Content textAlign={'center'}>

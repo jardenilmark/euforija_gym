@@ -13,7 +13,7 @@ const CreatePage = () => {
 			/>
 			<Segment style={style.segment}>
 				<Step.Group ordered fluid>
-					<Step active={false} completed={false}>
+					<Step active completed={false}>
 						<Step.Content>
 							<Step.Title>Personal Details</Step.Title>
 						</Step.Content>
