@@ -44,8 +44,8 @@ const style = {
 		marginBottom: 10
 	},
 	segment: {
-		marginLeft: '20%',
-		marginRight: '20%',
+		marginLeft: '30%',
+		marginRight: '30%',
 		backgroundColor: '#EBEBEB'
 	}
 }
