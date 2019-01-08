@@ -28,13 +28,14 @@ class Sale extends React.Component {
 							Overview of Orders
 						</Header>
 						<Container fluid style={{ height: '80%', marginTop: 20 }}>
-							<Table striped celled selectable singleLine>
+							<Table basic={'very'} singleLine padded>
 								<Table.Header>
 									<Table.Row textAlign={'center'} style={{ fontSize: '17px' }}>
 										<Table.HeaderCell>Name</Table.HeaderCell>
 										<Table.HeaderCell>Price</Table.HeaderCell>
 										<Table.HeaderCell>Quantity</Table.HeaderCell>
 										<Table.HeaderCell>Total</Table.HeaderCell>
+										<Table.HeaderCell>Action</Table.HeaderCell>
 									</Table.Row>
 								</Table.Header>
 								<Table.Body>
@@ -52,7 +53,7 @@ class Sale extends React.Component {
 							{!isEmpty && (
 								<Button
 									onClick={() => this.props.updateSales(this.props.overviewArr)}
-									size={'large'}
+									size={'medium'}
 									style={{ float: 'right' }}>
 									Confirm Purchase
 								</Button>

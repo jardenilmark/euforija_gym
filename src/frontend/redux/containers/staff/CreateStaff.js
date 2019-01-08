@@ -1,10 +1,6 @@
 import { connect } from 'react-redux'
-import Create from '../../../components/staff/Create'
+import Staff from '../../../components/staff/Staff'
 import { createStaff } from '../../actions/staffAction'
-
-function mapStateToProps(state) {
-	return {}
-}
 
 function mapDispatchToProps(dispatch) {
 	return {
@@ -15,6 +11,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-	mapStateToProps,
+	null,
 	mapDispatchToProps
-)(Create)
+)(Staff)

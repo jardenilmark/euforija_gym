@@ -34,7 +34,7 @@ const TableRows = ({
 					<Label ribbon>{index + 1}</Label>
 					<Popup
 						trigger={<Image src={item.image} avatar />}
-						content={<Image src={item.image} size={'small'} />}
+						content={<Image src={item.image} size={'large'} />}
 						position={'right center'}
 					/>
 					{item.name}

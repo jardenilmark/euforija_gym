@@ -5,10 +5,9 @@ import Attendance from '../components/attendance/Attendance'
 import HomeScreen from './homescreen/HomeScreen'
 import Sale from '../redux/containers/sale/SaleContainer'
 import Login from '../redux/containers/login/LoginContainer'
-import User from './staff/User'
-import Staff from '../redux/containers/staff/CreateContainer'
 import Student from './student/StudentPage'
 import CreateStudent from './student/CreatePage'
+import Staff from './staff/Staff'
 
 const Body = () => {
 	return (
@@ -18,7 +17,6 @@ const Body = () => {
 			<Route exact path={'/sales'} component={Sale} />
 			<Route exact path={'/home'} component={HomeScreen} />
 			<Route exact path={'/attendance'} component={Attendance} />
-			<Route exact path={'/staff'} component={User} />
 			<Route exact path={'/create-staff'} component={Staff} />
 			<Route exact path={'/student'} component={Student} />
 			<Route exact path={'/create-student'} component={CreateStudent} />
