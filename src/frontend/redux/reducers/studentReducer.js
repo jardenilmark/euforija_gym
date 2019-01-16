@@ -1,4 +1,10 @@
-const initialState = { activeForm: 'personal' }
+const initialState = {
+	activeForm: 'personal',
+	personal: {},
+	health: {},
+	trainer: {},
+	payment: {}
+}
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
@@ -6,6 +12,26 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				activeForm: action.payload
+			}
+		case 'STEP_PERSONAL':
+			return {
+				...state,
+				personal: action.payload
+			}
+		case 'STEP_HEALTH':
+			return {
+				...state,
+				health: action.payload
+			}
+		case 'STEP_TRAINER':
+			return {
+				...state,
+				trainer: action.payload
+			}
+		case 'STEP_PAYMENT':
+			return {
+				...state,
+				payment: action.payload
 			}
 		default:
 			return state

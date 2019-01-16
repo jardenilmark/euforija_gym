@@ -17,7 +17,7 @@ const CreateStudent = props => {
 			<div style={getStyle(props.activeForm, 'personal')}>
 				<PersonalPage
 					onSubmit={e => {
-						console.log(e)
+						props.setStepData('PERSONAL', e)
 						props.setActiveForm('health')
 					}}
 				/>
@@ -25,12 +25,15 @@ const CreateStudent = props => {
 			<div style={getStyle(props.activeForm, 'health')}>
 				<HealthPage
 					onSubmit={e => {
-						console.log(e)
+						props.setStepData('HEALTH', e)
 						props.setActiveForm('trainer')
 					}}
 				/>
 			</div>
 			<div style={getStyle(props.activeForm, 'trainer')}>
+				<TrainerPage />
+			</div>
+			<div style={getStyle(props.activeForm, 'payment')}>
 				<TrainerPage />
 			</div>
 		</div>

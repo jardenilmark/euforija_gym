@@ -25,35 +25,30 @@ const PersonalDetails = props => {
 					name={'firstName'}
 					component={CustomInput}
 					{...{ header: 'Firstname', type: 'text' }}
-					required
 				/>
 				<Field
 					name={'lastName'}
 					component={CustomInput}
 					{...{ header: 'lastName', type: 'text' }}
-					required
 				/>
 				<Header size={'small'} style={style.header}>
 					Sex
 				</Header>
-				<Field name={'sex'} component={DropdownField} options={genderOptions} required />
+				<Field name={'sex'} component={DropdownField} options={genderOptions} />
 				<Field
 					name={'birthday'}
 					component={CustomInput}
 					{...{ header: 'Birthday', type: 'date' }}
-					required
 				/>
 				<Field
 					name={'contact'}
 					component={CustomInput}
 					{...{ header: 'Contact No.', type: 'number' }}
-					required
 				/>
 				<Field
 					name={'emergency'}
 					component={CustomInput}
 					{...{ header: 'Emergency Contact No.', type: 'number' }}
-					required
 				/>
 				<Header size={'small'} style={style.header}>
 					Picture
