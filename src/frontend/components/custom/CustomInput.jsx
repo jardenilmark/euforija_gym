@@ -1,12 +1,12 @@
 import React from 'react'
-import { Form, Header, Input } from 'semantic-ui-react'
+import { Form, Header } from 'semantic-ui-react'
 
 const CustomInput = ({ header, type }) => (
 	<Form.Field style={style.form}>
 		<label>
 			<Header size={'small'}>{header}</Header>
 		</label>
-		<Input type={type} />
+		<Form.Input type={type} required />
 	</Form.Field>
 )
 

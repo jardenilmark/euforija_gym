@@ -14,9 +14,10 @@ const getStyle = (active, name) => {
 const CreateStudent = props => {
 	return (
 		<div>
-			{/* <div style={getStyle(props.activeForm, 'personal')}>
+			<div style={getStyle(props.activeForm, 'personal')}>
 				<PersonalPage
 					onSubmit={e => {
+						console.log(e)
 						props.setActiveForm('health')
 					}}
 				/>
@@ -24,13 +25,14 @@ const CreateStudent = props => {
 			<div style={getStyle(props.activeForm, 'health')}>
 				<HealthPage
 					onSubmit={e => {
+						console.log(e)
 						props.setActiveForm('trainer')
 					}}
 				/>
-			</div> */}
-			{/* <div style={getStyle(props.activeForm, 'trainer')}> */}
-			<TrainerPage />
-			{/* </div> */}
+			</div>
+			<div style={getStyle(props.activeForm, 'trainer')}>
+				<TrainerPage />
+			</div>
 		</div>
 	)
 }

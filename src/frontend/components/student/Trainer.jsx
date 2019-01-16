@@ -58,7 +58,7 @@ class Trainer extends Component {
 						<Table.Header>
 							<Table.Row>
 								<Table.HeaderCell>Name</Table.HeaderCell>
-								<Table.HeaderCell>Type</Table.HeaderCell>
+								<Table.HeaderCell>Program</Table.HeaderCell>
 							</Table.Row>
 						</Table.Header>
 						<Table.Body>{this.Cells()}</Table.Body>
