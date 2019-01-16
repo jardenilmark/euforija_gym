@@ -5,7 +5,7 @@ import Attendance from '../components/attendance/Attendance'
 import HomeScreen from './homescreen/HomeScreen'
 import Sale from '../redux/containers/sale/SaleContainer'
 import Login from '../redux/containers/login/LoginContainer'
-import Staff from '../redux/containers/staff/CreateStaff'
+import Staff from '../redux/containers/staff/StaffPage'
 
 const Body = () => {
 	return (
