@@ -10,7 +10,6 @@ const PurchaseItemModal = props => {
 			open={props.modal}
 			size={'tiny'}
 			closeIcon
-			dimmer={'blurring'}
 			basic
 			closeOnEscape={false}
 			closeOnDimmerClick={false}
