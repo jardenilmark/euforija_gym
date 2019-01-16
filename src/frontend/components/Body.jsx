@@ -8,6 +8,7 @@ import Login from '../redux/containers/login/LoginContainer'
 import Student from './student/StudentPage'
 import CreateStudent from '../redux/containers/student/CreateStudentPage'
 import Staff from './staff/Staff'
+import 'semantic-ui-css/semantic.min.css'
 
 const Body = () => {
 	return (

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Modal, Container, Header, Icon } from 'semantic-ui-react'
 import AddForm from '../../redux/containers/inventory/AddFormContainer'
-import 'semantic-ui-css/semantic.min.css'
 
 const AddItemModal = props => {
 	return (

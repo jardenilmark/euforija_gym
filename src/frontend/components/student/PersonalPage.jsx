@@ -4,7 +4,6 @@ import { Field } from 'redux-form'
 import { Form, Button, Container, Header } from 'semantic-ui-react'
 import ImageField from '../custom/ImageField'
 import CustomInput from '../custom/CustomInput'
-import 'semantic-ui-css/semantic.min.css'
 
 const genderOptions = [
 	{

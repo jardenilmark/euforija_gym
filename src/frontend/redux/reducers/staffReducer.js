@@ -1,5 +1,5 @@
 import swal from 'sweetalert'
-const initialState = { staffList: [], type: 'All' }
+const initialState = { staffList: [], type: 'all' }
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {

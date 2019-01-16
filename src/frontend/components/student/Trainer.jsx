@@ -1,13 +1,31 @@
 import React, { Component } from 'react'
-import { Container, Table, Dropdown } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
+import { Container, Table, Dropdown, Button } from 'semantic-ui-react'
 
+const getArray = (array, type) => {
+	// to transfer in another file
+	if (type === 'all') {
+		return array
+	}
+	return array.filter(e => e.role === type)
+}
+const Options = array => {
+	return [
+		...new Set(
+			array.map(e => {
+				if (e.role.includes('coach')) {
+					return e.role
+				}
+			})
+		),
+		'all'
+	]
+}
 class Trainer extends Component {
 	componentDidMount() {
 		this.props.fetchStaff()
 	}
 	Cells() {
-		return this.props.staff.map(e => {
+		return getArray(this.props.staff, this.props.type).map(e => {
 			return (
 				<Table.Row key={e.id}>
 					<Table.Cell>{e.firstName}</Table.Cell>
@@ -16,20 +34,7 @@ class Trainer extends Component {
 			)
 		})
 	}
-	Options() {
-		return [
-			...new Set(
-				this.props.staff.map(e => {
-					if (e.role.includes('coach')) {
-						return e.role
-					}
-				})
-			)
-		]
-	}
-	getArray() {}
 	render() {
-		console.log(this.props)
 		return (
 			<Container fluid>
 				<Dropdown
@@ -37,15 +42,15 @@ class Trainer extends Component {
 					fluid
 					placeholder={'Type'}
 					onChange={(e, data) => {
-						console.log(data.value)
+						this.props.setStaffFilter(data.value)
 					}}
-					options={this.Options().map(e => {
+					options={Options(this.props.staff).map(e => {
 						return { text: e, value: e }
 					})}
 				/>
 				<Container
 					style={{
-						maxHeight: 500,
+						maxHeight: 450,
 						overflowY: 'auto',
 						marginTop: 10
 					}}>
@@ -58,6 +63,9 @@ class Trainer extends Component {
 						</Table.Header>
 						<Table.Body>{this.Cells()}</Table.Body>
 					</Table>
+				</Container>
+				<Container style={{ marginTop: 10 }} textAlign={'right'}>
+					<Button>Submit</Button>
 				</Container>
 			</Container>
 		)

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Image, Segment, Step } from 'semantic-ui-react'
 import CreateStudent from '../../redux/containers/student/StudentCreateContainer'
-import 'semantic-ui-css/semantic.min.css'
 
 const CreatePage = props => {
 	const { activeForm, setActiveForm } = props

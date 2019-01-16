@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Segment, Button, Divider, Header, Image } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
 import Field from './Field'
 
 const LoginForm = ({ handleSubmit }) => {

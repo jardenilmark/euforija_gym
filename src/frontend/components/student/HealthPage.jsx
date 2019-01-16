@@ -1,7 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Container, Input, Header, Card, Divider } from 'semantic-ui-react'
-import 'semantic-ui-css/semantic.min.css'
 
 const mapArray = array => {
 	return array.map(e => {
