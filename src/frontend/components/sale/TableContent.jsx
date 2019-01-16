@@ -30,9 +30,16 @@ const TableContent = ({ overviewArr, setModalState, setClickedItem }) => {
 								}}
 							/>
 						}
+						color={'black'}
+						inverted
 						content={'edit item quantity'}
 					/>
-					<Popup trigger={<Button circular icon="delete" />} content={'remove item from cart'} />
+					<Popup
+						trigger={<Button circular icon="delete" />}
+						content={'remove item from cart'}
+						color={'black'}
+						inverted
+					/>
 				</Table.Cell>
 			</Table.Row>
 		)
