@@ -12,7 +12,7 @@ const mapArray = array => {
 					<label>
 						<Field name={e.question} component={Input} type={'radio'} value={'yes'} /> Yes
 					</label>
-					<label>
+					<label style={{ marginLeft: 10 }}>
 						<Field name={e.question} component={Input} type={'radio'} value={'no'} /> No
 					</label>
 					<Header>{e.followUp}</Header>
@@ -28,7 +28,7 @@ const mapArray = array => {
 					<label>
 						<Field name={e.question} component={Input} type={'radio'} value={'yes'} /> Yes
 					</label>
-					<label>
+					<label style={{ marginLeft: 10 }}>
 						<Field name={e.question} component={Input} type={'radio'} value={'no'} /> No
 					</label>
 				</div>

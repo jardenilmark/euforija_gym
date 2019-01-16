@@ -24,3 +24,16 @@ export function createStaff(obj) {
 		dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
 	}
 }
+
+export function fetchStaff(args) {
+	return async dispatch => {
+		const staff = await app.service(staffApi).find(args)
+		dispatch({ type: 'GET_STAFF', payload: staff })
+	}
+}
+
+export function setStaffFilter(payload) {
+	return dispatch => {
+		dispatch({ type: 'STAFF_FILTER', payload: payload })
+	}
+}

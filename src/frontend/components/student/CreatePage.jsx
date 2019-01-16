@@ -3,7 +3,8 @@ import { Image, Segment, Step } from 'semantic-ui-react'
 import CreateStudent from '../../redux/containers/student/StudentCreateContainer'
 import 'semantic-ui-css/semantic.min.css'
 
-const CreatePage = () => {
+const CreatePage = props => {
+	const { activeForm, setActiveForm } = props
 	return (
 		<div>
 			<Image
@@ -13,23 +14,25 @@ const CreatePage = () => {
 			/>
 			<Segment style={style.segment}>
 				<Step.Group ordered fluid>
-					<Step active completed={false}>
+					<Step
+						active={activeForm === 'personal'}
+						completed={activeForm === 'health' || activeForm === 'trainer'}>
 						<Step.Content>
 							<Step.Title>Personal Details</Step.Title>
 						</Step.Content>
 					</Step>
-					<Step active={false} completed={false}>
+					<Step active={activeForm === 'health'} completed={activeForm === 'trainer'}>
 						<Step.Content>
 							<Step.Title>Health</Step.Title>
 						</Step.Content>
 					</Step>
-					<Step active={false} completed={false}>
+					<Step active={activeForm === 'trainer'}>
 						<Step.Content>
 							<Step.Title>Trainer</Step.Title>
 						</Step.Content>
 					</Step>
 				</Step.Group>
-				<CreateStudent />
+				<CreateStudent setActiveForm={setActiveForm} activeForm={activeForm} />
 			</Segment>
 		</div>
 	)
