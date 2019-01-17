@@ -51,3 +51,32 @@ export function addStaff() {
 		dispatch({ type: 'STAFF_FORM_VISIBILITY', payload: true })
 	}
 }
+
+export function showStaffProfile() {
+	console.log('invoked')
+	return async dispatch => {
+		dispatch({ type: 'STAFF_PROFILE_VISIBILITY', payload: true })
+	}
+}
+
+export function setClickedStaffId(id) {
+	return async dispatch => {
+		dispatch({ type: 'SET_CLICKED_STAFF_ID', payload: id })
+	}
+}
+
+export function getStaffProfile(id) {
+	return async dispatch => {
+		const staff = await app.service(staffApi).find()
+		const images = await app.service(fileApi).find()
+		const result = staff.find(x => {
+			return x._id === id
+		})
+		const img = images.find(img => {
+			return img._id === result.image
+		})
+		delete result.image
+		const payload = { ...result, image: img.data }
+		dispatch({ type: 'GET_STAFF_PROFILE', payload: payload })
+	}
+}
