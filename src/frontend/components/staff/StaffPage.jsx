@@ -17,11 +17,20 @@ const User = props => {
 					style={styles.button}
 					onClick={() => props.addStaff()}
 				/>
-				<StaffTable />
+				<StaffTable
+					showProfile={props.showStaffProfile}
+					setClickedStaff={props.setClickedStaffId}
+				/>
 			</Grid.Column>
 			<Grid.Column width={8}>
 				{props.formVisibility && <StaffForm onSubmit={props.createStaff} />}
-				{/* <StaffProfile /> */}
+				{props.profileVisibility && (
+					<StaffProfile
+						clickedStaff={props.clickedStaff}
+						getStaffProfile={props.getStaffProfile}
+						staffProfile={props.staffProfile}
+					/>
+				)}
 			</Grid.Column>
 		</Grid>
 	)
