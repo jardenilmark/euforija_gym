@@ -1,6 +1,6 @@
 import React from 'react'
 import TableRow from './TableRow'
-import { Table } from 'semantic-ui-react'
+import { Table, Loader, Segment } from 'semantic-ui-react'
 
 class StaffTable extends React.Component {
 	componentDidMount() {
@@ -9,13 +9,24 @@ class StaffTable extends React.Component {
 
 	render() {
 		let rows
-		console.log(this.props.staff)
+		console.log(this.props)
 		if (this.props.staff) {
 			rows = this.props.staff.map((staff, index) => {
-				return <TableRow staff={staff} key={index} />
+				return (
+					<TableRow
+						staff={staff}
+						key={index}
+						showProfile={this.props.showProfile}
+						setClickedStaff={this.props.setClickedStaff}
+					/>
+				)
 			})
 		} else {
-			rows = <div>Loading...</div>
+			rows = (
+				<Segment style={{ height: '200px' }} basic>
+					<Loader active content={'Loading Staff...'} size={'big'} />
+				</Segment>
+			)
 		}
 
 		return (
