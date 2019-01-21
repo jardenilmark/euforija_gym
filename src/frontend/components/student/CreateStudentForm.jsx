@@ -2,6 +2,7 @@ import React from 'react'
 import PersonalPage from '../../redux/containers/student/Personal'
 import HealthPage from '../../redux/containers/student/Health'
 import TrainerPage from '../../redux/containers/student/Trainer'
+import PaymentPage from '../../redux/containers/student/Payment'
 
 const getStyle = (active, name) => {
 	if (name === active) {
@@ -12,29 +13,38 @@ const getStyle = (active, name) => {
 }
 
 const CreateStudent = props => {
+	const { setStepData, setActiveForm, createStudent, trainer, health, personal } = props
 	return (
 		<div>
 			<div style={getStyle(props.activeForm, 'personal')}>
 				<PersonalPage
 					onSubmit={e => {
-						props.setStepData('PERSONAL', e)
-						props.setActiveForm('health')
+						setStepData('PERSONAL', e)
+						setActiveForm('health')
 					}}
 				/>
 			</div>
 			<div style={getStyle(props.activeForm, 'health')}>
 				<HealthPage
 					onSubmit={e => {
-						props.setStepData('HEALTH', e)
-						props.setActiveForm('trainer')
+						setStepData('HEALTH', e)
+						setActiveForm('trainer')
 					}}
 				/>
 			</div>
 			<div style={getStyle(props.activeForm, 'trainer')}>
-				<TrainerPage />
+				<TrainerPage setStepData={setStepData} />
 			</div>
 			<div style={getStyle(props.activeForm, 'payment')}>
-				<TrainerPage />
+				<PaymentPage
+					onSubmit={e => {
+						let payment = { amount: 1499 }
+						if (props.paymentMethod === 'partial') {
+							payment = { amount: parseInt(e.amount) }
+						}
+						createStudent({ ...trainer, ...health, ...personal, ...payment })
+					}}
+				/>
 			</div>
 		</div>
 	)

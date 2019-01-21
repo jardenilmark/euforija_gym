@@ -3,8 +3,7 @@ import { Image, Segment, Step } from 'semantic-ui-react'
 import CreateStudent from '../../redux/containers/student/StudentCreateContainer'
 
 const CreatePage = props => {
-	console.log(props)
-	const { activeForm, setStepData, setActiveForm } = props
+	const { activeForm } = props
 	return (
 		<div>
 			<Image
@@ -37,11 +36,7 @@ const CreatePage = props => {
 						</Step.Content>
 					</Step>
 				</Step.Group>
-				<CreateStudent
-					setStepData={setStepData}
-					setActiveForm={setActiveForm}
-					activeForm={activeForm}
-				/>
+				<CreateStudent />
 			</Segment>
 		</div>
 	)

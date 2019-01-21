@@ -8,6 +8,7 @@ const getArray = (array, type) => {
 	}
 	return array.filter(e => e.role === type)
 }
+
 const Options = array => {
 	return [
 		...new Set(
@@ -20,6 +21,7 @@ const Options = array => {
 		'all'
 	]
 }
+
 class Trainer extends Component {
 	componentDidMount() {
 		this.props.fetchStaff()
@@ -27,7 +29,9 @@ class Trainer extends Component {
 	Cells() {
 		return getArray(this.props.staff, this.props.type).map(e => {
 			return (
-				<Table.Row key={e.id}>
+				<Table.Row
+					key={e._id}
+					onClick={() => this.props.setStepData('TRAINER', { trainerId: e._id })}>
 					<Table.Cell>{e.firstName}</Table.Cell>
 					<Table.Cell>{e.role}</Table.Cell>
 				</Table.Row>
@@ -65,7 +69,11 @@ class Trainer extends Component {
 					</Table>
 				</Container>
 				<Container style={{ marginTop: 10 }} textAlign={'right'}>
-					<Button>Submit</Button>
+					<Button
+						onClick={() => this.props.setActiveForm('payment')}
+						disabled={Object.keys(this.props.trainer).length === 0}>
+						Submit
+					</Button>
 				</Container>
 			</Container>
 		)

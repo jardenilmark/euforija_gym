@@ -3,7 +3,8 @@ const initialState = {
 	personal: {},
 	health: {},
 	trainer: {},
-	payment: {}
+	payment: {},
+	paymentMethod: 'full'
 }
 
 export default function reducer(state = initialState, action) {
@@ -28,10 +29,10 @@ export default function reducer(state = initialState, action) {
 				...state,
 				trainer: action.payload
 			}
-		case 'STEP_PAYMENT':
+		case 'PAYMENT_METHOD':
 			return {
 				...state,
-				payment: action.payload
+				paymentMethod: action.payload
 			}
 		default:
 			return state

@@ -6,7 +6,7 @@ const CustomInput = props => (
 		<label>
 			<Header size={'small'}>{props.header}</Header>
 		</label>
-		<Form.Input type={props.type} {...props.input} required />
+		<Form.Input type={props.type} {...props.input} required={props.isRequired === undefined} />
 	</Form.Field>
 )
 

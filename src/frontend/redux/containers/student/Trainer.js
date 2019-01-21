@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
 import Trainer from '../../../components/student/Trainer'
 import { fetchStaff, setStaffFilter } from '../../actions/staffAction'
+import { setStepData, setActiveForm } from '../../actions/studentAction'
 
 function mapDispatchToProps(dispatch) {
 	return {
@@ -9,6 +10,12 @@ function mapDispatchToProps(dispatch) {
 		},
 		setStaffFilter(type) {
 			dispatch(setStaffFilter(type))
+		},
+		setStepData(type, data) {
+			dispatch(setStepData(type, data))
+		},
+		setActiveForm(active) {
+			dispatch(setActiveForm(active))
 		}
 	}
 }
@@ -16,6 +23,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
 	return {
 		staff: state.staff.staffList,
+		trainer: state.student.trainer,
 		type: state.staff.type
 	}
 }
