@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import Staff from '../../../components/staff/StaffPage'
 import {
 	createStaff,
-	addStaff,
+	toggleFormVisibility,
 	getStaffProfile,
-	showStaffProfile,
+	toggleProfileVisibility,
 	setClickedStaffId
 } from '../../actions/staffActions'
 
@@ -22,14 +22,14 @@ function mapDispatchToProps(dispatch) {
 		async createStaff(user) {
 			await dispatch(createStaff(user))
 		},
-		async addStaff() {
-			await dispatch(addStaff())
+		async toggleFormVisibility(isVisible) {
+			await dispatch(toggleFormVisibility(isVisible))
 		},
 		async getStaffProfile(id) {
 			await dispatch(getStaffProfile(id))
 		},
-		async showStaffProfile() {
-			await dispatch(showStaffProfile())
+		async toggleProfileVisibility(isVisible) {
+			await dispatch(toggleProfileVisibility(isVisible))
 		},
 		async setClickedStaffId(id) {
 			await dispatch(setClickedStaffId(id))

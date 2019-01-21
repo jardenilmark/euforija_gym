@@ -5,6 +5,11 @@ import StaffForm from '../../redux/containers/staff/StaffForm'
 import StaffProfile from './StaffProfile'
 import StaffTable from '../../redux/containers/staff/StaffTable'
 
+const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility) => {
+	toggleFormVisibility(true)
+	toggleProfileVisibility(false)
+}
+
 const User = props => {
 	console.log(props)
 	return (
@@ -15,10 +20,11 @@ const User = props => {
 					content={'Add Staff'}
 					floated={'right'}
 					style={styles.button}
-					onClick={() => props.addStaff()}
+					onClick={() => invokeFunctions(props.toggleFormVisibility, props.toggleProfileVisibility)}
 				/>
 				<StaffTable
-					showProfile={props.showStaffProfile}
+					toggleProfileVisibility={props.toggleProfileVisibility}
+					toggleFormVisibility={props.toggleFormVisibility}
 					setClickedStaff={props.setClickedStaffId}
 				/>
 			</Grid.Column>

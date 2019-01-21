@@ -16,7 +16,8 @@ class StaffTable extends React.Component {
 					<TableRow
 						staff={staff}
 						key={index}
-						showProfile={this.props.showProfile}
+						toggleProfileVisibility={this.props.toggleProfileVisibility}
+						toggleFormVisibility={this.props.toggleFormVisibility}
 						setClickedStaff={this.props.setClickedStaff}
 					/>
 				)

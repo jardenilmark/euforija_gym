@@ -45,16 +45,16 @@ export function fetchStaff() {
 	}
 }
 
-export function addStaff() {
+export function toggleFormVisibility(isVisible) {
 	return async dispatch => {
-		dispatch({ type: 'STAFF_FORM_VISIBILITY', payload: true })
+		dispatch({ type: 'STAFF_FORM_VISIBILITY', payload: isVisible })
 	}
 }
 
-export function showStaffProfile() {
+export function toggleProfileVisibility(isVisible) {
 	console.log('invoked')
 	return async dispatch => {
-		dispatch({ type: 'STAFF_PROFILE_VISIBILITY', payload: true })
+		dispatch({ type: 'STAFF_PROFILE_VISIBILITY', payload: isVisible })
 	}
 }
 
@@ -65,6 +65,7 @@ export function setClickedStaffId(id) {
 }
 
 export function getStaffProfile(id) {
+	console.log('GOTCHU')
 	return async dispatch => {
 		const staff = await app.service(staffApi).find()
 		const images = await app.service(fileApi).find()

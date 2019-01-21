@@ -20,7 +20,7 @@ const Body = () => {
 			<Route exact path={'/sales'} component={Sale} />
 			<Route exact path={'/home'} component={HomeScreen} />
 			<Route exact path={'/attendance'} component={Attendance} />
-			<Route exact path={'/create-staff'} component={Staff} />
+			<Route exact path={'/staff'} component={Staff} />
 			<Route exact path={'/student'} component={Student} />
 			<Route exact path={'/create-student'} component={CreateStudent} />
 		</div>
