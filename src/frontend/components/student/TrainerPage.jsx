@@ -1,26 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Table, Dropdown, Button } from 'semantic-ui-react'
-
-const getArray = (array, type) => {
-	// to transfer in another file
-	if (type === 'all') {
-		return array
-	}
-	return array.filter(e => e.role === type)
-}
-
-const Options = array => {
-	return [
-		...new Set(
-			array.map(e => {
-				if (e.role.includes('coach')) {
-					return e.role
-				}
-			})
-		),
-		'all'
-	]
-}
+import { getArray, options } from '../../helpers/trainerHelper'
 
 class Trainer extends Component {
 	componentDidMount() {
@@ -48,16 +28,11 @@ class Trainer extends Component {
 					onChange={(e, data) => {
 						this.props.setStaffFilter(data.value)
 					}}
-					options={Options(this.props.staff).map(e => {
+					options={options(this.props.staff).map(e => {
 						return { text: e, value: e }
 					})}
 				/>
-				<Container
-					style={{
-						maxHeight: 450,
-						overflowY: 'auto',
-						marginTop: 10
-					}}>
+				<Container style={style.containerOuter}>
 					<Table selectable celled unstackable striped fixed>
 						<Table.Header>
 							<Table.Row>
@@ -68,7 +43,7 @@ class Trainer extends Component {
 						<Table.Body>{this.Cells()}</Table.Body>
 					</Table>
 				</Container>
-				<Container style={{ marginTop: 10 }} textAlign={'right'}>
+				<Container style={style.containerButton} textAlign={'right'}>
 					<Button
 						onClick={() => this.props.setActiveForm('payment')}
 						disabled={Object.keys(this.props.trainer).length === 0}>
@@ -81,3 +56,14 @@ class Trainer extends Component {
 }
 
 export default Trainer
+
+const style = {
+	containerOuter: {
+		maxHeight: 450,
+		overflowY: 'auto',
+		marginTop: 10
+	},
+	containerButton: {
+		marginTop: 10
+	}
+}
