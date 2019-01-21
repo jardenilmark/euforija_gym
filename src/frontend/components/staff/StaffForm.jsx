@@ -4,7 +4,6 @@ import { Field } from 'redux-form'
 import { Form, Button, Label, Header, Segment, Divider, Container, Icon } from 'semantic-ui-react'
 import ProfilePhoto from './ProfilePhoto'
 import ImageField from '../custom/ImageField'
-import 'semantic-ui-css/semantic.min.css'
 
 const genderOptions = [
 	{
@@ -34,7 +33,7 @@ const Create = props => {
 		<Form onSubmit={handleSubmit}>
 			<Segment style={{ margin: '30' }} basic>
 				<Label size={'huge'} attached={'top'} basic style={{ border: 'none', padding: 10 }}>
-					<Icon name="edit outline" style={{ marginRight: '5' }} />
+					<Icon name={'edit outline'} style={{ marginRight: '5' }} />
 					Add New Staff
 				</Label>
 				<ProfilePhoto />
