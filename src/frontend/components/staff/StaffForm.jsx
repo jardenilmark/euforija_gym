@@ -2,6 +2,7 @@ import { DropdownField } from '../custom/Dropdown'
 import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Label, Header, Segment, Divider, Container, Icon } from 'semantic-ui-react'
+import ProfilePhoto from './ProfilePhoto'
 import ImageField from '../custom/ImageField'
 
 const genderOptions = [
@@ -18,11 +19,11 @@ const genderOptions = [
 const roleOptions = [
 	{
 		text: 'Coach',
-		value: 'coach'
+		value: 'Coach'
 	},
 	{
 		text: 'Maintenance',
-		value: 'maintenance'
+		value: 'Maintenance'
 	}
 ]
 
@@ -30,11 +31,12 @@ const Create = props => {
 	const { handleSubmit, pristine, submitting } = props
 	return (
 		<Form onSubmit={handleSubmit}>
-			<Segment style={{ margin: '30' }} raised>
-				<Label size={'huge'} attached={'top'}>
+			<Segment style={{ margin: '30' }} basic>
+				<Label size={'huge'} attached={'top'} basic style={{ border: 'none', padding: 10 }}>
 					<Icon name={'edit outline'} style={{ marginRight: '5' }} />
-					Add new Staff
+					Add New Staff
 				</Label>
+				<ProfilePhoto />
 				<Divider style={{ marginBottom: '30' }} />
 				<Form.Group widths={'equal'}>
 					<div style={styles.field}>
@@ -131,14 +133,25 @@ const Create = props => {
 				<Form.Group>
 					<div style={styles.field}>
 						<label>
-							<Header size={'tiny'}>Photo</Header>
+							<Header size={'tiny'}>Password</Header>
 						</label>
 						<Field
-							name={'image'}
-							component={ImageField}
-							type={'file'}
-							placeholder={'Picture'}
-							style={styles.field}
+							name={'password'}
+							component={'input'}
+							type={'password'}
+							placeholder={'Password'}
+							required
+						/>
+					</div>
+					<div style={styles.field}>
+						<label>
+							<Header size={'tiny'}>Retype Password</Header>
+						</label>
+						<Field
+							name={'rePassword'}
+							component={'input'}
+							type={'password'}
+							placeholder={'Retype Password'}
 							required
 						/>
 					</div>

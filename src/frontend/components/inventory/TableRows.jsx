@@ -28,6 +28,7 @@ const TableRows = ({
 	}
 
 	return arr.map((item, index) => {
+		console.log(item.image)
 		return (
 			<Table.Row key={item._id} negative={item.quantity < 5}>
 				<Table.Cell style={styles.text}>

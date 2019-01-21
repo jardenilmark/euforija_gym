@@ -3,7 +3,7 @@ import { Menu, Header, Icon, Card, Image, Sidebar, Button, Segment } from 'seman
 import { Link } from 'react-router-dom'
 
 const HomeScreen = () => {
-	const icons = ['table', 'money', 'users', 'student', 'columns', 'chart line']
+	const icons = ['unordered list', 'shopping cart', 'users', 'student', 'columns', 'chart area']
 	const contents = ['Inventory', 'Sales', 'Staff', 'Students', 'Payroll', 'Income Reports']
 	const paths = ['/inventory', '/sales', '/staff', '/students', '/payroll', '/income-reports']
 

@@ -8,9 +8,9 @@ const fileApi = 'api/file'
 export function fetchWholeInventory(arg) {
 	return async dispatch => {
 		const items = await app.service(inventoryApi).find(arg)
-		const imageData = await app.service(fileApi).find()
+		const images = await app.service(fileApi).find()
 		items.map(item => {
-			const image = imageData.find(data => item.image === data._id)
+			const image = images.find(data => item.image === data._id)
 			item.imageId = item.image
 			item.image = image.data
 		})
