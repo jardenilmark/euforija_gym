@@ -6,12 +6,12 @@ const mapArray = array => {
 	return array.map(e => {
 		if (e.followUp) {
 			return (
-				<div key={e.question} style={{ paddingBottom: 15 }}>
+				<div key={e.question} style={style.arrayDiv}>
 					<Header>{e.question}</Header>
 					<label>
 						<Field name={e.question} component={Input} type={'radio'} value={'yes'} /> Yes
 					</label>
-					<label style={{ marginLeft: 10 }}>
+					<label style={style.label}>
 						<Field name={e.question} component={Input} type={'radio'} value={'no'} /> No
 					</label>
 					<Header>{e.followUp}</Header>
@@ -22,12 +22,12 @@ const mapArray = array => {
 			)
 		} else {
 			return (
-				<div key={e.question} style={{ paddingBottom: 15 }}>
+				<div key={e.question} style={style.arrayDiv}>
 					<Header>{e.question}</Header>
 					<label>
 						<Field name={e.question} component={Input} type={'radio'} value={'yes'} /> Yes
 					</label>
-					<label style={{ marginLeft: 10 }}>
+					<label style={style.label}>
 						<Field name={e.question} component={Input} type={'radio'} value={'no'} /> No
 					</label>
 				</div>
@@ -84,6 +84,12 @@ const HealthPage = props => {
 }
 
 const style = {
+	arrayDiv: {
+		paddingBottom: 15
+	},
+	label: {
+		marginLeft: 10
+	},
 	card: {
 		width: '100%'
 	},

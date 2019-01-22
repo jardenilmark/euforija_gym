@@ -32,12 +32,7 @@ class Trainer extends Component {
 						return { text: e, value: e }
 					})}
 				/>
-				<Container
-					style={{
-						maxHeight: 450,
-						overflowY: 'auto',
-						marginTop: 10
-					}}>
+				<Container style={style.containerOuter}>
 					<Table selectable celled unstackable striped fixed>
 						<Table.Header>
 							<Table.Row>
@@ -48,7 +43,7 @@ class Trainer extends Component {
 						<Table.Body>{this.Cells()}</Table.Body>
 					</Table>
 				</Container>
-				<Container style={{ marginTop: 10 }} textAlign={'right'}>
+				<Container style={style.containerButton} textAlign={'right'}>
 					<Button
 						onClick={() => this.props.setActiveForm('payment')}
 						disabled={Object.keys(this.props.trainer).length === 0}>
@@ -61,3 +56,14 @@ class Trainer extends Component {
 }
 
 export default Trainer
+
+const style = {
+	containerOuter: {
+		maxHeight: 450,
+		overflowY: 'auto',
+		marginTop: 10
+	},
+	containerButton: {
+		marginTop: 10
+	}
+}

@@ -20,7 +20,7 @@ const PersonalDetails = props => {
 	const { handleSubmit, pristine, submitting } = props
 	return (
 		<Form onSubmit={handleSubmit}>
-			<div style={{ marginBottom: '8px', paddingLeft: '4%', paddingRight: '4%' }}>
+			<div style={style.div}>
 				<Field
 					name={'firstName'}
 					component={CustomInput}
@@ -67,6 +67,11 @@ const PersonalDetails = props => {
 export default PersonalDetails
 
 const style = {
+	div: {
+		marginBottom: '8px',
+		paddingLeft: '4%',
+		paddingRight: '4%'
+	},
 	header: {
 		padding: 0,
 		margin: 0
