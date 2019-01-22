@@ -1,8 +1,8 @@
 import React from 'react'
-import PersonalPage from '../../redux/containers/student/Personal'
-import HealthPage from '../../redux/containers/student/Health'
-import TrainerPage from '../../redux/containers/student/Trainer'
-import PaymentPage from '../../redux/containers/student/Payment'
+import PersonalPage from '../../redux/containers/student/PersonalPage'
+import HealthPage from '../../redux/containers/student/HealthPage'
+import TrainerPage from '../../redux/containers/student/TrainerPage'
+import PaymentPage from '../../redux/containers/student/PaymentPage'
 
 const getStyle = (active, name) => {
 	if (name === active) {

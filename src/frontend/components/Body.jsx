@@ -9,6 +9,8 @@ import Student from './student/StudentPage'
 import CreateStudent from '../redux/containers/student/CreateStudentPage'
 import Staff from '../redux/containers/staff/StaffPage'
 import 'semantic-ui-css/semantic.min.css'
+import 'izitoast/dist/css/iziToast.min.css'
+import 'izitoast/dist/js/iziToast.min.js'
 
 const Body = () => {
 	return (

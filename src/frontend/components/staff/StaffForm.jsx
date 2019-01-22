@@ -3,7 +3,6 @@ import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Label, Header, Segment, Divider, Container, Icon } from 'semantic-ui-react'
 import ProfilePhoto from './ProfilePhoto'
-import ImageField from '../custom/ImageField'
 
 const genderOptions = [
 	{

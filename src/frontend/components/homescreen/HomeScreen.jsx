@@ -24,7 +24,7 @@ const HomeScreen = () => {
 		<div style={styles.div}>
 			<Sidebar
 				as={Menu}
-				icon="labeled"
+				icon={'labeled'}
 				vertical
 				visible
 				width={'wide'}

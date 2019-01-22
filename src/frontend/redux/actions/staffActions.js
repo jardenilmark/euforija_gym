@@ -16,7 +16,6 @@ export function createStaff(obj) {
 				charset: 'alphanumeric',
 				capitalization: 'uppercase'
 			})
-			alert(id)
 			delete staff.image
 			delete staff.rePassword
 			const base64 = await converter(obj.image)
@@ -78,5 +77,11 @@ export function getStaffProfile(id) {
 		delete result.image
 		const payload = { ...result, image: img.data }
 		dispatch({ type: 'GET_STAFF_PROFILE', payload: payload })
+	}
+}
+
+export function setStaffFilter(payload) {
+	return dispatch => {
+		dispatch({ type: 'STAFF_FILTER', payload: payload })
 	}
 }
