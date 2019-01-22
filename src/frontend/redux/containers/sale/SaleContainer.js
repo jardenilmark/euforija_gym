@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setModalState, setClickedItem, updateSales } from '../../actions/saleAction'
+import { setModalState, setClickedItem, updateSales } from '../../actions/saleActions'
 import { fetchWholeInventory } from '../../actions/inventoryActions'
 import Sale from '../../../components/sale/Sale'
 
