@@ -1,7 +1,10 @@
 import swal from 'sweetalert'
+
 const initialState = {
 	staffFormVisibility: false,
-	staffProfileVisibility: false
+	staffProfileVisibility: false,
+	staffList: [],
+	type: 'all'
 }
 
 export default function reducer(state = initialState, action) {
@@ -11,10 +14,15 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state
 			}
+		case 'STAFF_FILTER':
+			return {
+				...state,
+				type: action.payload
+			}
 		case 'GET_STAFF':
 			return {
 				...state,
-				staff: action.payload
+				staffList: action.payload
 			}
 		case 'STAFF_FORM_VISIBILITY':
 			return {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Segment, Image, Header } from 'semantic-ui-react'
+import { Segment, Header } from 'semantic-ui-react'
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader'
 
 const StaffProfile = () => {

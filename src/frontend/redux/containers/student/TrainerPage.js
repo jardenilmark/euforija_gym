@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import Trainer from '../../../components/student/Trainer'
-import { fetchStaff, setStaffFilter } from '../../actions/staffAction'
+import Trainer from '../../../components/student/TrainerPage'
+import { fetchStaff, setStaffFilter } from '../../actions/staffActions'
 import { setStepData, setActiveForm } from '../../actions/studentAction'
 
 function mapDispatchToProps(dispatch) {

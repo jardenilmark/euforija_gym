@@ -4,8 +4,6 @@ import { onSubmit } from '../../helpers/inventoryHelper'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
 import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
-import 'izitoast/dist/css/iziToast.min.css'
-import 'izitoast/dist/js/iziToast.min.js'
 import TableRows from './TableRows'
 
 class Inventory extends React.Component {
