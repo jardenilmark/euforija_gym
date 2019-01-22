@@ -28,8 +28,8 @@ class Trainer extends Component {
 					onChange={(e, data) => {
 						this.props.setStaffFilter(data.value)
 					}}
-					options={options(this.props.staff).map(e => {
-						return { text: e, value: e }
+					options={options(this.props.staff).map((e, index) => {
+						return { text: e, value: e, key: index }
 					})}
 				/>
 				<Container style={style.containerOuter}>
