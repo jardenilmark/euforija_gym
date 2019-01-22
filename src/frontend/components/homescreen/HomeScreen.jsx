@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 const HomeScreen = () => {
 	const icons = ['unordered list', 'shopping cart', 'users', 'student', 'columns', 'chart area']
 	const contents = ['Inventory', 'Sales', 'Staff', 'Students', 'Payroll', 'Income Reports']
-	const paths = ['/inventory', '/sales', '/staff', '/students', '/payroll', '/income-reports']
+	const paths = ['/inventory', '/sales', '/staff', '/student', '/payroll', '/income-reports']
 
-	const Cards = icons.map((icon, index) => {
+	const cards = icons.map((icon, index) => {
 		return (
 			<Card raised as={Link} to={paths[index]} key={index} color={'blue'}>
 				<Card.Content textAlign={'center'}>

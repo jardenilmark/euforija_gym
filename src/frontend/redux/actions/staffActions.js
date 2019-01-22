@@ -6,7 +6,6 @@ const staffApi = 'api/staff'
 const fileApi = 'api/file'
 
 export function createStaff(obj) {
-	console.log(obj)
 	return async dispatch => {
 		const isEqualPass = obj.password === obj.rePassword
 		if (isEqualPass) {
@@ -45,16 +44,15 @@ export function fetchStaff() {
 	}
 }
 
-export function addStaff() {
+export function toggleFormVisibility(isVisible) {
 	return async dispatch => {
-		dispatch({ type: 'STAFF_FORM_VISIBILITY', payload: true })
+		dispatch({ type: 'STAFF_FORM_VISIBILITY', payload: isVisible })
 	}
 }
 
-export function showStaffProfile() {
-	console.log('invoked')
+export function toggleProfileVisibility(isVisible) {
 	return async dispatch => {
-		dispatch({ type: 'STAFF_PROFILE_VISIBILITY', payload: true })
+		dispatch({ type: 'STAFF_PROFILE_VISIBILITY', payload: isVisible })
 	}
 }
 
