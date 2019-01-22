@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../../../public/assets/images/logoAttendance.jpg'
+import logo from '../../../../public/assets/images/logo.jpg'
 import DigiClock from 'react-digital-clock'
 import { HeaderLogo, ClockContainer, AppHeader } from './AttendanceStyled'
 

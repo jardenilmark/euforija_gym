@@ -46,8 +46,8 @@ export const LogsContainer = styled(Container)({
 	borderRadius: '5px',
 	boxShadow: '0 0 2px 1px #cccccc',
 	backgroundColor: '#ffffff',
-	marginBottom: '12px !important',
-	marginTop: '12px !important'
+	margin: '12px 0 12px 0 !important',
+	width: '100% !important'
 })
 
 export const LogsRow = styled(Grid.Row)({
