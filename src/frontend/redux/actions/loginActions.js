@@ -1,9 +1,6 @@
 import app from '../../client'
 import swal from 'sweetalert'
-// import createHistory from 'history/createBrowserHistory'
-
 const location = 'api/staff'
-// const history = createHistory()
 
 export function handleLogin(data) {
 	return async () => {

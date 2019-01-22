@@ -9,7 +9,6 @@ class ProfilePhoto extends React.Component {
 
 	capture = () => {
 		const img = this.webcam.getScreenshot()
-		alert('success')
 	}
 
 	render() {
