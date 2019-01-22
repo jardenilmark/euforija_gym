@@ -4,7 +4,7 @@ import { fetchStaff } from '../../actions/staffActions'
 
 function mapStateToProps(state) {
 	return {
-		staff: state.staff.staff
+		staff: state.staff.staffList
 	}
 }
 

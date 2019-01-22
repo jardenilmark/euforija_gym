@@ -1,6 +1,6 @@
 import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Grid, Button } from 'semantic-ui-react'
+import { Grid, Button, Divider } from 'semantic-ui-react'
 import StaffForm from '../../redux/containers/staff/StaffForm'
 import StaffProfile from './StaffProfile'
 import StaffTable from '../../redux/containers/staff/StaffTable'
@@ -10,7 +10,7 @@ const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility) => {
 	toggleProfileVisibility(false)
 }
 
-const User = props => {
+const StaffPage = props => {
 	console.log(props)
 	return (
 		<Grid divided style={styles.grid}>
@@ -53,4 +53,4 @@ const styles = {
 	}
 }
 
-export default User
+export default StaffPage
