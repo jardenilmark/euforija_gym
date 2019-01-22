@@ -2,7 +2,6 @@ import Cards from './Cards'
 import React from 'react'
 import { Container, Grid, Header, Icon, Button, Table, Message, Segment } from 'semantic-ui-react'
 import EditModal from '../../redux/containers/sale/EditModalContainer'
-import 'semantic-ui-css/semantic.min.css'
 import TableContent from './TableContent'
 
 class Sale extends React.Component {

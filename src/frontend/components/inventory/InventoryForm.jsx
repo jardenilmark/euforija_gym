@@ -2,7 +2,6 @@ import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Container, Header } from 'semantic-ui-react'
 import FieldComponent from '../custom/ImageField'
-import 'semantic-ui-css/semantic.min.css'
 
 const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 	return (
