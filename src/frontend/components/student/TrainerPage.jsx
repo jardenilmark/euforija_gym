@@ -1,26 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Table, Dropdown, Button } from 'semantic-ui-react'
-
-const getArray = (array, type) => {
-	// to transfer in another file
-	if (type === 'all') {
-		return array
-	}
-	return array.filter(e => e.role === type)
-}
-
-const Options = array => {
-	return [
-		...new Set(
-			array.map(e => {
-				if (e.role.includes('coach')) {
-					return e.role
-				}
-			})
-		),
-		'all'
-	]
-}
+import { getArray, options } from '../../helpers/trainerHelper'
 
 class Trainer extends Component {
 	componentDidMount() {
@@ -48,7 +28,7 @@ class Trainer extends Component {
 					onChange={(e, data) => {
 						this.props.setStaffFilter(data.value)
 					}}
-					options={Options(this.props.staff).map(e => {
+					options={options(this.props.staff).map(e => {
 						return { text: e, value: e }
 					})}
 				/>
