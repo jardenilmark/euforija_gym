@@ -77,9 +77,9 @@ class IncomeReport extends Component {
 								options: {
 									filterColumnIndex: 0,
 									ui: {
-										chartType: 'LineChart',
+										chartType: 'ScatterChart',
 										chartOptions: {
-											chartArea: { width: '90%', height: '50%' },
+											chartArea: { width: '100%', height: '40%', padding: 0, margin: 0 },
 											hAxis: { baselineColor: 'none' }
 										}
 									}
