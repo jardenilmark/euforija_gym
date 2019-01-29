@@ -1,12 +1,9 @@
 import app from '../../client'
 import swal from 'sweetalert'
-// import createHistory from 'history/createBrowserHistory'
-
 const location = 'api/staff'
-// const history = createHistory()
 
 export function handleLogin(data) {
-	return async dispatch => {
+	return async () => {
 		const result = await app.service(location).find({
 			query: { idNumber: data.idNumber }
 		})

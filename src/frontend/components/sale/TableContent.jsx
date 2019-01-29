@@ -1,6 +1,5 @@
 import { Table, Label, Popup, Button } from 'semantic-ui-react'
 import React from 'react'
-import { setClickedItem } from '../../redux/actions/saleAction'
 
 const TableContent = ({ overviewArr, setModalState, setClickedItem }) => {
 	return overviewArr.map(val => {
@@ -12,7 +11,7 @@ const TableContent = ({ overviewArr, setModalState, setClickedItem }) => {
 					.00
 				</Table.Cell>
 				<Table.Cell>
-					<b>x</b> {<Label content={val.quantity} circular color={'green'} size="large" />}
+					<b>x</b> {<Label content={val.quantity} circular color={'green'} size={'large'} />}
 				</Table.Cell>
 				<Table.Cell>
 					₱ {val.price * val.quantity}
@@ -23,16 +22,23 @@ const TableContent = ({ overviewArr, setModalState, setClickedItem }) => {
 						trigger={
 							<Button
 								circular
-								icon="edit outline"
+								icon={'edit outline'}
 								onClick={() => {
 									setModalState(true)
 									setClickedItem(val)
 								}}
 							/>
 						}
+						color={'black'}
+						inverted
 						content={'edit item quantity'}
 					/>
-					<Popup trigger={<Button circular icon="delete" />} content={'remove item from cart'} />
+					<Popup
+						trigger={<Button circular icon={'delete'} />}
+						content={'remove item from cart'}
+						color={'black'}
+						inverted
+					/>
 				</Table.Cell>
 			</Table.Row>
 		)

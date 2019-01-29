@@ -1,4 +1,4 @@
 import { reduxForm } from 'redux-form'
-import CreateStaff from '../../../components/staff/CreateStaffForm'
+import CreateStaff from '../../../components/staff/StaffForm'
 
 export default reduxForm({ form: 'createStaffForm' })(CreateStaff)

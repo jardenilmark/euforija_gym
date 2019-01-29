@@ -75,12 +75,12 @@ export const HeaderLogo = styled(Image)({
 
 export const ClockContainer = styled(Container)({
 	verticalAlign: 'middle',
-	padding: '18px',
+	padding: '18px !important',
 	height: '100%'
 })
 
 export const AppHeader = styled(Header)({
-	backgroundColor: '#541087',
+	backgroundColor: '#640088',
 	margin: '0 !important',
 	padding: '0 !important',
 	height: '10%',
