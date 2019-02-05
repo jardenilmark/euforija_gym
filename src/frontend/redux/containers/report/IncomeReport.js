@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import IncomeReport from '../../../components/report/IncomeReport'
-import { fetchSales } from '../../actions/saleActions'
+import { fetchSales, setChart } from '../../actions/saleActions'
 
 function mapStateToProps(state) {
 	return {
@@ -13,6 +13,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		async fetchSales() {
 			await dispatch(fetchSales())
+		},
+		setChart(category) {
+			dispatch(setChart(category))
 		}
 	}
 }

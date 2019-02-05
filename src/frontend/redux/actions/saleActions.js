@@ -20,7 +20,13 @@ export function setClickedItem(payload) {
 	}
 }
 
-export function fetchSales(year) {
+export function setChart(category) {
+	return dispatch => {
+		dispatch({ type: 'SALES_CATEGORY', payload: category })
+	}
+}
+
+export function fetchSales() {
 	return async dispatch => {
 		const sales = await app
 			.service(salesApi)

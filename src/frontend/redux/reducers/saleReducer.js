@@ -47,6 +47,11 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state
 			}
+		case 'SALES_CATEGORY':
+			return {
+				...state,
+				byItem: action.payload
+			}
 		case 'SALES_UPDATED':
 			iziToast.success({
 				title: 'SUCCESS',
