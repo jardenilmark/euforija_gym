@@ -1,6 +1,6 @@
 import React from 'react'
-import logo from '../../../../public/assets/images/logoAttendance.jpg'
-import DigiClock from 'react-digital-clock'
+import logo from '../../../../public/assets/images/logo.jpg'
+import DigiClock from '../../redux/containers/attendance/DigitalClock'
 import { HeaderLogo, ClockContainer, AppHeader } from './AttendanceStyled'
 
 const AttendanceHeader = () => (

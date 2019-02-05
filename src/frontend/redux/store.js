@@ -3,6 +3,12 @@ import thunk from 'redux-thunk'
 import promise from 'redux-promise-middleware'
 import { createLogger } from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux'
-const middleware = applyMiddleware(promise(), thunk)
+
+const logger = createLogger({
+	collapsed: true,
+	predicate: (getState, action) => action.type !== 'START_CLOCK_TICK'
+})
+
+const middleware = applyMiddleware(promise(), thunk, logger)
 
 export default createStore(reducers, middleware)
