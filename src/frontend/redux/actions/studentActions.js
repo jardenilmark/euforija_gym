@@ -1,5 +1,8 @@
 import app from '../../client'
+import { converter } from '../../helpers/converter'
+
 const studentApi = 'api/student'
+const fileApi = 'api/file'
 
 export function setActiveForm(payload) {
 	return dispatch => {
@@ -21,8 +24,14 @@ export function setPaymentMethod(payload) {
 
 export function createStudent(obj) {
 	return async dispatch => {
+		const base64 = await converter(obj.image)
+		const data = await app.service(fileApi).create({
+			data: base64
+		})
+		const student = { ...obj }
+		student.image = data._id
 		await app.service(studentApi).create({
-			obj
+			student
 		})
 		dispatch({ type: 'STUDENT_CREATED', payload: true })
 	}
