@@ -4,25 +4,26 @@ import {
 	LogGrid,
 	LogsRow,
 	LogTrainerCol,
-	LogsContainer,
+	LogsSegment,
 	TrainerSegment,
 	VisitedLabel
 } from './AttendanceStyled'
 import TrainerCards from './TrainerCards'
-// import AttendanceList from './AttendanceList'
+import AttendanceList from './AttendanceList'
 
 class Logs extends Component {
 	componentDidMount() {
 		this.props.getAttendance()
+		this.props.getVisitors()
 	}
 
 	render() {
-		const { loggedIn, loggedOut } = this.props
+		const { loggedIn, loggedOut, coachesIsLoading, visitorIsLoading } = this.props
 		return (
 			<LogGrid>
 				<LogsRow>
 					<LogTrainerCol width={'8'}>
-						<TrainerSegment>
+						<TrainerSegment loading={coachesIsLoading}>
 							<Label color={'green'} ribbon>
 								I COULD TRAIN YOU
 							</Label>
@@ -30,7 +31,7 @@ class Logs extends Component {
 						</TrainerSegment>
 					</LogTrainerCol>
 					<LogTrainerCol width={'8'}>
-						<TrainerSegment>
+						<TrainerSegment loading={coachesIsLoading}>
 							<Label color={'red'} ribbon>
 								I'M NOT HERE
 							</Label>
@@ -39,9 +40,10 @@ class Logs extends Component {
 					</LogTrainerCol>
 				</LogsRow>
 				<LogsRow>
-					<LogsContainer>
+					<LogsSegment loading={visitorIsLoading}>
 						<VisitedLabel attached={'top'}>WHO VISITED TODAY?</VisitedLabel>
-					</LogsContainer>
+						<AttendanceList visitors={this.props.visitors} />
+					</LogsSegment>
 				</LogsRow>
 			</LogGrid>
 		)

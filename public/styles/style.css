@@ -73,6 +73,24 @@
 	src: url(../assets/fonts/nature_beauty.ttf) format('truetype');
 }
 
+@font-face {
+	font-family: 'Big Noodle';
+	font-style: normal;
+	src: url(../assets/fonts/big_noodle_titling.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: 'Code';
+	font-style: normal;
+	src: url(../assets/fonts/Code.otf) format('opentype');
+}
+
+@font-face {
+	font-family: 'Lane';
+	font-style: normal;
+	src: url(../assets/fonts/LANENAR_.ttf) format('truetype');
+}
+
 #primary-header {
 	font-family: 'Ferro Rosso';
 	font-size: 7vw;

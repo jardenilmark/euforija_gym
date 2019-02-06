@@ -26,9 +26,10 @@ export const VisitedLabel = styled(Label)({
 
 export const Name = styled(Container)({
 	height: '30%',
-	padding: '50px',
-	fontSize: '3em !important',
-	textAlign: 'center'
+	padding: '50px 0 50px 0',
+	fontSize: '5em !important',
+	textAlign: 'center',
+	fontFamily: 'Big Noodle'
 })
 
 export const MainGrid = styled(Grid)({
@@ -43,13 +44,14 @@ export const LogGrid = styled(Grid)({
 	padding: '0 !important'
 })
 
-export const LogsContainer = styled(Container)({
-	border: '2px solid #808080',
+export const LogsSegment = styled(Segment)({
+	border: '2px solid #808080 !important',
 	borderRadius: '5px',
 	boxShadow: '0 0 2px 1px #cccccc',
 	backgroundColor: '#ffffff',
 	margin: '12px 0 12px 0 !important',
-	width: '100% !important'
+	width: '100% !important',
+	maxHeight: '100% !important'
 })
 
 export const LogsRow = styled(Grid.Row)({
@@ -118,9 +120,10 @@ export const VisitorListItem = styled(List.Item)({
 })
 
 export const VisitorName = styled(List.Content)({
-	float: 'left'
+	fontSize: '1.5em !important'
 })
 
 export const VisitorTimeIn = styled(List.Content)({
-	float: 'right'
+	float: 'right',
+	fontSize: '1.3em !important'
 })

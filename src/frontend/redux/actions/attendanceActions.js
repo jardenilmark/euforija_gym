@@ -1,8 +1,10 @@
 import app from '../../client'
 import moment from 'moment'
+import Swal from 'sweetalert2'
 
 const attendanceApi = 'api/attendance'
 const staffApi = 'api/staff'
+const studentApi = 'api/student'
 
 export function tick() {
 	return dispatch => {
@@ -17,11 +19,33 @@ export const updateAttendance = loggedUser => async dispatch => {
 	try {
 		dispatch({ type: 'UPDATING_ATTENDANCE' })
 
-		const user = await app.service(staffApi).find({ query: { idNumber: loggedUser.logId } })
+		let user = await app.service(staffApi).find({ query: { idNumber: loggedUser.logId } })
 
-		console.log(user)
+		if (user[0]) {
+			await updateAttendanceStatus(user[0])
+			if (user[0].role === 'Coach') {
+				dispatch(getAttendance())
+			}
+		} else {
+			user = await app.service(studentApi).find({ query: { idNumber: loggedUser.logId } })
+			if (user[0]) {
+				await updateVisitorTimeIn(user[0])
+				dispatch(getVisitors())
+			}
+		}
 
-		dispatch({ type: 'UPDATING_ATTENDANCE_SUCCESS', payload: user })
+		if (!user[0]) {
+			Swal.fire({
+				position: 'top-start',
+				type: 'error',
+				title: 'ID Number Invalid',
+				showConfirmButton: false,
+				timer: 1500
+			})
+		}
+		setTimeout(() => {
+			dispatch({ type: 'UPDATING_ATTENDANCE_SUCCESS', payload: user })
+		}, 1500)
 
 		setTimeout(() => {
 			dispatch({ type: 'DISPLAY_PROFILE_TIMEOUT' })
@@ -48,6 +72,75 @@ export const getAttendance = () => async dispatch => {
 		return coaches
 	} catch (e) {
 		dispatch({ type: 'FETCHING_ATTENDANCE_FAILURE', payload: e })
+		return e
+	}
+}
+
+export const getVisitors = () => async dispatch => {
+	try {
+		dispatch({ type: 'FETCHING_VISITORS' })
+
+		const visitors = await app.service(studentApi).find({
+			query: {
+				timeIn: { $gte: new Date(new Date().toDateString()) },
+				$sort: {
+					timeIn: -1
+				}
+			}
+		})
+
+		dispatch({
+			type: 'FETCHING_VISITORS_SUCCESS',
+			payload: visitors
+		})
+
+		return visitors
+	} catch (e) {
+		dispatch({ type: 'FETCHING_VISITORS_FAILURE', payload: e })
+		return e
+	}
+}
+
+const updateAttendanceStatus = async user => {
+	try {
+		if (user.status === 'in') {
+			await app.service(staffApi).patch(user._id, {
+				status: 'out'
+			})
+			Swal.fire({
+				type: 'success',
+				title: 'Time out success',
+				showConfirmButton: false,
+				timer: 1500
+			})
+		} else {
+			await app.service(staffApi).patch(user._id, {
+				status: 'in'
+			})
+			Swal.fire({
+				type: 'success',
+				title: 'Time in success',
+				showConfirmButton: false,
+				timer: 1500
+			})
+		}
+	} catch (e) {
+		return e
+	}
+}
+
+const updateVisitorTimeIn = async user => {
+	try {
+		await app.service(studentApi).patch(user._id, {
+			timeIn: new Date()
+		})
+		Swal.fire({
+			type: 'success',
+			title: 'Time in success',
+			showConfirmButton: false,
+			timer: 1500
+		})
+	} catch (e) {
 		return e
 	}
 }
