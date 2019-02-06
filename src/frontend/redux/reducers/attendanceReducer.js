@@ -3,7 +3,9 @@ const initialState = {
 	loggedIn: [],
 	loggedOut: [],
 	visitors: [],
-	loggedUser: null
+	loggedUser: null,
+	coachesIsLoading: false,
+	visitorIsLoading: false
 }
 
 export default function reducer(state = initialState, action) {
@@ -13,11 +15,28 @@ export default function reducer(state = initialState, action) {
 				...state,
 				time: action.payload
 			}
+		case 'FETCHING_ATTENDANCE':
+			return {
+				...state,
+				coachesIsLoading: true
+			}
 		case 'FETCHING_ATTENDANCE_SUCCESS':
 			return {
 				...state,
 				loggedIn: action.payload.filter(coach => coach.status === 'in'),
-				loggedOut: action.payload.filter(coach => coach.status === 'out')
+				loggedOut: action.payload.filter(coach => coach.status === 'out'),
+				coachesIsLoading: false
+			}
+		case 'FETCHING_VISITORS':
+			return {
+				...state,
+				visitorIsLoading: true
+			}
+		case 'FETCHING_VISITORS_SUCCESS':
+			return {
+				...state,
+				visitors: action.payload,
+				visitorIsLoading: false
 			}
 		case 'UPDATING_ATTENDANCE_SUCCESS':
 			return {

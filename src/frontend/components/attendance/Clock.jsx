@@ -22,7 +22,8 @@ class Clock extends Component {
 const style = {
 	displayTime: {
 		color: 'white',
-		fontSize: '1.2em'
+		fontSize: '1.8em',
+		fontFamily: 'Lane'
 	}
 }
 
