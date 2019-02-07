@@ -3,7 +3,9 @@ import iziToast from 'izitoast'
 const initialState = {
 	modal: false,
 	overviewArr: [],
-	clickedItem: ''
+	clickedItem: '',
+	sales: [],
+	byItem: false
 }
 
 export default function reducer(state = initialState, action) {
@@ -12,6 +14,11 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				modal: action.payload
+			}
+		case 'FETCH_SALES':
+			return {
+				...state,
+				sales: action.payload
 			}
 		case 'CLICKED_ITEM':
 			return {
@@ -39,6 +46,11 @@ export default function reducer(state = initialState, action) {
 			}
 			return {
 				...state
+			}
+		case 'SALES_CATEGORY':
+			return {
+				...state,
+				byItem: action.payload
 			}
 		case 'SALES_UPDATED':
 			iziToast.success({

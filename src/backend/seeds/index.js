@@ -1,6 +1,5 @@
 import seedStaff from './staff'
 import seedStudent from './student'
-
 ;(async () => {
 	try {
 		await seedStaff(10)

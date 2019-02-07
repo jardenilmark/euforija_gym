@@ -20,6 +20,21 @@ export function setClickedItem(payload) {
 	}
 }
 
+export function setChart(category) {
+	return dispatch => {
+		dispatch({ type: 'SALES_CATEGORY', payload: category })
+	}
+}
+
+export function fetchSales() {
+	return async dispatch => {
+		const sales = await app
+			.service(salesApi)
+			.find({ query: { $select: { name: 1, price: 1, date: 1, _id: 0 } } })
+		dispatch({ type: 'FETCH_SALES', payload: sales })
+	}
+}
+
 export function updateSales(arr) {
 	return async dispatch => {
 		const items = arr.map(val => {

@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import Create from '../../../components/student/CreateStudentForm'
-import { setActiveForm, setStepData, createStudent } from '../../actions/studentAction'
+import { setActiveForm, setStepData, createStudent } from '../../actions/studentActions'
 
 function mapDispatchToProps(dispatch) {
 	return {

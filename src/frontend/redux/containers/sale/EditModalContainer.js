@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setModalState, addItemOverview } from '../../actions/saleAction'
+import { setModalState, addItemOverview } from '../../actions/saleActions'
 import PurchaseModal from '../../../components/sale/PurchaseModal'
 
 function mapStateToProps(state) {

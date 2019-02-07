@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import PaymentPage from '../../../components/student/PaymentPage'
-import { setPaymentMethod } from '../../actions/studentAction'
+import { setPaymentMethod } from '../../actions/studentActions'
 
 function mapDispatchToProps(dispatch) {
 	return {
