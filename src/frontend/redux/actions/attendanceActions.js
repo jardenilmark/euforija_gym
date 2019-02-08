@@ -1,5 +1,5 @@
 import app from '../../client'
-import moment from 'moment'
+import date from 'date-and-time'
 import Swal from 'sweetalert2'
 
 const attendanceApi = 'api/attendance'
@@ -10,7 +10,7 @@ export function tick() {
 	return dispatch => {
 		dispatch({
 			type: 'START_CLOCK_TICK',
-			payload: moment().format('dddd, MMM DD, h:mm:ss a')
+			payload: date.format(new Date(), 'dddd, MMM D, h:mm:ss A')
 		})
 	}
 }
