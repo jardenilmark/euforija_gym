@@ -12,9 +12,8 @@ import TrainerCards from './TrainerCards'
 import AttendanceList from './AttendanceList'
 
 class Logs extends Component {
-	componentDidMount() {
-		this.props.getAttendance()
-		this.props.getVisitors()
+	async componentDidMount() {
+		await this.props.checkIfDayPassed()
 	}
 
 	render() {

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { getAttendance, getVisitors } from '../../actions/attendanceActions'
+import { checkIfDayPassed } from '../../actions/attendanceActions'
 import Logs from '../../../components/attendance/Logs'
 
 function mapStateToProps(state) {
@@ -14,11 +14,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getAttendance() {
-			dispatch(getAttendance())
-		},
-		getVisitors() {
-			dispatch(getVisitors())
+		checkIfDayPassed() {
+			dispatch(checkIfDayPassed())
 		}
 	}
 }

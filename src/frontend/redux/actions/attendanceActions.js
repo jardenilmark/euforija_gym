@@ -6,12 +6,18 @@ const attendanceApi = 'api/attendance'
 const staffApi = 'api/staff'
 const studentApi = 'api/student'
 
-export function tick() {
-	return dispatch => {
+export const tick = () => async dispatch => {
+	try {
+		const now = new Date()
 		dispatch({
 			type: 'START_CLOCK_TICK',
-			payload: date.format(new Date(), 'dddd, MMM D, h:mm:ss A')
+			payload: date.format(now, 'dddd, MMM D, h:mm:ss A')
 		})
+		if (date.format(now, 'HH:mm:ss') === '00:00:00') {
+			dispatch(checkIfDayPassed())
+		}
+	} catch (e) {
+		return e
 	}
 }
 
@@ -58,7 +64,7 @@ export const updateAttendance = loggedUser => async dispatch => {
 	}
 }
 
-export const getAttendance = () => async dispatch => {
+const getAttendance = () => async dispatch => {
 	try {
 		dispatch({ type: 'FETCHING_ATTENDANCE' })
 
@@ -76,7 +82,7 @@ export const getAttendance = () => async dispatch => {
 	}
 }
 
-export const getVisitors = () => async dispatch => {
+const getVisitors = () => async dispatch => {
 	try {
 		dispatch({ type: 'FETCHING_VISITORS' })
 
@@ -97,6 +103,51 @@ export const getVisitors = () => async dispatch => {
 		return visitors
 	} catch (e) {
 		dispatch({ type: 'FETCHING_VISITORS_FAILURE', payload: e })
+		return e
+	}
+}
+
+export const checkIfDayPassed = () => async dispatch => {
+	try {
+		const now = new Date()
+		let currentDate = []
+		currentDate = await app.service(attendanceApi).find({
+			query: {
+				name: 'current date'
+			}
+		})
+
+		if (!currentDate[0]) {
+			currentDate = await app.service(attendanceApi).create({
+				name: 'current date',
+				today: new Date()
+			})
+		} else if (new Date(currentDate[0].today).toDateString() !== now.toDateString()) {
+			await timeoutAll()
+			console.log(new Date(currentDate[0].today))
+			currentDate = await app.service(attendanceApi).patch(
+				null,
+				{
+					today: new Date()
+				},
+				{
+					query: {
+						name: 'current date'
+					}
+				}
+			)
+		}
+
+		dispatch(getAttendance())
+		dispatch(getVisitors())
+		dispatch({
+			type: 'FETCHING_CURRENT_DATE',
+			payload: currentDate[0].today
+		})
+
+		return currentDate
+	} catch (e) {
+		console.log('errrrroooor', e)
 		return e
 	}
 }
@@ -139,6 +190,16 @@ const updateVisitorTimeIn = async user => {
 			title: 'Time in success',
 			showConfirmButton: false,
 			timer: 1500
+		})
+	} catch (e) {
+		return e
+	}
+}
+
+const timeoutAll = async user => {
+	try {
+		await app.service(staffApi).patch(null, {
+			status: 'out'
 		})
 	} catch (e) {
 		return e
