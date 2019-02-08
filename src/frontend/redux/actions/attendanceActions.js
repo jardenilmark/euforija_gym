@@ -13,7 +13,7 @@ export const tick = () => async dispatch => {
 			type: 'START_CLOCK_TICK',
 			payload: date.format(now, 'dddd, MMM D, h:mm:ss A')
 		})
-		if (date.format(now, 'HH:mm:ss') === '00:00:00') {
+		if (date.format(now, 'HH:mm:ss') === '18:58:00') {
 			dispatch(checkIfDayPassed())
 		}
 	} catch (e) {
@@ -124,7 +124,6 @@ export const checkIfDayPassed = () => async dispatch => {
 			})
 		} else if (new Date(currentDate[0].today).toDateString() !== now.toDateString()) {
 			await timeoutAll()
-			console.log(new Date(currentDate[0].today))
 			currentDate = await app.service(attendanceApi).patch(
 				null,
 				{
