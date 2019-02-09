@@ -28,15 +28,16 @@ const roleOptions = [
 
 const Create = props => {
 	const { handleSubmit, pristine, submitting } = props
+	console.log('form props', props)
 	return (
 		<Form onSubmit={handleSubmit}>
-			<Segment style={{ margin: '30' }} basic>
-				<Label size={'huge'} attached={'top'} basic style={{ border: 'none', padding: 10 }}>
+			<Segment style={styles.segment} basic>
+				<Label size={'huge'} attached={'top'} basic style={styles.headerLabel}>
 					<Icon name={'edit outline'} style={{ marginRight: '5' }} />
 					Add New Staff
 				</Label>
-				<ProfilePhoto />
-				<Divider style={{ marginBottom: '30' }} />
+				<ProfilePhoto {...props} />
+				<Divider style={styles.divider} />
 				<Form.Group widths={'equal'}>
 					<div style={styles.field}>
 						<label>
@@ -172,6 +173,16 @@ const styles = {
 	},
 	label: {
 		margin: 0
+	},
+	segment: {
+		margin: '30'
+	},
+	headerLabel: {
+		border: 'none',
+		padding: 10
+	},
+	divider: {
+		marginBottom: 30
 	}
 }
 

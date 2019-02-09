@@ -17,6 +17,7 @@ const SaleForm = ({ handleSubmit, pristine, submitting }) => {
 						component={'input'}
 						type={'number'}
 						placeholder={'place value here...'}
+						style={styles.field}
 						required
 					/>
 				</div>
@@ -36,6 +37,11 @@ const styles = {
 	},
 	header: {
 		marginBottom: '7px'
+	},
+	field: {
+		borderBottom: '2px solid white',
+		backgroundColor: 'transparent',
+		color: 'white'
 	}
 }
 
