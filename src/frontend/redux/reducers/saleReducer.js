@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action) {
 				...state,
 				clickedItem: action.payload
 			}
-		case 'OVERVIEW_ARR':
+		case 'ADD_ITEM':
 			const item = action.payload[0]
 			const quantity = action.payload[1]
 			if (quantity <= item.quantity && quantity > 0) {
@@ -51,6 +51,11 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				byItem: action.payload
+			}
+		case 'REMOVE_ITEM':
+			return {
+				...state,
+				overviewArr: action.payload
 			}
 		case 'SALES_UPDATED':
 			iziToast.success({
