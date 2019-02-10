@@ -3,9 +3,11 @@ import { Menu, Header, Icon, Card, Image, Sidebar, Button, Segment } from 'seman
 import { Link } from 'react-router-dom'
 
 const HomeScreen = () => {
-	const icons = ['unordered list', 'shopping cart', 'users', 'student', 'columns', 'chart area']
+	const icons = ['unordered list', 'shopping cart', 'users', 'users', 'columns', 'chart area']
 	const contents = ['Inventory', 'Sales', 'Staff', 'Students', 'Payroll', 'Income Reports']
-	const paths = ['/inventory', '/sales', '/staff', '/student', '/payroll', '/income-reports']
+	const paths = ['/inventory', '/sales', '/staff', '/student', '/payroll', '/income-report']
+
+	//TODO: fix responsiveness!
 
 	const cards = icons.map((icon, index) => {
 		return (
@@ -29,7 +31,7 @@ const HomeScreen = () => {
 				visible
 				width={'wide'}
 				borderless
-				style={{ paddingTop: 15 }}>
+				style={styles.sidebar}>
 				<Menu.Item>
 					<Image src={'./assets/images/images.png'} size={'small'} circular centered />
 					<Header as={'h2'} style={styles.user}>
@@ -47,7 +49,7 @@ const HomeScreen = () => {
 				</Menu.Item>
 			</Sidebar>
 			<Sidebar.Pusher>
-				<div style={{ marginRight: '350px' }}>
+				<div style={styles.cardsContainer}>
 					<Card.Group itemsPerRow={2} style={styles.cards}>
 						{cards}
 					</Card.Group>
@@ -60,6 +62,12 @@ const HomeScreen = () => {
 const styles = {
 	div: {
 		height: '100%'
+	},
+	cardsContainer: {
+		marginRight: 350
+	},
+	sidebar: {
+		paddingTop: 15
 	},
 	header: {
 		margin: 0,

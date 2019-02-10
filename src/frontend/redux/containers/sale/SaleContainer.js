@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setModalState, setClickedItem, updateSales } from '../../actions/saleActions'
+import { setModalState, setClickedItem, updateSales, removeItem } from '../../actions/saleActions'
 import { fetchWholeInventory } from '../../actions/inventoryActions'
 import Sale from '../../../components/sale/Sale'
 
@@ -29,6 +29,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		setClickedItem(item) {
 			dispatch(setClickedItem(item))
+		},
+		removeItem(arr, index) {
+			dispatch(removeItem(arr, index))
 		},
 		async updateSales(items) {
 			await dispatch(updateSales(items))

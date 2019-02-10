@@ -17,7 +17,6 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						name={'name'}
 						component={'input'}
 						type={'text'}
-						placeholder={'Name'}
 						style={styles.field}
 						required
 						padded
@@ -35,7 +34,6 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						name={'quantity'}
 						component={'input'}
 						type={'number'}
-						placeholder={'Quantity'}
 						style={styles.field}
 						required
 						padded
@@ -53,7 +51,6 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						name={'price'}
 						component={'input'}
 						type={'number'}
-						placeholder={'Price'}
 						style={styles.field}
 						required
 						padded
@@ -67,17 +64,11 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 					</Header>
 				</label>
 				<div>
-					<Field
-						name={'image'}
-						component={FieldComponent}
-						type={'file'}
-						required
-						style={styles.field}
-					/>
+					<Field name={'image'} component={FieldComponent} type={'file'} style={styles.field} />
 				</div>
 			</div>
 			<Container textAlign={'right'} style={styles.container}>
-				<Button type={'submit'} color={'green'} inverted disabled={pristine || submitting}>
+				<Button type={'submit'} inverted disabled={pristine || submitting}>
 					Submit
 				</Button>
 			</Container>
@@ -93,7 +84,9 @@ const styles = {
 		paddingTop: '20px'
 	},
 	field: {
-		borderBottom: '2px solid red'
+		borderBottom: '2px solid white',
+		backgroundColor: 'transparent',
+		color: 'white'
 	},
 	label: {
 		marginBottom: '8px'
