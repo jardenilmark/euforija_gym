@@ -7,7 +7,8 @@ function mapStateToProps(state) {
 	return {
 		inventory: state.inventory.items,
 		modal: state.sale.modal,
-		overviewArr: state.sale.overviewArr
+		overviewArr: state.sale.overviewArr,
+		isFetchingInventory: state.inventory.isFetchingInventory
 	}
 }
 

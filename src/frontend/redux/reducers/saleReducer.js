@@ -28,6 +28,7 @@ export default function reducer(state = initialState, action) {
 		case 'ADD_ITEM':
 			const item = action.payload[0]
 			const quantity = action.payload[1]
+			console.log('qty', item.quantity)
 			if (quantity <= item.quantity && quantity > 0) {
 				const index = state.overviewArr.findIndex(obj => obj._id === item._id)
 				const newItem = { ...item }
@@ -53,6 +54,8 @@ export default function reducer(state = initialState, action) {
 				byItem: action.payload
 			}
 		case 'REMOVE_ITEM':
+			console.log('pay', action.payload)
+			console.log('state', state.overviewArr)
 			return {
 				...state,
 				overviewArr: action.payload
