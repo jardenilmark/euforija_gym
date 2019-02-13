@@ -4,14 +4,23 @@ import { Table, Loader, Segment } from 'semantic-ui-react'
 
 class StaffTable extends React.Component {
 	componentDidMount() {
-		console.log('CALLED')
 		this.props.fetchStaff()
 	}
 
 	render() {
 		let rows
 		console.log(this.props)
-		if (this.props.staff.length > 0) {
+		if (this.props.isFetching) {
+			rows = (
+				<Table.Row>
+					<Table.Cell>
+						<Segment style={{ height: '200px' }} basic>
+							<Loader active content={'Loading Staff...'} size={'big'} />
+						</Segment>
+					</Table.Cell>
+				</Table.Row>
+			)
+		} else {
 			rows = this.props.staff.map((staff, index) => {
 				return (
 					<TableRow
@@ -23,16 +32,6 @@ class StaffTable extends React.Component {
 					/>
 				)
 			})
-		} else {
-			rows = (
-				<Table.Row>
-					<Table.Cell>
-						<Segment style={{ height: '200px' }} basic>
-							<Loader active content={'Loading Staff...'} size={'big'} />
-						</Segment>
-					</Table.Cell>
-				</Table.Row>
-			)
 		}
 
 		return (

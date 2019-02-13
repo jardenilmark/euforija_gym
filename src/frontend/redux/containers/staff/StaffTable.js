@@ -4,7 +4,8 @@ import { fetchStaff } from '../../actions/staffActions'
 
 function mapStateToProps(state) {
 	return {
-		staff: state.staff.staffList
+		staff: state.staff.staffList,
+		isFetching: state.staff.isFetching
 	}
 }
 
