@@ -22,18 +22,15 @@ const TableRows = ({
 }) => {
 	const arr = filteredInv.length > 0 ? filteredInv : inventory
 	if (isFetchingInventory) {
-		return <Loader active content={'Fetching Items...'} size={'big'} />
+		return <Loader active content={'Fetching Items...'} size={'huge'} />
 	} else {
 		if (arr.length === 0) {
 			return (
-				<Segment placeholder>
+				<Segment placeholder style={{ border: 'dotted 5px' }} size={'big'}>
 					<Header icon>
-						<Icon name="tags" />
-						No item has been added to the inventory.{' '}
-						<b onClick={() => setModalState(true, 'ADD_FORM_STATE')} style={styles.cursor}>
-							Click here
-						</b>{' '}
-						to add one.
+						<Icon name="exclamation circle" color={'red'} />
+						<Header.Content>No item has been added to the inventory.</Header.Content>
+						<Header.Content>Click the button above to start adding items.</Header.Content>
 					</Header>
 				</Segment>
 			)
@@ -96,10 +93,6 @@ const styles = {
 	text: {
 		fontSize: 16,
 		fontWeight: 'bold'
-	},
-	cursor: {
-		cursor: 'pointer',
-		color: 'red'
 	}
 }
 
