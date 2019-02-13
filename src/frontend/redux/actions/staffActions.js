@@ -19,7 +19,7 @@ export function createStaff(staff) {
 			})
 			await app.service(staffApi).create({
 				...staff,
-				generatedId: id,
+				idNumber: id,
 				image: data._id
 			})
 		}
