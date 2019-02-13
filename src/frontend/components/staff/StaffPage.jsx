@@ -10,8 +10,13 @@ const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility) => {
 	toggleProfileVisibility(false)
 }
 
+const submit = (values, props) => {
+	const staff = { ...values, image: props.image }
+	props.createStaff(staff)
+}
+
 const StaffPage = props => {
-	console.log(props)
+	console.log('staff props', props)
 	return (
 		<Grid divided style={styles.grid}>
 			<Grid.Column width={8}>
@@ -29,7 +34,9 @@ const StaffPage = props => {
 				/>
 			</Grid.Column>
 			<Grid.Column width={8}>
-				{props.formVisibility && <StaffForm onSubmit={props.createStaff} />}
+				{props.formVisibility && (
+					<StaffForm onSubmit={values => submit(values, props)} {...props} />
+				)}
 				{props.profileVisibility && (
 					<StaffProfile
 						clickedStaff={props.clickedStaff}

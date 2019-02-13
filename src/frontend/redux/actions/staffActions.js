@@ -1,63 +1,77 @@
 import app from '../../client'
-import { converter } from '../../helpers/converter'
 import randomstring from 'randomstring'
 
 const staffApi = 'api/staff'
 const fileApi = 'api/file'
 
-export function createStaff(obj) {
+export function createStaff(staff) {
 	return async dispatch => {
-		const isEqualPass = obj.password === obj.rePassword
+		const isEqualPass = staff.password === staff.rePassword
 		if (isEqualPass) {
-			const staff = { ...obj }
-			const id = randomstring.generate({
-				length: 8,
-				charset: 'alphanumeric',
-				capitalization: 'uppercase'
-			})
-			delete staff.image
 			delete staff.rePassword
-			const base64 = await converter(obj.image)
 			const data = await app.service(fileApi).create({
-				data: base64
+				data: staff.image
+			})
+			const id = randomstring.generate({
+				charset: 'alphanumeric',
+				length: 8,
+				capitalization: 'uppercase'
 			})
 			await app.service(staffApi).create({
 				...staff,
 				generatedId: id,
-				image: data._id,
-				time: [] // insert time in and time out object
+				image: data._id
 			})
 		}
 		dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
 	}
 }
 
+export function saveImage(imageString) {
+	// console.log('image saved', imageString)
+	return dispatch => {
+		dispatch({ type: 'SAVE_IMAGE', payload: imageString })
+	}
+}
+
+export function clearImage() {
+	return dispatch => {
+		dispatch({ type: 'CLEAR_IMAGE' })
+	}
+}
+
 export function fetchStaff() {
 	return async dispatch => {
-		const staff = await app.service(staffApi).find()
-		const images = await app.service(fileApi).find()
-		staff.map((staff, index) => {
-			const image = images.find(image => image._id === staff.image)
-			staff.image = image.data
-		})
-		dispatch({ type: 'GET_STAFF', payload: staff })
+		dispatch({ type: 'FETCHING_STAFF' })
+
+		try {
+			const staffList = await app.service(staffApi).find()
+			const images = await app.service(fileApi).find()
+			staffList.map((staff, index) => {
+				const image = images.find(image => image._id === staff.image)
+				staff.image = image.data
+			})
+			dispatch({ type: 'FETCHING_STAFF_SUCCESS', payload: staffList })
+		} catch (e) {
+			dispatch({ type: 'FETCHING_STAFF_FAILED', payload: e.message })
+		}
 	}
 }
 
 export function toggleFormVisibility(isVisible) {
-	return async dispatch => {
+	return dispatch => {
 		dispatch({ type: 'STAFF_FORM_VISIBILITY', payload: isVisible })
 	}
 }
 
 export function toggleProfileVisibility(isVisible) {
-	return async dispatch => {
+	return dispatch => {
 		dispatch({ type: 'STAFF_PROFILE_VISIBILITY', payload: isVisible })
 	}
 }
 
 export function setClickedStaffId(id) {
-	return async dispatch => {
+	return dispatch => {
 		dispatch({ type: 'SET_CLICKED_STAFF_ID', payload: id })
 	}
 }
