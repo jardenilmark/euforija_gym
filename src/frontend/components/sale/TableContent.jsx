@@ -1,8 +1,9 @@
 import { Table, Label, Popup, Button } from 'semantic-ui-react'
 import React from 'react'
 
-const TableContent = ({ overviewArr, setModalState, setClickedItem }) => {
-	return overviewArr.map(val => {
+const TableContent = ({ overviewArr, setModalState, setClickedItem, removeItem, inventory }) => {
+	return overviewArr.map((val, index) => {
+		const item = findItem(inventory, val._id)
 		return (
 			<Table.Row key={val._id} textAlign={'center'} style={styles.tableRow}>
 				<Table.Cell>{val.name}</Table.Cell>
@@ -25,7 +26,7 @@ const TableContent = ({ overviewArr, setModalState, setClickedItem }) => {
 								icon={'edit outline'}
 								onClick={() => {
 									setModalState(true)
-									setClickedItem(val)
+									setClickedItem(item)
 								}}
 							/>
 						}
@@ -34,7 +35,15 @@ const TableContent = ({ overviewArr, setModalState, setClickedItem }) => {
 						content={'edit item quantity'}
 					/>
 					<Popup
-						trigger={<Button circular icon={'delete'} />}
+						trigger={
+							<Button
+								circular
+								icon={'delete'}
+								onClick={() => {
+									removeItem(overviewArr, index)
+								}}
+							/>
+						}
 						content={'remove item from cart'}
 						color={'black'}
 						inverted
@@ -43,6 +52,13 @@ const TableContent = ({ overviewArr, setModalState, setClickedItem }) => {
 			</Table.Row>
 		)
 	})
+}
+
+const findItem = (inventory, id) => {
+	const found = inventory.find(item => {
+		return item._id === id
+	})
+	return found
 }
 
 const styles = {

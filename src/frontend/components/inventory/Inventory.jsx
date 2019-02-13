@@ -60,7 +60,7 @@ class Inventory extends React.Component {
 								}
 							}}
 						/>
-						<Header style={{ display: activeItem !== 'name' ? 'inline' : 'none' }}>To</Header>
+						<Header style={{ display: activeItem !== 'name' ? 'inline' : 'none' }}>to</Header>
 						<Input
 							style={{ ...styles.input, display: activeItem !== 'name' ? 'inline' : 'none' }}
 							placeholder={'Search...'}
@@ -104,6 +104,8 @@ class Inventory extends React.Component {
 		)
 	}
 }
+
+//TODO: fix inconsistent units e.g. (px, vw)
 
 const styles = {
 	container: {

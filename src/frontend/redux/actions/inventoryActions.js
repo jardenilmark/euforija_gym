@@ -1,21 +1,27 @@
 import app from '../../client'
 import { compareData } from '../../helpers/sort'
-import { converter } from '../../helpers/converter'
+import { converter, getFile } from '../../helpers/converter'
 import iziToast from 'izitoast'
 const inventoryApi = 'api/inventory'
 const fileApi = 'api/file'
 
 export function fetchWholeInventory(arg) {
 	return async dispatch => {
-		const items = await app.service(inventoryApi).find(arg)
-		const images = await app.service(fileApi).find()
-		items.map(item => {
-			const image = images.find(data => item.image === data._id)
-			item.imageId = item.image
-			item.image = image.data
-		})
-		compareData(items, 'name')
-		dispatch({ type: 'GET_INVENTORY', payload: items })
+		dispatch({ type: 'FETCHING_INVENTORY' })
+
+		try {
+			const items = await app.service(inventoryApi).find(arg)
+			const images = await app.service(fileApi).find()
+			items.map(item => {
+				const image = images.find(data => item.image === data._id)
+				item.imageId = item.image
+				item.image = image.data
+			})
+			compareData(items, 'name')
+			dispatch({ type: 'FETCHING_INVENTORY_SUCCESS', payload: items })
+		} catch (e) {
+			dispatch({ type: 'FETCHING_INVENTORY_FAILED', payload: items })
+		}
 	}
 }
 
@@ -51,11 +57,16 @@ export function createItem(obj) {
 		})
 		iziToast.success({
 			title: 'SUCCESS',
-			message: 'Item added successfully!'
+			message: 'Item added successfully!',
+			position: 'topRight'
 		})
 		dispatch({ type: 'ITEM_CREATED', payload: true })
 	}
 }
+
+// TODO: fix "No file chosen" text in the upload photo field eventhough image file is already pre-filled
+// possible reason: a function which delegates the props of the image file is not invoked
+// since there is no detected change in the field
 
 export function updateItem(id, imageId, obj) {
 	return async dispatch => {
@@ -69,7 +80,8 @@ export function updateItem(id, imageId, obj) {
 		await app.service(inventoryApi).update(id, obj)
 		iziToast.success({
 			title: 'SUCCESS',
-			message: 'Item updated successfully!'
+			message: 'Item updated successfully!',
+			position: 'topRight'
 		})
 		dispatch({ type: 'ITEM_UPDATED', payload: true })
 	}
@@ -81,19 +93,21 @@ export function removeItem(id, imageId) {
 		await app.service(fileApi).remove(imageId)
 		iziToast.warning({
 			title: 'SUCCESS',
-			message: 'Item removed successfully!'
+			message: 'Item removed successfully!',
+			position: 'topRight'
 		})
 		dispatch({ type: 'ITEM_DELETED', payload: true })
 	}
 }
 
 export function setFormValues(item) {
+	console.log(getFile(item.image))
 	return async dispatch => {
 		const value = {
 			name: item.name,
 			price: item.price,
 			quantity: item.quantity,
-			image: item.image // need to fix this
+			image: getFile(item.image)
 		}
 		dispatch({ type: 'GET_INITIAL_VALUES', payload: value })
 	}

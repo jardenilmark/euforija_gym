@@ -5,7 +5,10 @@ import {
 	toggleFormVisibility,
 	getStaffProfile,
 	toggleProfileVisibility,
-	setClickedStaffId
+	setClickedStaffId,
+	saveImage,
+	clearImage,
+	fetchStaff
 } from '../../actions/staffActions'
 
 function mapStateToProps(state) {
@@ -13,7 +16,8 @@ function mapStateToProps(state) {
 		formVisibility: state.staff.staffFormVisibility,
 		profileVisibility: state.staff.staffProfileVisibility,
 		staffProfile: state.staff.staffProfile,
-		clickedStaff: state.staff.clickedStaff
+		clickedStaff: state.staff.clickedStaff,
+		image: state.staff.image
 	}
 }
 
@@ -21,18 +25,25 @@ function mapDispatchToProps(dispatch) {
 	return {
 		async createStaff(user) {
 			await dispatch(createStaff(user))
+			await dispatch(fetchStaff())
 		},
-		async toggleFormVisibility(isVisible) {
-			await dispatch(toggleFormVisibility(isVisible))
+		toggleFormVisibility(isVisible) {
+			dispatch(toggleFormVisibility(isVisible))
 		},
 		async getStaffProfile(id) {
 			await dispatch(getStaffProfile(id))
 		},
-		async toggleProfileVisibility(isVisible) {
-			await dispatch(toggleProfileVisibility(isVisible))
+		toggleProfileVisibility(isVisible) {
+			dispatch(toggleProfileVisibility(isVisible))
 		},
-		async setClickedStaffId(id) {
-			await dispatch(setClickedStaffId(id))
+		setClickedStaffId(id) {
+			dispatch(setClickedStaffId(id))
+		},
+		saveImage(imageString) {
+			dispatch(saveImage(imageString))
+		},
+		clearImage() {
+			dispatch(clearImage())
 		}
 	}
 }

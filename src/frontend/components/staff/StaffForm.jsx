@@ -28,9 +28,8 @@ const roleOptions = [
 
 const Create = props => {
 	const { handleSubmit, pristine, submitting } = props
-	console.log('form props', props)
 	return (
-		<Form onSubmit={handleSubmit}>
+		<Form onSubmit={values => handleSubmit(values)}>
 			<Segment style={styles.segment} basic>
 				<Label size={'huge'} attached={'top'} basic style={styles.headerLabel}>
 					<Icon name={'edit outline'} style={{ marginRight: '5' }} />

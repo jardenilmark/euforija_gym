@@ -8,9 +8,22 @@ export function setModalState(payload) {
 	}
 }
 
-export function addItemOverview(item, quantity) {
+export function addItem(item, quantity) {
+	console.log('item', [item, quantity])
 	return dispatch => {
-		dispatch({ type: 'OVERVIEW_ARR', payload: [item, quantity] })
+		dispatch({ type: 'ADD_ITEM', payload: [item, quantity] })
+	}
+}
+
+// TODO: fix this (removeItem)! not working.
+
+export function removeItem(overviewArr, index) {
+	console.log('ARR1', overviewArr)
+	overviewArr.splice(index, 1)
+	console.log('ARR', overviewArr)
+	console.log('I', index)
+	return dispatch => {
+		dispatch({ type: 'REMOVE_ITEM', payload: overviewArr })
 	}
 }
 

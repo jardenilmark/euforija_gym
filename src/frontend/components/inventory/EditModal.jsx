@@ -22,8 +22,8 @@ const EditItemModal = props => {
 			</Modal.Header>
 			<Modal.Content>
 				<EditForm
-					onSubmit={e => {
-						props.updateItem(props.formId, props.imageId, e)
+					onSubmit={obj => {
+						props.updateItem(props.formId, props.imageId, obj)
 						props.setModalState(false, 'EDIT_FORM_STATE')
 					}}
 				/>

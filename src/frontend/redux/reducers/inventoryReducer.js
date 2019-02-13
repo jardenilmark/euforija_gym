@@ -11,15 +11,22 @@ const initialState = {
 	editModalState: false,
 	addModalState: false,
 	deleteModalState: false,
+	isFetchingInventory: false,
 	formId: ''
 }
 
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
-		case 'GET_INVENTORY':
+		case 'FETCHING_INVENTORY_SUCCESS':
 			return {
 				...state,
-				items: action.payload
+				items: action.payload,
+				isFetchingInventory: false
+			}
+		case 'FETCHING_INVENTORY':
+			return {
+				...state,
+				isFetchingInventory: true
 			}
 		case 'GET_NAME_VAL':
 			return {
