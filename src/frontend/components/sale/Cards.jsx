@@ -1,7 +1,10 @@
 import React from 'react'
-import { Card, Image, Label } from 'semantic-ui-react'
+import { Card, Image, Label, Loader } from 'semantic-ui-react'
 
-const Cards = ({ setModalState, setClickedItem, inventory }) => {
+const Cards = ({ setModalState, setClickedItem, inventory, isFetchingInventory }) => {
+	if (isFetchingInventory) {
+		return <Loader active content={'Fetching items from inventory...'} size={'huge'} />
+	}
 	return (
 		<Card.Group stackable itemsPerRow={5} style={styles.cardGroup}>
 			{inventory.map(val => {
