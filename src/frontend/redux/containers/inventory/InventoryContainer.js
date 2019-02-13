@@ -20,7 +20,8 @@ function mapStateToProps(state) {
 		filteredInv: state.inventory.filteredInv,
 		priceOne: state.inventory.priceOne,
 		priceTwo: state.inventory.priceTwo,
-		nameVal: state.inventory.nameVal
+		nameVal: state.inventory.nameVal,
+		isFetchingInventory: state.inventory.isFetchingInventory
 	}
 }
 

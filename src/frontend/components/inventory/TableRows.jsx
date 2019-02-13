@@ -1,4 +1,14 @@
-import { Table, Button, Label, Image, Popup, Message } from 'semantic-ui-react'
+import {
+	Table,
+	Button,
+	Label,
+	Image,
+	Popup,
+	Header,
+	Segment,
+	Icon,
+	Loader
+} from 'semantic-ui-react'
 import React from 'react'
 
 const TableRows = ({
@@ -7,28 +17,30 @@ const TableRows = ({
 	setModalState,
 	setFormValues,
 	setFormId,
-	setImageId
+	setImageId,
+	isFetchingInventory
 }) => {
 	const arr = filteredInv.length > 0 ? filteredInv : inventory
-	if (arr.length === 0) {
-		return (
-			<Message negative size={'big'}>
-				<Message.Header>
-					<b>Inventory is empty!</b>
-				</Message.Header>
-				<p>
-					No item has been added to the inventory.{' '}
-					<b onClick={() => setModalState(true, 'ADD_FORM_STATE')} style={styles.cursor}>
-						Click here
-					</b>{' '}
-					to add one.
-				</p>
-			</Message>
-		)
+	if (isFetchingInventory) {
+		return <Loader active content={'Fetching Items...'} size={'big'} />
+	} else {
+		if (arr.length === 0) {
+			return (
+				<Segment placeholder>
+					<Header icon>
+						<Icon name="tags" />
+						No item has been added to the inventory.{' '}
+						<b onClick={() => setModalState(true, 'ADD_FORM_STATE')} style={styles.cursor}>
+							Click here
+						</b>{' '}
+						to add one.
+					</Header>
+				</Segment>
+			)
+		}
 	}
 
 	return arr.map((item, index) => {
-		console.log(item.image)
 		return (
 			<Table.Row key={item._id} negative={item.quantity < 5}>
 				<Table.Cell style={styles.text}>
@@ -86,7 +98,8 @@ const styles = {
 		fontWeight: 'bold'
 	},
 	cursor: {
-		cursor: 'pointer'
+		cursor: 'pointer',
+		color: 'red'
 	}
 }
 

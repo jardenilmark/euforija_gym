@@ -13,14 +13,7 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 					</Header>
 				</label>
 				<div>
-					<Field
-						name={'name'}
-						component={'input'}
-						type={'text'}
-						style={styles.field}
-						required
-						padded
-					/>
+					<Field name={'name'} component={'input'} type={'text'} style={styles.field} required />
 				</div>
 			</div>
 			<div style={styles.div}>
@@ -36,7 +29,6 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						type={'number'}
 						style={styles.field}
 						required
-						padded
 					/>
 				</div>
 			</div>
@@ -47,14 +39,7 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 					</Header>
 				</label>
 				<div>
-					<Field
-						name={'price'}
-						component={'input'}
-						type={'number'}
-						style={styles.field}
-						required
-						padded
-					/>
+					<Field name={'price'} component={'input'} type={'number'} style={styles.field} required />
 				</div>
 			</div>
 			<div>

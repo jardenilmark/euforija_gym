@@ -1,21 +1,27 @@
 import app from '../../client'
 import { compareData } from '../../helpers/sort'
-import { converter } from '../../helpers/converter'
+import { converter, getFile } from '../../helpers/converter'
 import iziToast from 'izitoast'
 const inventoryApi = 'api/inventory'
 const fileApi = 'api/file'
 
 export function fetchWholeInventory(arg) {
 	return async dispatch => {
-		const items = await app.service(inventoryApi).find(arg)
-		const images = await app.service(fileApi).find()
-		items.map(item => {
-			const image = images.find(data => item.image === data._id)
-			item.imageId = item.image
-			item.image = image.data
-		})
-		compareData(items, 'name')
-		dispatch({ type: 'GET_INVENTORY', payload: items })
+		dispatch({ type: 'FETCHING_INVENTORY' })
+
+		try {
+			const items = await app.service(inventoryApi).find(arg)
+			const images = await app.service(fileApi).find()
+			items.map(item => {
+				const image = images.find(data => item.image === data._id)
+				item.imageId = item.image
+				item.image = image.data
+			})
+			compareData(items, 'name')
+			dispatch({ type: 'FETCHING_INVENTORY_SUCCESS', payload: items })
+		} catch (e) {
+			dispatch({ type: 'FETCHING_INVENTORY_FAILED', payload: items })
+		}
 	}
 }
 
@@ -88,12 +94,13 @@ export function removeItem(id, imageId) {
 }
 
 export function setFormValues(item) {
+	console.log(getFile(item.image))
 	return async dispatch => {
 		const value = {
 			name: item.name,
 			price: item.price,
 			quantity: item.quantity,
-			image: item.image // need to fix this
+			image: getFile(item.image)
 		}
 		dispatch({ type: 'GET_INITIAL_VALUES', payload: value })
 	}
