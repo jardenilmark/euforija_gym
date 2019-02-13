@@ -47,12 +47,22 @@ class Sale extends React.Component {
 								</Segment>
 							)}
 							{!isEmpty && (
-								<Button
-									onClick={() => this.props.updateSales(this.props.overviewArr)}
-									size={'medium'}
-									style={styles.button}>
-									Confirm Purchase
-								</Button>
+								<div>
+									<Button
+										onClick={() => this.props.updateSales(this.props.overviewArr)}
+										size={'medium'}
+										negative
+										style={styles.button}
+										content={'Clear Cart'}
+									/>
+									<Button
+										onClick={() => this.props.updateSales(this.props.overviewArr)}
+										size={'medium'}
+										positive
+										style={styles.button}
+										content={'Confirm Purchase'}
+									/>
+								</div>
 							)}
 							{isEmpty && <EmptyCartMessage />}
 						</Container>

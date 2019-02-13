@@ -15,6 +15,8 @@ export function addItem(item, quantity) {
 	}
 }
 
+// TODO: fix this (removeItem)! not working.
+
 export function removeItem(overviewArr, index) {
 	console.log('ARR1', overviewArr)
 	overviewArr.splice(index, 1)
