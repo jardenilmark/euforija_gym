@@ -1,4 +1,4 @@
-import iziToast from 'izitoast'
+import Swal from 'sweetalert2'
 
 const initialState = {
 	modal: false,
@@ -39,10 +39,11 @@ export default function reducer(state = initialState, action) {
 					state.overviewArr.push(newItem)
 				}
 			} else {
-				iziToast.error({
-					title: 'ERROR',
-					message: 'Quantity is invalid!',
-					position: 'topRight'
+				Swal.fire({
+					type: 'error',
+					title: 'Quantity entered is more than the amount in stock!',
+					showConfirmButton: false,
+					timer: 2000
 				})
 			}
 			return {

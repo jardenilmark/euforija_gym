@@ -57,11 +57,16 @@ export function createItem(obj) {
 		})
 		iziToast.success({
 			title: 'SUCCESS',
-			message: 'Item added successfully!'
+			message: 'Item added successfully!',
+			position: 'topRight'
 		})
 		dispatch({ type: 'ITEM_CREATED', payload: true })
 	}
 }
+
+// TODO: fix "No file chosen" text in the upload photo field eventhough image file is already pre-filled
+// possible reason: a function which delegates the props of the image file is not invoked
+// since there is no detected change in the field
 
 export function updateItem(id, imageId, obj) {
 	return async dispatch => {
@@ -75,7 +80,8 @@ export function updateItem(id, imageId, obj) {
 		await app.service(inventoryApi).update(id, obj)
 		iziToast.success({
 			title: 'SUCCESS',
-			message: 'Item updated successfully!'
+			message: 'Item updated successfully!',
+			position: 'topRight'
 		})
 		dispatch({ type: 'ITEM_UPDATED', payload: true })
 	}
@@ -87,7 +93,8 @@ export function removeItem(id, imageId) {
 		await app.service(fileApi).remove(imageId)
 		iziToast.warning({
 			title: 'SUCCESS',
-			message: 'Item removed successfully!'
+			message: 'Item removed successfully!',
+			position: 'topRight'
 		})
 		dispatch({ type: 'ITEM_DELETED', payload: true })
 	}
