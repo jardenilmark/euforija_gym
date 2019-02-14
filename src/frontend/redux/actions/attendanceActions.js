@@ -7,6 +7,7 @@ import dateHelper from '../../helpers/dateHelper'
 const attendanceApi = 'api/attendance'
 const staffApi = 'api/staff'
 const studentApi = 'api/student'
+const imageApi = 'api/file'
 
 export const tick = () => async dispatch => {
 	try {
@@ -52,7 +53,16 @@ export const updateAttendance = loggedUser => async dispatch => {
 				showConfirmButton: false,
 				timer: 1500
 			})
+		} else {
+			const image = await app.service(imageApi).find({
+				query: {
+					_id: user.image
+				}
+			})
+			user[0].image = image[0].data
+			console.log(user)
 		}
+
 		setTimeout(() => {
 			dispatch({ type: 'UPDATING_ATTENDANCE_SUCCESS', payload: user })
 		}, 1500)
@@ -136,7 +146,17 @@ const getAttendance = () => async dispatch => {
 	try {
 		dispatch({ type: 'FETCHING_ATTENDANCE' })
 
-		const coaches = await app.service(staffApi).find({ query: { role: 'Coach' } })
+		let coaches = await app.service(staffApi).find({ query: { role: 'Coach' } })
+		const images = await app.service(imageApi).find()
+
+		coaches = coaches.map(coach => {
+			const imageIndex = images.findIndex(image => image._id === coach.image)
+			const base64 = images[imageIndex].data
+			return {
+				...coach,
+				image: base64
+			}
+		})
 
 		dispatch({
 			type: 'FETCHING_ATTENDANCE_SUCCESS',
@@ -154,12 +174,22 @@ const getVisitors = () => async dispatch => {
 	try {
 		dispatch({ type: 'FETCHING_VISITORS' })
 
-		const visitors = await app.service(studentApi).find({
+		let visitors = await app.service(studentApi).find({
 			query: {
 				timeIn: { $gte: new Date(new Date().toDateString()) },
 				$sort: {
 					timeIn: -1
 				}
+			}
+		})
+		const images = await app.service(imageApi).find()
+
+		visitors = visitors.map(visitor => {
+			const imageIndex = images.findIndex(image => image._id === visitor.image)
+			const base64 = images[imageIndex].data
+			return {
+				...visitor,
+				image: base64
 			}
 		})
 
