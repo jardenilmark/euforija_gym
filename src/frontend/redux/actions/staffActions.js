@@ -1,5 +1,5 @@
 import app from '../../client'
-import randomstring from 'randomstring'
+import { generateId } from '../../helpers/idGenerator'
 import { reset } from 'redux-form'
 
 const staffApi = 'api/staff'
@@ -13,11 +13,7 @@ export function createStaff(staff) {
 			const data = await app.service(fileApi).create({
 				data: staff.image
 			})
-			const id = randomstring.generate({
-				charset: 'alphanumeric',
-				length: 8,
-				capitalization: 'uppercase'
-			})
+			const id = generateId(staff)
 			await app.service(staffApi).create({
 				...staff,
 				idNumber: id,

@@ -1,4 +1,4 @@
-const date = require('date-fns')
+import date from 'date-fns'
 
 export const sortDate = (a, b) => {
 	if (date.isAfter(new Date(a.date), new Date(b.date))) {
