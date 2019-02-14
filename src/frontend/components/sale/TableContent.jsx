@@ -1,5 +1,6 @@
 import { Table, Label, Popup, Button } from 'semantic-ui-react'
 import React from 'react'
+import NumberFormat from 'react-number-format'
 
 const TableContent = ({ overviewArr, setModalState, setClickedItem, removeItem, inventory }) => {
 	return overviewArr.map((val, index) => {
@@ -8,15 +9,35 @@ const TableContent = ({ overviewArr, setModalState, setClickedItem, removeItem, 
 			<Table.Row key={val._id} textAlign={'center'} style={styles.tableRow}>
 				<Table.Cell>{val.name}</Table.Cell>
 				<Table.Cell>
-					₱ {val.price}
-					.00
+					<NumberFormat
+						value={val.price}
+						displayType={'text'}
+						thousandSeparator={true}
+						prefix={'₱ '}
+						renderText={value => (
+							<b>
+								{value}
+								.00
+							</b>
+						)}
+					/>
 				</Table.Cell>
 				<Table.Cell>
 					<b>x</b> {<Label content={val.quantity} circular color={'green'} size={'large'} />}
 				</Table.Cell>
 				<Table.Cell>
-					₱ {val.price * val.quantity}
-					.00
+					<NumberFormat
+						value={val.price * val.quantity}
+						displayType={'text'}
+						thousandSeparator={true}
+						prefix={'₱ '}
+						renderText={value => (
+							<b>
+								{value}
+								.00
+							</b>
+						)}
+					/>
 				</Table.Cell>
 				<Table.Cell>
 					<Popup
