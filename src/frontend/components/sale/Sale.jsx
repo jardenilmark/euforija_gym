@@ -3,6 +3,7 @@ import React from 'react'
 import { Container, Grid, Header, Icon, Button, Table, Message, Segment } from 'semantic-ui-react'
 import EditModal from '../../redux/containers/sale/EditModalContainer'
 import TableContent from './TableContent'
+import NumberFormat from 'react-number-format'
 
 class Sale extends React.Component {
 	componentDidMount() {
@@ -41,8 +42,18 @@ class Sale extends React.Component {
 							{!isEmpty && (
 								<Segment basic textAlign={'right'}>
 									<b style={styles.priceSegment}>
-										Total Price: ₱ {getTotalPrice(this.props.overviewArr)}
-										.00
+										<NumberFormat
+											value={getTotalPrice(this.props.overviewArr)}
+											displayType={'text'}
+											thousandSeparator={true}
+											prefix={'₱ '}
+											renderText={value => (
+												<div>
+													Total Price: {value}
+													.00
+												</div>
+											)}
+										/>
 									</b>
 								</Segment>
 							)}

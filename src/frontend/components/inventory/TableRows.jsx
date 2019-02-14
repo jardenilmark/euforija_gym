@@ -10,6 +10,7 @@ import {
 	Loader
 } from 'semantic-ui-react'
 import React from 'react'
+import NumberFormat from 'react-number-format'
 
 const TableRows = ({
 	inventory,
@@ -57,8 +58,18 @@ const TableRows = ({
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>
 					<Label tag style={styles.text}>
-						₱ {item.price}
-						.00
+						<NumberFormat
+							value={item.price}
+							displayType={'text'}
+							thousandSeparator={true}
+							prefix={'₱ '}
+							renderText={value => (
+								<b>
+									{value}
+									.00
+								</b>
+							)}
+						/>
 					</Label>
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>
