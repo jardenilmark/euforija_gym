@@ -75,7 +75,6 @@ class Inventory extends React.Component {
 					<Menu.Item position={'right'}>
 						<Button
 							animated
-							negative
 							style={styles.button}
 							onClick={() => setModalState(true, 'ADD_FORM_STATE')}>
 							<Button.Content hidden>Add New Item</Button.Content>
@@ -118,7 +117,7 @@ const styles = {
 		paddingTop: 20
 	},
 	button: {
-		width: '120px'
+		width: 120
 	},
 	div: {
 		height: '38vw',
@@ -128,10 +127,10 @@ const styles = {
 		fontSize: 18
 	},
 	input: {
-		padding: '3px'
+		padding: 3
 	},
 	icon: {
-		marginTop: '2px'
+		marginTop: 2
 	}
 }
 

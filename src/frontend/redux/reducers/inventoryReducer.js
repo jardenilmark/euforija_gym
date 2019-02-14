@@ -1,3 +1,4 @@
+import Swal from 'sweetalert'
 const initialState = {
 	items: [],
 	activeItem: 'name',
@@ -12,6 +13,7 @@ const initialState = {
 	addModalState: false,
 	deleteModalState: false,
 	isFetchingInventory: false,
+	isFilteringInventory: false,
 	formId: ''
 }
 
@@ -83,11 +85,24 @@ export default function reducer(state = initialState, action) {
 				...state,
 				activeItem: action.payload
 			}
-		case 'GET_FILTERED_INVENTORY':
+		case 'FILTERING_INVENTORY_SUCCESS':
 			return {
 				...state,
-				filteredInv: action.payload
+				filteredInv: action.payload,
+				isFilteringInventory: false
 			}
+		case 'FILTERING_INVENTORY':
+			return {
+				...state,
+				isFilteringInventory: true
+			}
+		case 'FILTERING_INVENTORY_FAILED':
+			Swal.fire({
+				type: 'error',
+				title: action.payload,
+				showConfirmButton: false,
+				timer: 1500
+			})
 		case 'ITEM_CREATED':
 			return {
 				...state,

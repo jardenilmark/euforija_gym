@@ -21,7 +21,8 @@ function mapStateToProps(state) {
 		priceOne: state.inventory.priceOne,
 		priceTwo: state.inventory.priceTwo,
 		nameVal: state.inventory.nameVal,
-		isFetchingInventory: state.inventory.isFetchingInventory
+		isFetchingInventory: state.inventory.isFetchingInventory,
+		isFilteringInventory: state.inventory.isFilteringInventory
 	}
 }
 
