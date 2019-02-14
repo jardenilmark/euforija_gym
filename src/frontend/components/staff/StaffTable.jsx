@@ -13,7 +13,7 @@ class StaffTable extends React.Component {
 			rows = (
 				<Table.Row>
 					<Table.Cell>
-						<Segment style={{ height: '200px' }} basic>
+						<Segment style={styles.loaderSegment} basic>
 							<Loader active content={'Loading Staff...'} size={'big'} />
 						</Segment>
 					</Table.Cell>
@@ -36,7 +36,7 @@ class StaffTable extends React.Component {
 				rows = (
 					<Table.Row>
 						<Table.Cell>
-							<Segment placeholder style={{ border: 'dotted 5px' }} size={'big'}>
+							<Segment placeholder style={styles.placeholderSegment} size={'big'}>
 								<Header icon>
 									<Icon name="exclamation circle" color={'red'} />
 									<Header.Content>No staff exists in the database.</Header.Content>
@@ -51,11 +51,25 @@ class StaffTable extends React.Component {
 
 		return (
 			<div>
-				<Table basic={'very'} collapsing style={{ width: '100%', padding: 30, paddingTop: 0 }}>
+				<Table basic={'very'} collapsing style={styles.table}>
 					<Table.Body>{rows}</Table.Body>
 				</Table>
 			</div>
 		)
+	}
+}
+
+const styles = {
+	table: {
+		width: '100%',
+		padding: 30,
+		paddingTop: 0
+	},
+	placeholderSegment: {
+		border: 'dotted 5px'
+	},
+	loaderSegment: {
+		height: 200
 	}
 }
 
