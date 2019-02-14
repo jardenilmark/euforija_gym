@@ -50,7 +50,10 @@ const TableRows = ({
 					{item.name}
 				</Table.Cell>
 				<Table.Cell style={styles.text} textAlign={'center'}>
-					{item.quantity}
+					<Label style={styles.text}>
+						{item.quantity}
+						<Label.Detail>{item.unit}</Label.Detail>
+					</Label>
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>
 					<Label tag style={styles.text}>

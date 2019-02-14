@@ -53,7 +53,8 @@ export function createItem(obj) {
 			name: obj.name,
 			quantity: parseInt(obj.quantity, 10),
 			price: parseInt(obj.price, 10),
-			image: data._id
+			image: data._id,
+			unit: obj.unit
 		})
 		iziToast.success({
 			title: 'SUCCESS',
@@ -107,7 +108,8 @@ export function setFormValues(item) {
 			name: item.name,
 			price: item.price,
 			quantity: item.quantity,
-			image: getFile(item.image)
+			image: getFile(item.image),
+			unit: item.unit
 		}
 		dispatch({ type: 'GET_INITIAL_VALUES', payload: value })
 	}

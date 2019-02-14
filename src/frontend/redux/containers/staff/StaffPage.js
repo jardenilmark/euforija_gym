@@ -10,6 +10,7 @@ import {
 	clearImage,
 	fetchStaff
 } from '../../actions/staffActions'
+import Swal from 'sweetalert2'
 
 function mapStateToProps(state) {
 	return {
@@ -24,8 +25,18 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		async createStaff(user) {
-			await dispatch(createStaff(user))
-			await dispatch(fetchStaff())
+			if (user.image) {
+				await dispatch(createStaff(user))
+				await dispatch(fetchStaff())
+				dispatch(clearImage())
+			} else {
+				Swal.fire({
+					type: 'error',
+					title: 'Capture Image First!',
+					showConfirmButton: false,
+					timer: 1500
+				})
+			}
 		},
 		toggleFormVisibility(isVisible) {
 			dispatch(toggleFormVisibility(isVisible))

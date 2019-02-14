@@ -6,23 +6,23 @@ import FieldComponent from '../custom/ImageField'
 const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 	return (
 		<Form onSubmit={handleSubmit}>
-			<div style={styles.div}>
-				<label style={styles.label}>
-					<Header size={'small'} inverted>
-						Name
-					</Header>
-				</label>
-				<div>
+			<Form.Group>
+				<Form.Field style={styles.formField}>
+					<label>
+						<Header size={'small'} inverted style={styles.header}>
+							Name
+						</Header>
+					</label>
 					<Field name={'name'} component={'input'} type={'text'} style={styles.field} required />
-				</div>
-			</div>
-			<div style={styles.div}>
-				<label style={styles.label}>
-					<Header size={'small'} inverted>
-						Quantity
-					</Header>
-				</label>
-				<div>
+				</Form.Field>
+			</Form.Group>
+			<Form.Group widths={'equal'}>
+				<Form.Field style={styles.formField}>
+					<label>
+						<Header size={'small'} inverted style={styles.header}>
+							Quantity
+						</Header>
+					</label>
 					<Field
 						name={'quantity'}
 						component={'input'}
@@ -30,28 +30,36 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 						style={styles.field}
 						required
 					/>
-				</div>
-			</div>
-			<div style={styles.div}>
-				<label style={styles.label}>
-					<Header size={'small'} inverted>
-						Price
-					</Header>
-				</label>
-				<div>
+				</Form.Field>
+				<Form.Field style={styles.formField}>
+					<label>
+						<Header size={'small'} inverted style={styles.header}>
+							Unit
+						</Header>
+					</label>
+					<Field name={'unit'} component={'input'} type={'text'} style={styles.field} required />
+				</Form.Field>
+			</Form.Group>
+			<Form.Group>
+				<Form.Field style={styles.formField}>
+					<label style={styles.label}>
+						<Header size={'small'} inverted style={styles.header}>
+							Price
+						</Header>
+					</label>
 					<Field name={'price'} component={'input'} type={'number'} style={styles.field} required />
-				</div>
-			</div>
-			<div>
-				<label>
-					<Header size={'small'} inverted>
-						Image
-					</Header>
-				</label>
-				<div>
+				</Form.Field>
+			</Form.Group>
+			<Form.Group>
+				<Form.Field style={styles.formField}>
+					<label>
+						<Header size={'small'} inverted style={styles.header}>
+							Image
+						</Header>
+					</label>
 					<Field name={'image'} component={FieldComponent} type={'file'} style={styles.field} />
-				</div>
-			</div>
+				</Form.Field>
+			</Form.Group>
 			<Container textAlign={'right'} style={styles.container}>
 				<Button type={'submit'} inverted disabled={pristine || submitting}>
 					Submit
@@ -62,19 +70,17 @@ const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 }
 
 const styles = {
-	div: {
-		marginBottom: '8px'
-	},
-	container: {
-		paddingTop: '20px'
-	},
 	field: {
 		borderBottom: '2px solid white',
 		backgroundColor: 'transparent',
-		color: 'white'
+		color: 'white',
+		width: '100%'
 	},
-	label: {
-		marginBottom: '8px'
+	formField: {
+		width: '100%'
+	},
+	header: {
+		margin: 0
 	}
 }
 

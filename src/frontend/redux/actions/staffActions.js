@@ -1,5 +1,6 @@
 import app from '../../client'
 import randomstring from 'randomstring'
+import { reset } from 'redux-form'
 
 const staffApi = 'api/staff'
 const fileApi = 'api/file'
@@ -24,6 +25,7 @@ export function createStaff(staff) {
 				status: 'out'
 			})
 		}
+		dispatch(reset('createStaffForm'))
 		dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
 	}
 }
