@@ -19,7 +19,7 @@ const TableExampleCollapsing = ({
 			onClick={() =>
 				invokeFunctions(toggleFormVisibility, toggleProfileVisibility, setClickedStaff, staff._id)
 			}>
-			<Table.Cell style={{ cursor: 'pointer', padding: '10' }}>
+			<Table.Cell style={styles.cell} selectable>
 				<Header as={'h2'} image>
 					<Image src={staff.image} circular />
 					<Header.Content>
@@ -30,6 +30,13 @@ const TableExampleCollapsing = ({
 			</Table.Cell>
 		</Table.Row>
 	)
+}
+
+const styles = {
+	cell: {
+		cursor: 'pointer',
+		padding: 10
+	}
 }
 
 export default TableExampleCollapsing

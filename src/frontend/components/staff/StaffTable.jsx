@@ -51,11 +51,7 @@ class StaffTable extends React.Component {
 
 		return (
 			<div>
-				<Table
-					basic={'very'}
-					collapsing
-					selectable
-					style={{ width: '100%', padding: 30, paddingTop: 0 }}>
+				<Table basic={'very'} collapsing style={{ width: '100%', padding: 30, paddingTop: 0 }}>
 					<Table.Body>{rows}</Table.Body>
 				</Table>
 			</div>
