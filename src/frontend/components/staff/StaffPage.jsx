@@ -1,6 +1,6 @@
 import React from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Grid, Button, Divider } from 'semantic-ui-react'
+import { Grid, Button, Icon } from 'semantic-ui-react'
 import StaffForm from '../../redux/containers/staff/StaffForm'
 import StaffProfile from './StaffProfile'
 import StaffTable from '../../redux/containers/staff/StaffTable'
@@ -21,12 +21,17 @@ const StaffPage = props => {
 		<Grid divided style={styles.grid}>
 			<Grid.Column width={8}>
 				<Button
-					icon={'add'}
-					content={'Add Staff'}
+					animated
 					floated={'right'}
 					style={styles.button}
-					onClick={() => invokeFunctions(props.toggleFormVisibility, props.toggleProfileVisibility)}
-				/>
+					onClick={() =>
+						invokeFunctions(props.toggleFormVisibility, props.toggleProfileVisibility)
+					}>
+					<Button.Content hidden>Add New Staff</Button.Content>
+					<Button.Content visible>
+						<Icon name={'add'} />
+					</Button.Content>
+				</Button>
 				<StaffTable
 					toggleProfileVisibility={props.toggleProfileVisibility}
 					toggleFormVisibility={props.toggleFormVisibility}
@@ -56,7 +61,8 @@ const styles = {
 	button: {
 		marginTop: 30,
 		marginRight: 30,
-		marginBottom: 10
+		marginBottom: 10,
+		width: 120
 	}
 }
 
