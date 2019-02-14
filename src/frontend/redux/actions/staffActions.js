@@ -20,7 +20,8 @@ export function createStaff(staff) {
 			await app.service(staffApi).create({
 				...staff,
 				idNumber: id,
-				image: data._id
+				image: data._id,
+				status: 'out'
 			})
 		}
 		dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
