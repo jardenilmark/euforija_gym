@@ -1,6 +1,7 @@
 import Webcam from 'react-webcam'
-import { Button, Image } from 'semantic-ui-react'
+import { Button, Image, Container } from 'semantic-ui-react'
 import React from 'react'
+import iziToast from 'izitoast'
 
 class ProfilePhoto extends React.Component {
 	setRef = webcam => {
@@ -10,6 +11,11 @@ class ProfilePhoto extends React.Component {
 	capture = () => {
 		const img = this.webcam.getScreenshot()
 		this.props.saveImage(img)
+		iziToast.success({
+			title: 'SUCCESS',
+			message: 'Image captured successfully!',
+			position: 'topRight'
+		})
 	}
 
 	render() {
@@ -18,7 +24,7 @@ class ProfilePhoto extends React.Component {
 			<div style={{ textAlign: 'center' }}>
 				{hasCaptured ? (
 					<Webcam
-						height={350}
+						height={225}
 						width={300}
 						ref={this.setRef}
 						imageSmoothing={true}
@@ -31,17 +37,21 @@ class ProfilePhoto extends React.Component {
 				<div>
 					{hasCaptured ? (
 						<Button
-							content={'Capture Image'}
+							circular
 							type={'button'}
 							onClick={this.capture}
 							icon={'camera retro'}
+							size={'huge'}
+							style={styles.button}
 						/>
 					) : (
 						<Button
-							content={'Retry'}
+							circular
 							type={'button'}
 							onClick={this.props.clearImage}
+							size={'huge'}
 							icon={'sync alternate'}
+							style={styles.button}
 						/>
 					)}
 				</div>
@@ -52,12 +62,13 @@ class ProfilePhoto extends React.Component {
 
 const styles = {
 	webcam: {
-		marginBottom: -15,
-		marginTop: -50
+		border: 'dashed 3px'
 	},
 	image: {
-		marginBottom: 40,
-		marginTop: 50
+		border: 'dashed 3px'
+	},
+	button: {
+		marginTop: 10
 	}
 }
 
