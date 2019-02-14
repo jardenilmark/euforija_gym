@@ -120,7 +120,8 @@ export const VisitorListItem = styled(List.Item)({
 })
 
 export const VisitorName = styled(List.Content)({
-	fontSize: '1.5em !important'
+	fontSize: '1.5em !important',
+	width: '75% !important'
 })
 
 export const VisitorTimeIn = styled(List.Content)({
