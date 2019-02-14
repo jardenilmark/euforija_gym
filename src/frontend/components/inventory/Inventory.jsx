@@ -51,7 +51,7 @@ class Inventory extends React.Component {
 					<Menu.Item>
 						<Input
 							style={styles.input}
-							placeholder={'Search...'}
+							placeholder={activeItem !== 'name' ? 'from...' : 'Search...'}
 							onChange={e => {
 								if (activeItem === 'name') {
 									setNameVal(e.target.value)
@@ -60,10 +60,14 @@ class Inventory extends React.Component {
 								}
 							}}
 						/>
-						<Header style={{ display: activeItem !== 'name' ? 'inline' : 'none' }}>to</Header>
+						<Icon
+							style={{ display: activeItem !== 'name' ? 'inline' : 'none' }}
+							name={'arrow right'}
+							fitted
+						/>
 						<Input
 							style={{ ...styles.input, display: activeItem !== 'name' ? 'inline' : 'none' }}
-							placeholder={'Search...'}
+							placeholder={'to...'}
 							onChange={e => setPriceValue(e.target.value, 'TWO')}
 						/>
 						<Button icon={'search'} onClick={e => onSubmit(this.props)} />
