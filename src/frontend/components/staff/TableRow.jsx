@@ -12,7 +12,8 @@ const TableExampleCollapsing = ({
 	staff,
 	toggleProfileVisibility,
 	setClickedStaff,
-	toggleFormVisibility
+	toggleFormVisibility,
+	removeStaff
 }) => {
 	return (
 		<Table.Row>
@@ -44,6 +45,7 @@ const TableExampleCollapsing = ({
 					circular
 					floated={'right'}
 					style={{ marginTop: 30 }}
+					onClick={() => removeStaff(staff)}
 				/>
 			</Table.Cell>
 		</Table.Row>

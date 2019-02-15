@@ -1,4 +1,5 @@
-import swal from 'sweetalert'
+import Swal from 'sweetalert2'
+import iziToast from 'izitoast'
 
 const initialState = {
 	staffFormVisibility: false,
@@ -52,7 +53,13 @@ export default function reducer(state = initialState, action) {
 				staffList: action.payload
 			}
 		case 'FETCHING_STAFF_FAILED':
-			swal(action.payload)
+			Swal.fire({
+				position: 'top-start',
+				type: 'error',
+				title: action.payload,
+				showConfirmButton: false,
+				timer: 1500
+			})
 			return {
 				...state
 			}
@@ -65,6 +72,26 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				image: ''
+			}
+		case 'REMOVE_STAFF_SUCCESS':
+			iziToast.success({
+				title: 'SUCCESS',
+				message: 'Staff removed successfully!',
+				position: 'topRight'
+			})
+			return {
+				...state
+			}
+		case 'REMOVE_STAFF_FAILED':
+			Swal.fire({
+				position: 'top-start',
+				type: 'error',
+				title: action.payload,
+				showConfirmButton: false,
+				timer: 1500
+			})
+			return {
+				...state
 			}
 		default:
 			return state

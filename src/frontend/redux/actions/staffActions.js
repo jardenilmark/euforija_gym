@@ -26,6 +26,20 @@ export function createStaff(staff) {
 	}
 }
 
+export function removeStaff(staff) {
+	console.log(staff)
+	return async dispatch => {
+		try {
+			await app.service(staffApi).remove(staff._id)
+			await app.service(fileApi).remove(staff.imageId)
+			dispatch({ type: 'REMOVE_STAFF_SUCCESS' })
+			dispatch(fetchStaff())
+		} catch (e) {
+			dispatch({ type: 'REMOVE_STAFF_FAILED', payload: e.message })
+		}
+	}
+}
+
 export function saveImage(imageString) {
 	// console.log('image saved', imageString)
 	return dispatch => {
@@ -49,6 +63,7 @@ export function fetchStaff() {
 			staffList.map((staff, index) => {
 				const image = images.find(image => image._id === staff.image)
 				staff.image = image.data
+				staff.imageId = image._id
 			})
 			dispatch({ type: 'FETCHING_STAFF_SUCCESS', payload: staffList })
 		} catch (e) {

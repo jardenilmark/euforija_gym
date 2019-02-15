@@ -29,6 +29,7 @@ class StaffTable extends React.Component {
 							toggleProfileVisibility={this.props.toggleProfileVisibility}
 							toggleFormVisibility={this.props.toggleFormVisibility}
 							setClickedStaff={this.props.setClickedStaff}
+							removeStaff={this.props.removeStaff}
 						/>
 					)
 				})
