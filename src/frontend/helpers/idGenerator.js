@@ -16,6 +16,6 @@ export const generateId = user => {
 					charset: 'numeric',
 					length: len
 			  })
-			: ''
+			: Math.trunc(Math.random() * 10)
 	return id
 }
