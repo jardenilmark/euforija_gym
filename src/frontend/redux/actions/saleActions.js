@@ -1,6 +1,7 @@
 import app from '../../client'
 const salesApi = 'api/sales'
 const inventoryApi = 'api/inventory'
+import { fetchWholeInventory } from './inventoryActions'
 
 export function setModalState(payload) {
 	return dispatch => {
@@ -24,6 +25,12 @@ export function removeItem(overviewArr, index) {
 	console.log('I', index)
 	return dispatch => {
 		dispatch({ type: 'REMOVE_ITEM', payload: overviewArr })
+	}
+}
+
+export function togglePurchaseOverview() {
+	return dispatch => {
+		dispatch({ type: 'TOGGLE_PURCHASE_OVERVIEW' })
 	}
 }
 
@@ -67,5 +74,6 @@ export function updateSales(arr) {
 			})
 		}
 		dispatch({ type: 'SALES_UPDATED', payload: true })
+		dispatch(togglePurchaseOverview())
 	}
 }

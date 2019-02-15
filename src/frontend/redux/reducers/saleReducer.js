@@ -5,7 +5,8 @@ const initialState = {
 	overviewArr: [],
 	clickedItem: '',
 	sales: [],
-	byItem: false
+	byItem: false,
+	purchaseOverviewState: false
 }
 
 export default function reducer(state = initialState, action) {
@@ -62,14 +63,14 @@ export default function reducer(state = initialState, action) {
 				overviewArr: action.payload
 			}
 		case 'SALES_UPDATED':
-			iziToast.success({
-				title: 'SUCCESS',
-				message: 'Purchase successful!',
-				position: 'topRight'
-			})
 			return {
 				...state,
 				overviewArr: []
+			}
+		case 'TOGGLE_PURCHASE_OVERVIEW':
+			return {
+				...state,
+				purchaseOverviewState: !state.purchaseOverviewState
 			}
 		default:
 			return state
