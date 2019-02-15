@@ -44,7 +44,7 @@ class Sale extends React.Component {
 							{!isEmpty && (
 								<div>
 									<Button
-										onClick={() => this.props.updateSales(this.props.overviewArr)}
+										onClick={() => this.props.clearCart()}
 										size={'medium'}
 										negative
 										style={styles.button}

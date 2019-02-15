@@ -29,15 +29,15 @@ export default function reducer(state = initialState, action) {
 		case 'ADD_ITEM':
 			const item = action.payload[0]
 			const quantity = action.payload[1]
-			console.log('qty', item.quantity)
+			const overviewArr = state.overviewArr
 			if (quantity <= item.quantity && quantity > 0) {
-				const index = state.overviewArr.findIndex(obj => obj._id === item._id)
+				const index = overviewArr.findIndex(obj => obj._id === item._id)
 				const newItem = { ...item }
 				newItem.quantity = quantity
 				if (index !== -1) {
-					state.overviewArr[index] = newItem
+					overviewArr[index] = newItem
 				} else {
-					state.overviewArr.push(newItem)
+					overviewArr.push(newItem)
 				}
 			} else {
 				Swal.fire({
@@ -48,7 +48,8 @@ export default function reducer(state = initialState, action) {
 				})
 			}
 			return {
-				...state
+				...state,
+				overviewArr: overviewArr
 			}
 		case 'SALES_CATEGORY':
 			return {
@@ -56,8 +57,7 @@ export default function reducer(state = initialState, action) {
 				byItem: action.payload
 			}
 		case 'REMOVE_ITEM':
-			console.log('pay', action.payload)
-			console.log('state', state.overviewArr)
+			console.log(action.payload)
 			return {
 				...state,
 				overviewArr: action.payload
@@ -71,6 +71,11 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				purchaseOverviewState: !state.purchaseOverviewState
+			}
+		case 'CLEAR_CART':
+			return {
+				...state,
+				overviewArr: []
 			}
 		default:
 			return state

@@ -4,7 +4,8 @@ import {
 	setClickedItem,
 	removeItem,
 	togglePurchaseOverview,
-	updateSales
+	updateSales,
+	clearCart
 } from '../../actions/saleActions'
 import { fetchWholeInventory } from '../../actions/inventoryActions'
 import Sale from '../../../components/sale/Sale'
@@ -32,14 +33,17 @@ function mapDispatchToProps(dispatch) {
 				})
 			)
 		},
+		clearCart() {
+			dispatch(clearCart())
+		},
 		setModalState(state) {
 			dispatch(setModalState(state))
 		},
 		setClickedItem(item) {
 			dispatch(setClickedItem(item))
 		},
-		removeItem(arr, index) {
-			dispatch(removeItem(arr, index))
+		async removeItem(overviewArr, index) {
+			dispatch(removeItem(overviewArr, index))
 		},
 		togglePurchaseOverview() {
 			dispatch(togglePurchaseOverview())
