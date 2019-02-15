@@ -56,11 +56,10 @@ export const updateAttendance = loggedUser => async dispatch => {
 		} else {
 			const image = await app.service(imageApi).find({
 				query: {
-					_id: user.image
+					_id: user[0].image
 				}
 			})
 			user[0].image = image[0].data
-			console.log(user)
 		}
 
 		setTimeout(() => {
