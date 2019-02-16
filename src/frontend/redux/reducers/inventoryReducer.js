@@ -96,6 +96,11 @@ export default function reducer(state = initialState, action) {
 				...state,
 				isFilteringInventory: true
 			}
+		case 'GET_FILTERED_INVENTORY':
+			return {
+				...state,
+				filteredInv: action.payload
+			}
 		case 'FILTERING_INVENTORY_FAILED':
 			Swal.fire({
 				type: 'error',
@@ -103,6 +108,7 @@ export default function reducer(state = initialState, action) {
 				showConfirmButton: false,
 				timer: 1500
 			})
+			break
 		case 'ITEM_CREATED':
 			return {
 				...state,

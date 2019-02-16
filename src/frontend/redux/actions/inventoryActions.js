@@ -20,7 +20,7 @@ export function fetchWholeInventory(arg) {
 			compareData(items, 'name')
 			dispatch({ type: 'FETCHING_INVENTORY_SUCCESS', payload: items })
 		} catch (e) {
-			dispatch({ type: 'FETCHING_INVENTORY_FAILED', payload: items })
+			dispatch({ type: 'FETCHING_INVENTORY_FAILED', payload: [] })
 		}
 	}
 }
