@@ -15,7 +15,7 @@ describe('Student', () => {
         address: 'Leganes, Iloilo City',
         password: 'thisismypassword',
       })
-      expect(student.isValid().toBeTruthy)
+      expect(student.isValid()).toBeTruthy
     })
 
     test('all inputs are invalid', () => {
@@ -29,7 +29,7 @@ describe('Student', () => {
         address: 121.7740,
         password: 'short',
       })
-      expect(student.isValid().toBeFalsy)
+      expect(student.isValid()).toBeFalsy
     })
 
     test('all inputs are empty', () => {
@@ -43,7 +43,7 @@ describe('Student', () => {
         address: '',
         password: '',
       })
-      expect(student.isValid().toBeFalsy)
+      expect(student.isValid()).toBeFalsy
     })
   })
 })

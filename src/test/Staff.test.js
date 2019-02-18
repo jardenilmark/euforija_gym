@@ -17,7 +17,7 @@ describe('Staff', () => {
         password: 'password',
         status: 'in'
       })
-      expect(staff.isValid().toBeTruthy)
+      expect(staff.isValid()).toBeTruthy
     })
 
     test('all inputs are invalid', () => {
@@ -33,7 +33,7 @@ describe('Staff', () => {
         password: 'pwd',
         status: 'absent'
       })
-      expect(staff.isValid().toBeFalsy)
+      expect(staff.isValid()).toBeFalsy
     })
 
     test('all inputs are blank', () => {
@@ -49,7 +49,7 @@ describe('Staff', () => {
         password: '',
         status: ''
       })
-      expect(staff.isValid().toBeFalsy)
+      expect(staff.isValid()).toBeFalsy
     })
   })
 })
