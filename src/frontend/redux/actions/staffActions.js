@@ -26,6 +26,10 @@ export function createStaff(staff) {
 	}
 }
 
+export function clearProfile() {
+	dispatch({ type: 'CLEAR_PROFILE' })
+}
+
 export function removeStaff(staff) {
 	console.log(staff)
 	return async dispatch => {

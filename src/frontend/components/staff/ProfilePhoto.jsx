@@ -21,7 +21,7 @@ class ProfilePhoto extends React.Component {
 	render() {
 		const hasCaptured = this.props.image === ''
 		return (
-			<div style={{ textAlign: 'center' }}>
+			<div style={styles.outerDiv}>
 				{hasCaptured ? (
 					<Webcam
 						height={225}
@@ -34,7 +34,7 @@ class ProfilePhoto extends React.Component {
 				) : (
 					<Image src={this.props.image} centered style={styles.image} />
 				)}
-				<div>
+				<div style={styles.innerDiv}>
 					{hasCaptured ? (
 						<Button
 							circular
@@ -69,6 +69,13 @@ const styles = {
 	},
 	button: {
 		marginTop: 10
+	},
+	outerDiv: {
+		textAlign: 'center',
+	},
+	innerDiv: {
+		marginTop: 10,
+		marginBottom: 20
 	}
 }
 

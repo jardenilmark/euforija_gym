@@ -36,6 +36,11 @@ export default function reducer(state = initialState, action) {
 				...state,
 				staffProfile: action.payload
 			}
+		case 'CLEAR_PROFILE':
+			return {
+				...state,
+				staffProfile: {}
+			}
 		case 'SET_CLICKED_STAFF_ID':
 			return {
 				...state,
