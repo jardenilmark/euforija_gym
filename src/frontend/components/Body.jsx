@@ -9,6 +9,7 @@ import Student from './student/StudentPage'
 import CreateStudent from '../redux/containers/student/CreateStudentPage'
 import Staff from '../redux/containers/staff/StaffPage'
 import Report from '../redux/containers/report/IncomeReport'
+import Payroll from '../components/payroll'
 import 'semantic-ui-css/semantic.min.css'
 import 'izitoast/dist/css/iziToast.min.css'
 import 'izitoast/dist/js/iziToast.min.js'
@@ -25,6 +26,7 @@ const Body = () => {
 			<Route exact path={'/student'} component={Student} />
 			<Route exact path={'/create-student'} component={CreateStudent} />
 			<Route exact path={'/income-report'} component={Report} />
+			<Route exact path={'/payroll'} component={Payroll} />
 		</div>
 	)
 }
