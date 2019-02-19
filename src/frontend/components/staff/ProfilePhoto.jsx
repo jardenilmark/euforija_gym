@@ -10,7 +10,6 @@ class ProfilePhoto extends React.Component {
 	}
 
 	capture = () => {
-		console.log(this.props)
 		const img = this.webcam.getScreenshot()
 		this.props.saveImage(img)
 		iziToast.success({
@@ -22,10 +21,8 @@ class ProfilePhoto extends React.Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const hasCaptured = this.props.image ? true : false
 		const image = this.props.croppedImage ? this.props.croppedImage : this.props.image
-		console.log(hasCaptured)
 		return (
 			<div style={styles.outerDiv}>
 				<CropImageModal />
