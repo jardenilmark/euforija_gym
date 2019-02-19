@@ -26,10 +26,6 @@ export function createStaff(staff) {
 	}
 }
 
-export function clearProfile() {
-	dispatch({ type: 'CLEAR_PROFILE' })
-}
-
 export function removeStaff(staff) {
 	console.log(staff)
 	return async dispatch => {
@@ -41,19 +37,6 @@ export function removeStaff(staff) {
 		} catch (e) {
 			dispatch({ type: 'REMOVE_STAFF_FAILED', payload: e.message })
 		}
-	}
-}
-
-export function saveImage(imageString) {
-	// console.log('image saved', imageString)
-	return dispatch => {
-		dispatch({ type: 'SAVE_IMAGE', payload: imageString })
-	}
-}
-
-export function clearImage() {
-	return dispatch => {
-		dispatch({ type: 'CLEAR_IMAGE' })
 	}
 }
 
@@ -76,6 +59,18 @@ export function fetchStaff() {
 	}
 }
 
+export function saveImage(imageString) {
+	return dispatch => {
+		dispatch({ type: 'SAVE_IMAGE', payload: imageString })
+	}
+}
+
+export function clearImage() {
+	return dispatch => {
+		dispatch({ type: 'CLEAR_IMAGE' })
+	}
+}
+
 export function toggleFormVisibility(isVisible) {
 	return dispatch => {
 		dispatch({ type: 'STAFF_FORM_VISIBILITY', payload: isVisible })
@@ -94,24 +89,48 @@ export function setClickedStaffId(id) {
 	}
 }
 
-export function getStaffProfile(id) {
-	return async dispatch => {
-		const staff = await app.service(staffApi).find()
-		const images = await app.service(fileApi).find()
-		const result = staff.find(x => {
-			return x._id === id
-		})
-		const img = images.find(img => {
-			return img._id === result.image
-		})
-		delete result.image
-		const payload = { ...result, image: img.data }
-		dispatch({ type: 'GET_STAFF_PROFILE', payload: payload })
+export function toggleCropImageModal() {
+	return dispatch => {
+		dispatch({ type: 'TOGGLE_CROP_IMAGE_MODAL' })
 	}
 }
 
-export function setStaffFilter(payload) {
+export function onCropChange(cropCoordinates) {
 	return dispatch => {
-		dispatch({ type: 'STAFF_FILTER', payload: payload })
+		dispatch({ type: 'CHANGE_CROP_VALUE', payload: cropCoordinates })
+	}
+}
+
+export function onCropComplete(croppedAreaPixels) {
+	return dispatch => {
+		dispatch({ type: 'CROP_COMPLETED', payload: croppedAreaPixels })
+	}
+}
+
+export function getCroppedImage(imgSrc, pixelCrop) {
+	const image = new Image()
+	image.src = imgSrc
+	const canvas = document.createElement('canvas')
+	canvas.width = pixelCrop.width
+	canvas.height = pixelCrop.height
+	const ctx = canvas.getContext('2d')
+
+	ctx.drawImage(
+		image,
+		pixelCrop.x,
+		pixelCrop.y,
+		pixelCrop.width,
+		pixelCrop.height,
+		0,
+		0,
+		pixelCrop.width,
+		pixelCrop.height
+	)
+
+	const base64Image = canvas.toDataURL('image/jpeg')
+
+	return dispatch => {
+		dispatch({ type: 'GET_CROPPED_IMAGE', payload: base64Image })
+		dispatch(toggleCropImageModal())
 	}
 }
