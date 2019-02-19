@@ -4,6 +4,7 @@ import { Container, Grid, Header, Icon, Button, Table, Message, Segment } from '
 import EditModal from '../../redux/containers/sale/EditModalContainer'
 import TableContent from './TableContent'
 import NumberFormat from 'react-number-format'
+import PurchaseOverview from './PurchaseOverview'
 
 class Sale extends React.Component {
 	componentDidMount() {
@@ -15,6 +16,7 @@ class Sale extends React.Component {
 		return (
 			<Grid style={styles.grid}>
 				<EditModal />
+				<PurchaseOverview {...this.props} />
 				<Grid.Row divided style={styles.gridRow}>
 					<Grid.Column width={11} style={styles.cardsColumn}>
 						<Cards {...this.props} />
@@ -40,38 +42,20 @@ class Sale extends React.Component {
 								</Table.Body>
 							</Table>
 							{!isEmpty && (
-								<Segment basic textAlign={'right'}>
-									<b style={styles.priceSegment}>
-										<NumberFormat
-											value={getTotalPrice(this.props.overviewArr)}
-											displayType={'text'}
-											thousandSeparator={true}
-											prefix={'₱ '}
-											renderText={value => (
-												<div>
-													Total Price: {value}
-													.00
-												</div>
-											)}
-										/>
-									</b>
-								</Segment>
-							)}
-							{!isEmpty && (
 								<div>
 									<Button
-										onClick={() => this.props.updateSales(this.props.overviewArr)}
+										onClick={() => this.props.clearCart()}
 										size={'medium'}
 										negative
 										style={styles.button}
 										content={'Clear Cart'}
 									/>
 									<Button
-										onClick={() => this.props.updateSales(this.props.overviewArr)}
+										onClick={() => this.props.togglePurchaseOverview()}
 										size={'medium'}
 										positive
 										style={styles.button}
-										content={'Confirm Purchase'}
+										content={'Purchase'}
 									/>
 								</div>
 							)}
@@ -82,14 +66,6 @@ class Sale extends React.Component {
 			</Grid>
 		)
 	}
-}
-
-const getTotalPrice = arr => {
-	let total = 0
-	arr.forEach(element => {
-		total += element.price * element.quantity
-	})
-	return total
 }
 
 const EmptyCartMessage = () => {

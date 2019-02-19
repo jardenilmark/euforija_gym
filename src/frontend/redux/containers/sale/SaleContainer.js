@@ -1,5 +1,12 @@
 import { connect } from 'react-redux'
-import { setModalState, setClickedItem, updateSales, removeItem } from '../../actions/saleActions'
+import {
+	setModalState,
+	setClickedItem,
+	removeItem,
+	togglePurchaseOverview,
+	updateSales,
+	clearCart
+} from '../../actions/saleActions'
 import { fetchWholeInventory } from '../../actions/inventoryActions'
 import Sale from '../../../components/sale/Sale'
 
@@ -8,7 +15,8 @@ function mapStateToProps(state) {
 		inventory: state.inventory.items,
 		modal: state.sale.modal,
 		overviewArr: state.sale.overviewArr,
-		isFetchingInventory: state.inventory.isFetchingInventory
+		isFetchingInventory: state.inventory.isFetchingInventory,
+		purchaseOverviewState: state.sale.purchaseOverviewState
 	}
 }
 
@@ -25,17 +33,23 @@ function mapDispatchToProps(dispatch) {
 				})
 			)
 		},
+		clearCart() {
+			dispatch(clearCart())
+		},
 		setModalState(state) {
 			dispatch(setModalState(state))
 		},
 		setClickedItem(item) {
 			dispatch(setClickedItem(item))
 		},
-		removeItem(arr, index) {
-			dispatch(removeItem(arr, index))
+		async removeItem(overviewArr, index) {
+			dispatch(removeItem(overviewArr, index))
 		},
-		async updateSales(items) {
-			await dispatch(updateSales(items))
+		togglePurchaseOverview() {
+			dispatch(togglePurchaseOverview())
+		},
+		async updateSales(arr) {
+			await dispatch(updateSales(arr))
 			await dispatch(
 				fetchWholeInventory({
 					query: {

@@ -20,7 +20,7 @@ export function fetchWholeInventory(arg) {
 			compareData(items, 'name')
 			dispatch({ type: 'FETCHING_INVENTORY_SUCCESS', payload: items })
 		} catch (e) {
-			dispatch({ type: 'FETCHING_INVENTORY_FAILED', payload: items })
+			dispatch({ type: 'FETCHING_INVENTORY_FAILED', payload: [] })
 		}
 	}
 }
@@ -149,6 +149,7 @@ const getValue = param => {
 
 export function filterList(param) {
 	return async dispatch => {
+		dispatch({ type: 'FILTERING_INVENTORY' })
 		let query =
 			param.name === 'name'
 				? {
@@ -163,14 +164,18 @@ export function filterList(param) {
 							$gte: getValue(param.value)
 						}
 				  }
-		const items = await app.service(inventoryApi).find({ query })
-		const imageData = await app.service(fileApi).find()
-		items.map(item => {
-			const image = imageData.find(data => item.image === data._id)
-			item.imageId = item.image
-			item.image = image.data
-		})
-		compareData(items, 'name')
-		dispatch({ type: 'GET_FILTERED_INVENTORY', payload: items })
+		try {
+			const items = await app.service(inventoryApi).find({ query })
+			const imageData = await app.service(fileApi).find()
+			items.map(item => {
+				const image = imageData.find(data => item.image === data._id)
+				item.imageId = item.image
+				item.image = image.data
+			})
+			compareData(items, 'name')
+			dispatch({ type: 'FILTERING_INVENTORY_SUCCESS', payload: items })
+		} catch (e) {
+			dispatch({ type: 'FILTERING_INVENTORY_FAILED', payload: e })
+		}
 	}
 }

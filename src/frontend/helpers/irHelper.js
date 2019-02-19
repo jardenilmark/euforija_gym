@@ -1,4 +1,12 @@
 // ir = income report
+const manipulateItem = (obj, e) => {
+	if (obj) {
+		obj = obj + e.price
+	} else {
+		obj = e.price
+	}
+	return obj
+}
 
 export const getData = props => {
 	const { sales, byItem } = props
@@ -15,24 +23,18 @@ export const getData = props => {
 					}
 				})
 			} else {
-				if (item.data[`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`]) {
-					item.data[`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`] =
-						item.data[`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`] + e.price
-				} else {
-					item.data[`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`] = e.price
-				}
+				const parsedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+				const obj = item.data[parsedDate]
+				item.data[parsedDate] = manipulateItem(obj, e)
 			}
 		})
 	} else {
 		const dates = {}
 		sales.forEach(e => {
 			const date = new Date(e.date)
-			if (dates[`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`]) {
-				dates[`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`] =
-					dates[`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`] + e.price
-			} else {
-				dates[`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`] = e.price
-			}
+			const parsedDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+			const obj = dates[parsedDate]
+			dates[parsedDate] = manipulateItem(obj, e)
 		})
 		data.push({
 			name: 'Sales',

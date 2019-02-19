@@ -19,11 +19,14 @@ const TableRows = ({
 	setFormValues,
 	setFormId,
 	setImageId,
-	isFetchingInventory
+	isFetchingInventory,
+	isFilteringInventory
 }) => {
 	const arr = filteredInv.length > 0 ? filteredInv : inventory
 	if (isFetchingInventory) {
 		return <Loader active content={'Fetching Items...'} size={'huge'} />
+	} else if (isFilteringInventory) {
+		return <Loader active content={'Executing Search...'} size={'huge'} />
 	} else {
 		if (arr.length === 0) {
 			return (

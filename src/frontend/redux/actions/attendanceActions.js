@@ -2,8 +2,6 @@ import app from '../../client'
 import date from 'date-fns'
 import Swal from 'sweetalert2'
 
-import dateHelper from '../../helpers/dateHelper'
-
 const attendanceApi = 'api/attendance'
 const staffApi = 'api/staff'
 const studentApi = 'api/student'

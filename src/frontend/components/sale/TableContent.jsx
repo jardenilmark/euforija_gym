@@ -85,8 +85,7 @@ const findItem = (inventory, id) => {
 const styles = {
 	tableRow: {
 		fontSize: '15px',
-		fontWeight: 'bold',
-		cursor: 'pointer'
+		fontWeight: 'bold'
 	}
 }
 

@@ -64,6 +64,20 @@ const Create = props => {
 					</div>
 					<div style={styles.field}>
 						<label>
+							<Header size={'tiny'}>Nickname</Header>
+						</label>
+						<Field
+							name={'nickname'}
+							component={'input'}
+							label={'Nickname'}
+							placeholder={'Nickname'}
+							required
+						/>
+					</div>
+				</Form.Group>
+				<Form.Group>
+					<div style={styles.field}>
+						<label>
 							<Header size={'tiny'}>Gender</Header>
 						</label>
 						<Field
@@ -74,8 +88,6 @@ const Create = props => {
 							required
 						/>
 					</div>
-				</Form.Group>
-				<Form.Group>
 					<div style={styles.field}>
 						<label>
 							<Header size={'tiny'}>Birth date</Header>
@@ -85,18 +97,6 @@ const Create = props => {
 							component={'input'}
 							type={'date'}
 							placeholder={'Birth date'}
-							required
-						/>
-					</div>
-					<div style={styles.field}>
-						<label>
-							<Header size={'tiny'}>Contact number</Header>
-						</label>
-						<Field
-							name={'contactNumber'}
-							component={'input'}
-							type={'text'}
-							placeholder={'Contact number'}
 							required
 						/>
 					</div>
@@ -125,6 +125,18 @@ const Create = props => {
 							component={DropdownField}
 							label={'Role'}
 							options={roleOptions}
+							required
+						/>
+					</div>
+					<div style={styles.field}>
+						<label>
+							<Header size={'tiny'}>Contact number</Header>
+						</label>
+						<Field
+							name={'contactNumber'}
+							component={'input'}
+							type={'text'}
+							placeholder={'Contact number'}
 							required
 						/>
 					</div>
