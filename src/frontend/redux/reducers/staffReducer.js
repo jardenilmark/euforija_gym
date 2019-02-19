@@ -4,9 +4,13 @@ import iziToast from 'izitoast'
 const initialState = {
 	staffFormVisibility: false,
 	staffProfileVisibility: false,
+	cropImageModalVisibility: false,
 	isFetching: false,
 	staffList: [],
-	image: '',
+	image: null,
+	crop: { x: 0, y: 0 },
+	croppedImage: null,
+	croppedAreaPixels: null,
 	type: 'all'
 }
 
@@ -14,7 +18,9 @@ export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case 'STAFF_CREATED':
 			return {
-				...state
+				...state,
+				image: null,
+				croppedImage: null
 			}
 		case 'STAFF_FILTER':
 			return {
@@ -30,16 +36,6 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				staffProfileVisibility: action.payload
-			}
-		case 'GET_STAFF_PROFILE':
-			return {
-				...state,
-				staffProfile: action.payload
-			}
-		case 'CLEAR_PROFILE':
-			return {
-				...state,
-				staffProfile: {}
 			}
 		case 'SET_CLICKED_STAFF_ID':
 			return {
@@ -76,7 +72,8 @@ export default function reducer(state = initialState, action) {
 		case 'CLEAR_IMAGE':
 			return {
 				...state,
-				image: ''
+				image: null,
+				croppedImage: null
 			}
 		case 'REMOVE_STAFF_SUCCESS':
 			iziToast.success({
@@ -97,6 +94,27 @@ export default function reducer(state = initialState, action) {
 			})
 			return {
 				...state
+			}
+		case 'CHANGE_CROP_VALUE':
+			return {
+				...state,
+				crop: action.payload
+			}
+		case 'CROP_COMPLETED':
+			return {
+				...state,
+				croppedAreaPixels: action.payload
+			}
+		case 'TOGGLE_CROP_IMAGE_MODAL':
+			return {
+				...state,
+				cropImageModalVisibility: !state.cropImageModalVisibility
+			}
+		case 'GET_CROPPED_IMAGE':
+			console.log(action.payload)
+			return {
+				...state,
+				croppedImage: action.payload
 			}
 		default:
 			return state

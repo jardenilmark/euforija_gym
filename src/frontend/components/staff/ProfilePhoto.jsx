@@ -1,5 +1,6 @@
 import Webcam from 'react-webcam'
-import { Button, Image, Container } from 'semantic-ui-react'
+import { Button, Image } from 'semantic-ui-react'
+import CropImageModal from '../../redux/containers/staff/CropImageModal'
 import React from 'react'
 import iziToast from 'izitoast'
 
@@ -9,6 +10,7 @@ class ProfilePhoto extends React.Component {
 	}
 
 	capture = () => {
+		console.log(this.props)
 		const img = this.webcam.getScreenshot()
 		this.props.saveImage(img)
 		iziToast.success({
@@ -16,13 +18,18 @@ class ProfilePhoto extends React.Component {
 			message: 'Image captured successfully!',
 			position: 'topRight'
 		})
+		this.props.toggleCropImageModal()
 	}
 
 	render() {
-		const hasCaptured = this.props.image === ''
+		console.log(this.props)
+		const hasCaptured = this.props.image ? true : false
+		const image = this.props.croppedImage ? this.props.croppedImage : this.props.image
+		console.log(hasCaptured)
 		return (
 			<div style={styles.outerDiv}>
-				{hasCaptured ? (
+				<CropImageModal />
+				{!hasCaptured ? (
 					<Webcam
 						height={225}
 						width={300}
@@ -32,10 +39,10 @@ class ProfilePhoto extends React.Component {
 						screenshotFormat={'image/jpeg'}
 					/>
 				) : (
-					<Image src={this.props.image} centered style={styles.image} />
+					<Image src={image} centered style={styles.image} />
 				)}
 				<div style={styles.innerDiv}>
-					{hasCaptured ? (
+					{!hasCaptured ? (
 						<Button
 							circular
 							type={'button'}
@@ -71,7 +78,7 @@ const styles = {
 		marginTop: 10
 	},
 	outerDiv: {
-		textAlign: 'center',
+		textAlign: 'center'
 	},
 	innerDiv: {
 		marginTop: 10,

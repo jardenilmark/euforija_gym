@@ -1,11 +1,10 @@
 import React from 'react'
 import { Table, Header, Image, Button } from 'semantic-ui-react'
 
-const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility, clearStaffProfile, setClickedStaff, id) => {
+const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility, setClickedStaff, staff) => {
 	toggleFormVisibility(false)
-	// clearStaffProfile()
 	toggleProfileVisibility(true)
-	setClickedStaff(id)
+	setClickedStaff(staff)
 }
 
 const TableExampleCollapsing = ({
@@ -13,8 +12,7 @@ const TableExampleCollapsing = ({
 	toggleProfileVisibility,
 	setClickedStaff,
 	toggleFormVisibility,
-	removeStaff,
-	clearStaffProfile
+	removeStaff
 }) => {
 	return (
 		<Table.Row>
@@ -32,20 +30,10 @@ const TableExampleCollapsing = ({
 					floated={'right'}
 					style={styles.button}
 					onClick={() =>
-						invokeFunctions(
-							toggleFormVisibility,
-							toggleProfileVisibility,
-							clearStaffProfile,
-							setClickedStaff,
-							staff._id
-						)
+						invokeFunctions(toggleFormVisibility, toggleProfileVisibility, setClickedStaff, staff)
 					}
 				/>
-				<Button
-					icon={'edit outline'}
-					circular
-					floated={'right'}
-					style={styles.button} />
+				<Button icon={'edit outline'} circular floated={'right'} style={styles.button} />
 				<Button
 					icon={'trash alternate outline'}
 					circular

@@ -3,12 +3,12 @@ import Staff from '../../../components/staff/StaffPage'
 import {
 	createStaff,
 	toggleFormVisibility,
-	getStaffProfile,
 	toggleProfileVisibility,
 	setClickedStaffId,
 	saveImage,
 	clearImage,
-	fetchStaff
+	fetchStaff,
+	toggleCropImageModal
 } from '../../actions/staffActions'
 import Swal from 'sweetalert2'
 
@@ -16,9 +16,9 @@ function mapStateToProps(state) {
 	return {
 		formVisibility: state.staff.staffFormVisibility,
 		profileVisibility: state.staff.staffProfileVisibility,
-		staffProfile: state.staff.staffProfile,
 		clickedStaff: state.staff.clickedStaff,
-		image: state.staff.image
+		image: state.staff.image,
+		croppedImage: state.staff.croppedImage
 	}
 }
 
@@ -41,9 +41,6 @@ function mapDispatchToProps(dispatch) {
 		toggleFormVisibility(isVisible) {
 			dispatch(toggleFormVisibility(isVisible))
 		},
-		async getStaffProfile(id) {
-			await dispatch(getStaffProfile(id))
-		},
 		toggleProfileVisibility(isVisible) {
 			dispatch(toggleProfileVisibility(isVisible))
 		},
@@ -55,6 +52,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		clearImage() {
 			dispatch(clearImage())
+		},
+		toggleCropImageModal() {
+			dispatch(toggleCropImageModal())
 		}
 	}
 }
