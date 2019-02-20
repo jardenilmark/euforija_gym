@@ -142,14 +142,20 @@
 	margin-right: 2.5%;
 }
 
-#logField {
+#logField,
+#payrollSearchField {
 	border-radius: 5px 0 0 5px;
 	border: 1px solid #808080;
 	border-right-width: 0;
 }
 
-#logButton {
+#logButton,
+#payrollSearchButton {
 	border-radius: 0 5px 5px 0;
 	border: 1px solid #808080;
 	border-left-width: 0;
+}
+
+video {
+	object-fit: cover;
 }

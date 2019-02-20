@@ -4,6 +4,7 @@ import saleReducer from './saleReducer'
 import staffReducer from './staffReducer'
 import studentReducer from './studentReducer'
 import attendanceReducer from './attendanceReducer'
+import payrollReducer from './payrollReducer'
 import { reducer as formReducer } from 'redux-form'
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
 	sale: saleReducer,
 	staff: staffReducer,
 	student: studentReducer,
-	attendance: attendanceReducer
+	attendance: attendanceReducer,
+	payroll: payrollReducer
 })
