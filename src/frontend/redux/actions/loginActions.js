@@ -1,15 +1,17 @@
 import app from '../../client'
 import swal from 'sweetalert'
-const location = 'api/staff'
+import { comparePass } from '../../helpers/bcrypt'
+const staff = 'api/staff'
 
 export function handleLogin(data) {
 	return async () => {
-		const result = await app.service(location).find({
-			query: { idNumber: data.idNumber }
+		const result = await app.service(staff).find({
+			query: { idNumber: data.idNumber, $select: { password: 1 } }
 		})
+		console.log(result)
 		if (result.length > 0) {
 			const user = result[0]
-			if (user.password === data.password) {
+			if (comparePass(data.password, user.password)) {
 				window.location.assign('/')
 				swal('Success', 'You have successfully logged in.', 'success')
 			} else {
