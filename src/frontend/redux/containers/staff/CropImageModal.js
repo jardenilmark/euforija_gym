@@ -3,7 +3,8 @@ import {
 	onCropChange,
 	onCropComplete,
 	toggleCropImageModal,
-	getCroppedImage
+	getCroppedImage,
+	onZoomChange
 } from '../../actions/staffActions'
 import CropImageModal from '../../../components/staff/CropImageModal'
 

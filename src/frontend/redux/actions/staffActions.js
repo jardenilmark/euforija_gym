@@ -1,6 +1,7 @@
 import app from '../../client'
 import { generateId } from '../../helpers/idGenerator'
 import { reset } from 'redux-form'
+import { getHash } from '../../helpers/bcrypt'
 
 const staffApi = 'api/staff'
 const fileApi = 'api/file'
@@ -10,6 +11,7 @@ export function createStaff(staff) {
 		const isEqualPass = staff.password === staff.rePassword
 		if (isEqualPass) {
 			delete staff.rePassword
+			staff.password = await getHash(staff.password)
 			const data = await app.service(fileApi).create({
 				data: staff.image
 			})
