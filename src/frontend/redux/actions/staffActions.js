@@ -1,6 +1,7 @@
 import app from '../../client'
 import { generateId } from '../../helpers/idGenerator'
 import { reset } from 'redux-form'
+import iziToast from 'izitoast'
 
 const staffApi = 'api/staff'
 const fileApi = 'api/file'
@@ -61,7 +62,21 @@ export function fetchStaff() {
 
 export function saveImage(imageString) {
 	return dispatch => {
-		dispatch({ type: 'SAVE_IMAGE', payload: imageString })
+		if (imageString) {
+			iziToast.success({
+				title: 'SUCCESS',
+				message: 'Image captured successfully!',
+				position: 'topRight'
+			})
+			dispatch({ type: 'SAVE_IMAGE', payload: imageString })
+			dispatch(toggleCropImageModal())
+		} else {
+			iziToast.error({
+				title: 'ERROR',
+				message: 'No image captured! Webcam might not have started yet',
+				position: 'topRight'
+			})
+		}
 	}
 }
 

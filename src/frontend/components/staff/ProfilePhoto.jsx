@@ -2,7 +2,6 @@ import Webcam from 'react-webcam'
 import { Button, Image } from 'semantic-ui-react'
 import CropImageModal from '../../redux/containers/staff/CropImageModal'
 import React from 'react'
-import iziToast from 'izitoast'
 
 class ProfilePhoto extends React.Component {
 	setRef = webcam => {
@@ -11,13 +10,8 @@ class ProfilePhoto extends React.Component {
 
 	capture = () => {
 		const img = this.webcam.getScreenshot()
+		console.log('image', img)
 		this.props.saveImage(img)
-		iziToast.success({
-			title: 'SUCCESS',
-			message: 'Image captured successfully!',
-			position: 'topRight'
-		})
-		this.props.toggleCropImageModal()
 	}
 
 	render() {
