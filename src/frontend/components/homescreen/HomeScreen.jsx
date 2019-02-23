@@ -1,18 +1,21 @@
 import React, { Component } from 'react'
-import { Menu, Header, Icon, Card, Image, Sidebar, Button } from 'semantic-ui-react'
+import { Menu, Header, Icon, Card, Image, Sidebar, Button, Loader } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import swal from 'sweetalert'
 
 class HomeScreen extends Component {
 	componentDidMount() {
-		const { userLogin, checkStorage } = this.props
-		if (!userLogin) {
+		const { userLogin, checkStorage, loginChecked } = this.props
+		if (!userLogin && !loginChecked) {
 			checkStorage()
+		} else {
+			swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+			window.location.assign('/')
 		}
 	}
 	render() {
-		const { loginChecked, userLogin } = this.props
+		const { loginChecked, userLogin, logout } = this.props
 		if (loginChecked && userLogin) {
-			console.log(userLogin)
 			const icons =
 				userLogin.role === 'Owner'
 					? ['unordered list', 'shopping cart', 'users', 'users', 'columns', 'chart area']
@@ -60,7 +63,7 @@ class HomeScreen extends Component {
 						<Menu.Item style={styles.item}>
 							<Button animated fluid style={styles.logout} size={'huge'}>
 								<Button.Content visible>Logout</Button.Content>
-								<Button.Content hidden>
+								<Button.Content hidden onClick={e => logout()}>
 									<Icon name={'arrow right'} />
 								</Button.Content>
 							</Button>
@@ -76,7 +79,7 @@ class HomeScreen extends Component {
 				</div>
 			)
 		} else {
-			return <div /> // to place loading screen
+			return <Loader style={styles.loader}>Loading</Loader> // to configure
 		}
 	}
 }
@@ -84,6 +87,10 @@ class HomeScreen extends Component {
 const styles = {
 	div: {
 		height: '100%'
+	},
+	loader: {
+		height: '100vh',
+		width: '100vh'
 	},
 	cardsContainer: {
 		marginRight: 350

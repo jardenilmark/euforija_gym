@@ -41,6 +41,15 @@ export function handleLogin(data) {
 	}
 }
 
+export function logout() {
+	return dispatch => {
+		window.location.assign('/')
+		window.localStorage.clear()
+		dispatch({ type: 'USER_LOGIN', payload: undefined })
+		dispatch({ type: 'LOGIN_CHECKED', payload: false })
+	}
+}
+
 export function checkStorage() {
 	return async dispatch => {
 		const token = window.localStorage.getItem('jwtToken')

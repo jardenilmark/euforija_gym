@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { checkStorage } from '../../actions/loginActions'
+import { checkStorage, logout } from '../../actions/loginActions'
 import HomeScreen from '../../../components/homescreen/HomeScreen'
 
 function mapStateToProps(state) {
@@ -13,6 +13,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		checkStorage() {
 			dispatch(checkStorage())
+		},
+		logout() {
+			dispatch(logout())
 		}
 	}
 }
