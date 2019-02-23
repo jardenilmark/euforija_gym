@@ -53,14 +53,21 @@ export function logout() {
 export function checkStorage() {
 	return async dispatch => {
 		const token = window.localStorage.getItem('jwtToken')
-		const legit = jwt.verify(token, privateKey)
-		const image = await getImageData(legit)
-		legit.image = image
-		if (legit) {
-			dispatch({ type: 'USER_LOGIN', payload: legit })
-			dispatch({ type: 'LOGIN_CHECKED', payload: true })
+		if (token) {
+			const legit = jwt.verify(token, privateKey)
+			const image = await getImageData(legit)
+			legit.image = image
+			if (legit) {
+				dispatch({ type: 'USER_LOGIN', payload: legit })
+				dispatch({ type: 'LOGIN_CHECKED', payload: true })
+			} else {
+				swal('Oops', 'User not found.', 'error')
+			}
 		} else {
-			swal('Oops', 'User not found.', 'error')
+			const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+			if (error) {
+				window.location.assign('/')
+			}
 		}
 	}
 }

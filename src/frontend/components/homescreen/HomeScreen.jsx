@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import { Menu, Header, Icon, Card, Image, Sidebar, Button, Loader } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import swal from 'sweetalert'
 
 class HomeScreen extends Component {
 	componentDidMount() {
 		const { userLogin, checkStorage, loginChecked } = this.props
 		if (!userLogin && !loginChecked) {
 			checkStorage()
-		} else {
-			swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
-			window.location.assign('/')
 		}
 	}
 	render() {
