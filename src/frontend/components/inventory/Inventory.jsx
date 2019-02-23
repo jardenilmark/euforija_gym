@@ -8,7 +8,8 @@ import TableRows from './TableRows'
 
 class Inventory extends React.Component {
 	componentDidMount() {
-		this.props.getInventory()
+		const { userLogin, getInventory } = this.props
+		getInventory(userLogin)
 	}
 
 	render() {
@@ -35,7 +36,7 @@ class Inventory extends React.Component {
 										Name
 									</Button>
 								}
-								content="filters items by fuzzy name search"
+								content={'filters items by fuzzy name search'}
 								inverted
 							/>
 							<Button.Or />
@@ -48,7 +49,7 @@ class Inventory extends React.Component {
 										Quantity
 									</Button>
 								}
-								content="filters items by quantity range"
+								content={'filters items by quantity range'}
 								inverted
 							/>
 							<Button.Or />
@@ -61,7 +62,7 @@ class Inventory extends React.Component {
 										Price
 									</Button>
 								}
-								content="filters items by price range"
+								content={'filters items by price range'}
 								inverted
 							/>
 						</Button.Group>
@@ -126,7 +127,7 @@ class Inventory extends React.Component {
 	}
 }
 
-//TODO: fix inconsistent units e.g. (px, vw)
+// TODO: fix inconsistent units e.g. (px, vw)
 
 const styles = {
 	container: {

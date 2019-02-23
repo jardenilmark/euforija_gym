@@ -17,13 +17,14 @@ function mapStateToProps(state) {
 		profileVisibility: state.staff.staffProfileVisibility,
 		clickedStaff: state.staff.clickedStaff,
 		image: state.staff.image,
-		croppedImage: state.staff.croppedImage
+		croppedImage: state.staff.croppedImage,
+		userLogin: state.staff.userLogin
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		async createStaff(user) {
+		async createStaff(user, userLogin) {
 			if (user.image) {
 				await dispatch(createStaff(user))
 				await dispatch(fetchStaff())

@@ -2,25 +2,28 @@ import app from '../../client'
 import { compareData } from '../../helpers/sort'
 import { converter, getFile } from '../../helpers/converter'
 import iziToast from 'izitoast'
+import { isValidAuthority } from './loginActions'
 const inventoryApi = 'api/inventory'
 const fileApi = 'api/file'
 
-export function fetchWholeInventory(arg) {
+export function fetchWholeInventory(user, path, arg) {
 	return async dispatch => {
 		dispatch({ type: 'FETCHING_INVENTORY' })
-
-		try {
-			const items = await app.service(inventoryApi).find(arg)
-			const images = await app.service(fileApi).find()
-			items.map(item => {
-				const image = images.find(data => item.image === data._id)
-				item.imageId = item.image
-				item.image = image.data
-			})
-			compareData(items, 'name')
-			dispatch({ type: 'FETCHING_INVENTORY_SUCCESS', payload: items })
-		} catch (e) {
-			dispatch({ type: 'FETCHING_INVENTORY_FAILED', payload: [] })
+		const check = await isValidAuthority(user, path)
+		if (check) {
+			try {
+				const items = await app.service(inventoryApi).find(arg)
+				const images = await app.service(fileApi).find()
+				items.map(item => {
+					const image = images.find(data => item.image === data._id)
+					item.imageId = item.image
+					item.image = image.data
+				})
+				compareData(items, 'name')
+				dispatch({ type: 'FETCHING_INVENTORY_SUCCESS', payload: items })
+			} catch (e) {
+				dispatch({ type: 'FETCHING_INVENTORY_FAILED', payload: [] })
+			}
 		}
 	}
 }

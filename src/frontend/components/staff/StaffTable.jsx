@@ -4,7 +4,8 @@ import { Table, Loader, Segment, Header, Icon } from 'semantic-ui-react'
 
 class StaffTable extends React.Component {
 	componentDidMount() {
-		this.props.fetchStaff()
+		const { fetchStaff, userLogin } = this.props
+		fetchStaff(userLogin)
 	}
 
 	render() {
@@ -40,7 +41,7 @@ class StaffTable extends React.Component {
 						<Table.Cell>
 							<Segment placeholder style={styles.placeholderSegment} size={'big'}>
 								<Header icon>
-									<Icon name="exclamation circle" color={'red'} />
+									<Icon name={'exclamation circle'} color={'red'} />
 									<Header.Content>No staff exists in the database.</Header.Content>
 									<Header.Content>Click the button above to add one.</Header.Content>
 								</Header>

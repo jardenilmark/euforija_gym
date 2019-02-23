@@ -1,14 +1,14 @@
 import Cards from './Cards'
 import React from 'react'
-import { Container, Grid, Header, Icon, Button, Table, Message, Segment } from 'semantic-ui-react'
+import { Container, Grid, Header, Icon, Button, Table, Segment } from 'semantic-ui-react'
 import EditModal from '../../redux/containers/sale/EditModalContainer'
 import TableContent from './TableContent'
-import NumberFormat from 'react-number-format'
 import PurchaseOverview from './PurchaseOverview'
 
 class Sale extends React.Component {
 	componentDidMount() {
-		this.props.getInventory()
+		const { userLogin, getInventory } = this.props
+		getInventory(userLogin)
 	}
 
 	render() {

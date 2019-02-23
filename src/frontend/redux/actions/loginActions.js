@@ -71,3 +71,23 @@ export function checkStorage() {
 		}
 	}
 }
+
+export async function isValidAuthority(user, path) {
+	const staffPaths = ['/sales', '/student', '/payroll']
+	if (user) {
+		if (user.role !== 'Owner' && !staffPaths.includes(path)) {
+			const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+			if (error) {
+				window.location.assign('/home')
+			}
+			return false
+		}
+		return true
+	} else {
+		const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+		if (error) {
+			window.location.assign('/')
+		}
+		return false
+	}
+}
