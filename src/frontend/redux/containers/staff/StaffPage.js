@@ -7,8 +7,7 @@ import {
 	setClickedStaffId,
 	saveImage,
 	clearImage,
-	fetchStaff,
-	toggleCropImageModal
+	fetchStaff
 } from '../../actions/staffActions'
 import Swal from 'sweetalert2'
 
@@ -52,9 +51,6 @@ function mapDispatchToProps(dispatch) {
 		},
 		clearImage() {
 			dispatch(clearImage())
-		},
-		toggleCropImageModal() {
-			dispatch(toggleCropImageModal())
 		}
 	}
 }
