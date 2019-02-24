@@ -13,6 +13,12 @@ export const fetchAllStaff = () => async dispatch => {
 	try {
 		dispatch({ type: 'FETCHING_ALL_STAFF' })
 
+		let query = {
+			firstName: {
+				$search: 'len',
+				$caseSensitive: false
+			}
+		}
 		let staffs = await app.service(staffApi).find()
 		const images = await app.service(imageApi).find()
 

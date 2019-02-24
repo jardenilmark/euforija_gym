@@ -12,7 +12,7 @@ const LogForm = ({ handleSubmit }) => (
 					type="text"
 					name="payrollSearch"
 					component={InputField}
-					placeholder="Search by ID/Name"
+					placeholder="Search by ID or Name"
 					style={styles.field}
 					fluid
 				/>
