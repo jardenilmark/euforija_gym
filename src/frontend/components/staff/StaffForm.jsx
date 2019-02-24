@@ -193,7 +193,8 @@ const styles = {
 		padding: 10
 	},
 	divider: {
-		marginBottom: 30
+		marginBottom: 30,
+		marginTop: 50
 	}
 }
 

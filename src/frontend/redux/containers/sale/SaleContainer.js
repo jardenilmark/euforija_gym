@@ -16,15 +16,16 @@ function mapStateToProps(state) {
 		modal: state.sale.modal,
 		overviewArr: state.sale.overviewArr,
 		isFetchingInventory: state.inventory.isFetchingInventory,
-		purchaseOverviewState: state.sale.purchaseOverviewState
+		purchaseOverviewState: state.sale.purchaseOverviewState,
+		userLogin: state.staff.userLogin
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		async getInventory() {
+		async getInventory(user) {
 			await dispatch(
-				fetchWholeInventory({
+				fetchWholeInventory(user, '/sales', {
 					query: {
 						quantity: {
 							$gt: 0

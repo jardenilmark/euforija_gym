@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Header, Image, Button } from 'semantic-ui-react'
+import { Table, Header, Image, Button, Popup } from 'semantic-ui-react'
 
 const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility, setClickedStaff, staff) => {
 	toggleFormVisibility(false)
@@ -24,22 +24,45 @@ const TableExampleCollapsing = ({
 						<Header.Subheader>{staff.role}</Header.Subheader>
 					</Header.Content>
 				</Header>
-				<Button
-					icon={'chevron right'}
-					circular
-					floated={'right'}
-					style={styles.button}
-					onClick={() =>
-						invokeFunctions(toggleFormVisibility, toggleProfileVisibility, setClickedStaff, staff)
+				<Popup
+					content={'view profile'}
+					inverted
+					trigger={
+						<Button
+							icon={'chevron right'}
+							circular
+							floated={'right'}
+							style={styles.button}
+							onClick={() =>
+								invokeFunctions(
+									toggleFormVisibility,
+									toggleProfileVisibility,
+									setClickedStaff,
+									staff
+								)
+							}
+						/>
 					}
 				/>
-				<Button icon={'edit outline'} circular floated={'right'} style={styles.button} />
-				<Button
-					icon={'trash alternate outline'}
-					circular
-					floated={'right'}
-					style={styles.button}
-					onClick={() => removeStaff(staff)}
+				<Popup
+					content={'edit staff'}
+					inverted
+					trigger={
+						<Button icon={'edit outline'} circular floated={'right'} style={styles.button} />
+					}
+				/>
+				<Popup
+					content={'delete staff'}
+					inverted
+					trigger={
+						<Button
+							icon={'trash alternate outline'}
+							circular
+							floated={'right'}
+							style={styles.button}
+							onClick={() => removeStaff(staff)}
+						/>
+					}
 				/>
 			</Table.Cell>
 		</Table.Row>

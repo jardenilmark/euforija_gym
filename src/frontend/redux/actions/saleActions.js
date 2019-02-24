@@ -1,7 +1,7 @@
 import app from '../../client'
+import { isValidAuthority } from './loginActions'
 const salesApi = 'api/sales'
 const inventoryApi = 'api/inventory'
-import { fetchWholeInventory } from './inventoryActions'
 
 export function setModalState(payload) {
 	return dispatch => {
@@ -49,12 +49,15 @@ export function setChart(category) {
 	}
 }
 
-export function fetchSales() {
+export function fetchSales(user) {
 	return async dispatch => {
-		const sales = await app
-			.service(salesApi)
-			.find({ query: { $select: { name: 1, price: 1, date: 1, _id: 0 } } })
-		dispatch({ type: 'FETCH_SALES', payload: sales })
+		const check = await isValidAuthority(user, '/income-report')
+		if (check) {
+			const sales = await app
+				.service(salesApi)
+				.find({ query: { $select: { name: 1, price: 1, date: 1, _id: 0 } } })
+			dispatch({ type: 'FETCH_SALES', payload: sales })
+		}
 	}
 }
 

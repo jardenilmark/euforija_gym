@@ -11,7 +11,8 @@ const initialState = {
 	crop: { x: 0, y: 0 },
 	croppedImage: null,
 	croppedAreaPixels: null,
-	type: 'all'
+	type: 'all',
+	loginChecked: false
 }
 
 export default function reducer(state = initialState, action) {
@@ -115,6 +116,16 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				croppedImage: action.payload
+			}
+		case 'USER_LOGIN':
+			return {
+				...state,
+				userLogin: action.payload
+			}
+		case 'LOGIN_CHECKED':
+			return {
+				...state,
+				loginChecked: action.payload
 			}
 		default:
 			return state

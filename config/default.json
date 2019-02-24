@@ -1,9 +1,10 @@
 {
-  "mongoURI": "mongodb://127.0.0.1:27017/euforija-system",
-  "port": 3000,
-  "auth": {
-    "secret": "euforijasystem",
-    "path": "/api/authentication",
-    "service": "/api/users"
-  }
+	"mongoURI": "mongodb://127.0.0.1:27017/euforija-system",
+	"port": 3000,
+	"auth": {
+		"secret": "euforijasystem",
+		"path": "/api/authentication",
+		"service": "/api/users"
+	},
+	"privateKey": "euforija-system"
 }

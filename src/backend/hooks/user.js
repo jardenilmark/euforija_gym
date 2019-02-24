@@ -1,4 +1,4 @@
-import { hashSync } from 'bcrypt'
+import { hashSync } from 'bcryptjs'
 
 const encryptPassword = context => {
 	console.log(context)

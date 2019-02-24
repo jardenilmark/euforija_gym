@@ -1,67 +1,92 @@
-import React from 'react'
-import { Menu, Header, Icon, Card, Image, Sidebar, Button, Segment } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { Menu, Header, Icon, Card, Image, Sidebar, Button, Loader } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-const HomeScreen = () => {
-	const icons = ['unordered list', 'shopping cart', 'users', 'users', 'columns', 'chart area']
-	const contents = ['Inventory', 'Sales', 'Staff', 'Students', 'Payroll', 'Income Reports']
-	const paths = ['/inventory', '/sales', '/staff', '/student', '/payroll', '/income-report']
+class HomeScreen extends Component {
+	componentDidMount() {
+		const { userLogin, checkStorage, loginChecked } = this.props
+		if (!userLogin && !loginChecked) {
+			checkStorage()
+		}
+	}
+	render() {
+		const { loginChecked, userLogin, logout } = this.props
+		if (loginChecked && userLogin) {
+			const icons =
+				userLogin.role === 'Owner'
+					? ['unordered list', 'shopping cart', 'users', 'users', 'columns', 'chart area']
+					: ['shopping cart', 'users', 'columns']
+			const contents =
+				userLogin.role === 'Owner'
+					? ['Inventory', 'Sales', 'Staff', 'Students', 'Payroll', 'Income Reports']
+					: ['Sales', 'Students', 'Payroll']
+			const paths =
+				userLogin.role === 'owner'
+					? ['/inventory', '/sales', '/staff', '/student', '/payroll', '/income-report']
+					: ['/sales', '/student', '/payroll']
+			// TODO: fix responsiveness!
 
-	//TODO: fix responsiveness!
+			const cards = icons.map((icon, index) => {
+				return (
+					<Card raised as={Link} to={paths[index]} key={index} color={'blue'}>
+						<Card.Content textAlign={'center'}>
+							<Icon name={icon} size={'massive'} />
+							<br />
+							<br />
+							<label style={styles.cardLabel}>{contents[index]}</label>
+						</Card.Content>
+					</Card>
+				)
+			})
 
-	const cards = icons.map((icon, index) => {
-		return (
-			<Card raised as={Link} to={paths[index]} key={index} color={'blue'}>
-				<Card.Content textAlign={'center'}>
-					<Icon name={icon} size={'massive'} />
-					<br />
-					<br />
-					<label style={styles.cardLabel}>{contents[index]}</label>
-				</Card.Content>
-			</Card>
-		)
-	})
-
-	return (
-		<div style={styles.div}>
-			<Sidebar
-				as={Menu}
-				icon={'labeled'}
-				vertical
-				visible
-				width={'wide'}
-				borderless
-				style={styles.sidebar}>
-				<Menu.Item>
-					<Image src={'./assets/images/images.png'} size={'small'} circular centered />
-					<Header as={'h2'} style={styles.user}>
-						Mark Jardenil
-						<Header.Subheader>Owner</Header.Subheader>
-					</Header>
-				</Menu.Item>
-				<Menu.Item style={styles.item}>
-					<Button animated fluid style={styles.logout} size={'huge'}>
-						<Button.Content visible>Logout</Button.Content>
-						<Button.Content hidden>
-							<Icon name={'arrow right'} />
-						</Button.Content>
-					</Button>
-				</Menu.Item>
-			</Sidebar>
-			<Sidebar.Pusher>
-				<div style={styles.cardsContainer}>
-					<Card.Group itemsPerRow={2} style={styles.cards}>
-						{cards}
-					</Card.Group>
+			return (
+				<div style={styles.div}>
+					<Sidebar
+						as={Menu}
+						icon={'labeled'}
+						vertical
+						visible
+						width={'wide'}
+						borderless
+						style={styles.sidebar}>
+						<Menu.Item>
+							<Image src={userLogin.image} size={'small'} circular centered />
+							<Header as={'h2'} style={styles.user}>
+								{userLogin.firstName} {userLogin.lastName}
+								<Header.Subheader>{userLogin.role}</Header.Subheader>
+							</Header>
+						</Menu.Item>
+						<Menu.Item style={styles.item}>
+							<Button animated fluid style={styles.logout} size={'huge'}>
+								<Button.Content visible>Logout</Button.Content>
+								<Button.Content hidden onClick={e => logout()}>
+									<Icon name={'arrow right'} />
+								</Button.Content>
+							</Button>
+						</Menu.Item>
+					</Sidebar>
+					<Sidebar.Pusher>
+						<div style={styles.cardsContainer}>
+							<Card.Group itemsPerRow={2} style={styles.cards}>
+								{cards}
+							</Card.Group>
+						</div>
+					</Sidebar.Pusher>
 				</div>
-			</Sidebar.Pusher>
-		</div>
-	)
+			)
+		} else {
+			return <Loader style={styles.loader}>Loading</Loader> // to configure
+		}
+	}
 }
 
 const styles = {
 	div: {
 		height: '100%'
+	},
+	loader: {
+		height: '100vh',
+		width: '100vh'
 	},
 	cardsContainer: {
 		marginRight: 350

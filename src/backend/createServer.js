@@ -20,10 +20,7 @@ app
 	.use(express.errorHandler())
 
 const createServer = async () => {
-	const client = await MongoClient.connect(
-		app.get('mongoURI'),
-		{ useNewUrlParser: true }
-	)
+	const client = await MongoClient.connect(app.get('mongoURI'), { useNewUrlParser: true })
 	const db = client.db('euforija-system')
 	app.configure(setupAllServices(app, db))
 	return app

@@ -7,8 +7,7 @@ import {
 	setClickedStaffId,
 	saveImage,
 	clearImage,
-	fetchStaff,
-	toggleCropImageModal
+	fetchStaff
 } from '../../actions/staffActions'
 import Swal from 'sweetalert2'
 
@@ -18,13 +17,14 @@ function mapStateToProps(state) {
 		profileVisibility: state.staff.staffProfileVisibility,
 		clickedStaff: state.staff.clickedStaff,
 		image: state.staff.image,
-		croppedImage: state.staff.croppedImage
+		croppedImage: state.staff.croppedImage,
+		userLogin: state.staff.userLogin
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		async createStaff(user) {
+		async createStaff(user, userLogin) {
 			if (user.image) {
 				await dispatch(createStaff(user))
 				await dispatch(fetchStaff())
@@ -52,9 +52,6 @@ function mapDispatchToProps(dispatch) {
 		},
 		clearImage() {
 			dispatch(clearImage())
-		},
-		toggleCropImageModal() {
-			dispatch(toggleCropImageModal())
 		}
 	}
 }

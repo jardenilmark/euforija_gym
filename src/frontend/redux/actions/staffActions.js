@@ -1,28 +1,35 @@
 import app from '../../client'
 import { generateId } from '../../helpers/idGenerator'
 import { reset } from 'redux-form'
+import { getHash } from '../../helpers/bcrypt'
+import iziToast from 'izitoast'
+import { isValidAuthority } from './loginActions'
 
 const staffApi = 'api/staff'
 const fileApi = 'api/file'
 
-export function createStaff(staff) {
+export function createStaff(staff, user) {
 	return async dispatch => {
-		const isEqualPass = staff.password === staff.rePassword
-		if (isEqualPass) {
-			delete staff.rePassword
-			const data = await app.service(fileApi).create({
-				data: staff.image
-			})
-			const id = generateId(staff)
-			await app.service(staffApi).create({
-				...staff,
-				idNumber: id,
-				image: data._id,
-				status: 'out'
-			})
+		const check = isValidAuthority(user, '/staff')
+		if (check) {
+			const isEqualPass = staff.password === staff.rePassword
+			if (isEqualPass) {
+				delete staff.rePassword
+				staff.password = await getHash(staff.password)
+				const data = await app.service(fileApi).create({
+					data: staff.image
+				})
+				const id = generateId(staff)
+				await app.service(staffApi).create({
+					...staff,
+					idNumber: id,
+					image: data._id,
+					status: 'out'
+				})
+			}
+			dispatch(reset('createStaffForm'))
+			dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
 		}
-		dispatch(reset('createStaffForm'))
-		dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
 	}
 }
 
@@ -40,28 +47,45 @@ export function removeStaff(staff) {
 	}
 }
 
-export function fetchStaff() {
+export function fetchStaff(user) {
 	return async dispatch => {
-		dispatch({ type: 'FETCHING_STAFF' })
+		const check = isValidAuthority(user, '/staff')
+		if (check) {
+			dispatch({ type: 'FETCHING_STAFF' })
 
-		try {
-			const staffList = await app.service(staffApi).find()
-			const images = await app.service(fileApi).find()
-			staffList.map((staff, index) => {
-				const image = images.find(image => image._id === staff.image)
-				staff.image = image.data
-				staff.imageId = image._id
-			})
-			dispatch({ type: 'FETCHING_STAFF_SUCCESS', payload: staffList })
-		} catch (e) {
-			dispatch({ type: 'FETCHING_STAFF_FAILED', payload: e.message })
+			try {
+				const staffList = await app.service(staffApi).find()
+				const images = await app.service(fileApi).find()
+				staffList.map((staff, index) => {
+					const image = images.find(image => image._id === staff.image)
+					staff.image = image.data
+					staff.imageId = image._id
+				})
+				dispatch({ type: 'FETCHING_STAFF_SUCCESS', payload: staffList })
+			} catch (e) {
+				dispatch({ type: 'FETCHING_STAFF_FAILED', payload: e.message })
+			}
 		}
 	}
 }
 
 export function saveImage(imageString) {
 	return dispatch => {
-		dispatch({ type: 'SAVE_IMAGE', payload: imageString })
+		if (imageString) {
+			iziToast.success({
+				title: 'SUCCESS',
+				message: 'Image captured successfully!',
+				position: 'topRight'
+			})
+			dispatch({ type: 'SAVE_IMAGE', payload: imageString })
+			dispatch(toggleCropImageModal())
+		} else {
+			iziToast.error({
+				title: 'ERROR',
+				message: 'No image captured! Webcam might not have started yet',
+				position: 'topRight'
+			})
+		}
 	}
 }
 

@@ -44,6 +44,7 @@
 		"@feathersjs/feathers": "^3.1.7",
 		"@feathersjs/socketio": "^3.2.2",
 		"@feathersjs/socketio-client": "^1.1.0",
+		"bcryptjs": "^2.4.3",
 		"body-parser": "^1.18.3",
 		"chart.js": "^2.7.3",
 		"compression": "^1.7.2",
