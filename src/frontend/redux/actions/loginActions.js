@@ -100,3 +100,16 @@ export async function isValidAuthority(path) {
 		}
 	}
 }
+
+export function hasJWT() {
+	return dispatch => {
+		try {
+			const token = window.localStorage.getItem('jwtToken')
+			const legit = jwt.verify(token, privateKey)
+			console.log(legit)
+			if (legit) {
+				window.location.assign('/home')
+			}
+		} catch (e) {}
+	}
+}
