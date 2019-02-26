@@ -12,8 +12,8 @@ const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility) => {
 
 const submit = (values, props) => {
 	const staff = { ...values, image: props.croppedImage }
-	const { createStaff, userLogin } = props
-	createStaff(staff, userLogin)
+	const { createStaff } = props
+	createStaff(staff)
 }
 
 const StaffPage = props => {

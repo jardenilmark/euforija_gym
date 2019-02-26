@@ -6,10 +6,10 @@ import { isValidAuthority } from './loginActions'
 const inventoryApi = 'api/inventory'
 const fileApi = 'api/file'
 
-export function fetchWholeInventory(user, path, arg) {
+export function fetchWholeInventory(path, arg) {
 	return async dispatch => {
 		dispatch({ type: 'FETCHING_INVENTORY' })
-		const check = await isValidAuthority(user, path)
+		const check = await isValidAuthority(path)
 		if (check) {
 			try {
 				const items = await app.service(inventoryApi).find(arg)

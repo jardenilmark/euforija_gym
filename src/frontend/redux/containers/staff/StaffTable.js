@@ -5,15 +5,14 @@ import { fetchStaff, removeStaff, clearProfile } from '../../actions/staffAction
 function mapStateToProps(state) {
 	return {
 		staff: state.staff.staffList,
-		isFetching: state.staff.isFetching,
-		userLogin: state.staff.userLogin
+		isFetching: state.staff.isFetching
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		async fetchStaff(user) {
-			await dispatch(fetchStaff(user))
+		async fetchStaff() {
+			await dispatch(fetchStaff())
 		},
 		async removeStaff(staff) {
 			await dispatch(removeStaff(staff))

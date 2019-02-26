@@ -21,7 +21,7 @@ class HomeScreen extends Component {
 					? ['Inventory', 'Sales', 'Staff', 'Students', 'Payroll', 'Income Reports']
 					: ['Sales', 'Students', 'Payroll']
 			const paths =
-				userLogin.role === 'owner'
+				userLogin.role === 'Owner'
 					? ['/inventory', '/sales', '/staff', '/student', '/payroll', '/income-report']
 					: ['/sales', '/student', '/payroll']
 			// TODO: fix responsiveness!

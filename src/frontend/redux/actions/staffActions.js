@@ -8,9 +8,9 @@ import { isValidAuthority } from './loginActions'
 const staffApi = 'api/staff'
 const fileApi = 'api/file'
 
-export function createStaff(staff, user) {
+export function createStaff(staff) {
 	return async dispatch => {
-		const check = isValidAuthority(user, '/staff')
+		const check = await isValidAuthority('/staff')
 		if (check) {
 			const isEqualPass = staff.password === staff.rePassword
 			if (isEqualPass) {
@@ -47,9 +47,9 @@ export function removeStaff(staff) {
 	}
 }
 
-export function fetchStaff(user) {
+export function fetchStaff() {
 	return async dispatch => {
-		const check = isValidAuthority(user, '/staff')
+		const check = isValidAuthority('/staff')
 		if (check) {
 			dispatch({ type: 'FETCHING_STAFF' })
 

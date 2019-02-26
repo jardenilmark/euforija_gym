@@ -11,8 +11,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		checkStorage() {
-			dispatch(checkStorage())
+		async checkStorage() {
+			await dispatch(checkStorage())
 		},
 		logout() {
 			dispatch(logout())

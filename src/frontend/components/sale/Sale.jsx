@@ -7,12 +7,13 @@ import PurchaseOverview from './PurchaseOverview'
 
 class Sale extends React.Component {
 	componentDidMount() {
-		const { userLogin, getInventory } = this.props
-		getInventory(userLogin)
+		const { getInventory } = this.props
+		getInventory()
 	}
 
 	render() {
 		const isEmpty = this.props.overviewArr.length === 0
+		console.log(this.props)
 		return (
 			<Grid style={styles.grid}>
 				<EditModal />

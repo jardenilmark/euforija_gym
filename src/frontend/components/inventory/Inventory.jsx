@@ -8,8 +8,8 @@ import TableRows from './TableRows'
 
 class Inventory extends React.Component {
 	componentDidMount() {
-		const { userLogin, getInventory } = this.props
-		getInventory(userLogin)
+		const { getInventory } = this.props
+		getInventory()
 	}
 
 	render() {

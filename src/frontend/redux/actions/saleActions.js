@@ -49,9 +49,9 @@ export function setChart(category) {
 	}
 }
 
-export function fetchSales(user) {
+export function fetchSales() {
 	return async dispatch => {
-		const check = await isValidAuthority(user, '/income-report')
+		const check = await isValidAuthority('/income-report')
 		if (check) {
 			const sales = await app
 				.service(salesApi)

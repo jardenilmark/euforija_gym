@@ -5,15 +5,14 @@ import { fetchSales, setChart } from '../../actions/saleActions'
 function mapStateToProps(state) {
 	return {
 		sales: state.sale.sales,
-		byItem: state.sale.byItem,
-		userLogin: state.staff.userLogin
+		byItem: state.sale.byItem
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		async fetchSales(user) {
-			await dispatch(fetchSales(user))
+		async fetchSales() {
+			await dispatch(fetchSales())
 		},
 		setChart(category) {
 			dispatch(setChart(category))

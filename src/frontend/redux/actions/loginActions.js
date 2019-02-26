@@ -72,22 +72,31 @@ export function checkStorage() {
 	}
 }
 
-export async function isValidAuthority(user, path) {
-	const staffPaths = ['/sales', '/student', '/payroll']
-	if (user) {
-		if (user.role !== 'Owner' && !staffPaths.includes(path)) {
+export async function isValidAuthority(path) {
+	try {
+		const staffPaths = ['/sales', '/student', '/payroll']
+		const token = window.localStorage.getItem('jwtToken')
+		const user = jwt.verify(token, privateKey)
+		if (user) {
+			if (user.role !== 'Owner' && !staffPaths.includes(path)) {
+				const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+				if (error) {
+					window.location.assign('/home')
+				}
+				return false
+			}
+			return true
+		} else {
 			const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
 			if (error) {
-				window.location.assign('/home')
+				window.location.assign('/')
 			}
 			return false
 		}
-		return true
-	} else {
-		const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+	} catch (e) {
+		const error = await swal('ERROR FOUND', 'NO USER FOUND', 'error')
 		if (error) {
 			window.location.assign('/')
 		}
-		return false
 	}
 }

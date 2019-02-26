@@ -8,8 +8,8 @@ ReactChartkick.addAdapter(Chart)
 
 class IncomeReport extends Component {
 	componentDidMount() {
-		const { fetchSales, userLogin } = this.props
-		fetchSales(userLogin)
+		const { fetchSales } = this.props
+		fetchSales()
 	}
 	render() {
 		const { byItem, setChart } = this.props
