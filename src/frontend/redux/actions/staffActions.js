@@ -29,14 +29,8 @@ export function createStaff(staff) {
 			}
 			dispatch(reset('createStaffForm'))
 			dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
+			await dispatch(fetchStaff())
 		}
-		dispatch(reset('createStaffForm'))
-		iziToast.success({
-			title: 'SUCCESS',
-			message: 'New staff added successfully!',
-			position: 'topRight'
-		})
-		dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
 	}
 }
 
@@ -55,11 +49,7 @@ export function removeStaff(staff) {
 
 export function fetchStaff() {
 	return async dispatch => {
-<<<<<<< Updated upstream
 		const check = isValidAuthority('/staff')
-=======
-		const check = await isValidAuthority(user, '/staff')
->>>>>>> Stashed changes
 		if (check) {
 			dispatch({ type: 'FETCHING_STAFF' })
 

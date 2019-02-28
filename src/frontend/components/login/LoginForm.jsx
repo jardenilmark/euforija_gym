@@ -4,16 +4,18 @@ import Field from './Field'
 
 const LoginForm = ({ handleSubmit }) => {
 	return (
-		<Segment basic textAlign={'center'} id={'outer-segment'}>
-			<Form as={'form'} onSubmit={handleSubmit}>
-				<Image src={'./assets/images/logoAttendance.jpg'} circular centered size={'small'} />
+		<Segment basic textAlign={'center'}>
+			<Form as={'form'} onSubmit={handleSubmit} autocomplete={'off'}>
+				<Image src={'./assets/images/loginLogo.png'} centered size={'large'} />
 				<Header style={styles.header}>Sign in to your Account</Header>
-				<Divider />
-				<Segment basic id={'inner-segment'} textAlign={'left'}>
-					<Field placeholder={'ID Number'} icon={'id card'} type={'text'} name={'idNumber'} />
-					<Field placeholder={'Password'} icon={'lock'} type={'password'} name={'password'} />
+				<Segment basic style={styles.innerSegment}>
+					<Divider />
+					<Segment basic textAlign={'left'}>
+						<Field label={'ID Number'} type={'text'} name={'idNumber'} />
+						<Field label={'Password'} type={'password'} name={'password'} />
+					</Segment>
+					<Divider />
 				</Segment>
-				<Divider />
 				<Button type={'submit'} id={'login-button'} size={'large'}>
 					Login
 				</Button>
@@ -24,16 +26,15 @@ const LoginForm = ({ handleSubmit }) => {
 
 const styles = {
 	header: {
-		fontSize: '2vw',
-		marginTop: '5px'
-	},
-	outerSegment: {
-		width: '95%',
-		marginLeft: '2.5%'
+		fontSize: '2.5vw',
+		marginTop: 15,
+		fontFamily: 'Lane',
+		color: 'rgb(84, 16, 135)'
 	},
 	innerSegment: {
-		marginLeft: '2.5%',
-		marginRight: '2.5%'
+		width: '85%',
+		padding: 0,
+		marginLeft: '7.5%'
 	}
 }
 

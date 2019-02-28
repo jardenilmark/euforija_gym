@@ -1,5 +1,5 @@
 import app from '../../client'
-import swal from 'sweetalert'
+import Swal from 'sweetalert2'
 import jwt from 'jsonwebtoken'
 import { comparePass } from '../../helpers/bcrypt'
 import { privateKey } from '../../../../config/default.json'
@@ -20,11 +20,11 @@ export function handleLogin(data) {
 		})
 		if (result.length > 0) {
 			const user = result[0]
-			if (comparePass(data.password, user.password)) {
+			if (await comparePass(data.password, user.password)) {
 				const token = jwt.sign(user, privateKey)
 				window.localStorage.setItem('jwtToken', token)
 				await app.service(staffApi).patch(user._id, { status: 'in' })
-				const success = await swal('Success', 'You have successfully logged in.', 'success')
+				const success = await Swal.fire('Success', 'You have successfully logged in!', 'success')
 				const image = await getImageData(user)
 				user.image = image
 				if (success) {
@@ -33,10 +33,10 @@ export function handleLogin(data) {
 					dispatch({ type: 'LOGIN_CHECKED', payload: true })
 				}
 			} else {
-				swal('Oops', 'The password you entered is incorrect.', 'error')
+				Swal.fire('Oops', 'The password you entered is incorrect.', 'error')
 			}
 		} else {
-			swal('Oops', 'User not found.', 'error')
+			Swal.fire('Oops', 'User not found.', 'error')
 		}
 	}
 }
@@ -61,10 +61,10 @@ export function checkStorage() {
 				dispatch({ type: 'USER_LOGIN', payload: legit })
 				dispatch({ type: 'LOGIN_CHECKED', payload: true })
 			} else {
-				swal('Oops', 'User not found.', 'error')
+				Swal.fire('Oops', 'User not found.', 'error')
 			}
 		} else {
-			const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+			const error = await Swal.fire('Restricted Access', 'You must login first!', 'error')
 			if (error) {
 				window.location.assign('/')
 			}
@@ -79,7 +79,7 @@ export async function isValidAuthority(path) {
 		const user = jwt.verify(token, privateKey)
 		if (user) {
 			if (user.role !== 'Owner' && !staffPaths.includes(path)) {
-				const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+				const error = await Swal.fire('Restricted Access', 'You must login first!', 'error')
 				if (error) {
 					window.location.assign('/home')
 				}
@@ -87,14 +87,14 @@ export async function isValidAuthority(path) {
 			}
 			return true
 		} else {
-			const error = await swal('ERROR FOUND', 'RESTRICTED ACCESS', 'error')
+			const error = await Swal.fire('Restricted Access', 'You must login first!', 'error')
 			if (error) {
 				window.location.assign('/')
 			}
 			return false
 		}
 	} catch (e) {
-		const error = await swal('ERROR FOUND', 'NO USER FOUND', 'error')
+		const error = await Swal.fire('Restricted Access', 'You must login first!', 'error')
 		if (error) {
 			window.location.assign('/')
 		}

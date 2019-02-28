@@ -32,6 +32,7 @@ export default function reducer(state = initialState, action) {
 		case 'STAFF_FORM_VISIBILITY':
 			return {
 				...state,
+				initialValues: {},
 				staffFormVisibility: action.payload
 			}
 		case 'STAFF_PROFILE_VISIBILITY':
@@ -52,6 +53,7 @@ export default function reducer(state = initialState, action) {
 		case 'EDIT_STAFF_PROFILE':
 			const staff = action.payload
 			delete staff.password
+			// alert(JSON.stringify(staff))
 			return {
 				...state,
 				initialValues: staff,
