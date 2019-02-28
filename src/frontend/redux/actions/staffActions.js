@@ -30,11 +30,17 @@ export function createStaff(staff) {
 			dispatch(reset('createStaffForm'))
 			dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
 		}
+		dispatch(reset('createStaffForm'))
+		iziToast.success({
+			title: 'SUCCESS',
+			message: 'New staff added successfully!',
+			position: 'topRight'
+		})
+		dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
 	}
 }
 
 export function removeStaff(staff) {
-	console.log(staff)
 	return async dispatch => {
 		try {
 			await app.service(staffApi).remove(staff._id)
@@ -49,7 +55,11 @@ export function removeStaff(staff) {
 
 export function fetchStaff() {
 	return async dispatch => {
+<<<<<<< Updated upstream
 		const check = isValidAuthority('/staff')
+=======
+		const check = await isValidAuthority(user, '/staff')
+>>>>>>> Stashed changes
 		if (check) {
 			dispatch({ type: 'FETCHING_STAFF' })
 
@@ -89,6 +99,12 @@ export function saveImage(imageString) {
 	}
 }
 
+export function editStaffProfile(staff) {
+	return dispatch => {
+		dispatch({ type: 'EDIT_STAFF_PROFILE', payload: staff })
+	}
+}
+
 export function clearImage() {
 	return dispatch => {
 		dispatch({ type: 'CLEAR_IMAGE' })
@@ -107,9 +123,9 @@ export function toggleProfileVisibility(isVisible) {
 	}
 }
 
-export function setClickedStaffId(id) {
+export function setClickedStaff(staff) {
 	return dispatch => {
-		dispatch({ type: 'SET_CLICKED_STAFF_ID', payload: id })
+		dispatch({ type: 'SET_CLICKED_STAFF_ID', payload: staff })
 	}
 }
 

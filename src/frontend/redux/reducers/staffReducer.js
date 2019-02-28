@@ -12,7 +12,8 @@ const initialState = {
 	croppedImage: null,
 	croppedAreaPixels: null,
 	type: 'all',
-	loginChecked: false
+	loginChecked: false,
+	initialValues: {}
 }
 
 export default function reducer(state = initialState, action) {
@@ -47,6 +48,15 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				isFetching: true
+			}
+		case 'EDIT_STAFF_PROFILE':
+			const staff = action.payload
+			delete staff.password
+			return {
+				...state,
+				initialValues: staff,
+				staffFormVisibility: true,
+				croppedImage: staff.image
 			}
 		case 'FETCHING_STAFF_SUCCESS':
 			return {

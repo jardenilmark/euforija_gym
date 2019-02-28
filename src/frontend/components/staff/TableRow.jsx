@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Header, Image, Button, Popup } from 'semantic-ui-react'
+import { editStaffProfile } from '../../redux/actions/staffActions'
 
 const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility, setClickedStaff, staff) => {
 	toggleFormVisibility(false)
@@ -12,7 +13,8 @@ const TableExampleCollapsing = ({
 	toggleProfileVisibility,
 	setClickedStaff,
 	toggleFormVisibility,
-	removeStaff
+	removeStaff,
+	editStaffProfile
 }) => {
 	return (
 		<Table.Row>
@@ -48,7 +50,13 @@ const TableExampleCollapsing = ({
 					content={'edit staff'}
 					inverted
 					trigger={
-						<Button icon={'edit outline'} circular floated={'right'} style={styles.button} />
+						<Button
+							icon={'edit outline'}
+							circular
+							floated={'right'}
+							style={styles.button}
+							onClick={() => editStaffProfile(staff)}
+						/>
 					}
 				/>
 				<Popup

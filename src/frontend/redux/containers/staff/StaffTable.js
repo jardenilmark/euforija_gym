@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import StaffTable from '../../../components/staff/StaffTable'
-import { fetchStaff, removeStaff, clearProfile } from '../../actions/staffActions'
+import { fetchStaff, removeStaff, clearProfile, editStaffProfile } from '../../actions/staffActions'
 
 function mapStateToProps(state) {
 	return {
@@ -19,6 +19,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		clearStaffProfile() {
 			dispatch(clearProfile())
+		},
+		editStaffProfile(staff) {
+			dispatch(editStaffProfile(staff))
 		}
 	}
 }

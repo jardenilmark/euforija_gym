@@ -35,7 +35,7 @@ const StaffPage = props => {
 				<StaffTable
 					toggleProfileVisibility={props.toggleProfileVisibility}
 					toggleFormVisibility={props.toggleFormVisibility}
-					setClickedStaff={props.setClickedStaffId}
+					setClickedStaff={props.setClickedStaff}
 				/>
 			</Grid.Column>
 			<Grid.Column width={8}>

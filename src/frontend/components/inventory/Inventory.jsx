@@ -104,7 +104,7 @@ class Inventory extends React.Component {
 					</Menu.Item>
 				</Menu>
 				<div>
-					<Table celled unstackable striped fixed>
+					<Table celled unstackable fixed>
 						<Table.Header>
 							<Table.Row textAlign={'center'} style={styles.tableHeader}>
 								<Table.HeaderCell>Name</Table.HeaderCell>
@@ -116,7 +116,7 @@ class Inventory extends React.Component {
 					</Table>
 				</div>
 				<div style={styles.div}>
-					<Table celled unstackable striped fixed>
+					<Table celled unstackable fixed>
 						<Table.Body>
 							<TableRows {...this.props} />
 						</Table.Body>

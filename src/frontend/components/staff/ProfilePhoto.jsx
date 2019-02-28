@@ -10,12 +10,11 @@ class ProfilePhoto extends React.Component {
 
 	capture = () => {
 		const img = this.webcam.getScreenshot()
-		console.log('image', img)
 		this.props.saveImage(img)
 	}
 
 	render() {
-		const hasCaptured = this.props.image ? true : false
+		const hasCaptured = this.props.image || this.props.croppedImage ? true : false
 		const image = this.props.croppedImage ? this.props.croppedImage : this.props.image
 		return (
 			<div style={styles.outerDiv}>

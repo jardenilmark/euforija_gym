@@ -32,6 +32,7 @@ class StaffTable extends React.Component {
 							setClickedStaff={this.props.setClickedStaff}
 							removeStaff={this.props.removeStaff}
 							clearStaffProfile={this.props.clearStaffProfile}
+							editStaffProfile={this.props.editStaffProfile}
 						/>
 					)
 				})

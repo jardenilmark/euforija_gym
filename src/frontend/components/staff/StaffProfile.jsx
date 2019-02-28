@@ -1,9 +1,9 @@
 import React from 'react'
-import { Segment, Image, Header, Loader, Icon, Divider } from 'semantic-ui-react'
+import { Segment, Image, Header, Icon, Divider } from 'semantic-ui-react'
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader'
 
-const StaffProfile = props => {
-	const staff = props.clickedStaff
+const StaffProfile = ({ clickedStaff }) => {
+	const staff = clickedStaff
 
 	return (
 		<Segment basic style={{ padding: 40 }}>

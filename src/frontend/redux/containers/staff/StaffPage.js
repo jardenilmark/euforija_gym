@@ -4,7 +4,7 @@ import {
 	createStaff,
 	toggleFormVisibility,
 	toggleProfileVisibility,
-	setClickedStaffId,
+	setClickedStaff,
 	saveImage,
 	clearImage,
 	fetchStaff
@@ -43,8 +43,8 @@ function mapDispatchToProps(dispatch) {
 		toggleProfileVisibility(isVisible) {
 			dispatch(toggleProfileVisibility(isVisible))
 		},
-		setClickedStaffId(id) {
-			dispatch(setClickedStaffId(id))
+		setClickedStaff(staff) {
+			dispatch(setClickedStaff(staff))
 		},
 		saveImage(imageString) {
 			dispatch(saveImage(imageString))
