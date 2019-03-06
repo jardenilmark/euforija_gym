@@ -59,16 +59,7 @@ export const selectStaff = staff => async dispatch => {
 
 export const computeSalary = (from, to, rate, staff) => async dispatch => {
 	try {
-		dispatch({ type: 'FETCHING_DATES' })
-		const dates = await app.service(attendanceApi).find({
-			query: {
-				user: staff._id,
-				date: {
-					$gte: new Date(from),
-					$lte: new Date(to)
-				}
-			}
-		})
+		const dates = await dispatch(fetchRange(from, to, staff))
 		rate = rate > 0 ? rate : 0
 		const hours = dateHelper.solveHours(dates)
 		const salary = dateHelper.solveGrossSalary(hours, rate)
@@ -80,6 +71,30 @@ export const computeSalary = (from, to, rate, staff) => async dispatch => {
 				rate
 			}
 		})
+	} catch (e) {
+		dispatch({
+			type: 'COMPUTE_SALARY_FAILURE',
+			payload: e
+		})
+	}
+}
+
+export const fetchRange = (from, to, staff) => async dispatch => {
+	try {
+		dispatch({ type: 'FETCHING_DATES' })
+		const dates = await app.service(attendanceApi).find({
+			query: {
+				user: staff._id,
+				date: {
+					$gte: new Date(from),
+					$lte: new Date(to)
+				}
+			}
+		})
+		dispatch({
+			type: 'FETCHING_DATES_SUCCESS'
+		})
+		return dates
 	} catch (e) {
 		dispatch({
 			type: 'FETCHING_DATES_FAILURE',
