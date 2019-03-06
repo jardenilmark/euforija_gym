@@ -1,6 +1,11 @@
 const initialState = {
 	staffs: [],
-	selectedStaff: null
+	selectedStaff: null,
+	salary: 0,
+	from: new Date(),
+	to: new Date(),
+	rate: 0,
+	hours: 0
 }
 
 export default function reducer(state = initialState, action) {
@@ -15,6 +20,19 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				selectedStaff: action.payload
+			}
+		case 'PASS_DATES_PROPS':
+			return {
+				...state,
+				from: new Date(action.payload.from.toDateString()),
+				to: action.payload.to
+			}
+		case 'COMPUTE_SALARY':
+			return {
+				...state,
+				salary: action.payload.salary,
+				hours: action.payload.hours.toFixed(2),
+				rate: action.payload.rate
 			}
 		default:
 			return state
