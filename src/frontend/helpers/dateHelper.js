@@ -15,23 +15,25 @@ export const removeUnpaired = dates => {
 	const pairedDates = []
 	const firstIndex = dates.findIndex(date => date.type === 'in')
 	let status = 'in'
-	for (let i = firstIndex; i < dates.length - 1; i++) {
-		if (dates[i].type === status) {
-			if (dates[i].type === 'in' && dates[i + 1].type === 'out') {
-				pairedDates.push(dates[i])
-				status = 'out'
-			} else if (dates[i].type === 'out' && dates[i + 1].type === 'in') {
-				pairedDates.push(dates[i])
-				status = 'in'
+	if (dates.length) {
+		for (let i = firstIndex; i < dates.length - 1; i++) {
+			if (dates[i].type === status) {
+				if (dates[i].type === 'in' && dates[i + 1].type === 'out') {
+					pairedDates.push(dates[i])
+					status = 'out'
+				} else if (dates[i].type === 'out' && dates[i + 1].type === 'in') {
+					pairedDates.push(dates[i])
+					status = 'in'
+				}
 			}
 		}
-	}
-	pairedDates.push(dates[dates.length - 1])
-	if (
-		pairedDates[pairedDates.length - 1].type === 'in' ||
-		pairedDates[pairedDates.length - 1].type === pairedDates[pairedDates.length - 2].type
-	) {
-		pairedDates.pop()
+		pairedDates.push(dates[dates.length - 1])
+		if (
+			pairedDates[pairedDates.length - 1].type === 'in' ||
+			pairedDates[pairedDates.length - 1].type === pairedDates[pairedDates.length - 2].type
+		) {
+			pairedDates.pop()
+		}
 	}
 	return pairedDates
 }
@@ -39,7 +41,6 @@ export const removeUnpaired = dates => {
 export const solveHours = dates => {
 	let timeRendered = 0
 	dates = removeUnpaired(dates)
-	console.log(dates)
 	for (let i = 0; i < dates.length; i += 2) {
 		timeRendered += date.differenceInSeconds(new Date(dates[i + 1].date), new Date(dates[i].date))
 	}

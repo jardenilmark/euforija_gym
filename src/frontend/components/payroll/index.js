@@ -3,6 +3,7 @@ import { Grid, Container } from 'semantic-ui-react'
 import Profile from '../../redux/containers/payroll/ProfileContainer'
 import Search from '../../redux/containers/payroll/SearchContainer'
 import StaffList from '../../redux/containers/payroll/StaffListContainer'
+import Data from './Data'
 
 const Payroll = () => (
 	<Container>
@@ -15,7 +16,9 @@ const Payroll = () => (
 				<Grid.Row style={styles.listRow}>
 					<StaffList />
 				</Grid.Row>
-				<Grid.Row style={styles.dataRow} />
+				<Grid.Row style={styles.dataRow}>
+					<Data />
+				</Grid.Row>
 			</Grid.Column>
 		</Grid>
 	</Container>
@@ -30,13 +33,13 @@ const styles = {
 		height: '100%'
 	},
 	listRow: {
-		height: '10%',
+		height: '100px',
 		alignItems: 'center',
-		justifyContents: 'center',
+		justifyContent: 'center',
 		display: 'flex'
 	},
 	dataRow: {
-		height: '90%'
+		height: '100%'
 	}
 }
 
