@@ -48,3 +48,21 @@ export const solveHours = dates => {
 }
 
 export const solveGrossSalary = (hours, rate) => (hours * rate).toFixed(2)
+
+export const pairDates = dates => {
+	dates = dates.sort(sortDate)
+	const pairedDates = []
+	let status = ''
+	dates.forEach(date => {
+		if (status !== date.type) {
+			if (date.type === 'in') {
+				pairedDates.push([date])
+			} else {
+				pairedDates[pairedDates.length - 1].push(date)
+			}
+		} else {
+			pairedDates.push([date])
+		}
+	})
+	return pairedDates
+}
