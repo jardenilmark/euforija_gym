@@ -54,7 +54,6 @@ const DateForm = props => {
 const styles = {
 	segment: {
 		marginTop: '10px',
-		height: '50px',
 		padding: 0
 	},
 	date: {
@@ -78,7 +77,9 @@ const styles = {
 	box: {
 		padding: '0 5px 0 5px',
 		borderBottom: '1px solid grey',
-		borderTop: '1px solid grey'
+		borderTop: '1px solid grey',
+		fontSize: '20px',
+		fontWeight: '600'
 	},
 	calc: {
 		marginTop: '20px',
@@ -90,7 +91,7 @@ const styles = {
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'center',
-		fontSize: '20px'
+		fontSize: '30px'
 	}
 }
 
