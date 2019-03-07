@@ -41,9 +41,7 @@ const TimeLogs = props => {
 
 const styles = {
 	main: {
-		marginTop: '50px'
-	},
-	text: {
+		marginTop: '50px',
 		fontSize: '20px',
 		textAlign: 'center'
 	}
