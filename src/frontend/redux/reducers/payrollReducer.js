@@ -5,7 +5,8 @@ const initialState = {
 	from: new Date(),
 	to: new Date(),
 	rate: 0,
-	hours: 0
+	hours: 0,
+	dates: []
 }
 
 export default function reducer(state = initialState, action) {
@@ -33,6 +34,11 @@ export default function reducer(state = initialState, action) {
 				salary: action.payload.salary,
 				hours: action.payload.hours.toFixed(2),
 				rate: action.payload.rate
+			}
+		case 'FETCHING_DATES_SUCCESS':
+			return {
+				...state,
+				dates: action.payload
 			}
 		default:
 			return state

@@ -92,7 +92,8 @@ export const fetchRange = (from, to, staff) => async dispatch => {
 			}
 		})
 		dispatch({
-			type: 'FETCHING_DATES_SUCCESS'
+			type: 'FETCHING_DATES_SUCCESS',
+			payload: dates
 		})
 		return dates
 	} catch (e) {
