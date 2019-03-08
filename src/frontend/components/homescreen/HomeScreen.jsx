@@ -57,9 +57,9 @@ class HomeScreen extends Component {
 							</Header>
 						</Menu.Item>
 						<Menu.Item style={styles.item}>
-							<Button animated fluid style={styles.logout} size={'huge'}>
+							<Button animated fluid style={styles.logout} size={'huge'} onClick={e => logout()}>
 								<Button.Content visible>Logout</Button.Content>
-								<Button.Content hidden onClick={e => logout()}>
+								<Button.Content hidden>
 									<Icon name={'arrow right'} />
 								</Button.Content>
 							</Button>
