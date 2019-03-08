@@ -23,7 +23,8 @@ function mapStateToProps(state) {
 		personal: state.student.personal,
 		health: state.student.health,
 		trainer: state.student.trainer,
-		paymentMethod: state.student.paymentMethod
+		paymentMethod: state.student.paymentMethod,
+		croppedImage: state.student.croppedImage
 	}
 }
 

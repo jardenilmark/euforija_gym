@@ -1,6 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { Form, Button, Container, Input, Header, Card, Divider } from 'semantic-ui-react'
+import { Form, Button, Container, Input, Header, Segment, Divider } from 'semantic-ui-react'
 
 const mapArray = array => {
 	return array.map(e => {
@@ -37,22 +37,22 @@ const mapArray = array => {
 }
 
 const healthIndexArray = [
-	{ question: 'Do you have joint/bone deformities?' },
+	{ question: 'Do you have joint or bone deformities?' },
 	{ question: 'Do you suffer from chest pain?' },
 	{
-		question: 'Do you have smoke regularly?',
-		followUp: 'If yes, how many sticks?'
+		question: 'Do you smoke regularly?',
+		followUp: 'If yes, how many sticks of cigarettes?'
 	}
 ]
 const healthProblemArray = [
-	{ question: 'High blood pressure' },
-	{ question: 'Arthritis/Gout' },
-	{ question: 'Urinary/Kidney Problem' },
+	{ question: 'High blood Pressure' },
+	{ question: 'Arthritis or Gout' },
+	{ question: 'Urinary or Kidney Problems' },
 	{ question: 'Have you been hospitalized?' },
-	{ question: 'Recently?', followUp: 'For what reason?' },
+	{ question: 'Recently?', followUp: 'For what reason/s?' },
 	{ question: 'Do you exercise?' },
-	{ question: 'Less than 2x a week?' },
-	{ question: '3-4x a week?', followUp: 'Specify exercise type' },
+	{ question: 'Less than 2 times a week?' },
+	{ question: '3 to 4 times a week?', followUp: 'Specify the type of exercise' },
 	{ question: 'Any problems or pains relating to this activity?' },
 	{ question: 'Heart Disease' },
 	{ question: 'Diabetes' }
@@ -62,19 +62,22 @@ const HealthPage = props => {
 	const { handleSubmit, pristine, submitting } = props
 	return (
 		<Form onSubmit={handleSubmit}>
-			<Card style={style.card}>
+			<Segment style={style.segment} basic>
 				<div style={style.div}>
 					<Divider />
-					<Header textAlign={'center'}>HEALTH INDEX QUESTIONAIRE</Header>
+					<Header textAlign={'center'}>Health Index Questionnaire</Header>
 					<Divider />
 					{mapArray(healthIndexArray)}
 					<Divider />
-					<Header textAlign={'center'}>DO YOU HAVE HEALTH PROBLEMS?</Header>
+					<Header textAlign={'center'}>Do you exhibit any health-related problems?</Header>
 					<Divider />
 					{mapArray(healthProblemArray)}
 				</div>
-			</Card>
-			<Container textAlign={'right'} style={style.container}>
+			</Segment>
+			<Container textAlign={'right'} style={style.buttonContainer}>
+				<Button type={'button'} onClick={() => props.setActiveForm('personal')}>
+					Previous
+				</Button>
 				<Button type={'submit'} disabled={pristine || submitting}>
 					Next
 				</Button>
@@ -90,16 +93,18 @@ const style = {
 	label: {
 		marginLeft: 10
 	},
-	card: {
-		width: '100%'
+	segment: {
+		width: '100%',
+		height: '650px',
+		overflowY: 'auto'
 	},
 	div: {
 		marginBottom: '8px',
 		paddingLeft: '4%',
 		paddingRight: '4%'
 	},
-	container: {
-		paddingTop: '20px'
+	buttonContainer: {
+		paddingTop: 20
 	}
 }
 
