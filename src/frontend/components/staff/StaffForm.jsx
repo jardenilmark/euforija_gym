@@ -2,7 +2,7 @@ import { DropdownField } from '../custom/Dropdown'
 import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Label, Header, Segment, Divider, Container, Icon } from 'semantic-ui-react'
-import ProfilePhoto from './ProfilePhoto'
+import ProfilePhoto from '../custom/ProfilePhoto'
 
 const genderOptions = [
 	{
@@ -17,8 +17,16 @@ const genderOptions = [
 
 const roleOptions = [
 	{
-		text: 'Coach',
-		value: 'Coach'
+		text: 'Plyometrics Coach',
+		value: 'Plyometrics Coach'
+	},
+	{
+		text: 'Weights Coach',
+		value: 'Weights Coach'
+	},
+	{
+		text: 'Boxing Coach',
+		value: 'Boxing Coach'
 	},
 	{
 		text: 'Maintenance',
@@ -35,6 +43,7 @@ const Create = props => {
 					<Icon name={'edit outline'} style={{ marginRight: '5' }} />
 					Add New Staff
 				</Label>
+				<Divider />
 				<ProfilePhoto {...props} />
 				<Divider style={styles.divider} />
 				<Form.Group widths={'equal'}>

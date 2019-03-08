@@ -4,7 +4,6 @@ import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/Hea
 
 const StaffProfile = ({ clickedStaff }) => {
 	const staff = clickedStaff
-
 	return (
 		<Segment basic style={{ padding: 40 }}>
 			<Segment basic>

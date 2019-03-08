@@ -1,5 +1,4 @@
 import React from 'react'
-import 'semantic-ui-css/semantic.min.css'
 import { Grid, Button, Icon } from 'semantic-ui-react'
 import StaffForm from '../../redux/containers/staff/StaffForm'
 import StaffProfile from './StaffProfile'
@@ -42,7 +41,9 @@ const StaffPage = props => {
 				{props.formVisibility && (
 					<StaffForm onSubmit={values => submit(values, props)} {...props} />
 				)}
-				{props.profileVisibility && <StaffProfile clickedStaff={props.clickedStaff} />}
+				{props.profileVisibility && props.clickedStaff != null && (
+					<StaffProfile clickedStaff={props.clickedStaff} />
+				)}
 			</Grid.Column>
 		</Grid>
 	)
