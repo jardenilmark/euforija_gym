@@ -2,11 +2,12 @@ import app from '../../client'
 import { generateId } from '../../helpers/idGenerator'
 import { reset } from 'redux-form'
 import { getHash } from '../../helpers/bcrypt'
-import iziToast from 'izitoast'
 import { isValidAuthority } from './loginActions'
+import iziToast from 'izitoast'
 
 const staffApi = 'api/staff'
 const fileApi = 'api/file'
+const studentApi = 'api/student'
 
 export function createStaff(staff) {
 	return async dispatch => {
@@ -29,7 +30,12 @@ export function createStaff(staff) {
 			}
 			dispatch(reset('createStaffForm'))
 			dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
-			await dispatch(fetchStaff())
+			iziToast.success({
+				title: 'SUCCESS',
+				message: 'Staff added successfully!',
+				position: 'topRight'
+			})
+			dispatch(fetchStaff())
 		}
 	}
 }
@@ -54,12 +60,24 @@ export function fetchStaff() {
 			dispatch({ type: 'FETCHING_STAFF' })
 
 			try {
-				const staffList = await app.service(staffApi).find()
+				const staffList = await app.service(staffApi).find({
+					query: {
+						role: {
+							$ne: 'Owner'
+						}
+					}
+				})
 				const images = await app.service(fileApi).find()
-				staffList.map((staff, index) => {
+				staffList.map(async (staff, index) => {
 					const image = images.find(image => image._id === staff.image)
 					staff.image = image.data
 					staff.imageId = image._id
+					const students = await app.service(studentApi).find({
+						query: {
+							trainerId: staff._id
+						}
+					})
+					staff.students = students
 				})
 				dispatch({ type: 'FETCHING_STAFF_SUCCESS', payload: staffList })
 			} catch (e) {
@@ -69,35 +87,9 @@ export function fetchStaff() {
 	}
 }
 
-export function saveImage(imageString) {
-	return dispatch => {
-		if (imageString) {
-			iziToast.success({
-				title: 'SUCCESS',
-				message: 'Image captured successfully!',
-				position: 'topRight'
-			})
-			dispatch({ type: 'SAVE_IMAGE', payload: imageString })
-			dispatch(toggleCropImageModal())
-		} else {
-			iziToast.error({
-				title: 'ERROR',
-				message: 'No image captured! Webcam might not have started yet',
-				position: 'topRight'
-			})
-		}
-	}
-}
-
 export function editStaffProfile(staff) {
 	return dispatch => {
 		dispatch({ type: 'EDIT_STAFF_PROFILE', payload: staff })
-	}
-}
-
-export function clearImage() {
-	return dispatch => {
-		dispatch({ type: 'CLEAR_IMAGE' })
 	}
 }
 
@@ -114,53 +106,8 @@ export function toggleProfileVisibility(isVisible) {
 }
 
 export function setClickedStaff(staff) {
+	console.log(staff)
 	return dispatch => {
-		dispatch({ type: 'SET_CLICKED_STAFF_ID', payload: staff })
-	}
-}
-
-export function toggleCropImageModal() {
-	return dispatch => {
-		dispatch({ type: 'TOGGLE_CROP_IMAGE_MODAL' })
-	}
-}
-
-export function onCropChange(cropCoordinates) {
-	return dispatch => {
-		dispatch({ type: 'CHANGE_CROP_VALUE', payload: cropCoordinates })
-	}
-}
-
-export function onCropComplete(croppedAreaPixels) {
-	return dispatch => {
-		dispatch({ type: 'CROP_COMPLETED', payload: croppedAreaPixels })
-	}
-}
-
-export function getCroppedImage(imgSrc, pixelCrop) {
-	const image = new Image()
-	image.src = imgSrc
-	const canvas = document.createElement('canvas')
-	canvas.width = pixelCrop.width
-	canvas.height = pixelCrop.height
-	const ctx = canvas.getContext('2d')
-
-	ctx.drawImage(
-		image,
-		pixelCrop.x,
-		pixelCrop.y,
-		pixelCrop.width,
-		pixelCrop.height,
-		0,
-		0,
-		pixelCrop.width,
-		pixelCrop.height
-	)
-
-	const base64Image = canvas.toDataURL('image/jpeg')
-
-	return dispatch => {
-		dispatch({ type: 'GET_CROPPED_IMAGE', payload: base64Image })
-		dispatch(toggleCropImageModal())
+		dispatch({ type: 'SET_CLICKED_STAFF', payload: staff })
 	}
 }
