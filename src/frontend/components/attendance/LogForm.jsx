@@ -4,7 +4,7 @@ import { Field as ReduxField } from 'redux-form'
 import { InputField } from 'react-semantic-redux-form'
 
 const LogForm = ({ handleSubmit }) => (
-	<Form as={'form'} onSubmit={handleSubmit} style={styles.form}>
+	<Form as={'form'} onSubmit={handleSubmit} style={styles.form} autocomplete={'off'}>
 		<Form.Group style={styles.fields}>
 			<Form.Field style={styles.field}>
 				<ReduxField

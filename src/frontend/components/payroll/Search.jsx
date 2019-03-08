@@ -6,7 +6,7 @@ const Search = props => (
 	<Segment basic style={styles.segment}>
 		<SearchBar
 			onSubmit={e => {
-				alert('eeee', e, 'yyyyyy')
+				console.log(e)
 			}}
 		/>
 	</Segment>

@@ -11,7 +11,7 @@ const TrainerCards = ({ trainers }) => (
 					<Image src={trainer.image} />
 					<TrainerName>
 						<TextFit mode="single" forceSingleModeWidth={false}>
-							{trainer.firstName}
+							{trainer.nickname}
 						</TextFit>
 					</TrainerName>
 				</Card>

@@ -7,7 +7,7 @@ const ProfileDisplay = ({ selectedStaff }) => (
 	<Container style={styles.main}>
 		<Image src={selectedStaff.image} style={styles.image} />
 		<Divider />
-		<Container style={styles.name}>{selectedStaff.idNumber}</Container>
+		<Container style={styles.id}>{selectedStaff.idNumber}</Container>
 		<Container style={styles.name}>
 			<TextFit max={22} min={22}>
 				{selectedStaff.firstName} {selectedStaff.lastName}
@@ -76,6 +76,11 @@ const styles = {
 	},
 	info: {
 		fontSize: '15px'
+	},
+	id: {
+		fontSize: '15px',
+		fontWeight: 'bold',
+		color: 'rgba(0,0,0,.65)'
 	},
 	name: {
 		fontWeight: '600'
