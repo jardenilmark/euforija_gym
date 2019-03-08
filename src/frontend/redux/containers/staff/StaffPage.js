@@ -5,10 +5,9 @@ import {
 	toggleFormVisibility,
 	toggleProfileVisibility,
 	setClickedStaff,
-	saveImage,
-	clearImage,
 	fetchStaff
 } from '../../actions/staffActions'
+import { saveImage, clearImage } from '../../actions/profilePhotoActions'
 import Swal from 'sweetalert2'
 
 function mapStateToProps(state) {
