@@ -108,8 +108,13 @@ export function setClickedStudent(student) {
 
 export function removeStudent(student) {
 	return async dispatch => {
-		await app.service(studentApi).remove(student._id)
-		await app.service(fileApi).remove(student.imageId)
-		dispatch({ type: 'REMOVE_STUDENT', payload: student })
+		try {
+			await app.service(studentApi).remove(student._id)
+			await app.service(fileApi).remove(student.imageId)
+			dispatch({ type: 'REMOVE_STUDENT', payload: student })
+			dispatch(fetchStudents())
+		} catch (error) {
+			console.log(error)
+		}
 	}
 }
