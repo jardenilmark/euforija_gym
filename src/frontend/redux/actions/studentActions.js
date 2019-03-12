@@ -7,6 +7,7 @@ import iziToast from 'izitoast'
 
 const studentApi = 'api/student'
 const fileApi = 'api/file'
+const staffApi = 'api/staff'
 
 export function setActiveForm(payload) {
 	return dispatch => {
@@ -74,10 +75,14 @@ export function fetchStudents() {
 				const studentsList = await app.service(studentApi).find()
 				console.log('students', studentsList)
 				const images = await app.service(fileApi).find()
-				studentsList.map((student, index) => {
+				studentsList.map(async (student, index) => {
 					const image = images.find(image => image._id === student.image)
 					student.image = image.data
 					student.imageId = image._id
+					const trainer = await app.service(staffApi).find({ query: { _id: student.trainerId } })
+					const trainerImage = images.find(image => image._id === trainer[0].image)
+					trainer[0].image = trainerImage.data
+					student.trainer = trainer[0]
 				})
 				dispatch({ type: 'FETCHING_STUDENTS_SUCCESS', payload: studentsList })
 			} catch (e) {
@@ -112,6 +117,11 @@ export function removeStudent(student) {
 			await app.service(studentApi).remove(student._id)
 			await app.service(fileApi).remove(student.imageId)
 			dispatch({ type: 'REMOVE_STUDENT', payload: student })
+			iziToast.success({
+				title: 'SUCCESS',
+				message: 'Staff removed successfully!',
+				position: 'topRight'
+			})
 			dispatch(fetchStudents())
 		} catch (error) {
 			console.log(error)

@@ -2,7 +2,7 @@ import React from 'react'
 import { Grid, Button, Icon } from 'semantic-ui-react'
 import CreateStudent from '../../redux/containers/student/CreateStudentPage'
 import StudentTable from '../../redux/containers/student/StudentTable'
-import StudentProfile from './StudentProfile'
+import StudentProfile from '../../redux/containers/student/StudentProfile'
 
 const StudentPage = props => {
 	return (
