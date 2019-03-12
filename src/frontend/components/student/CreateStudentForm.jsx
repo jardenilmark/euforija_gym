@@ -51,7 +51,7 @@ const CreateStudent = props => {
 						if (props.paymentMethod === 'partial') {
 							payment = { amount: parseInt(e.amount) }
 						}
-						createStudent({ ...trainer, ...health, ...personal, ...payment })
+						createStudent({ ...trainer, ...personal, ...payment, questionnaire: health })
 					}}
 				/>
 			</div>
