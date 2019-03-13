@@ -15,7 +15,7 @@ export function handleLogin(data) {
 		const result = await app.service(staffApi).find({
 			query: {
 				idNumber: data.idNumber,
-				$select: { password: 1, role: 1, firstName: 1, lastName: 1, image: 1 }
+				$select: { password: 1, role: 1, firstName: 1, lastName: 1, image: 1, idNumber: 1 }
 			}
 		})
 		if (result.length > 0) {

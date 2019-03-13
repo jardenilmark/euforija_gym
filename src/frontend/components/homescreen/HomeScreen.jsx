@@ -1,5 +1,16 @@
 import React, { Component } from 'react'
-import { Menu, Header, Icon, Card, Image, Sidebar, Button, Loader } from 'semantic-ui-react'
+import {
+	Menu,
+	Header,
+	Icon,
+	Card,
+	Image,
+	Sidebar,
+	Button,
+	Loader,
+	Divider,
+	Label
+} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class HomeScreen extends Component {
@@ -12,10 +23,6 @@ class HomeScreen extends Component {
 	render() {
 		const { loginChecked, userLogin, logout } = this.props
 		if (loginChecked && userLogin) {
-			const icons =
-				userLogin.role === 'Owner'
-					? ['unordered list', 'shopping cart', 'users', 'users', 'columns', 'chart area']
-					: ['shopping cart', 'users', 'columns']
 			const contents =
 				userLogin.role === 'Owner'
 					? ['Inventory', 'Sales', 'Staff', 'Students', 'Payroll', 'Income Reports']
@@ -24,15 +31,26 @@ class HomeScreen extends Component {
 				userLogin.role === 'Owner'
 					? ['/inventory', '/sales', '/staff', '/student', '/payroll', '/income-report']
 					: ['/sales', '/student', '/payroll']
+			const images =
+				userLogin.role === 'Owner'
+					? [
+							'cart.png',
+							'receipt.png',
+							'collaboration.png',
+							'network.png',
+							'check.png',
+							'presentation.png'
+					  ]
+					: ['receipt.png', 'network.png', 'check.png']
 			// TODO: fix responsiveness!
 
-			const cards = icons.map((icon, index) => {
+			const cards = images.map((image, index) => {
+				const imgSrc = './assets/images/' + image
 				return (
-					<Card raised as={Link} to={paths[index]} key={index} color={'blue'}>
+					<Card raised as={Link} to={paths[index]} key={index} style={{ height: 420 }}>
 						<Card.Content textAlign={'center'}>
-							<Icon name={icon} size={'massive'} />
-							<br />
-							<br />
+							<Image src={imgSrc} size={'medium'} centered id={'img'} />
+							<Divider style={{ marginBottom: 30 }} />
 							<label style={styles.cardLabel}>{contents[index]}</label>
 						</Card.Content>
 					</Card>
@@ -40,24 +58,26 @@ class HomeScreen extends Component {
 			})
 
 			return (
-				<div style={styles.div}>
+				<div>
 					<Sidebar
 						as={Menu}
 						icon={'labeled'}
 						vertical
 						visible
-						width={'wide'}
+						animation={'push'}
 						borderless
 						style={styles.sidebar}>
-						<Menu.Item>
+						<Menu.Item fitted>
+							<Image src={'./assets/images/loginLogo.png'} size={'medium'} centered />
+							<Divider />
 							<Image src={userLogin.image} size={'small'} circular centered />
-							<Header as={'h2'} style={styles.user}>
+							<Header as={'h1'} style={styles.user}>
 								{userLogin.firstName} {userLogin.lastName}
 								<Header.Subheader>{userLogin.role}</Header.Subheader>
 							</Header>
 						</Menu.Item>
 						<Menu.Item style={styles.item}>
-							<Button animated fluid style={styles.logout} size={'huge'} onClick={e => logout()}>
+							<Button animated fluid style={styles.logout} size={'massive'} onClick={e => logout()}>
 								<Button.Content visible>Logout</Button.Content>
 								<Button.Content hidden>
 									<Icon name={'arrow right'} />
@@ -67,7 +87,7 @@ class HomeScreen extends Component {
 					</Sidebar>
 					<Sidebar.Pusher>
 						<div style={styles.cardsContainer}>
-							<Card.Group itemsPerRow={2} style={styles.cards}>
+							<Card.Group itemsPerRow={3} style={styles.cards}>
 								{cards}
 							</Card.Group>
 						</div>
@@ -81,28 +101,25 @@ class HomeScreen extends Component {
 }
 
 const styles = {
-	div: {
-		height: '100%'
-	},
 	loader: {
 		height: '100vh',
 		width: '100vh'
 	},
 	cardsContainer: {
-		marginRight: 350
+		marginRight: 230,
+		paddingTop: 50,
+		height: '100%'
 	},
 	sidebar: {
-		paddingTop: 15
-	},
-	header: {
-		margin: 0,
-		marginTop: 10,
-		fontSize: '70px',
-		textAlign: 'center'
+		paddingTop: 15,
+		padding: 0,
+		width: 300
 	},
 	user: {
 		margin: 0,
-		marginTop: 8
+		marginTop: 15,
+		fontFamily: 'Code',
+		fontWeight: 'bold'
 	},
 	item: {
 		padding: 0,
@@ -111,18 +128,18 @@ const styles = {
 		width: '100%'
 	},
 	logout: {
-		borderRadius: 0
+		borderRadius: 0,
+		fontFamily: 'Lane'
 	},
 	cards: {
 		marginLeft: '5%',
-		marginRight: '5%',
-		height: '70%',
-		paddingTop: '10%',
-		paddingBottom: '10%'
+		marginRight: '5%'
 	},
 	cardLabel: {
-		fontSize: '50px',
-		fontWeight: 'bold'
+		fontSize: '60px',
+		fontFamily: 'Lane',
+		fontWeight: 'bolder',
+		color: 'black'
 	}
 }
 
