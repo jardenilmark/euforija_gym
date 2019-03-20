@@ -12,7 +12,7 @@ class Student extends Model {
       contactNumber: Joi.string().regex(/[0-9]*$/).max(11).required(),
 			address: Joi.string().required(),
       password: Joi.string().alphanum().min(8).required(),
-			// image: faker.image.avatar()
+			image: Joi.string().base64().required(),
     }
   }
 }

@@ -13,7 +13,7 @@ class Staff extends Model {
       address: Joi.string().required(),
       role: Joi.any().valid(['Coach', 'Maintenance']).required(),
       password: Joi.string().alphanum().min(8).required(),
-      // image: faker.image.avatar(),
+      image: Joi.string().base64().required(),
       status: Joi.any().valid(['in', 'out']).required()
     }
   }
