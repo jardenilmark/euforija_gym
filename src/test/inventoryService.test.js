@@ -20,7 +20,6 @@ describe('inventoryService', () => {
     serviceStub.mockReturnValue({
       create: createStub,
       find: findStub,
-      update: updateStub,
     })
 
     test('creates a new inventory item', () => {
