@@ -1,5 +1,16 @@
-import { Table, Button, Label, Image, Popup, Message } from 'semantic-ui-react'
+import {
+	Table,
+	Button,
+	Label,
+	Image,
+	Popup,
+	Header,
+	Segment,
+	Icon,
+	Loader
+} from 'semantic-ui-react'
 import React from 'react'
+import NumberFormat from 'react-number-format'
 
 const TableRows = ({
 	inventory,
@@ -7,28 +18,30 @@ const TableRows = ({
 	setModalState,
 	setFormValues,
 	setFormId,
-	setImageId
+	setImageId,
+	isFetchingInventory,
+	isFilteringInventory
 }) => {
 	const arr = filteredInv.length > 0 ? filteredInv : inventory
-	if (arr.length === 0) {
-		return (
-			<Message negative size={'big'}>
-				<Message.Header>
-					<b>Inventory is empty!</b>
-				</Message.Header>
-				<p>
-					No item has been added to the inventory.{' '}
-					<b onClick={() => setModalState(true, 'ADD_FORM_STATE')} style={styles.cursor}>
-						Click here
-					</b>{' '}
-					to add one.
-				</p>
-			</Message>
-		)
+	if (isFetchingInventory) {
+		return <Loader active content={'Fetching Items...'} size={'huge'} />
+	} else if (isFilteringInventory) {
+		return <Loader active content={'Executing Search...'} size={'huge'} />
+	} else {
+		if (arr.length === 0) {
+			return (
+				<Segment placeholder style={{ border: 'dotted 5px' }} size={'big'}>
+					<Header icon>
+						<Icon name="exclamation circle" color={'red'} />
+						<Header.Content>No item has been added to the inventory.</Header.Content>
+						<Header.Content>Click the button above to start adding items.</Header.Content>
+					</Header>
+				</Segment>
+			)
+		}
 	}
 
 	return arr.map((item, index) => {
-		console.log(item.image)
 		return (
 			<Table.Row key={item._id} negative={item.quantity < 5}>
 				<Table.Cell style={styles.text}>
@@ -41,12 +54,25 @@ const TableRows = ({
 					{item.name}
 				</Table.Cell>
 				<Table.Cell style={styles.text} textAlign={'center'}>
-					{item.quantity}
+					<Label style={styles.text}>
+						{item.quantity}
+						<Label.Detail>{item.unit}</Label.Detail>
+					</Label>
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>
 					<Label tag style={styles.text}>
-						₱ {item.price}
-						.00
+						<NumberFormat
+							value={item.price}
+							displayType={'text'}
+							thousandSeparator={true}
+							prefix={'₱ '}
+							renderText={value => (
+								<b>
+									{value}
+									.00
+								</b>
+							)}
+						/>
 					</Label>
 				</Table.Cell>
 				<Table.Cell textAlign={'center'}>
@@ -84,9 +110,6 @@ const styles = {
 	text: {
 		fontSize: 16,
 		fontWeight: 'bold'
-	},
-	cursor: {
-		cursor: 'pointer'
 	}
 }
 

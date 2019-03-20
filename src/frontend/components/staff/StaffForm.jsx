@@ -2,7 +2,7 @@ import { DropdownField } from '../custom/Dropdown'
 import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Label, Header, Segment, Divider, Container, Icon } from 'semantic-ui-react'
-import ProfilePhoto from './ProfilePhoto'
+import ProfilePhoto from '../custom/ProfilePhoto'
 
 const genderOptions = [
 	{
@@ -17,8 +17,16 @@ const genderOptions = [
 
 const roleOptions = [
 	{
-		text: 'Coach',
-		value: 'Coach'
+		text: 'Plyometrics Coach',
+		value: 'Plyometrics Coach'
+	},
+	{
+		text: 'Weights Coach',
+		value: 'Weights Coach'
+	},
+	{
+		text: 'Boxing Coach',
+		value: 'Boxing Coach'
 	},
 	{
 		text: 'Maintenance',
@@ -29,14 +37,15 @@ const roleOptions = [
 const Create = props => {
 	const { handleSubmit, pristine, submitting } = props
 	return (
-		<Form onSubmit={handleSubmit}>
-			<Segment style={{ margin: '30' }} basic>
-				<Label size={'huge'} attached={'top'} basic style={{ border: 'none', padding: 10 }}>
+		<Form onSubmit={values => handleSubmit(values)}>
+			<Segment style={styles.segment} basic>
+				<Label size={'huge'} attached={'top'} basic style={styles.headerLabel}>
 					<Icon name={'edit outline'} style={{ marginRight: '5' }} />
 					Add New Staff
 				</Label>
-				<ProfilePhoto />
-				<Divider style={{ marginBottom: '30' }} />
+				<Divider />
+				<ProfilePhoto {...props} />
+				<Divider style={styles.divider} />
 				<Form.Group widths={'equal'}>
 					<div style={styles.field}>
 						<label>
@@ -64,6 +73,20 @@ const Create = props => {
 					</div>
 					<div style={styles.field}>
 						<label>
+							<Header size={'tiny'}>Nickname</Header>
+						</label>
+						<Field
+							name={'nickname'}
+							component={'input'}
+							label={'Nickname'}
+							placeholder={'Nickname'}
+							required
+						/>
+					</div>
+				</Form.Group>
+				<Form.Group>
+					<div style={styles.field}>
+						<label>
 							<Header size={'tiny'}>Gender</Header>
 						</label>
 						<Field
@@ -74,8 +97,6 @@ const Create = props => {
 							required
 						/>
 					</div>
-				</Form.Group>
-				<Form.Group>
 					<div style={styles.field}>
 						<label>
 							<Header size={'tiny'}>Birth date</Header>
@@ -85,18 +106,6 @@ const Create = props => {
 							component={'input'}
 							type={'date'}
 							placeholder={'Birth date'}
-							required
-						/>
-					</div>
-					<div style={styles.field}>
-						<label>
-							<Header size={'tiny'}>Contact number</Header>
-						</label>
-						<Field
-							name={'contactNumber'}
-							component={'input'}
-							type={'text'}
-							placeholder={'Contact number'}
 							required
 						/>
 					</div>
@@ -125,6 +134,18 @@ const Create = props => {
 							component={DropdownField}
 							label={'Role'}
 							options={roleOptions}
+							required
+						/>
+					</div>
+					<div style={styles.field}>
+						<label>
+							<Header size={'tiny'}>Contact number</Header>
+						</label>
+						<Field
+							name={'contactNumber'}
+							component={'input'}
+							type={'text'}
+							placeholder={'Contact number'}
 							required
 						/>
 					</div>
@@ -172,6 +193,17 @@ const styles = {
 	},
 	label: {
 		margin: 0
+	},
+	segment: {
+		margin: '30'
+	},
+	headerLabel: {
+		border: 'none',
+		padding: 10
+	},
+	divider: {
+		marginBottom: 30,
+		marginTop: 50
 	}
 }
 

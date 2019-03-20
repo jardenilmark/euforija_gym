@@ -1,11 +1,16 @@
 import React from 'react'
 import { ProfileSegment, ProfileImage, Name } from './AttendanceStyled'
-import logo from '../../../../public/assets/images/profilelogo.png'
+import TextFit from 'react-textfit'
+import logo from '../../../../public/assets/images/purple.png'
 
-const Profile = () => (
+const Profile = ({ loggedUser }) => (
 	<ProfileSegment raised>
-		<ProfileImage src={logo} />
-		<Name>Firstname Lastname</Name>
+		<ProfileImage src={loggedUser ? loggedUser.image : logo} circular />
+		<Name>
+			<TextFit mode="single">
+				{loggedUser ? `${loggedUser.firstName} ${loggedUser.lastName}` : 'Welcome to Euforija'}
+			</TextFit>
+		</Name>
 	</ProfileSegment>
 )
 

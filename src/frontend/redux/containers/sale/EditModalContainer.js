@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { setModalState, addItemOverview } from '../../actions/saleAction'
+import { setModalState, addItem } from '../../actions/saleActions'
 import PurchaseModal from '../../../components/sale/PurchaseModal'
 
 function mapStateToProps(state) {
@@ -15,7 +15,7 @@ function mapDispatchToProps(dispatch) {
 			dispatch(setModalState(state))
 		},
 		addItemOverview(item, quantity) {
-			dispatch(addItemOverview(item, quantity))
+			dispatch(addItem(item, quantity))
 		}
 	}
 }

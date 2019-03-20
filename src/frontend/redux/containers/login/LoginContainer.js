@@ -1,9 +1,10 @@
 import { connect } from 'react-redux'
-import { handleLogin } from '../../actions/loginActions'
+import { handleLogin, hasJWT } from '../../actions/loginActions'
 import Login from '../../../components/login/Login'
 
 const mapDispatchToProps = dispatch => ({
-	handleLogin: async values => dispatch(handleLogin(values))
+	handleLogin: async values => dispatch(handleLogin(values)),
+	hasJWT: () => dispatch(hasJWT())
 })
 export default connect(
 	null,

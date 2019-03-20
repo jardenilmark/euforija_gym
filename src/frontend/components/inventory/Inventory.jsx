@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Menu, Container, Table, Button, Icon, Header } from 'semantic-ui-react'
+import { Input, Menu, Container, Table, Button, Icon, Header, Popup } from 'semantic-ui-react'
 import { onSubmit } from '../../helpers/inventoryHelper'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
@@ -8,7 +8,8 @@ import TableRows from './TableRows'
 
 class Inventory extends React.Component {
 	componentDidMount() {
-		this.props.getInventory()
+		const { getInventory } = this.props
+		getInventory()
 	}
 
 	render() {
@@ -26,32 +27,50 @@ class Inventory extends React.Component {
 					<Menu.Item header>SEARCH BY</Menu.Item>
 					<Menu.Item>
 						<Button.Group size={'medium'}>
-							<Button
-								compact
-								positive={activeItem === 'name'}
-								onClick={() => setActiveItem('name')}>
-								Name
-							</Button>
+							<Popup
+								trigger={
+									<Button
+										compact
+										positive={activeItem === 'name'}
+										onClick={() => setActiveItem('name')}>
+										Name
+									</Button>
+								}
+								content={'filters items by fuzzy name search'}
+								inverted
+							/>
 							<Button.Or />
-							<Button
-								compact
-								positive={activeItem === 'quantity'}
-								onClick={() => setActiveItem('quantity')}>
-								Quantity
-							</Button>
+							<Popup
+								trigger={
+									<Button
+										compact
+										positive={activeItem === 'quantity'}
+										onClick={() => setActiveItem('quantity')}>
+										Quantity
+									</Button>
+								}
+								content={'filters items by quantity range'}
+								inverted
+							/>
 							<Button.Or />
-							<Button
-								compact
-								positive={activeItem === 'price'}
-								onClick={() => setActiveItem('price')}>
-								Price
-							</Button>
+							<Popup
+								trigger={
+									<Button
+										compact
+										positive={activeItem === 'price'}
+										onClick={() => setActiveItem('price')}>
+										Price
+									</Button>
+								}
+								content={'filters items by price range'}
+								inverted
+							/>
 						</Button.Group>
 					</Menu.Item>
 					<Menu.Item>
 						<Input
 							style={styles.input}
-							placeholder={'Search...'}
+							placeholder={activeItem !== 'name' ? 'from...' : 'search...'}
 							onChange={e => {
 								if (activeItem === 'name') {
 									setNameVal(e.target.value)
@@ -60,10 +79,14 @@ class Inventory extends React.Component {
 								}
 							}}
 						/>
-						<Header style={{ display: activeItem !== 'name' ? 'inline' : 'none' }}>To</Header>
+						<Icon
+							style={{ display: activeItem !== 'name' ? 'inline' : 'none' }}
+							name={'arrow right'}
+							fitted
+						/>
 						<Input
 							style={{ ...styles.input, display: activeItem !== 'name' ? 'inline' : 'none' }}
-							placeholder={'Search...'}
+							placeholder={'to...'}
 							onChange={e => setPriceValue(e.target.value, 'TWO')}
 						/>
 						<Button icon={'search'} onClick={e => onSubmit(this.props)} />
@@ -71,7 +94,6 @@ class Inventory extends React.Component {
 					<Menu.Item position={'right'}>
 						<Button
 							animated
-							negative
 							style={styles.button}
 							onClick={() => setModalState(true, 'ADD_FORM_STATE')}>
 							<Button.Content hidden>Add New Item</Button.Content>
@@ -82,7 +104,7 @@ class Inventory extends React.Component {
 					</Menu.Item>
 				</Menu>
 				<div>
-					<Table celled unstackable striped fixed>
+					<Table celled unstackable fixed>
 						<Table.Header>
 							<Table.Row textAlign={'center'} style={styles.tableHeader}>
 								<Table.HeaderCell>Name</Table.HeaderCell>
@@ -94,7 +116,7 @@ class Inventory extends React.Component {
 					</Table>
 				</div>
 				<div style={styles.div}>
-					<Table celled unstackable striped fixed>
+					<Table celled unstackable fixed>
 						<Table.Body>
 							<TableRows {...this.props} />
 						</Table.Body>
@@ -105,6 +127,8 @@ class Inventory extends React.Component {
 	}
 }
 
+// TODO: fix inconsistent units e.g. (px, vw)
+
 const styles = {
 	container: {
 		paddingLeft: 100,
@@ -112,7 +136,7 @@ const styles = {
 		paddingTop: 20
 	},
 	button: {
-		width: '120px'
+		width: 120
 	},
 	div: {
 		height: '38vw',
@@ -122,10 +146,10 @@ const styles = {
 		fontSize: 18
 	},
 	input: {
-		padding: '3px'
+		padding: 3
 	},
 	icon: {
-		marginTop: '2px'
+		marginTop: 2
 	}
 }
 

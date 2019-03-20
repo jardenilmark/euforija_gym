@@ -1,9 +1,12 @@
-import iziToast from 'izitoast'
+import Swal from 'sweetalert2'
 
 const initialState = {
 	modal: false,
 	overviewArr: [],
-	clickedItem: ''
+	clickedItem: '',
+	sales: [],
+	byItem: false,
+	purchaseOverviewState: false
 }
 
 export default function reducer(state = initialState, action) {
@@ -13,39 +16,63 @@ export default function reducer(state = initialState, action) {
 				...state,
 				modal: action.payload
 			}
+		case 'FETCH_SALES':
+			return {
+				...state,
+				sales: action.payload
+			}
 		case 'CLICKED_ITEM':
 			return {
 				...state,
 				clickedItem: action.payload
 			}
-		case 'OVERVIEW_ARR':
+		case 'ADD_ITEM':
 			const item = action.payload[0]
 			const quantity = action.payload[1]
+			const overviewArr = state.overviewArr
 			if (quantity <= item.quantity && quantity > 0) {
-				const index = state.overviewArr.findIndex(obj => obj._id === item._id)
+				const index = overviewArr.findIndex(obj => obj._id === item._id)
 				const newItem = { ...item }
 				newItem.quantity = quantity
 				if (index !== -1) {
-					state.overviewArr[index] = newItem
+					overviewArr[index] = newItem
 				} else {
-					state.overviewArr.push(newItem)
+					overviewArr.push(newItem)
 				}
 			} else {
-				iziToast.error({
-					title: 'ERROR',
-					message: 'Quantity is invalid!',
-					position: 'topRight'
+				Swal.fire({
+					type: 'error',
+					title: 'Quantity entered is more than the amount in stock!',
+					showConfirmButton: false,
+					timer: 2000
 				})
 			}
 			return {
-				...state
+				...state,
+				overviewArr: overviewArr
+			}
+		case 'SALES_CATEGORY':
+			return {
+				...state,
+				byItem: action.payload
+			}
+		case 'REMOVE_ITEM':
+			console.log(action.payload)
+			return {
+				...state,
+				overviewArr: action.payload
 			}
 		case 'SALES_UPDATED':
-			iziToast.success({
-				title: 'SUCCESS',
-				message: 'Purchase successful!',
-				position: 'topRight'
-			})
+			return {
+				...state,
+				overviewArr: []
+			}
+		case 'TOGGLE_PURCHASE_OVERVIEW':
+			return {
+				...state,
+				purchaseOverviewState: !state.purchaseOverviewState
+			}
+		case 'CLEAR_CART':
 			return {
 				...state,
 				overviewArr: []

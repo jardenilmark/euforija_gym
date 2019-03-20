@@ -1,15 +1,19 @@
 import React from 'react'
-import { List } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
+import TextFit from 'react-textfit'
 import { VisitorList, VisitorListItem, VisitorName, VisitorTimeIn } from './AttendanceStyled'
 
 const AttendanceList = ({ visitors }) => (
 	<VisitorList>
 		{visitors.map(visitor => (
 			<VisitorListItem key={visitor._id}>
+				<Image avatar src={visitor.image} />
 				<VisitorName>
-					<List.Header>{`${visitor.firstName} ${visitor.lastName}`}</List.Header>
+					<TextFit mode="single" forceSingleModeWidth={false}>
+						{`${visitor.firstName} ${visitor.lastName}`}
+					</TextFit>
 				</VisitorName>
-				<VisitorTimeIn>{visitor.timeIn}</VisitorTimeIn>
+				<VisitorTimeIn>{new Date(visitor.timeIn).toLocaleTimeString()}</VisitorTimeIn>
 			</VisitorListItem>
 		))}
 	</VisitorList>

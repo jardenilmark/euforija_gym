@@ -23,7 +23,7 @@ function mapDispatchToProps(dispatch) {
 		},
 		async createItem(obj) {
 			await dispatch(createItem(obj))
-			await dispatch(fetchWholeInventory({}))
+			await dispatch(fetchWholeInventory('/inventory', {}))
 		}
 	}
 }

@@ -20,14 +20,16 @@ function mapStateToProps(state) {
 		filteredInv: state.inventory.filteredInv,
 		priceOne: state.inventory.priceOne,
 		priceTwo: state.inventory.priceTwo,
-		nameVal: state.inventory.nameVal
+		nameVal: state.inventory.nameVal,
+		isFetchingInventory: state.inventory.isFetchingInventory,
+		isFilteringInventory: state.inventory.isFilteringInventory
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		async getInventory() {
-			await dispatch(fetchWholeInventory({}))
+			await dispatch(fetchWholeInventory('/inventory', {}))
 		},
 		async filterList(param) {
 			await dispatch(filterList(param))

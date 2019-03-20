@@ -1,82 +1,46 @@
-#main { 
-  background: rgba(148,0,148,0.63);
-  background: -moz-linear-gradient(top, rgba(148,0,148,0.63) 0%, rgba(255,255,255,0.81) 35%, rgba(255,255,255,0.8) 46%, rgba(255,255,255,0.79) 63%, rgba(255,178,36,0.76) 100%);
-  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(148,0,148,0.63)), color-stop(35%, rgba(255,255,255,0.81)), color-stop(46%, rgba(255,255,255,0.8)), color-stop(63%, rgba(255,255,255,0.79)), color-stop(100%, rgba(255,178,36,0.76)));
-  background: -webkit-linear-gradient(top, rgba(148,0,148,0.63) 0%, rgba(255,255,255,0.81) 35%, rgba(255,255,255,0.8) 46%, rgba(255,255,255,0.79) 63%, rgba(255,178,36,0.76) 100%);
-  background: -o-linear-gradient(top, rgba(148,0,148,0.63) 0%, rgba(255,255,255,0.81) 35%, rgba(255,255,255,0.8) 46%, rgba(255,255,255,0.79) 63%, rgba(255,178,36,0.76) 100%);
-  background: -ms-linear-gradient(top, rgba(148,0,148,0.63) 0%, rgba(255,255,255,0.81) 35%, rgba(255,255,255,0.8) 46%, rgba(255,255,255,0.79) 63%, rgba(255,178,36,0.76) 100%);
-  background: linear-gradient(to bottom, rgba(148,0,148,0.63) 0%, rgba(255,255,255,0.81) 35%, rgba(255,255,255,0.8) 46%, rgba(255,255,255,0.79) 63%, rgba(255,178,36,0.76) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#940094', endColorstr='#ffb224', GradientType=0 );
+@font-face {
+	font-family: 'Big Noodle';
+	font-style: normal;
+	src: url(../assets/fonts/big_noodle_titling.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'Letters in Circles';
-  font-style: normal;
-  font-weight: 400;
-  src: url(../assets/fonts/letters_in_circles.ttf) format('truetype');
+	font-family: 'Code';
+	font-style: normal;
+	src: url(../assets/fonts/Code.otf) format('opentype');
 }
 
 @font-face {
-  font-family: 'Ferro Rosso';
-  font-style: normal;
-  font-weight: 400;
-  src: url(../assets/fonts/ferro_rosso.ttf) format('truetype');
+	font-family: 'Lane';
+	font-style: normal;
+	src: url(../assets/fonts/LANENAR_.ttf) format('truetype');
 }
-
-@font-face {
-  font-family: 'Nature Beauty';
-  font-style: normal;
-  font-weight: 400;
-  src: url(../assets/fonts/nature_beauty.ttf) format('truetype');
-}
-
-#primary-header {
-  font-family: 'Ferro Rosso';
-  font-size: 7vw;
-  color: purple;
-  margin-top: -15px;
-  margin-bottom: 0px;
-}
-
-#slogan {
-  /* font-family: 'Letters in Circles'; */
-  font-size: 3.3vw;
-  color: orange;
-  font-weight: 900;
-  margin-bottom: 2px;
-}
-
-#sub-header {
-  font-family: 'Nature Beauty';
-  font-size: 3vw;
-  color: orange;
-  margin-top: -10px;
-}
-
-#login-label {
-  font-family: 'Nature Beauty';
-  font-size: 1.7vw;
-  color: purple;
-  margin-top: 10px;
-  margin-bottom: 20px;
-} 
 
 #login-button {
-  background-color: purple;
-  color: white;
+	background-color: rgb(84, 16, 135);
+	color: white;
 }
 
 #login-button:hover {
-  background-color: orange;
-  color: white;
+	background-color: orange;
+	color: white;
 }
 
-#outer-segment {
-  width: 95%;
-  margin-left: 2.5%;
+#logField,
+#payrollSearchField {
+	border-radius: 5px 0 0 5px;
+	border: 1px solid #808080;
+	border-right-width: 0;
 }
 
-#inner-segment {
-  margin-left: 2.5%;
-  margin-right: 2.5%;
+#logButton,
+#payrollSearchButton {
+	border-radius: 0 5px 5px 0;
+	border: 1px solid #808080;
+	border-left-width: 0;
+}
+
+#img:hover {
+	-webkit-filter: grayscale(100%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+	filter: grayscale(100%); /* FF 35+ */
 }

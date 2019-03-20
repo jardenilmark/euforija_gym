@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
+import TextFit from 'react-textfit'
 import { TrainerName, CardsContainer } from './AttendanceStyled'
 
 const TrainerCards = ({ trainers }) => (
@@ -7,8 +8,12 @@ const TrainerCards = ({ trainers }) => (
 		<Card.Group itemsPerRow={5}>
 			{trainers.map(trainer => (
 				<Card key={trainer._id}>
-					<Image src={'https://react.semantic-ui.com/images/avatar/large/matthew.png'} />
-					<TrainerName>{trainer.firstName}</TrainerName>
+					<Image src={trainer.image} />
+					<TrainerName>
+						<TextFit mode="single" forceSingleModeWidth={false}>
+							{trainer.nickname}
+						</TextFit>
+					</TrainerName>
 				</Card>
 			))}
 		</Card.Group>

@@ -2,17 +2,19 @@ import { Segment, Image, Container, Grid, Header, Label, Card, List } from 'sema
 import styled from 'styled-components'
 
 export const ProfileSegment = styled(Segment)({
-	marginTop: '150px !important',
+	border: '1px solid #808080 !important',
+	marginTop: '10px !important',
 	marginLeft: '20px !important',
 	height: '75%',
-	backgroundColor: '#fbf5fe !important',
-	padding: '10px 20px !important'
+	backgroundColor: '#fbf5fe !important'
 })
 
 export const ProfileImage = styled(Image)({
-	width: '100%',
+	width: '80%',
 	height: 'auto',
-	maxHeight: '70%'
+	maxHeight: '80%',
+	display: 'block',
+	margin: 'auto'
 })
 
 export const VisitedLabel = styled(Label)({
@@ -24,9 +26,10 @@ export const VisitedLabel = styled(Label)({
 
 export const Name = styled(Container)({
 	height: '30%',
-	padding: '50px',
-	fontSize: '20pt !important',
-	textAlign: 'center'
+	padding: '50px 0 50px 0',
+	fontSize: '5em !important',
+	textAlign: 'center',
+	fontFamily: 'Big Noodle'
 })
 
 export const MainGrid = styled(Grid)({
@@ -41,13 +44,14 @@ export const LogGrid = styled(Grid)({
 	padding: '0 !important'
 })
 
-export const LogsContainer = styled(Container)({
-	border: '2px solid #808080',
+export const LogsSegment = styled(Segment)({
+	border: '2px solid #808080 !important',
 	borderRadius: '5px',
 	boxShadow: '0 0 2px 1px #cccccc',
 	backgroundColor: '#ffffff',
-	marginBottom: '12px !important',
-	marginTop: '12px !important'
+	margin: '12px 0 12px 0 !important',
+	width: '100% !important',
+	maxHeight: '100% !important'
 })
 
 export const LogsRow = styled(Grid.Row)({
@@ -75,12 +79,12 @@ export const HeaderLogo = styled(Image)({
 
 export const ClockContainer = styled(Container)({
 	verticalAlign: 'middle',
-	padding: '18px',
+	padding: '18px !important',
 	height: '100%'
 })
 
 export const AppHeader = styled(Header)({
-	backgroundColor: '#541087',
+	backgroundColor: '#640088',
 	margin: '0 !important',
 	padding: '0 !important',
 	height: '10%',
@@ -116,9 +120,11 @@ export const VisitorListItem = styled(List.Item)({
 })
 
 export const VisitorName = styled(List.Content)({
-	float: 'left'
+	fontSize: '1.5em !important',
+	width: '75% !important'
 })
 
 export const VisitorTimeIn = styled(List.Content)({
-	float: 'right'
+	float: 'right',
+	fontSize: '1.3em !important'
 })

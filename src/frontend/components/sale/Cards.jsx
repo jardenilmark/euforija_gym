@@ -1,7 +1,11 @@
 import React from 'react'
-import { Card, Image, Label } from 'semantic-ui-react'
+import { Card, Image, Label, Loader } from 'semantic-ui-react'
+import NumberFormat from 'react-number-format'
 
-const Cards = ({ setModalState, setClickedItem, inventory }) => {
+const Cards = ({ setModalState, setClickedItem, inventory, isFetchingInventory }) => {
+	if (isFetchingInventory) {
+		return <Loader active content={'Fetching items from inventory...'} size={'huge'} />
+	}
 	return (
 		<Card.Group stackable itemsPerRow={5} style={styles.cardGroup}>
 			{inventory.map(val => {
@@ -24,11 +28,20 @@ const Cards = ({ setModalState, setClickedItem, inventory }) => {
 							<Label
 								tag
 								size={'medium'}
-								// color={'black'}
 								content={
 									<strong>
-										₱ {val.price}
-										.00
+										<NumberFormat
+											value={val.price}
+											displayType={'text'}
+											thousandSeparator={true}
+											prefix={'₱ '}
+											renderText={value => (
+												<b>
+													{value}
+													.00
+												</b>
+											)}
+										/>
 									</strong>
 								}
 								style={styles.label}

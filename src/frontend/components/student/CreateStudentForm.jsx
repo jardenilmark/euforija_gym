@@ -13,13 +13,22 @@ const getStyle = (active, name) => {
 }
 
 const CreateStudent = props => {
-	const { setStepData, setActiveForm, createStudent, trainer, health, personal } = props
+	const {
+		setStepData,
+		setActiveForm,
+		createStudent,
+		trainer,
+		health,
+		personal,
+		croppedImage
+	} = props
 	return (
 		<div>
 			<div style={getStyle(props.activeForm, 'personal')}>
 				<PersonalPage
 					onSubmit={e => {
-						setStepData('PERSONAL', e)
+						const obj = { ...e, image: croppedImage }
+						setStepData('PERSONAL', obj)
 						setActiveForm('health')
 					}}
 				/>
@@ -42,7 +51,7 @@ const CreateStudent = props => {
 						if (props.paymentMethod === 'partial') {
 							payment = { amount: parseInt(e.amount) }
 						}
-						createStudent({ ...trainer, ...health, ...personal, ...payment })
+						createStudent({ ...trainer, ...personal, ...payment, questionnaire: health })
 					}}
 				/>
 			</div>

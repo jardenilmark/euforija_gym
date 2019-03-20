@@ -1,21 +1,33 @@
 import { Field as ReduxField } from 'redux-form'
 import { Form } from 'semantic-ui-react'
-import { InputField } from 'react-semantic-redux-form'
+import { Input, Label } from 'semantic-ui-react'
 import React from 'react'
 
-const Field = ({ placeholder, icon, type, name }) => (
+const Field = ({ label, type, name }) => (
 	<Form.Field>
 		<ReduxField
-			icon={icon}
-			iconPosition={'left'}
 			type={type}
 			name={name}
-			component={InputField}
-			placeholder={placeholder}
-			label={placeholder}
+			component={Input}
+			label={<Label content={label} style={styles.label} />}
 			required
+			style={styles.field}
+			transparent
 		/>
 	</Form.Field>
 )
+
+const styles = {
+	label: {
+		width: 95,
+		background: 'rgb(84, 16, 135)',
+		color: 'white',
+		marginRight: '10px'
+	},
+	field: {
+		borderRadius: '5px',
+		border: '2px solid rgb(84, 16, 135)'
+	}
+}
 
 export default Field
