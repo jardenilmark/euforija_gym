@@ -5,7 +5,7 @@ import Field from './Field'
 const LoginForm = ({ handleSubmit }) => {
 	return (
 		<Segment basic textAlign={'center'}>
-			<Form as={'form'} onSubmit={handleSubmit} autocomplete={'off'}>
+			<Form as={'form'} onSubmit={handleSubmit} autoComplete={'off'}>
 				<Image src={'./assets/images/loginLogo.png'} centered size={'large'} />
 				<Header style={styles.header}>Sign in to your Account</Header>
 				<Segment basic style={styles.innerSegment}>
