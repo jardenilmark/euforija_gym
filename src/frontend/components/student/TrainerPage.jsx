@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Table, Dropdown, Button, Image, Popup } from 'semantic-ui-react'
-import { getArray, options } from '../../helpers/trainerHelper'
+import { Container, Table, Button, Image } from 'semantic-ui-react'
+import { getArray } from '../../helpers/trainerHelper'
 
 class Trainer extends Component {
 	componentDidMount() {
@@ -8,7 +8,7 @@ class Trainer extends Component {
 	}
 	Cells() {
 		return getArray(this.props.staff, this.props.type).map((e, index) => {
-			if (e.role.includes('Coach')) {
+			if (e.role === 'Coach') {
 				return (
 					<Table.Row
 						key={index}
@@ -30,17 +30,6 @@ class Trainer extends Component {
 	render() {
 		return (
 			<Container fluid>
-				<Dropdown
-					selection
-					fluid
-					placeholder={'Type'}
-					onChange={(e, data) => {
-						this.props.setStaffFilter(data.value)
-					}}
-					options={options(this.props.staff).map((e, index) => {
-						return { text: e, value: e, key: index }
-					})}
-				/>
 				<Container style={styles.innerContainer}>
 					<Table selectable celled unstackable fixed>
 						<Table.Header>
