@@ -14,6 +14,7 @@ class StaffTable extends React.Component {
 			rows = (
 				<Table.Row>
 					<Table.Cell>
+						H
 						<Segment style={styles.loaderSegment} basic>
 							<Loader active content={'Loading Staff...'} size={'big'} />
 						</Segment>

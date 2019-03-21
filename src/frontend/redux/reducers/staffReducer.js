@@ -33,7 +33,10 @@ export default function reducer(state = initialState, action) {
 		case 'STAFF_FORM_VISIBILITY':
 			return {
 				...state,
-				staffFormVisibility: action.payload
+				staffFormVisibility: action.payload,
+				initialValues: {},
+				croppedImage: null,
+				image: null
 			}
 		case 'STAFF_PROFILE_VISIBILITY':
 			return {
@@ -53,7 +56,6 @@ export default function reducer(state = initialState, action) {
 		case 'EDIT_STAFF_PROFILE':
 			const staff = action.payload
 			delete staff.password
-			console.log(action.payload)
 			return {
 				...state,
 				initialValues: staff,

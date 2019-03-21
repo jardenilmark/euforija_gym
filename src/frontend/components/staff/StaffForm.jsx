@@ -17,16 +17,8 @@ const genderOptions = [
 
 const roleOptions = [
 	{
-		text: 'Plyometrics Coach',
-		value: 'Plyometrics Coach'
-	},
-	{
-		text: 'Weights Coach',
-		value: 'Weights Coach'
-	},
-	{
-		text: 'Boxing Coach',
-		value: 'Boxing Coach'
+		text: 'Coach',
+		value: 'Coach'
 	},
 	{
 		text: 'Maintenance',
