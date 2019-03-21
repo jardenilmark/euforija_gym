@@ -39,7 +39,7 @@ const HealthPane = student => {
 		)
 	})
 	return (
-		<Table celled collapsing>
+		<Table celled>
 			<Table.Body>{answers}</Table.Body>
 		</Table>
 	)
@@ -68,6 +68,17 @@ const TrainerPane = student => {
 	)
 }
 
+const PaymentPane = student => {
+	return (
+		<div>
+			<Header as="h2">
+				<Icon name="check circle" color={'green'} fitted style={{ marginRight: 5 }} />
+				<Header.Content>Fully Paid</Header.Content>
+			</Header>
+		</div>
+	)
+}
+
 const renderPanes = props => [
 	{
 		menuItem: (
@@ -88,7 +99,9 @@ const renderPanes = props => [
 			</Menu.Item>
 		),
 		render: () => (
-			<Tab.Pane style={{ height: 600 }}>{<HealthPane {...props.clickedStudent} />}</Tab.Pane>
+			<Tab.Pane style={{ height: 600, paddingLeft: 150, paddingRight: 150 }}>
+				{<HealthPane {...props.clickedStudent} />}
+			</Tab.Pane>
 		)
 	},
 	{
@@ -109,7 +122,9 @@ const renderPanes = props => [
 				<Icon name={'payment'} /> Payment
 			</Menu.Item>
 		),
-		render: () => <Tab.Pane style={{ height: 700 }}>Tab 3 Content</Tab.Pane>
+		render: () => (
+			<Tab.Pane style={{ height: 100 }}>{<PaymentPane {...props.clickedStudent} />}</Tab.Pane>
+		)
 	}
 ]
 
