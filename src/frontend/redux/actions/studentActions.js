@@ -119,7 +119,7 @@ export function removeStudent(student) {
 			dispatch({ type: 'REMOVE_STUDENT', payload: student })
 			iziToast.success({
 				title: 'SUCCESS',
-				message: 'Staff removed successfully!',
+				message: 'Student removed successfully!',
 				position: 'topRight'
 			})
 			dispatch(fetchStudents())

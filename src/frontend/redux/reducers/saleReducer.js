@@ -42,7 +42,7 @@ export default function reducer(state = initialState, action) {
 			} else {
 				Swal.fire({
 					type: 'error',
-					title: 'Quantity entered is more than the amount in stock!',
+					title: 'Quantity entered is invalid or is more than the quantity in stock!',
 					showConfirmButton: false,
 					timer: 2000
 				})
