@@ -16,7 +16,10 @@ const initialState = {
 	studentsList: [],
 	profileVisibility: false,
 	formVisibility: false,
-	clickedStudent: null
+	clickedStudent: null,
+	priceModal: false,
+	priceOnChange: 0,
+	trainingPrice: 0
 }
 
 export default function reducer(state = initialState, action) {
@@ -25,6 +28,21 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				activeForm: action.payload
+			}
+		case 'TRAINING_PRICE':
+			return {
+				...state,
+				trainingPrice: action.payload
+			}
+		case 'PRICE_ON_CHANGE':
+			return {
+				...state,
+				priceOnChange: action.payload
+			}
+		case 'MODAL_PRICE':
+			return {
+				...state,
+				priceModal: action.payload
 			}
 		case 'STEP_PERSONAL':
 			return {

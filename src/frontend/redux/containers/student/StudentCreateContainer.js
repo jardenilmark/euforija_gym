@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import Create from '../../../components/student/CreateStudentForm'
-import { setActiveForm, setStepData, createStudent } from '../../actions/studentActions'
+import { setActiveForm, setStepData, createStudent, getPrice } from '../../actions/studentActions'
 
 function mapDispatchToProps(dispatch) {
 	return {
@@ -10,6 +10,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		setStepData(type, data) {
 			dispatch(setStepData(type, data))
+		},
+		async getPrice() {
+			await dispatch(getPrice())
 		},
 		async createStudent(student) {
 			await dispatch(createStudent(student))
@@ -24,7 +27,8 @@ function mapStateToProps(state) {
 		health: state.student.health,
 		trainer: state.student.trainer,
 		paymentMethod: state.student.paymentMethod,
-		croppedImage: state.student.croppedImage
+		croppedImage: state.student.croppedImage,
+		trainingPrice: state.student.trainingPrice
 	}
 }
 

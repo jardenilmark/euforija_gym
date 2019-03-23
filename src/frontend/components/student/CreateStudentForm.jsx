@@ -12,7 +12,16 @@ const getStyle = (active, name) => {
 	}
 }
 
-const CreateStudent = props => {
+class CreateStudent extends React.Component {
+	componentDidMount() {
+		this.props.getPrice()
+	}
+	render() {
+		return studentForm(this.props)
+	}
+}
+
+const studentForm = props => {
 	const {
 		setStepData,
 		setActiveForm,
@@ -20,7 +29,8 @@ const CreateStudent = props => {
 		trainer,
 		health,
 		personal,
-		croppedImage
+		croppedImage,
+		trainingPrice
 	} = props
 	return (
 		<div>
@@ -47,7 +57,7 @@ const CreateStudent = props => {
 			<div style={getStyle(props.activeForm, 'payment')}>
 				<PaymentPage
 					onSubmit={e => {
-						let payment = { amount: 1499 }
+						let payment = { amount: trainingPrice }
 						if (props.paymentMethod === 'partial') {
 							payment = { amount: parseInt(e.amount) }
 						}

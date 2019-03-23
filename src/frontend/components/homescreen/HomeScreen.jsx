@@ -9,6 +9,8 @@ import {
 	Button,
 	Loader,
 	Divider,
+	Modal,
+	Form,
 	Label
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
@@ -21,7 +23,16 @@ class HomeScreen extends Component {
 		}
 	}
 	render() {
-		const { loginChecked, userLogin, logout } = this.props
+		const {
+			loginChecked,
+			userLogin,
+			logout,
+			setPrice,
+			priceModal,
+			toggleModal,
+			onChangePrice,
+			priceOnChange
+		} = this.props
 		if (loginChecked && userLogin) {
 			const contents =
 				userLogin.role === 'Owner'
@@ -76,6 +87,38 @@ class HomeScreen extends Component {
 								<Header.Subheader>{userLogin.role}</Header.Subheader>
 							</Header>
 						</Menu.Item>
+						<Menu.Item style={userLogin.role === 'Owner' ? {} : styles.price}>
+							{/* change ui */}
+							<Modal
+								trigger={
+									<Button fluid size={'massive'} onClick={e => toggleModal(true)}>
+										Change Price
+									</Button>
+								}
+								open={priceModal}
+								onClose={e => {
+									onChangePrice(0)
+									toggleModal(false)
+								}}>
+								<Modal.Content>
+									<Form
+										onSubmit={() => {
+											setPrice(priceOnChange)
+											toggleModal(false)
+										}}>
+										<Form.Input
+											label={'Set Price'}
+											name={'price'}
+											type={'number'}
+											onChange={e => onChangePrice(e.target.value)}
+										/>
+										<Button color="green" type={'submit'} inverted>
+											Submit
+										</Button>
+									</Form>
+								</Modal.Content>
+							</Modal>
+						</Menu.Item>
 						<Menu.Item style={styles.item}>
 							<Button animated fluid style={styles.logout} size={'massive'} onClick={e => logout()}>
 								<Button.Content visible>Logout</Button.Content>
@@ -101,6 +144,9 @@ class HomeScreen extends Component {
 }
 
 const styles = {
+	price: {
+		display: 'none'
+	},
 	loader: {
 		height: '100vh',
 		width: '100vh'

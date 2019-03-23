@@ -6,6 +6,7 @@ import fileService from './fileService'
 import loginService from './loginService'
 import attendanceService from './attendanceService'
 import authService from './authenticationService'
+import priceService from './priceService'
 
 const setupAllServices = (app, db) => {
 	return () => {
@@ -17,7 +18,8 @@ const setupAllServices = (app, db) => {
 			.configure(fileService(app, db))
 			.configure(loginService(app, db))
 			.configure(attendanceService(app, db))
-			.configure(authService(app))
+			.configure(priceService(app, db))
+		// .configure(authService(app))
 	}
 }
 

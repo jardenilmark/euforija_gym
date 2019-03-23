@@ -8,10 +8,46 @@ import iziToast from 'izitoast'
 const studentApi = 'api/student'
 const fileApi = 'api/file'
 const staffApi = 'api/staff'
+const priceApi = 'api/price'
 
 export function setActiveForm(payload) {
 	return dispatch => {
 		dispatch({ type: 'ACTIVE_STUDENT_FORM', payload: payload })
+	}
+}
+
+export function setPrice(price) {
+	console.log(price)
+	return async () => {
+		const fetch = await app.service(priceApi).find()
+		if (fetch.length === 0) {
+			await app.service(priceApi).create({
+				price: parseFloat(price)
+			})
+		} else {
+			await app.service(priceApi).patch(fetch[0]._id, {
+				price: parseFloat(price)
+			})
+		}
+	}
+}
+
+export function getPrice() {
+	return async dispatch => {
+		const fetch = await app.service(priceApi).find()
+		dispatch({ type: 'TRAINING_PRICE', payload: fetch[0].price })
+	}
+}
+
+export function toggleModal(payload) {
+	return dispatch => {
+		dispatch({ type: 'MODAL_PRICE', payload: payload })
+	}
+}
+
+export function onChangePrice(payload) {
+	return dispatch => {
+		dispatch({ type: 'PRICE_ON_CHANGE', payload: payload })
 	}
 }
 
