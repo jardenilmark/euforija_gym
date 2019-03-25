@@ -15,7 +15,7 @@ const initialState = {
 	isFetching: false,
 	studentsList: [],
 	profileVisibility: false,
-	formVisibility: false,
+	formVisibility: true,
 	clickedStudent: null,
 	priceModal: false,
 	priceOnChange: 0,

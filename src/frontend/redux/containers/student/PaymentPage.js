@@ -16,7 +16,8 @@ function mapDispatchToProps(dispatch) {
 
 function mapStateToProps(state) {
 	return {
-		paymentMethod: state.student.paymentMethod
+		paymentMethod: state.student.paymentMethod,
+		trainingPrice: state.student.trainingPrice
 	}
 }
 

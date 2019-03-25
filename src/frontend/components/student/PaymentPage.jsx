@@ -4,14 +4,14 @@ import { Field } from 'redux-form'
 import CustomInput from '../custom/CustomInput'
 
 const PaymentPage = props => {
-	const { paymentMethod, setPaymentMethod, handleSubmit } = props
+	const { paymentMethod, setPaymentMethod, handleSubmit, trainingPrice } = props
 	return (
 		<div>
 			<Header size={'medium'}>Please select your payment option of choice:</Header>
 			<div style={{ width: 350 }}>
 				<div>
 					<Radio
-						label={'Full Payment'}
+						label={`Full Payment (${trainingPrice})`}
 						name={'paymentType'}
 						checked={paymentMethod === 'full'}
 						toggle
