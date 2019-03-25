@@ -91,9 +91,15 @@ class HomeScreen extends Component {
 							{/* change ui */}
 							<Modal
 								trigger={
-									<Button fluid size={'massive'} onClick={e => toggleModal(true)}>
-										Change Price
-									</Button>
+									<div style={{ paddingLeft: 55, paddingRight: 55 }}>
+										<Button
+											fluid
+											size={'medium'}
+											style={{ fontFamily: 'Code' }}
+											onClick={e => toggleModal(true)}>
+											Change Price
+										</Button>
+									</div>
 								}
 								open={priceModal}
 								onClose={e => {
