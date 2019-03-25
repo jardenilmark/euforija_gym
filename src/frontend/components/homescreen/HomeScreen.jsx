@@ -102,23 +102,35 @@ class HomeScreen extends Component {
 									</div>
 								}
 								open={priceModal}
+								size={'tiny'}
+								basic
+								closeOnEscape={false}
+								closeOnDimmerClick={false}
+								closeIcon
 								onClose={e => {
 									onChangePrice(0)
 									toggleModal(false)
 								}}>
+								<Header
+									icon="dollar"
+									content="Set Price for Monthly Membership"
+									style={{ marginBottom: -20 }}
+								/>
 								<Modal.Content>
 									<Form
+										inverted
+										size={'medium'}
 										onSubmit={() => {
 											setPrice(priceOnChange)
 											toggleModal(false)
 										}}>
 										<Form.Input
-											label={'Set Price'}
+											label={'Price'}
 											name={'price'}
 											type={'number'}
 											onChange={e => onChangePrice(e.target.value)}
 										/>
-										<Button color="green" type={'submit'} inverted>
+										<Button type={'submit'} inverted floated={'right'}>
 											Submit
 										</Button>
 									</Form>
