@@ -13,7 +13,7 @@ const initialState = {
 	croppedAreaPixels: null,
 	type: 'all',
 	loginChecked: false,
-	initialValues: {},
+	initialValues: null,
 	clickedStaff: null
 }
 
@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action) {
 			return {
 				...state,
 				staffFormVisibility: action.payload,
-				initialValues: {},
+				initialValues: null,
 				croppedImage: null,
 				image: null
 			}
@@ -122,9 +122,17 @@ export default function reducer(state = initialState, action) {
 				croppedAreaPixels: action.payload
 			}
 		case 'TOGGLE_CROP_IMAGE_MODAL':
-			return {
-				...state,
-				cropImageModalVisibility: !state.cropImageModalVisibility
+			if (state.cropImageModalVisibility) {
+				return {
+					...state,
+					cropImageModalVisibility: !state.cropImageModalVisibility,
+					image: null
+				}
+			} else {
+				return {
+					...state,
+					cropImageModalVisibility: !state.cropImageModalVisibility
+				}
 			}
 		case 'GET_CROPPED_IMAGE':
 			console.log(action.payload)

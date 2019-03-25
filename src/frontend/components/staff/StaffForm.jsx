@@ -27,13 +27,13 @@ const roleOptions = [
 ]
 
 const Create = props => {
-	const { handleSubmit, pristine, submitting } = props
+	const { handleSubmit, pristine, submitting, initialValues } = props
 	return (
 		<Form onSubmit={values => handleSubmit(values)}>
 			<Segment style={styles.segment} basic>
 				<Label size={'huge'} attached={'top'} basic style={styles.headerLabel}>
 					<Icon name={'edit outline'} style={{ marginRight: '5' }} />
-					Add New Staff
+					{initialValues ? 'Edit Staff' : 'Add New Staff'}
 				</Label>
 				<Divider />
 				<ProfilePhoto {...props} />

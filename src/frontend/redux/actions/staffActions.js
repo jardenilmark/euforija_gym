@@ -4,7 +4,7 @@ import { reset } from 'redux-form'
 import { getHash } from '../../helpers/bcrypt'
 import { isValidAuthority } from './loginActions'
 import iziToast from 'izitoast'
-
+import Swal from 'sweetalert2'
 const staffApi = 'api/staff'
 const fileApi = 'api/file'
 const studentApi = 'api/student'
@@ -27,15 +27,22 @@ export function createStaff(staff) {
 					image: data._id,
 					status: 'out'
 				})
+				Swal.fire(
+					`${id} is your auto-generated identification number`,
+					'You can use this identification number when logging in to your account',
+					'success'
+				)
+				dispatch(reset('createStaffForm'))
+				dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
+				iziToast.success({
+					title: 'SUCCESS',
+					message: 'Staff added successfully!',
+					position: 'topRight'
+				})
+				dispatch(fetchStaff())
+			} else {
+				Swal.fire('Oops', 'The password you entered did not match. Please try again.', 'error')
 			}
-			dispatch(reset('createStaffForm'))
-			dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
-			iziToast.success({
-				title: 'SUCCESS',
-				message: 'Staff added successfully!',
-				position: 'topRight'
-			})
-			dispatch(fetchStaff())
 		}
 	}
 }
@@ -109,6 +116,10 @@ export function fetchStaff() {
 							trainerId: staff._id
 						}
 					})
+					students.map(student => {
+						const image = images.find(image => image._id == student.image)
+						student.image = image.data
+					})
 					staff.students = students
 				})
 				dispatch({ type: 'FETCHING_STAFF_SUCCESS', payload: staffList })
@@ -138,7 +149,6 @@ export function toggleProfileVisibility(isVisible) {
 }
 
 export function setClickedStaff(staff) {
-	console.log(staff)
 	return dispatch => {
 		dispatch({ type: 'SET_CLICKED_STAFF', payload: staff })
 	}

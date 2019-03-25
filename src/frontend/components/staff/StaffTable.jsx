@@ -14,7 +14,6 @@ class StaffTable extends React.Component {
 			rows = (
 				<Table.Row>
 					<Table.Cell>
-						H
 						<Segment style={styles.loaderSegment} basic>
 							<Loader active content={'Loading Staff...'} size={'big'} />
 						</Segment>
@@ -25,6 +24,7 @@ class StaffTable extends React.Component {
 			if (this.props.staff.length > 0) {
 				rows = this.props.staff.map((staff, index) => {
 					if (index == 0) {
+						console.log('STAFF', staff)
 						this.props.setClickedStaff(staff)
 					}
 					return (
