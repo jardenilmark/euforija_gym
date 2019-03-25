@@ -12,7 +12,7 @@ const Students = ({ students, role }) => {
 	if (students && students.length > 0 && role === 'Coach') {
 		studentList = students.map((student, index) => {
 			return (
-				<List.Item>
+				<List.Item key={index}>
 					<Image avatar src={student.image} verticalAlign={'middle'} />
 					<List.Content>
 						<List.Header>

@@ -39,7 +39,6 @@ export function createStaff(staff) {
 					message: 'Staff added successfully!',
 					position: 'topRight'
 				})
-				dispatch(fetchStaff())
 			} else {
 				Swal.fire('Oops', 'The password you entered did not match. Please try again.', 'error')
 			}
@@ -50,32 +49,24 @@ export function createStaff(staff) {
 export function updateStaff(staff) {
 	return async dispatch => {
 		const check = await isValidAuthority('/staff')
-		console.log(staff)
-		// if (check) {
-		// 	const isEqualPass = staff.password === staff.rePassword
-		// 	if (isEqualPass) {
-		// 		delete staff.rePassword
-		// 		staff.password = await getHash(staff.password)
-		// 		const data = await app.service(fileApi).update({
-		// 			data: staff.image
-		// 		})
-		// 		const id = generateId(staff)
-		// 		await app.service(staffApi).create({
-		// 			...staff,
-		// 			idNumber: id,
-		// 			image: data._id,
-		// 			status: 'out'
-		// 		})
-		// 	}
-		// 	dispatch(reset('createStaffForm'))
-		// 	dispatch({ type: 'STAFF_CREATED', payload: isEqualPass })
-		// 	iziToast.success({
-		// 		title: 'SUCCESS',
-		// 		message: 'Staff added successfully!',
-		// 		position: 'topRight'
-		// 	})
-		// 	dispatch(fetchStaff())
-		// }
+		console.log('EDIT STAFF', staff)
+		if (check) {
+			const isEqualPass = staff.password === staff.rePassword
+			if (isEqualPass) {
+				delete staff.rePassword
+				delete staff.students
+				staff.password = await getHash(staff.password)
+				const data = await app.service(fileApi).patch(staff.imageId, { data: staff.image })
+				staff.image = data._id
+				await app.service(staffApi).patch(staff._id, staff)
+			}
+			dispatch(reset('createStaffForm'))
+			iziToast.success({
+				title: 'SUCCESS',
+				message: 'Staff updated successfully!',
+				position: 'topRight'
+			})
+		}
 	}
 }
 
