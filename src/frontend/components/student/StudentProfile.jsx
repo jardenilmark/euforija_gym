@@ -23,7 +23,7 @@ const handleSubmit = (values, props) => {
 		payment = values.amount
 	}
 
-	props.renewMembership(payment, props.clickedStudent._id)
+	props.renewMembership(payment, props.clickedStudent)
 }
 
 const PersonalDetailsPane = props => {

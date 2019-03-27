@@ -31,10 +31,11 @@ export function setPrice(price) {
 	}
 }
 
-export function renewMembership(amount, id) {
+export function renewMembership(amount, student) {
 	return async dispatch => {
-		await app.service(studentApi).patch(id, { amount: amount, membershipDate: new Date() })
+		await app.service(studentApi).patch(student._id, { amount: amount, membershipDate: new Date() })
 		dispatch(fetchStudents())
+		dispatch(setClickedStudent(student))
 	}
 }
 
