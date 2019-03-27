@@ -3,6 +3,7 @@ import Chart from 'chart.js'
 import React, { Component } from 'react'
 import { Menu, Container } from 'semantic-ui-react'
 import { getData } from '../../helpers/irHelper'
+import FloatingButton from '../custom/FloatingButton'
 
 ReactChartkick.addAdapter(Chart)
 
@@ -29,6 +30,7 @@ class IncomeReport extends Component {
 						discrete={true}
 					/>
 				</Container>
+				<FloatingButton />
 			</div>
 		)
 	}
