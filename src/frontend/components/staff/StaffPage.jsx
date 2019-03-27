@@ -3,6 +3,7 @@ import { Grid, Button, Icon } from 'semantic-ui-react'
 import StaffForm from '../../redux/containers/staff/StaffForm'
 import StaffProfile from './StaffProfile'
 import StaffTable from '../../redux/containers/staff/StaffTable'
+import FloatingButton from '../custom/FloatingButton'
 
 const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility) => {
 	toggleFormVisibility(true)
@@ -22,33 +23,36 @@ const submit = (values, props) => {
 const StaffPage = props => {
 	return (
 		<Grid divided style={styles.grid}>
-			<Grid.Column width={8}>
-				<Button
-					animated
-					floated={'right'}
-					style={styles.button}
-					onClick={() =>
-						invokeFunctions(props.toggleFormVisibility, props.toggleProfileVisibility)
-					}>
-					<Button.Content hidden>Add New Staff</Button.Content>
-					<Button.Content visible>
-						<Icon name={'add'} />
-					</Button.Content>
-				</Button>
-				<StaffTable
-					toggleProfileVisibility={props.toggleProfileVisibility}
-					toggleFormVisibility={props.toggleFormVisibility}
-					setClickedStaff={props.setClickedStaff}
-				/>
-			</Grid.Column>
-			<Grid.Column width={8}>
-				{props.formVisibility && (
-					<StaffForm onSubmit={values => submit(values, props)} {...props} />
-				)}
-				{props.profileVisibility && props.clickedStaff != null && (
-					<StaffProfile clickedStaff={props.clickedStaff} />
-				)}
-			</Grid.Column>
+			<Grid.Row>
+				<Grid.Column width={8}>
+					<Button
+						animated
+						floated={'right'}
+						style={styles.button}
+						onClick={() =>
+							invokeFunctions(props.toggleFormVisibility, props.toggleProfileVisibility)
+						}>
+						<Button.Content hidden>Add New Staff</Button.Content>
+						<Button.Content visible>
+							<Icon name={'add'} />
+						</Button.Content>
+					</Button>
+					<StaffTable
+						toggleProfileVisibility={props.toggleProfileVisibility}
+						toggleFormVisibility={props.toggleFormVisibility}
+						setClickedStaff={props.setClickedStaff}
+					/>
+				</Grid.Column>
+				<Grid.Column width={8}>
+					{props.formVisibility && (
+						<StaffForm onSubmit={values => submit(values, props)} {...props} />
+					)}
+					{props.profileVisibility && props.clickedStaff != null && (
+						<StaffProfile clickedStaff={props.clickedStaff} />
+					)}
+				</Grid.Column>
+				<FloatingButton />
+			</Grid.Row>
 		</Grid>
 	)
 }

@@ -4,6 +4,7 @@ import Profile from '../../redux/containers/payroll/ProfileContainer'
 import Search from '../../redux/containers/payroll/SearchContainer'
 import StaffList from '../../redux/containers/payroll/StaffListContainer'
 import Data from './Data'
+import FloatingButton from '../custom/FloatingButton'
 
 const Payroll = () => (
 	<Container>
@@ -21,6 +22,7 @@ const Payroll = () => (
 				</Grid.Row>
 			</Grid.Column>
 		</Grid>
+		<FloatingButton />
 	</Container>
 )
 

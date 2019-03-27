@@ -1,26 +1,64 @@
 import React from 'react'
-import { Tab, Menu, Icon, Image, Header, Table, Divider } from 'semantic-ui-react'
+import {
+	Tab,
+	Menu,
+	Icon,
+	Image,
+	Header,
+	Table,
+	Statistic,
+	Button,
+	Reveal,
+	Label,
+	Divider
+} from 'semantic-ui-react'
 import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader'
+import NumberFormat from 'react-number-format'
+import date from 'date-fns'
+import RenewModal from '../../redux/containers/student/RenewModal'
 
-const PersonalDetailsPane = student => (
-	<div>
-		<Image src={student.image} circular floated={'left'} />
-		<Header as={'h1'}>
-			<Header.Content>
-				{student.lastName}, {student.firstName}
-			</Header.Content>
-			<HeaderSubHeader>
-				<i>Contact Number: </i> <b>{student.contact}</b>
-			</HeaderSubHeader>
-			<HeaderSubHeader>
-				<i>Emergency Contact Number: </i> <b>{student.emergencyContact}</b>
-			</HeaderSubHeader>
-			<HeaderSubHeader>
-				<i>Birthdate: </i> <b>{student.birthday}</b>
-			</HeaderSubHeader>
-		</Header>
-	</div>
-)
+const handleSubmit = (values, props) => {
+	let payment = props.trainingPrice
+	if (props.paymentMethod === 'partial') {
+		payment = values.amount
+	}
+
+	props.renewMembership(payment, props.clickedStudent._id)
+}
+
+const PersonalDetailsPane = props => {
+	const student = props.clickedStudent
+	const isMembershipExpired = date.differenceInMonths(new Date(), student.membershipDate) >= 1
+	const trigger = <Button disabled={!isMembershipExpired}>Renew Membership</Button>
+	return (
+		<div>
+			<Image src={student.image} circular floated={'left'} />
+			<Header as={'h1'}>
+				<Header.Content>
+					{student.lastName}, {student.firstName}
+				</Header.Content>
+				<HeaderSubHeader>
+					<i>Contact Number: </i> <b>{student.contact}</b>
+				</HeaderSubHeader>
+				<HeaderSubHeader>
+					<i>Emergency Contact Number: </i> <b>{student.emergencyContact}</b>
+				</HeaderSubHeader>
+				<HeaderSubHeader>
+					<i>Birthdate: </i> <b>{student.birthday}</b>
+				</HeaderSubHeader>
+				<HeaderSubHeader>
+					<i>Date Joined: </i> <b>{date.format(student.membershipDate, 'MMMM D, YYYY')}</b>
+				</HeaderSubHeader>
+				<Divider style={{ width: 600 }} />
+				<RenewModal
+					trigger={trigger}
+					id={student._id}
+					onSubmit={values => handleSubmit(values, props)}
+				/>
+			</Header>
+		</div>
+	)
+}
 
 const HealthPane = student => {
 	const questionnaire = student.questionnaire
@@ -68,14 +106,87 @@ const TrainerPane = student => {
 	)
 }
 
-const PaymentPane = student => {
+const PaymentPane = props => {
+	const student = props.clickedStudent
+	const balance = props.trainingPrice - student.amount
 	return (
-		<div>
-			<Header as="h2">
-				<Icon name="check circle" color={'green'} fitted style={{ marginRight: 5 }} />
-				<Header.Content>Fully Paid</Header.Content>
-			</Header>
-		</div>
+		<Statistic.Group size={'tiny'} widths={'four'}>
+			<Statistic>
+				<Statistic.Value>
+					<NumberFormat
+						value={props.trainingPrice}
+						displayType={'text'}
+						thousandSeparator={true}
+						prefix={'₱ '}
+						renderText={value => (
+							<b>
+								{value}
+								.00
+							</b>
+						)}
+					/>
+				</Statistic.Value>
+				<Statistic.Label>Training Price</Statistic.Label>
+			</Statistic>
+
+			<Statistic>
+				<Statistic.Value>
+					<NumberFormat
+						value={student.amount}
+						displayType={'text'}
+						thousandSeparator={true}
+						prefix={'₱ '}
+						renderText={value => (
+							<b>
+								{value}
+								.00
+							</b>
+						)}
+					/>
+				</Statistic.Value>
+				<Statistic.Label>Amount Paid</Statistic.Label>
+			</Statistic>
+
+			<Statistic>
+				<Statistic.Value>
+					<NumberFormat
+						value={balance}
+						displayType={'text'}
+						thousandSeparator={true}
+						prefix={'₱ '}
+						renderText={value => (
+							<b>
+								{value}
+								.00
+							</b>
+						)}
+					/>
+				</Statistic.Value>
+				<Statistic.Label>Remaining Balance</Statistic.Label>
+			</Statistic>
+
+			<Statistic>
+				<Statistic.Value>
+					{balance == 0 ? (
+						<Label style={{ color: 'green', fontSize: 20, padding: 5, width: '243' }}>
+							<b>FULLY PAID</b>
+						</Label>
+					) : (
+						<Reveal animated="move up">
+							<Reveal.Content hidden>
+								<Button fluid>Make Payment</Button>
+							</Reveal.Content>
+							<Reveal.Content visible>
+								<Label style={{ color: 'red', fontSize: 20, padding: 5, width: '243' }}>
+									<b>PARTIALLY PAID</b>
+								</Label>
+							</Reveal.Content>
+						</Reveal>
+					)}
+				</Statistic.Value>
+				<Statistic.Label>Payment Status</Statistic.Label>
+			</Statistic>
+		</Statistic.Group>
 	)
 }
 
@@ -86,11 +197,7 @@ const renderPanes = props => [
 				<Icon name={'info'} /> Personal Details
 			</Menu.Item>
 		),
-		render: () => (
-			<Tab.Pane style={{ height: 300 }}>
-				{<PersonalDetailsPane {...props.clickedStudent} />}
-			</Tab.Pane>
-		)
+		render: () => <Tab.Pane style={{ height: 300 }}>{<PersonalDetailsPane {...props} />}</Tab.Pane>
 	},
 	{
 		menuItem: (
@@ -122,14 +229,18 @@ const renderPanes = props => [
 				<Icon name={'payment'} /> Payment
 			</Menu.Item>
 		),
-		render: () => (
-			<Tab.Pane style={{ height: 100 }}>{<PaymentPane {...props.clickedStudent} />}</Tab.Pane>
-		)
+		render: () => <Tab.Pane style={{ height: 80 }}>{<PaymentPane {...props} />}</Tab.Pane>
 	}
 ]
 
-const StudentProfile = props => {
-	return <Tab panes={renderPanes(props)} style={{ margin: 30 }} />
+class StudentProfile extends React.Component {
+	componentDidMount() {
+		this.props.getPrice()
+	}
+
+	render() {
+		return <Tab panes={renderPanes(this.props)} style={{ margin: 30 }} />
+	}
 }
 
 export default StudentProfile

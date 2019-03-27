@@ -4,6 +4,7 @@ import { Container, Grid, Header, Icon, Button, Table, Segment } from 'semantic-
 import EditModal from '../../redux/containers/sale/EditModalContainer'
 import TableContent from './TableContent'
 import PurchaseOverview from './PurchaseOverview'
+import FloatingButton from '../custom/FloatingButton'
 
 class Sale extends React.Component {
 	componentDidMount() {
@@ -63,6 +64,7 @@ class Sale extends React.Component {
 							{isEmpty && <EmptyCartMessage />}
 						</Container>
 					</Grid.Column>
+					<FloatingButton />
 				</Grid.Row>
 			</Grid>
 		)

@@ -17,7 +17,6 @@ export function setActiveForm(payload) {
 }
 
 export function setPrice(price) {
-	console.log(price)
 	return async () => {
 		const fetch = await app.service(priceApi).find()
 		if (fetch.length === 0) {
@@ -29,6 +28,13 @@ export function setPrice(price) {
 				price: parseFloat(price)
 			})
 		}
+	}
+}
+
+export function renewMembership(amount, id) {
+	return async dispatch => {
+		await app.service(studentApi).patch(id, { amount: amount, membershipDate: new Date() })
+		dispatch(fetchStudents())
 	}
 }
 
@@ -85,6 +91,7 @@ export function createStudent(student) {
 		})
 		student.image = data._id
 		student.id = generateId(student)
+		student.membershipDate = new Date()
 		await app.service(studentApi).create({
 			...student
 		})

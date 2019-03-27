@@ -39,6 +39,11 @@ const Students = ({ students, role }) => {
 
 	return (
 		<List divided relaxed size={'huge'} style={{ marginRight: '50%' }}>
+			{role === 'Coach' && (
+				<Header as={'h3'} textAlign={'center'}>
+					<Header.Content>Students Enrolled Under this Coach</Header.Content>
+				</Header>
+			)}
 			{studentList}
 		</List>
 	)

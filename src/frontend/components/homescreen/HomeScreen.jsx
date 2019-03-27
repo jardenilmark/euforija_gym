@@ -11,7 +11,7 @@ import {
 	Divider,
 	Modal,
 	Form,
-	Label
+	Accordion
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
@@ -88,7 +88,6 @@ class HomeScreen extends Component {
 							</Header>
 						</Menu.Item>
 						<Menu.Item style={userLogin.role === 'Owner' ? {} : styles.price}>
-							{/* change ui */}
 							<Modal
 								trigger={
 									<div style={{ paddingLeft: 55, paddingRight: 55 }}>
@@ -136,6 +135,20 @@ class HomeScreen extends Component {
 									</Form>
 								</Modal.Content>
 							</Modal>
+						</Menu.Item>
+						<Menu.Item>
+							<Accordion style={{ textAlign: 'left' }}>
+								<Accordion.Title active index={0}>
+									<Icon name="dropdown" />
+									What is a dog?
+								</Accordion.Title>
+								<Accordion.Content active>
+									<p>
+										A dog is a type of domesticated animal. Known for its loyalty and faithfulness,
+										it can be found as a welcome guest in many households across the world.
+									</p>
+								</Accordion.Content>
+							</Accordion>
 						</Menu.Item>
 						<Menu.Item style={styles.item}>
 							<Button animated fluid style={styles.logout} size={'massive'} onClick={e => logout()}>
