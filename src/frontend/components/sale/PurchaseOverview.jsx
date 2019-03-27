@@ -44,7 +44,7 @@ const TableContent = ({ overviewArr }) =>
 
 const PurchaseOverview = props => {
 	return (
-		<Modal open={props.purchaseOverviewState} size="small" basic dimmer={'blurring'}>
+		<Modal open={props.purchaseOverviewState} size="small" basic>
 			<Header icon="tasks" content="Review Order Summary" />
 			<Modal.Content>
 				<Container style={styles.container}>

@@ -1,4 +1,7 @@
 import createServices from './createService'
+import transform from '../hooks/transfrom'
+import Student from '../../models/Student'
+import validate from '../hooks/validate'
 
 const setupStudentService = (app, db) => {
 	return () => {
@@ -6,9 +9,10 @@ const setupStudentService = (app, db) => {
 
 		service.hooks({
 			before: {
-				create: [],
-				update: [],
-				patch: []
+				create: [transform(Student), validate()]
+			},
+			after: {
+				find: [transform(Student)]
 			}
 		})
 	}

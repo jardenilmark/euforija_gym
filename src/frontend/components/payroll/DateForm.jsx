@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Segment, Divider, Container } from 'semantic-ui-react'
 import { DateRange } from 'react-date-range'
 import RateForm from '../../redux/containers/payroll/RateFormContainer'

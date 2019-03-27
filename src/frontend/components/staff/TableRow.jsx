@@ -1,6 +1,5 @@
 import React from 'react'
 import { Table, Header, Image, Button, Popup } from 'semantic-ui-react'
-import { editStaffProfile } from '../../redux/actions/staffActions'
 
 const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility, setClickedStaff, staff) => {
 	toggleFormVisibility(false)
@@ -8,7 +7,7 @@ const invokeFunctions = (toggleFormVisibility, toggleProfileVisibility, setClick
 	setClickedStaff(staff)
 }
 
-const TableExampleCollapsing = ({
+const TableRow = ({
 	staff,
 	toggleProfileVisibility,
 	setClickedStaff,
@@ -87,4 +86,4 @@ const styles = {
 	}
 }
 
-export default TableExampleCollapsing
+export default TableRow

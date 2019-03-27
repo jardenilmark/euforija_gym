@@ -5,7 +5,7 @@ import FieldComponent from '../custom/ImageField'
 
 const InventoryForm = ({ handleSubmit, pristine, submitting }) => {
 	return (
-		<Form onSubmit={handleSubmit}>
+		<Form onSubmit={handleSubmit} autoComplete={'off'}>
 			<Form.Group>
 				<Form.Field style={styles.formField}>
 					<label>

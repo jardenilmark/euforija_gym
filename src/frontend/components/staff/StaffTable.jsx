@@ -23,6 +23,10 @@ class StaffTable extends React.Component {
 		} else {
 			if (this.props.staff.length > 0) {
 				rows = this.props.staff.map((staff, index) => {
+					if (index == 0) {
+						console.log('STAFF', staff)
+						this.props.setClickedStaff(staff)
+					}
 					return (
 						<TableRow
 							staff={staff}

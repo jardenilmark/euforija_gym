@@ -4,6 +4,7 @@ import { onSubmit } from '../../helpers/inventoryHelper'
 import AddItemModal from '../../redux/containers/inventory/AddModalContainer'
 import EditItemModal from '../../redux/containers/inventory/EditModalContainer'
 import DeleteItemModal from '../../redux/containers/inventory/DeleteModalContainer'
+import FloatingButton from '../custom/FloatingButton'
 import TableRows from './TableRows'
 
 class Inventory extends React.Component {
@@ -16,6 +17,7 @@ class Inventory extends React.Component {
 		const { activeItem, setActiveItem, setModalState, setPriceValue, setNameVal } = this.props
 		return (
 			<Container textAlign={'center'} fluid style={styles.container}>
+				<FloatingButton />
 				<EditItemModal />
 				<AddItemModal />
 				<DeleteItemModal />

@@ -4,7 +4,8 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
 	return {
-		initialValues: state.staff.initialValues
+		initialValues: state.staff.initialValues,
+		enableReinitialize: true
 	}
 }
 

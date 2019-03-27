@@ -40,6 +40,7 @@
 	border-left-width: 0;
 }
 
-video {
-	object-fit: cover;
+#img:hover {
+	-webkit-filter: grayscale(100%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+	filter: grayscale(100%); /* FF 35+ */
 }

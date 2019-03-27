@@ -2,7 +2,7 @@ import { DropdownField } from '../custom/Dropdown'
 import React from 'react'
 import { Field } from 'redux-form'
 import { Form, Button, Label, Header, Segment, Divider, Container, Icon } from 'semantic-ui-react'
-import ProfilePhoto from './ProfilePhoto'
+import ProfilePhoto from '../custom/ProfilePhoto'
 
 const genderOptions = [
 	{
@@ -27,14 +27,15 @@ const roleOptions = [
 ]
 
 const Create = props => {
-	const { handleSubmit, pristine, submitting } = props
+	const { handleSubmit, pristine, submitting, initialValues } = props
 	return (
 		<Form onSubmit={values => handleSubmit(values)}>
 			<Segment style={styles.segment} basic>
 				<Label size={'huge'} attached={'top'} basic style={styles.headerLabel}>
 					<Icon name={'edit outline'} style={{ marginRight: '5' }} />
-					Add New Staff
+					{initialValues ? 'Edit Staff' : 'Add New Staff'}
 				</Label>
+				<Divider />
 				<ProfilePhoto {...props} />
 				<Divider style={styles.divider} />
 				<Form.Group widths={'equal'}>

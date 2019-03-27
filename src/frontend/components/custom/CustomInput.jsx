@@ -4,7 +4,7 @@ import { Form, Header } from 'semantic-ui-react'
 const CustomInput = props => (
 	<Form.Field style={style.form}>
 		<label>
-			<Header size={'small'}>{props.header}</Header>
+			<Header size={'tiny'}>{props.header}</Header>
 		</label>
 		<Form.Input type={props.type} {...props.input} required={props.isRequired === undefined} />
 	</Form.Field>
@@ -14,7 +14,7 @@ const style = {
 	form: {
 		padding: 0,
 		margin: 0,
-		marginBottom: 10
+		marginRight: 10
 	}
 }
 

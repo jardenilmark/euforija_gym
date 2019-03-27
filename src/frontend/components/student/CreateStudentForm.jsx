@@ -12,14 +12,33 @@ const getStyle = (active, name) => {
 	}
 }
 
-const CreateStudent = props => {
-	const { setStepData, setActiveForm, createStudent, trainer, health, personal } = props
+class CreateStudent extends React.Component {
+	componentDidMount() {
+		this.props.getPrice()
+	}
+	render() {
+		return studentForm(this.props)
+	}
+}
+
+const studentForm = props => {
+	const {
+		setStepData,
+		setActiveForm,
+		createStudent,
+		trainer,
+		health,
+		personal,
+		croppedImage,
+		trainingPrice
+	} = props
 	return (
 		<div>
 			<div style={getStyle(props.activeForm, 'personal')}>
 				<PersonalPage
 					onSubmit={e => {
-						setStepData('PERSONAL', e)
+						const obj = { ...e, image: croppedImage }
+						setStepData('PERSONAL', obj)
 						setActiveForm('health')
 					}}
 				/>
@@ -38,11 +57,11 @@ const CreateStudent = props => {
 			<div style={getStyle(props.activeForm, 'payment')}>
 				<PaymentPage
 					onSubmit={e => {
-						let payment = { amount: 1499 }
+						let payment = { amount: trainingPrice }
 						if (props.paymentMethod === 'partial') {
 							payment = { amount: parseInt(e.amount) }
 						}
-						createStudent({ ...trainer, ...health, ...personal, ...payment })
+						createStudent({ ...trainer, ...personal, ...payment, questionnaire: health })
 					}}
 				/>
 			</div>

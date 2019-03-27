@@ -3,10 +3,9 @@ import {
 	onCropChange,
 	onCropComplete,
 	toggleCropImageModal,
-	getCroppedImage,
-	onZoomChange
-} from '../../actions/staffActions'
-import CropImageModal from '../../../components/staff/CropImageModal'
+	getCroppedImage
+} from '../../actions/profilePhotoActions'
+import CropImageModal from '../../../components/custom/CropImageModal'
 
 function mapStateToProps(state) {
 	return {
@@ -19,9 +18,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		onZoomChange(value) {
-			dispatch(onZoomChange(value))
-		},
 		onCropChange(coordinates) {
 			dispatch(onCropChange(coordinates))
 		},
