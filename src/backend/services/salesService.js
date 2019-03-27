@@ -9,7 +9,7 @@ const inventoryService = (app, db) => {
 
 		service.hooks({
 			before: {
-				create: [transform(Sales), validate()]
+				// create: [transform(Sales), validate()]
 			}
 		})
 	}

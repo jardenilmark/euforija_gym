@@ -9,9 +9,9 @@ const setupStaffService = (app, db) => {
 		const service = createServices(app, db, 'staff')
 		service.hooks({
 			before: {
-				create: [transformHook(Staff), validate(), encryptPassword()],
-				update: [encryptPassword()],
-				patch: [encryptPassword()]
+				create: [transformHook(Staff), validate(), encryptPassword],
+				update: [encryptPassword],
+				patch: [encryptPassword]
 			}
 		})
 	}
