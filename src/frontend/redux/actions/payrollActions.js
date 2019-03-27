@@ -12,13 +12,6 @@ const imageApi = 'api/file'
 export const fetchAllStaff = () => async dispatch => {
 	try {
 		dispatch({ type: 'FETCHING_ALL_STAFF' })
-
-		let query = {
-			firstName: {
-				$search: 'len',
-				$caseSensitive: false
-			}
-		}
 		let staffs = await app.service(staffApi).find()
 		const images = await app.service(imageApi).find()
 
@@ -112,4 +105,40 @@ export const selectDates = range => async dispatch => {
 			to: new Date(range.endDate._d)
 		}
 	})
+}
+
+export const findStaff = name => async dispatch => {
+	try {
+		dispatch({ type: 'FINDING_STAFF' })
+		let staffs = await app.service(staffApi).find({
+			query: {
+				$or: [
+					{ firstName: { $regex: name, $options: 'igm' } },
+					{ lastName: { $regex: name, $options: 'igm' } },
+					{ idNumber: { $regex: name, $options: 'igm' } }
+				]
+			}
+		})
+		console.log(staffs)
+		const images = await app.service(imageApi).find()
+
+		staffs = staffs.map(staff => {
+			const imageIndex = images.findIndex(image => image._id === staff.image)
+			const base64 = images[imageIndex].data
+			return {
+				...staff,
+				image: base64
+			}
+		})
+
+		dispatch({
+			type: 'FINDING_STAFF_SUCCESS',
+			payload: staffs
+		})
+	} catch (e) {
+		dispatch({
+			type: 'FINDING_STAFF_FAILURE',
+			payload: e
+		})
+	}
 }
