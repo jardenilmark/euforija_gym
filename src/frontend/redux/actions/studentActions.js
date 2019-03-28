@@ -35,7 +35,14 @@ export function renewMembership(amount, student) {
 	return async dispatch => {
 		await app.service(studentApi).patch(student._id, { amount: amount, membershipDate: new Date() })
 		dispatch(fetchStudents())
-		dispatch(setClickedStudent(student))
+	}
+}
+
+export function makePayment(amount, student) {
+	return async dispatch => {
+		const newAmount = amount + student.amount
+		await app.service(studentApi).patch(student._id, { amount: newAmount })
+		dispatch(fetchStudents())
 	}
 }
 
@@ -87,25 +94,33 @@ export function setPaymentMethod(payload) {
 
 export function createStudent(student) {
 	return async dispatch => {
-		const data = await app.service(fileApi).create({
-			data: student.image
-		})
-		student.image = data._id
-		student.id = generateId(student)
-		student.membershipDate = new Date()
-		await app.service(studentApi).create({
-			...student
-		})
-		dispatch({ type: 'STUDENT_CREATED', payload: true })
-		dispatch(reset('studentHealthForm'))
-		dispatch(reset('studentPaymentForm'))
-		dispatch(reset('studentPersonalForm'))
-		iziToast.success({
-			title: 'SUCCESS',
-			message: 'Student added successfully!',
-			position: 'topRight'
-		})
-		dispatch(fetchStudents())
+		try {
+			const data = await app.service(fileApi).create({
+				data: student.image
+			})
+			student.image = data._id
+			student.idNumber = generateId(student)
+			student.membershipDate = new Date()
+			await app.service(studentApi).create({
+				...student
+			})
+			dispatch({ type: 'STUDENT_CREATED', payload: true })
+			dispatch(reset('studentHealthForm'))
+			dispatch(reset('studentPaymentForm'))
+			dispatch(reset('studentPersonalForm'))
+			iziToast.success({
+				title: 'SUCCESS',
+				message: 'Student added successfully!',
+				position: 'topRight'
+			})
+			dispatch(fetchStudents())
+		} catch (e) {
+			iziToast.success({
+				title: 'ERROR',
+				message: e.message,
+				position: 'topRight'
+			})
+		}
 	}
 }
 

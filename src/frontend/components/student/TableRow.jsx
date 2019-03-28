@@ -27,7 +27,7 @@ const TableRow = ({
 					<Header.Content>
 						{student.lastName}, {student.firstName}
 						<Header.Subheader>
-							<Label content={student.id} style={{ marginLeft: -2 }} />
+							<Label content={student.idNumber} style={{ marginLeft: -2 }} />
 						</Header.Subheader>
 					</Header.Content>
 				</Header>
