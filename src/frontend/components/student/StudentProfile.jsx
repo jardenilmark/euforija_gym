@@ -41,6 +41,7 @@ const PersonalDetailsPane = props => {
 				<Header.Content>
 					{student.lastName}, {student.firstName}
 				</Header.Content>
+				<Divider style={{ width: 600 }} />
 				<HeaderSubHeader>
 					<i>Contact Number: </i> <b>{student.contact}</b>
 				</HeaderSubHeader>
@@ -89,6 +90,7 @@ const HealthPane = student => {
 
 const TrainerPane = student => {
 	const trainer = student.trainer
+	const labelColor = trainer.status === 'out' ? 'red' : 'green'
 	return (
 		<div>
 			<Image src={trainer.image} floated={'left'} circular />
@@ -96,6 +98,14 @@ const TrainerPane = student => {
 				<Header.Content>
 					{trainer.lastName}, {trainer.firstName}
 				</Header.Content>
+				<Divider style={{ width: 600 }} />
+				<HeaderSubHeader>
+					<i>Gender: </i>{' '}
+					<b>
+						{trainer.gender.substring(0, 1).toUpperCase()}
+						{trainer.gender.substring(1)}
+					</b>
+				</HeaderSubHeader>
 				<HeaderSubHeader>
 					<i>Contact Number: </i> <b>{trainer.contactNumber}</b>
 				</HeaderSubHeader>
@@ -103,8 +113,13 @@ const TrainerPane = student => {
 					<i>Address: </i> <b>{trainer.address}</b>
 				</HeaderSubHeader>
 				<HeaderSubHeader>
-					<i>Birthdate: </i> <b>{trainer.birthdate}</b>
+					<i>Birthdate: </i> <b>{date.format(trainer.birthdate, 'MMMM D, YYYY')}</b>
 				</HeaderSubHeader>
+				<Divider style={{ width: 600 }} />
+				<Label size={'large'} color={labelColor} style={{ marginLeft: -1 }}>
+					Status
+					<Label.Detail>{trainer.status}</Label.Detail>
+				</Label>
 			</Header>
 		</div>
 	)
