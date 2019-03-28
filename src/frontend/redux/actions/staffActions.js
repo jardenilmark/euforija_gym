@@ -39,6 +39,8 @@ export function createStaff(staff) {
 					message: 'Staff added successfully!',
 					position: 'topRight'
 				})
+				dispatch(fetchStaff())
+				dispatch(clearImage())
 			} else {
 				Swal.fire('Oops', 'The password you entered did not match. Please try again.', 'error')
 			}
@@ -59,13 +61,17 @@ export function updateStaff(staff) {
 				const data = await app.service(fileApi).patch(staff.imageId, { data: staff.image })
 				staff.image = data._id
 				await app.service(staffApi).patch(staff._id, staff)
+				iziToast.success({
+					title: 'SUCCESS',
+					message: 'Staff updated successfully!',
+					position: 'topRight'
+				})
+				dispatch({ type: 'STAFF_UPDATED' })
+				dispatch(fetchStaff())
+				dispatch(clearImage())
+			} else {
+				Swal.fire('Oops', 'The password you entered did not match. Please try again.', 'error')
 			}
-			dispatch(reset('createStaffForm'))
-			iziToast.success({
-				title: 'SUCCESS',
-				message: 'Staff updated successfully!',
-				position: 'topRight'
-			})
 		}
 	}
 }

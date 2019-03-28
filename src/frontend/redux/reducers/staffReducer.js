@@ -25,6 +25,11 @@ export default function reducer(state = initialState, action) {
 				image: null,
 				croppedImage: null
 			}
+		case 'STAFF_UPDATED':
+			return {
+				...state,
+				initialValues: null
+			}
 		case 'STAFF_FILTER':
 			return {
 				...state,
