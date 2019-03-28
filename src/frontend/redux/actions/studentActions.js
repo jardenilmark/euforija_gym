@@ -100,8 +100,9 @@ export function createStudent(student) {
 			const data = await app.service(fileApi).create({
 				data: student.image
 			})
+			const id = generateId(student)
 			student.image = data._id
-			student.idNumber = generateId(student)
+			student.idNumber = id
 			student.membershipDate = new Date()
 			await app.service(studentApi).create({
 				...student
@@ -110,6 +111,11 @@ export function createStudent(student) {
 			dispatch(reset('studentHealthForm'))
 			dispatch(reset('studentPaymentForm'))
 			dispatch(reset('studentPersonalForm'))
+			Swal.fire(
+				`${id} is your auto-generated identification number`,
+				'You can use this identification number when logging in on the attendance pane',
+				'success'
+			)
 			iziToast.success({
 				title: 'SUCCESS',
 				message: 'Student added successfully!',
