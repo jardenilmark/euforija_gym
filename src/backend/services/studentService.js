@@ -8,9 +8,9 @@ const setupStudentService = (app, db) => {
 		const service = createServices(app, db, 'student')
 
 		service.hooks({
-			before: {
-				create: [transform(Student), validate()]
-			},
+			// before: {
+			// 	create: [transform(Student), validate()]
+			// },
 			after: {
 				find: [transform(Student)]
 			}

@@ -136,7 +136,7 @@ class HomeScreen extends Component {
 								</Modal.Content>
 							</Modal>
 						</Menu.Item>
-						<Menu.Item>
+						{/* <Menu.Item>
 							<Accordion style={{ textAlign: 'left' }}>
 								<Accordion.Title active index={0}>
 									<Icon name="dropdown" />
@@ -149,7 +149,7 @@ class HomeScreen extends Component {
 									</p>
 								</Accordion.Content>
 							</Accordion>
-						</Menu.Item>
+						</Menu.Item> */}
 						<Menu.Item style={styles.item}>
 							<Button animated fluid style={styles.logout} size={'massive'} onClick={e => logout()}>
 								<Button.Content visible>Logout</Button.Content>
