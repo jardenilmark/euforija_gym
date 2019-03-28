@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import RenewModal from '../../../components/student/RenewModal'
-import { setPaymentMethod, renewMembership } from '../../actions/studentActions'
+import { setPaymentMethod } from '../../actions/studentActions'
 
 function mapDispatchToProps(dispatch) {
 	return {

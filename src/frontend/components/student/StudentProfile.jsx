@@ -16,6 +16,7 @@ import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/Hea
 import NumberFormat from 'react-number-format'
 import date from 'date-fns'
 import RenewModal from '../../redux/containers/student/RenewModal'
+import PaymentModal from '../../redux/containers/student/PaymentModal'
 
 const handleSubmit = (values, props) => {
 	let payment = props.trainingPrice
@@ -109,6 +110,7 @@ const TrainerPane = student => {
 const PaymentPane = props => {
 	const student = props.clickedStudent
 	const balance = props.trainingPrice - student.amount
+	const trigger = <Button fluid>Make Payment</Button>
 	return (
 		<Statistic.Group size={'tiny'} widths={'four'}>
 			<Statistic>
@@ -174,7 +176,7 @@ const PaymentPane = props => {
 					) : (
 						<Reveal animated="move up">
 							<Reveal.Content hidden>
-								<Button fluid>Make Payment</Button>
+								<PaymentModal trigger={trigger} />
 							</Reveal.Content>
 							<Reveal.Content visible>
 								<Label style={{ color: 'red', fontSize: 20, padding: 5, width: '243' }}>

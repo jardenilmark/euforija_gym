@@ -19,7 +19,7 @@ const Students = ({ students, role }) => {
 							{student.lastName}, {student.firstName}
 						</List.Header>
 						<List.Description>
-							<Label content={student.id} style={{ marginLeft: -2 }} size={'tiny'} />
+							<Label content={student.idNumber} style={{ marginLeft: -2 }} size={'tiny'} />
 						</List.Description>
 					</List.Content>
 				</List.Item>
