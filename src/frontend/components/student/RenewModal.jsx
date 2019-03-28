@@ -6,8 +6,7 @@ import {
 	Header,
 	Form,
 	Radio,
-	Divider,
-	Container
+	Divider
 } from 'semantic-ui-react'
 import { Field } from 'redux-form'
 import CustomInput from '../custom/CustomInput'

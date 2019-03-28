@@ -5,7 +5,6 @@ import * as dateHelper from '../../helpers/dateHelper'
 const TimeLogs = props => {
 	if (props.dates.length) {
 		const dates = dateHelper.pairDates(props.dates)
-		console.log(dates)
 		return (
 			<Table celled striped style={styles.main}>
 				<Table.Header>
@@ -41,9 +40,7 @@ const TimeLogs = props => {
 
 const styles = {
 	main: {
-		marginTop: '50px'
-	},
-	text: {
+		marginTop: '50px',
 		fontSize: '20px',
 		textAlign: 'center'
 	}

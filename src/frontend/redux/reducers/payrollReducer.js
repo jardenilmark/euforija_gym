@@ -12,6 +12,7 @@ const initialState = {
 export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case 'FETCHING_ALL_STAFF_SUCCESS':
+		case 'FINDING_STAFF_SUCCESS':
 			return {
 				...state,
 				staffs: action.payload,

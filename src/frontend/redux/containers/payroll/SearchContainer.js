@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import {} from '../../actions/attendanceActions'
+import { findStaff } from '../../actions/payrollActions'
 import Search from '../../../components/payroll/Search'
 
 function mapStateToProps(state) {
@@ -7,7 +7,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-	return {}
+	return {
+		findStaff(name) {
+			dispatch(findStaff(name))
+		}
+	}
 }
 
 export default connect(

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Segment } from 'semantic-ui-react'
 import SearchBar from '../../redux/containers/payroll/SearchBarContainer'
 
@@ -6,7 +6,7 @@ const Search = props => (
 	<Segment basic style={styles.segment}>
 		<SearchBar
 			onSubmit={e => {
-				console.log(e)
+				props.findStaff(e.payrollSearch)
 			}}
 		/>
 	</Segment>
