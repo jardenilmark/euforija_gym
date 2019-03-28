@@ -32,6 +32,8 @@ export function setPrice(price) {
 }
 
 export function renewMembership(amount, student) {
+	console.log('amt', amount)
+	console.log('stud', student)
 	return async dispatch => {
 		await app.service(studentApi).patch(student._id, { amount: amount, membershipDate: new Date() })
 		dispatch(fetchStudents())
@@ -40,7 +42,7 @@ export function renewMembership(amount, student) {
 
 export function makePayment(amount, student) {
 	return async dispatch => {
-		const newAmount = amount + student.amount
+		const newAmount = parseInt(amount) + parseInt(student.amount)
 		await app.service(studentApi).patch(student._id, { amount: newAmount })
 		dispatch(fetchStudents())
 	}

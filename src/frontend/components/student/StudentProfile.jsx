@@ -18,13 +18,16 @@ import date from 'date-fns'
 import RenewModal from '../../redux/containers/student/RenewModal'
 import PaymentModal from '../../redux/containers/student/PaymentModal'
 
-const handleSubmit = (values, props) => {
+const renewMembership = (values, props) => {
 	let payment = props.trainingPrice
 	if (props.paymentMethod === 'partial') {
 		payment = values.amount
 	}
-
 	props.renewMembership(payment, props.clickedStudent)
+}
+
+const makePayment = (amount, student, makePayment) => {
+	makePayment(amount, student)
 }
 
 const PersonalDetailsPane = props => {
@@ -54,7 +57,7 @@ const PersonalDetailsPane = props => {
 				<RenewModal
 					trigger={trigger}
 					id={student._id}
-					onSubmit={values => handleSubmit(values, props)}
+					onSubmit={values => renewMembership(values, props)}
 				/>
 			</Header>
 		</div>
@@ -176,10 +179,23 @@ const PaymentPane = props => {
 					) : (
 						<Reveal animated="move up">
 							<Reveal.Content hidden>
-								<PaymentModal trigger={trigger} />
+								<PaymentModal
+									trigger={trigger}
+									amountPaid={student.amount}
+									onSubmit={values => {
+										makePayment(values.amount, student, props.makePayment)
+									}}
+								/>
 							</Reveal.Content>
 							<Reveal.Content visible>
-								<Label style={{ color: 'red', fontSize: 20, padding: 5, width: '243' }}>
+								<Label
+									style={{
+										color: 'red',
+										fontSize: 20,
+										padding: 5,
+										width: '243',
+										cursor: 'pointer'
+									}}>
 									<b>PARTIALLY PAID</b>
 								</Label>
 							</Reveal.Content>
