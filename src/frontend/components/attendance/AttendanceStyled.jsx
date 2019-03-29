@@ -51,7 +51,7 @@ export const LogsSegment = styled(Segment)({
 	backgroundColor: '#ffffff',
 	margin: '12px 0 12px 0 !important',
 	width: '100% !important',
-	maxHeight: '100% !important'
+	maxHeight: '83% !important'
 })
 
 export const LogsRow = styled(Grid.Row)({
@@ -110,7 +110,7 @@ export const TrainerName = styled(Card.Content)({
 })
 
 export const VisitorList = styled(List)({
-	height: '83%',
+	height: '83% !important',
 	overflowY: 'auto',
 	overflowX: 'hidden'
 })
