@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron')
+const electron = require('electron')
+const { app, BrowserWindow } = electron
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -6,10 +7,16 @@ let win
 
 function createWindow() {
 	// Create the browser window.
-	win = new BrowserWindow({ width: 800, height: 600 })
+	const display = electron.screen.getPrimaryDisplay()
+	const maxiSize = display.workAreaSize
+	win = new BrowserWindow({
+		resizable: false,
+		height: maxiSize.height,
+		width: maxiSize.width
+	})
 
 	// and load the index.html of the app.
-	win.loadURL('http://localhost:8081/')
+	win.loadURL('http://localhost:8080/attendance')
 	// Open the DevTools.
 	win.webContents.openDevTools()
 
