@@ -1,5 +1,6 @@
 const electron = require('electron')
-const { app, BrowserWindow } = electron
+const path = require('path')
+const { app, BrowserWindow, nativeImage } = electron
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -9,16 +10,21 @@ function createWindow() {
 	// Create the browser window.
 	const display = electron.screen.getPrimaryDisplay()
 	const maxiSize = display.workAreaSize
+	const appIcon = nativeImage.createFromPath(
+		path.join(__dirname, '../public/assets/images/network.png')
+	)
 	win = new BrowserWindow({
 		resizable: false,
+		fullscreen: true,
 		height: maxiSize.height,
-		width: maxiSize.width
+		width: maxiSize.width,
+		icon: appIcon
 	})
 
 	// and load the index.html of the app.
 	win.loadURL('http://localhost:8080/attendance')
 	// Open the DevTools.
-	win.webContents.openDevTools()
+	// win.webContents.openDevTools()
 
 	// Emitted when the window is closed.
 	win.on('closed', () => {
