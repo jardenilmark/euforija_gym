@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Image } from 'semantic-ui-react'
+import { List, Image, Segment, Header, Icon } from 'semantic-ui-react'
 
 class StaffList extends Component {
 	async componentDidMount() {
@@ -8,23 +8,33 @@ class StaffList extends Component {
 
 	render() {
 		const { staffs } = this.props
+		if (staffs.length) {
+			return (
+				<List horizontal size={'big'} style={styles.list}>
+					{staffs.map(staff => (
+						<List.Item
+							key={staff._id}
+							style={styles.listItem}
+							onClick={() => this.props.selectStaff(staff)}>
+							<Image avatar src={staff.image} />
+							<List.Content>
+								<List.Header>{staff.idNumber}</List.Header>
+								<p style={styles.name}>
+									{staff.firstName} {staff.lastName}
+								</p>
+							</List.Content>
+						</List.Item>
+					))}
+				</List>
+			)
+		}
 		return (
-			<List horizontal size={'big'} style={styles.list}>
-				{staffs.map(staff => (
-					<List.Item
-						key={staff._id}
-						style={styles.listItem}
-						onClick={() => this.props.selectStaff(staff)}>
-						<Image avatar src={staff.image} />
-						<List.Content>
-							<List.Header>{staff.idNumber}</List.Header>
-							<p style={styles.name}>
-								{staff.firstName} {staff.lastName}
-							</p>
-						</List.Content>
-					</List.Item>
-				))}
-			</List>
+			<Segment size={'tiny'}>
+				<Header icon>
+					<Icon name="exclamation circle" color={'red'} />
+					<Header.Content>No Matched Staff.</Header.Content>
+				</Header>
+			</Segment>
 		)
 	}
 }
