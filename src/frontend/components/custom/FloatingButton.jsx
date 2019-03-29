@@ -23,6 +23,7 @@ const FloatingButton = () => {
 					return (
 						<Action
 							text={e.text}
+							key={e.text}
 							style={{
 								backgroundColor: 'transparent',
 								fontSize: '20',
