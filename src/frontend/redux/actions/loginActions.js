@@ -74,7 +74,7 @@ export function checkStorage() {
 
 export async function isValidAuthority(path) {
 	try {
-		const staffPaths = ['/sales', '/student', '/payroll']
+		const staffPaths = ['/sales', '/student']
 		const token = window.localStorage.getItem('jwtToken')
 		const user = jwt.verify(token, privateKey)
 		if (user) {
