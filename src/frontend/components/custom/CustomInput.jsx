@@ -3,9 +3,11 @@ import { Form, Header } from 'semantic-ui-react'
 
 const CustomInput = props => (
 	<Form.Field style={style.form}>
-		<label>
-			<Header size={'tiny'}>{props.header}</Header>
-		</label>
+		{props.header && (
+			<label>
+				<Header size={'tiny'}>{props.header}</Header>
+			</label>
+		)}
 		<Form.Input type={props.type} {...props.input} required={props.isRequired === undefined} />
 	</Form.Field>
 )

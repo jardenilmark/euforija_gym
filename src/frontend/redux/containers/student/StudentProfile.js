@@ -1,14 +1,17 @@
 import { connect } from 'react-redux'
 import StudentProfile from '../../../components/student/StudentProfile'
-import { getPrice, renewMembership } from '../../actions/studentActions'
+import { getPrice, renewMembership, makePayment } from '../../actions/studentActions'
 
 function mapDispatchToProps(dispatch) {
 	return {
 		getPrice() {
 			dispatch(getPrice())
 		},
-		renewMembership(amount, id) {
-			dispatch(renewMembership(amount, id))
+		renewMembership(amount, student) {
+			dispatch(renewMembership(amount, student))
+		},
+		makePayment(amount, student) {
+			dispatch(makePayment(amount, student))
 		}
 	}
 }

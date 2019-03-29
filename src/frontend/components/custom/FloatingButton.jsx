@@ -19,9 +19,10 @@ const FloatingButton = () => {
 			event={'hover'}>
 			{arr
 				.filter(e => window.location.pathname !== e.location)
-				.map(e => {
+				.map((e, index) => {
 					return (
 						<Action
+							key={index}
 							text={e.text}
 							key={e.text}
 							style={{

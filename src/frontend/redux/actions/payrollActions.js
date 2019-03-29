@@ -1,4 +1,5 @@
 import app from '../../client'
+import { isValidAuthority } from './loginActions'
 import date from 'date-fns'
 import Swal from 'sweetalert2'
 
@@ -11,23 +12,31 @@ const imageApi = 'api/file'
 
 export const fetchAllStaff = () => async dispatch => {
 	try {
-		dispatch({ type: 'FETCHING_ALL_STAFF' })
-		let staffs = await app.service(staffApi).find()
-		const images = await app.service(imageApi).find()
+		const check = await isValidAuthority('/payroll')
+		if (check) {
+			dispatch({ type: 'FETCHING_ALL_STAFF' })
+			let staffs = await app.service(staffApi).find()
+			const images = await app.service(imageApi).find()
 
-		staffs = staffs.map(staff => {
-			const imageIndex = images.findIndex(image => image._id === staff.image)
-			const base64 = images[imageIndex].data
-			return {
-				...staff,
-				image: base64
-			}
-		})
+			staffs = staffs.map(staff => {
+				const imageIndex = images.findIndex(image => image._id === staff.image)
+				const base64 = images[imageIndex].data
+				return {
+					...staff,
+					image: base64
+				}
+			})
 
-		dispatch({
-			type: 'FETCHING_ALL_STAFF_SUCCESS',
-			payload: staffs
-		})
+			dispatch({
+				type: 'FETCHING_ALL_STAFF_SUCCESS',
+				payload: staffs
+			})
+		} else {
+			dispatch({
+				type: 'FETCHING_ALL_STAFF_FAILURE',
+				payload: e
+			})
+		}
 	} catch (e) {
 		dispatch({
 			type: 'FETCHING_ALL_STAFF_FAILURE',

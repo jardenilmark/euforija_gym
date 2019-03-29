@@ -5,7 +5,6 @@ import {
 	toggleFormVisibility,
 	toggleProfileVisibility,
 	setClickedStaff,
-	fetchStaff,
 	updateStaff
 } from '../../actions/staffActions'
 import { saveImage, clearImage } from '../../actions/profilePhotoActions'
@@ -27,8 +26,6 @@ function mapDispatchToProps(dispatch) {
 		async createStaff(user) {
 			if (user.image) {
 				await dispatch(createStaff(user))
-				await dispatch(fetchStaff())
-				dispatch(clearImage())
 			} else {
 				Swal.fire({
 					type: 'error',
@@ -41,8 +38,6 @@ function mapDispatchToProps(dispatch) {
 		async updateStaff(user) {
 			if (user.image) {
 				await dispatch(updateStaff(user))
-				await dispatch(fetchStaff())
-				dispatch(clearImage())
 			} else {
 				Swal.fire({
 					type: 'error',

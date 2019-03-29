@@ -32,6 +32,8 @@ export function setPrice(price) {
 }
 
 export function renewMembership(amount, student) {
+	console.log('amt', amount)
+	console.log('stud', student)
 	return async dispatch => {
 		await app.service(studentApi).patch(student._id, { amount: amount, membershipDate: new Date() })
 		dispatch(fetchStudents())
@@ -40,7 +42,7 @@ export function renewMembership(amount, student) {
 
 export function makePayment(amount, student) {
 	return async dispatch => {
-		const newAmount = amount + student.amount
+		const newAmount = parseInt(amount) + parseInt(student.amount)
 		await app.service(studentApi).patch(student._id, { amount: newAmount })
 		dispatch(fetchStudents())
 	}
@@ -98,8 +100,9 @@ export function createStudent(student) {
 			const data = await app.service(fileApi).create({
 				data: student.image
 			})
+			const id = generateId(student)
 			student.image = data._id
-			student.idNumber = generateId(student)
+			student.idNumber = id
 			student.membershipDate = new Date()
 			await app.service(studentApi).create({
 				...student
@@ -108,6 +111,11 @@ export function createStudent(student) {
 			dispatch(reset('studentHealthForm'))
 			dispatch(reset('studentPaymentForm'))
 			dispatch(reset('studentPersonalForm'))
+			Swal.fire(
+				`${id} is your auto-generated identification number`,
+				'You can use this identification number when logging in on the attendance pane',
+				'success'
+			)
 			iziToast.success({
 				title: 'SUCCESS',
 				message: 'Student added successfully!',

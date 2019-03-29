@@ -16,14 +16,18 @@ import HeaderSubHeader from 'semantic-ui-react/dist/commonjs/elements/Header/Hea
 import NumberFormat from 'react-number-format'
 import date from 'date-fns'
 import RenewModal from '../../redux/containers/student/RenewModal'
+import PaymentModal from '../../redux/containers/student/PaymentModal'
 
-const handleSubmit = (values, props) => {
+const renewMembership = (values, props) => {
 	let payment = props.trainingPrice
 	if (props.paymentMethod === 'partial') {
 		payment = values.amount
 	}
-
 	props.renewMembership(payment, props.clickedStudent)
+}
+
+const makePayment = (amount, student, makePayment) => {
+	makePayment(amount, student)
 }
 
 const PersonalDetailsPane = props => {
@@ -37,6 +41,7 @@ const PersonalDetailsPane = props => {
 				<Header.Content>
 					{student.lastName}, {student.firstName}
 				</Header.Content>
+				<Divider style={{ width: 600 }} />
 				<HeaderSubHeader>
 					<i>Contact Number: </i> <b>{student.contact}</b>
 				</HeaderSubHeader>
@@ -53,7 +58,7 @@ const PersonalDetailsPane = props => {
 				<RenewModal
 					trigger={trigger}
 					id={student._id}
-					onSubmit={values => handleSubmit(values, props)}
+					onSubmit={values => renewMembership(values, props)}
 				/>
 			</Header>
 		</div>
@@ -85,6 +90,7 @@ const HealthPane = student => {
 
 const TrainerPane = student => {
 	const trainer = student.trainer
+	const labelColor = trainer.status === 'out' ? 'red' : 'green'
 	return (
 		<div>
 			<Image src={trainer.image} floated={'left'} circular />
@@ -92,6 +98,14 @@ const TrainerPane = student => {
 				<Header.Content>
 					{trainer.lastName}, {trainer.firstName}
 				</Header.Content>
+				<Divider style={{ width: 600 }} />
+				<HeaderSubHeader>
+					<i>Gender: </i>{' '}
+					<b>
+						{trainer.gender.substring(0, 1).toUpperCase()}
+						{trainer.gender.substring(1)}
+					</b>
+				</HeaderSubHeader>
 				<HeaderSubHeader>
 					<i>Contact Number: </i> <b>{trainer.contactNumber}</b>
 				</HeaderSubHeader>
@@ -99,8 +113,13 @@ const TrainerPane = student => {
 					<i>Address: </i> <b>{trainer.address}</b>
 				</HeaderSubHeader>
 				<HeaderSubHeader>
-					<i>Birthdate: </i> <b>{trainer.birthdate}</b>
+					<i>Birthdate: </i> <b>{date.format(trainer.birthdate, 'MMMM D, YYYY')}</b>
 				</HeaderSubHeader>
+				<Divider style={{ width: 600 }} />
+				<Label size={'large'} color={labelColor} style={{ marginLeft: -1 }}>
+					Status
+					<Label.Detail>{trainer.status}</Label.Detail>
+				</Label>
 			</Header>
 		</div>
 	)
@@ -109,6 +128,7 @@ const TrainerPane = student => {
 const PaymentPane = props => {
 	const student = props.clickedStudent
 	const balance = props.trainingPrice - student.amount
+	const trigger = <Button fluid>Make Payment</Button>
 	return (
 		<Statistic.Group size={'tiny'} widths={'four'}>
 			<Statistic>
@@ -174,10 +194,23 @@ const PaymentPane = props => {
 					) : (
 						<Reveal animated="move up">
 							<Reveal.Content hidden>
-								<Button fluid>Make Payment</Button>
+								<PaymentModal
+									trigger={trigger}
+									amountPaid={student.amount}
+									onSubmit={values => {
+										makePayment(values.amount, student, props.makePayment)
+									}}
+								/>
 							</Reveal.Content>
 							<Reveal.Content visible>
-								<Label style={{ color: 'red', fontSize: 20, padding: 5, width: '243' }}>
+								<Label
+									style={{
+										color: 'red',
+										fontSize: 20,
+										padding: 5,
+										width: '243',
+										cursor: 'pointer'
+									}}>
 									<b>PARTIALLY PAID</b>
 								</Label>
 							</Reveal.Content>

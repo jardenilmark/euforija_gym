@@ -24,19 +24,35 @@ const TableRows = ({
 }) => {
 	const arr = filteredInv.length > 0 ? filteredInv : inventory
 	if (isFetchingInventory) {
-		return <Loader active content={'Fetching Items...'} size={'huge'} />
+		return (
+			<Table.Row>
+				<Table.Cell>
+					<Loader active content={'Fetching Items...'} size={'huge'} />
+				</Table.Cell>
+			</Table.Row>
+		)
 	} else if (isFilteringInventory) {
-		return <Loader active content={'Executing Search...'} size={'huge'} />
+		return (
+			<Table.Row>
+				<Table.Cell>
+					<Loader active content={'Executing Search...'} size={'huge'} />
+				</Table.Cell>
+			</Table.Row>
+		)
 	} else {
 		if (arr.length === 0) {
 			return (
-				<Segment placeholder style={{ border: 'dotted 5px' }} size={'big'}>
-					<Header icon>
-						<Icon name="exclamation circle" color={'red'} />
-						<Header.Content>No item has been added to the inventory.</Header.Content>
-						<Header.Content>Click the button above to start adding items.</Header.Content>
-					</Header>
-				</Segment>
+				<Table.Row>
+					<Table.Cell>
+						<Segment placeholder style={{ border: 'dotted 5px' }} size={'big'}>
+							<Header icon>
+								<Icon name="exclamation circle" color={'red'} />
+								<Header.Content>No item has been added to the inventory.</Header.Content>
+								<Header.Content>Click the button above to start adding items.</Header.Content>
+							</Header>
+						</Segment>
+					</Table.Cell>
+				</Table.Row>
 			)
 		}
 	}

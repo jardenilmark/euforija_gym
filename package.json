@@ -1,5 +1,6 @@
 {
 	"name": "euforija-system",
+	"productName": "Euforija Management System",
 	"version": "1.0.0",
 	"main": "src/main.js",
 	"repository": "git@gitlab.com:softdev-eufouria/euforija-system.git",
@@ -13,7 +14,10 @@
 		"test": "jest",
 		"pretty-quick": "pretty-quick",
 		"seed:start": "babel-node src/backend/seeds",
-		"seed:clear": "babel-node src/backend/seeds/clearCollections.js"
+		"seed:clear": "babel-node src/backend/seeds/clearCollections.js",
+		"package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+		"package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32  --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Euforija Management System\"",
+		"package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
 	},
 	"jest": {
 		"verbose": true,
@@ -114,6 +118,7 @@
 		"commitizen": "^2.10.1",
 		"cz-conventional-changelog": "^2.1.0",
 		"electron": "^2.0.4",
+		"electron-packager": "^13.1.1",
 		"enzyme": "^3.3.0",
 		"enzyme-adapter-react-16": "^1.1.1",
 		"eslint": "^5.7.0",
